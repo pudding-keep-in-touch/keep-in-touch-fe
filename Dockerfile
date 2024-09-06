@@ -9,6 +9,12 @@ RUN apt-get update && apt-get install -y \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
+COPY package.json pnpm-lock.yaml ./
+
+RUN pnpm install
+
+COPY . .
+
 EXPOSE 3000
 
-ENTRYPOINT ["next", "start"]
+ENTRYPOINT ["pnpm", "run", "dev"]
