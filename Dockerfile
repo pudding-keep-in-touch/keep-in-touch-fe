@@ -9,4 +9,6 @@ RUN apt-get update && apt-get install -y \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["/bin/bash"]
+EXPOSE 3000
+
+ENTRYPOINT ["next", "start"]
