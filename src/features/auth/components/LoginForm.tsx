@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from '@/shared/ui/components/Button'
+import { Input } from '@/shared/ui/components/Input'
 import { useState } from 'react'
 
 export default function LoginForm() {
@@ -11,17 +13,19 @@ export default function LoginForm() {
     console.log('submit')
   }
 
+  // @TODO: zod 및 Shadcn form 적용
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email
-        <input type='email' onChange={(e) => setEmail(e.target.value)} />
-      </label>
-      <label>
-        Password
-        <input type='password' />
-      </label>
-      <button type='submit'>Login</button>
+    <form
+      onSubmit={handleSubmit}
+      className='flex flex-col gap-4 items-center mt-10'
+    >
+      <Input
+        type='email'
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder='Email'
+      />
+      <Input type='password' placeholder='Password' />
+      <Button type='submit'>Login</Button>
     </form>
   )
 }
