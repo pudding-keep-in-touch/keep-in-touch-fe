@@ -1,0 +1,55 @@
+'use client'
+
+import Image from 'next/image'
+import {
+  getVarietyData,
+  MessageSendVariety,
+  varieties,
+} from '../../[variety]/_utils/varieties'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { cn } from '@/shared/lib/utils'
+
+export default function MessageSendSelect() {
+  return (
+    <div className='w-full flex flex-col gap-5'>
+      {varieties.map((v) => (
+        <SelectButton variety={v} key={v} />
+      ))}
+    </div>
+  )
+}
+
+function SelectButton({ variety }: { variety: MessageSendVariety }) {
+  const pathname = usePathname()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const data = getVarietyData(variety)
+
+  const onClick = () => {
+    router.replace(`${pathname}/?variety=${variety}`)
+  }
+
+  return (
+    <button
+      type='button'
+      onClick={onClick}
+      className={cn(
+        'rounded-2xl w-full relative',
+        searchParams.get('variety') === variety &&
+          'outline outline-2 outline-black'
+      )}
+    >
+      <Image
+        src={data.src}
+        alt={data.text}
+        width={350}
+        height={250}
+        className='w-full h-auto'
+      />
+      <p className='absolute top-[10%] left-[10%] text-[#191F28] font-bold text-[26px]'>
+        {data.text}
+      </p>
+    </button>
+  )
+}
