@@ -31,11 +31,11 @@ function SelectButton({ variety }: { variety: MessageSendVariety }) {
   }
 
   return (
-    <button
-      type='button'
+    <div
+      role='button'
       onClick={onClick}
       className={cn(
-        'rounded-2xl w-full relative',
+        'rounded-2xl w-full relative overflow-hidden',
         searchParams.get('variety') === variety &&
           'outline outline-2 outline-black'
       )}
@@ -50,6 +50,6 @@ function SelectButton({ variety }: { variety: MessageSendVariety }) {
       <p className='absolute top-[10%] left-[10%] text-[#191F28] font-bold text-[26px]'>
         {data.text}
       </p>
-    </button>
+    </div>
   )
 }
