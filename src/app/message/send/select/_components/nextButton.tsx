@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import MessageSendFloatingButton from '../../_components/floatingButton'
+import { Button } from '@/shared/ui/components/Button'
 
 export default function MessageSendNextButton() {
   const searchParams = useSearchParams()
@@ -9,8 +9,12 @@ export default function MessageSendNextButton() {
   const variety = searchParams.get('variety')
 
   return (
-    <div className='fixed bottom-9 left-0 w-full px-8'>
-      <MessageSendFloatingButton text='다음' disabled={!variety} />
-    </div>
+    <Button
+      type='button'
+      disabled={!variety}
+      className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-5 w-full'
+    >
+      다음
+    </Button>
   )
 }
