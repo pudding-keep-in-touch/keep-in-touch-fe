@@ -35,7 +35,8 @@ const messages: MessageType[] = [
     id: '3',
     src: '',
     sender: '홍길동님께',
-    content: '내용내용내용내용내용내용내용내용...',
+    content:
+      '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
     timestamp: '2024.08.31 오후11:57',
   },
 ]
@@ -82,16 +83,16 @@ function MessageItem({
     >
       <div className='flex gap-5'>
         <Image
-          className='bg-zinc-300 rounded-lg w-[54px] h-[54px]'
+          className='bg-zinc-300 rounded-lg w-[54px] h-[54px] shrink-0'
           src={src}
           alt={content}
           width={54}
           height={54}
         />
         <div>
-          <div className='font-semibold text-gray-800'>{sender}</div>
-          <div className='text-gray-600 mt-1'>{content}</div>
-          <div className='text-xs text-gray-400 mt-2'>{timestamp}</div>
+          <div className='font-semibold text-slate-700'>{sender}</div>
+          <div className='text-gray-600 mt-1 line-clamp-1'>{content}</div>
+          <div className='text-xs text-gray-500 mt-2'>{timestamp}</div>
         </div>
       </div>
     </div>
