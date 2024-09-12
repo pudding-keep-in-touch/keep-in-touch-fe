@@ -46,7 +46,7 @@ export default function MessageList() {
   const selectedId = searchParams.get('detail')
 
   return (
-    <div className='w-full flex flex-col gap-2 py-6'>
+    <div className='w-full flex flex-col gap-2 py-6 px-6'>
       {messages.map((message) => (
         <MessageItem
           key={message.id}
@@ -70,7 +70,7 @@ function MessageItem({
   const router = useRouter()
 
   const onClick = () => {
-    router.replace(`${pathname}/?detail=${id}`)
+    router.replace(`${pathname}/detail=${id}`)
   }
 
   return (
