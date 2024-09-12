@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { cn } from '@/shared/lib/utils'
+import { ChevronLeftIcon } from 'lucide-react'
 
 interface MessageType {
   id: string
@@ -44,17 +45,29 @@ const messages: MessageType[] = [
 export default function MessageList() {
   const searchParams = useSearchParams()
   const selectedId = searchParams.get('detail')
+  const router = useRouter()
 
   return (
-    <div className='w-full flex flex-col gap-2 py-6 px-6'>
-      {messages.map((message) => (
-        <MessageItem
-          key={message.id}
-          {...message}
-          isSelected={message.id === selectedId}
+    <>
+      <header className='w-full h-[50px] grid grid-cols-3 items-center px-6'>
+        <ChevronLeftIcon
+          className='w-6 h-6 cursor-pointer'
+          onClick={() => router.back()}
         />
-      ))}
-    </div>
+        <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
+          받은 쪽지
+        </h1>
+      </header>
+      <div className='w-full flex flex-col gap-2 py-10 px-6'>
+        {messages.map((message) => (
+          <MessageItem
+            key={message.id}
+            {...message}
+            isSelected={message.id === selectedId}
+          />
+        ))}
+      </div>
+    </>
   )
 }
 
