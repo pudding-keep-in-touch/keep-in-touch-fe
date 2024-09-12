@@ -20,11 +20,6 @@ export default function Page() {
         </div>
 
         <MessageBoard />
-
-        <div className='px-6 pb-6 w-full h-fit absolute bottom-1 flex gap-2'>
-          <MessageShareButton />
-          <MessageSendButton />
-        </div>
       </div>
     </ReceiveDetailLayout>
   )
