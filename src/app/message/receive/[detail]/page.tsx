@@ -1,7 +1,5 @@
 import Image from 'next/image'
 import MessageBoard from './_components/board'
-import MessageSendButton from './_components/sendButton'
-import MessageShareButton from './_components/shareButton'
 import ReceiveDetailLayout from '@/shared/ui/layouts/ReceiveDetailLayout'
 
 export default function Page() {
