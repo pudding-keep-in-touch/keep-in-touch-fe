@@ -46,8 +46,12 @@ export default function Home() {
           <UserInfo nickname={testName} />
 
           <div className='mt-[100px] flex flex-col gap-6'>
-            <MessagePreview receivedDm={mockData[0]} title='보낸 쪽지' />
-            <MessagePreview receivedDm={mockData[1]} title='받은 쪽지' />
+            <MessagePreview
+              dmList={mockData[0]}
+              title='보낸 쪽지'
+              type='send'
+            />
+            <MessagePreview title='받은 쪽지' type='received' />
           </div>
 
           <Tooltip>
