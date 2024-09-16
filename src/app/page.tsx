@@ -15,8 +15,6 @@ export default function Home() {
         />
         <Image src='/main.svg' alt='main' width={600} height={800} />
       </div>
-      <div>회원가입</div>
-      <Link href='/login'>로그인</Link>
     </MainLayout>
   )
 }
