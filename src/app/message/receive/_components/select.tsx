@@ -103,9 +103,15 @@ function MessageItem({
           height={54}
         />
         <div>
-          <div className='font-semibold text-slate-700'>{sender}</div>
-          <div className='text-gray-600 mt-1 line-clamp-1'>{content}</div>
-          <div className='text-xs text-gray-500 mt-2'>{timestamp}</div>
+          <div className='font-semibold text-[#333D4B] text-[17px]'>
+            {sender}
+          </div>
+          <div className='text-[#333D4B] mt-1 line-clamp-1 text-base'>
+            {content}
+          </div>
+          <div className='text-xs text-[#6B7684] mt-2 text-[13px]'>
+            {timestamp}
+          </div>
         </div>
       </div>
     </div>
