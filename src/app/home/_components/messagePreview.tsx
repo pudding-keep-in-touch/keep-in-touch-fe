@@ -3,6 +3,7 @@
 import { DmList } from '@/shared/types'
 import Image from 'next/image'
 import { ChevronRightIcon } from 'lucide-react'
+import { cn } from '@/shared/lib/utils'
 
 interface MessagePreviewProps {
   dmList?: DmList
@@ -34,13 +35,27 @@ export default function MessagePreview({
       <div className='w-full h-[130px] px-5 py-7 bg-white'>
         {dmList ? (
           <div className='flex gap-5'>
-            <Image
-              className='bg-zinc-300 rounded-lg w-[54px] h-[54px] shrink-0'
-              src={dmList.emotion.emoji}
-              alt={dmList.emotion.name}
-              width={54}
-              height={54}
-            />
+            <div className='flex flex-col w-[54px] h-[54px] shrink-0 gap-1'>
+              <Image
+                className='bg-zinc-300 rounded-lg w-[54px] h-[54px]'
+                src={dmList.emotion.emoji}
+                alt={dmList.emotion.name}
+                width={54}
+                height={54}
+              />
+              <div
+                className={cn(
+                  'flex justify-center items-center py-[5px] w-full rounded-sm',
+                  dmList.emotion.name === '응원과감사'
+                    ? 'bg-[#D7F1FF]'
+                    : 'bg-[#FFDDFE]'
+                )}
+              >
+                <span className='text-[10px] text-[#1F1F1F] font-medium'>
+                  {dmList.emotion.name}
+                </span>
+              </div>
+            </div>
 
             <div>
               <div className='font-semibold text-[#333D4B] text-[17px]'>
