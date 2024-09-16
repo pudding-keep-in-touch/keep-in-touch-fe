@@ -1,8 +1,7 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
 
-export default function Home() {
+export default function Main() {
   return (
     <MainLayout>
       <div className='relative w-[32rem]'>
