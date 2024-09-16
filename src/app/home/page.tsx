@@ -13,7 +13,7 @@ export default function Home() {
       senderId: 10,
       content: '안녕, 너가 토이 프로젝트를 배포까지 하다니 진짜 대단하다..!!',
       emotion: {
-        name: '응원과 감사',
+        name: '응원과감사',
         emoji: '/supportEmotion.svg',
       },
       isRead: false,
@@ -25,7 +25,7 @@ export default function Home() {
       content:
         '두번째 안녕, 너가 토이 프로젝트를 배포까지 하다니 진짜 대단하다..!!',
       emotion: {
-        name: '응원과 감사',
+        name: '솔직한대화',
         emoji: '/honestEmotion.svg',
       },
       isRead: false,
