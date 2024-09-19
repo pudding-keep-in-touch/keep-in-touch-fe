@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const GA_ID =
+  process.env.NODE_ENV === 'production' ? 'G-6ZWWSPLVD7' : 'G-49Q9HYM5E0'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +16,29 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>{children}</body>
+    <html lang='en' className='scrollbar-hide'>
+      <head>
+        <Script
+          strategy='afterInteractive'
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        />
+        <Script
+          strategy='afterInteractive'
+          id='google-analytics'
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_ID}');
+          `,
+          }}
+        />
+      </head>
+      <body className='max-w-[32rem] w-full min-h-screen mr-auto ml-auto'>
+        {children}
+      </body>
     </html>
   )
 }

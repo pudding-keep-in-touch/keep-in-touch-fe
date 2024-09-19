@@ -75,7 +75,8 @@ const config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [tailwindcssAnimate, require('tailwind-scrollbar-hide')],
 } satisfies Config
 
 export default config

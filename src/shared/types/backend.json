@@ -1,0 +1,406 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/v1/users/{userId}/home": {
+      "get": {
+        "operationId": "UsersController_getUserHome",
+        "summary": "유저 홈 화면 조회",
+        "description": "유저 홈 화면 조회",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ResponseDtoTypeOfResponseGetUserHomeDto",
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BaseResponseDto" },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/ResponseGetUserHomeDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"],
+        "security": [{ "jwt": [] }]
+      }
+    },
+    "/v1/users/{userId}/direct-messages": {
+      "get": {
+        "operationId": "UsersController_getDmListByUserId",
+        "summary": "유저 id 기준 받은/보낸 쪽지 리스트 조회 하기",
+        "description": "유저 id 기준 받은/보낸 쪽지 리스트 조회 하기",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "example": "received",
+            "description": "조회 타입(received: 쪽지 받은, sent: 쪽지 보낸)",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "example": 1,
+            "description": "조회 할 페이지",
+            "schema": { "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 10,
+            "description": "조회 갯수",
+            "schema": { "default": 10, "type": "number" }
+          },
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "example": "desc",
+            "description": "조회 순서(desc: 내림차순, asc: 오름차순)",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ResponseDtoTypeOfResponseGetDmListByUserIdDto",
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BaseResponseDto" },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/ResponseGetDmListByUserIdDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"],
+        "security": [{ "jwt": [] }]
+      }
+    },
+    "/v1/users/{userId}/withdraw": {
+      "delete": {
+        "operationId": "UsersController_withdrawUser",
+        "summary": "회원 탈퇴",
+        "description": "현재 로그인한 사용자의 계정을 탈퇴 처리합니다.",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["users"],
+        "security": [{ "jwt": [] }]
+      }
+    },
+    "/v1/direct-messages/{directMessageId}": {
+      "get": {
+        "operationId": "DirectMessagesController_getDmDetail",
+        "summary": "메시지 상세 조회",
+        "description": "메시지 id 기준 받은/보낸 쪽지 상세 조회",
+        "parameters": [
+          {
+            "name": "directMessageId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "example": "received",
+            "description": "조회 타입(received: 쪽지 받은, sent: 쪽지 보낸)",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["direct-messages"],
+        "security": [{ "jwt": [] }]
+      }
+    },
+    "/v1/direct-messages": {
+      "post": {
+        "operationId": "DirectMessagesController_createDm",
+        "summary": "쪽지 전송",
+        "description": "받는 사람 가입 email로 쪽지 보내기",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateDmDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "tags": ["direct-messages"],
+        "security": [{ "jwt": [] }]
+      }
+    },
+    "/v1/auth/google/login": {
+      "get": {
+        "operationId": "AuthController_googleLogin",
+        "summary": "구글 로그인",
+        "description": "Swagger에서 테스트 할 수 없습니다. http://localhost:3000/v1/auth/google/login 으로 테스트 해주세요.",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["auth"],
+        "security": [{ "jwt": [] }]
+      }
+    },
+    "/v1/auth/google/callback": {
+      "get": {
+        "operationId": "AuthController_googleLoginCallback",
+        "summary": "구글 로그인 콜백",
+        "description": "Swagger에서 테스트 할 수 없습니다. http://localhost:3000/v1/auth/google/callback 으로 테스트 해주세요.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ResponseDtoTypeOfResponseGoogleCallbackDto",
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BaseResponseDto" },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/ResponseGoogleCallbackDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": ["auth"],
+        "security": [{ "jwt": [] }]
+      }
+    }
+  },
+  "info": {
+    "title": "keep-in-touch_local",
+    "description": "API description",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "jwt": {
+        "scheme": "bearer",
+        "bearerFormat": "jwt",
+        "type": "http",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "BaseResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "description": "상태값",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "메세지",
+            "example": "Ok"
+          },
+          "data": {
+            "type": "object",
+            "description": "실제 사용하는 데이터 전문"
+          }
+        },
+        "required": ["status", "message", "data"]
+      },
+      "EmotionDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "감정 이름",
+            "example": "행복"
+          },
+          "emoji": {
+            "type": "string",
+            "description": "감정 이모지",
+            "example": "😊"
+          }
+        },
+        "required": ["name", "emoji"]
+      },
+      "ResponseGetDmListByUserIdDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "쪽지 ID", "example": 1 },
+          "senderId": {
+            "type": "number",
+            "description": "보낸 사람 ID",
+            "example": 2
+          },
+          "receiverId": {
+            "type": "number",
+            "description": "받는 사람 ID",
+            "example": 3
+          },
+          "content": {
+            "type": "string",
+            "description": "쪽지 내용",
+            "example": "안녕하세요, 잘 지내시나요?"
+          },
+          "emotion": {
+            "description": "감정 정보",
+            "allOf": [{ "$ref": "#/components/schemas/EmotionDto" }]
+          },
+          "comment": {
+            "type": "object",
+            "description": "댓글",
+            "example": null,
+            "nullable": true
+          },
+          "isRead": {
+            "type": "boolean",
+            "description": "읽음 여부",
+            "example": false
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "생성 시간",
+            "example": "2024-09-15T10:30:00Z"
+          }
+        },
+        "required": [
+          "id",
+          "senderId",
+          "receiverId",
+          "content",
+          "emotion",
+          "comment",
+          "isRead",
+          "createdAt"
+        ]
+      },
+      "ResponseGetFriendDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "친구 id", "example": 1 },
+          "nickname": {
+            "type": "string",
+            "description": "친구 닉네임",
+            "example": "친구"
+          }
+        },
+        "required": ["id", "nickname"]
+      },
+      "ResponseGetUserHomeDto": {
+        "type": "object",
+        "properties": {
+          "isOwner": {
+            "type": "boolean",
+            "description": "현재 home url이 로그인한 유저인지 판별하는 값",
+            "example": true,
+            "nullable": false
+          },
+          "dmList": {
+            "description": "쪽지 리스트",
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseGetDmListByUserIdDto"
+            }
+          },
+          "friendUser": {
+            "description": "친구 정보",
+            "nullable": true,
+            "allOf": [{ "$ref": "#/components/schemas/ResponseGetFriendDto" }]
+          }
+        },
+        "required": ["isOwner", "dmList", "friendUser"]
+      },
+      "CreateDmDto": {
+        "type": "object",
+        "properties": {
+          "senderId": {
+            "type": "number",
+            "description": "보낸 사람 id",
+            "example": 1
+          },
+          "receiverEmail": {
+            "type": "string",
+            "description": "받는 사람 가입 이메일",
+            "example": "user@example.com"
+          },
+          "emotionName": {
+            "type": "string",
+            "description": "감정 이름(응원과 감사, 솔직한 대화)",
+            "example": "응원과 감사"
+          },
+          "content": {
+            "type": "string",
+            "description": "쪽지 내용",
+            "example": "사실 너에게 말하고 싶은게 있어"
+          }
+        },
+        "required": ["senderId", "receiverEmail", "emotionName", "content"]
+      },
+      "ResponseGoogleCallbackDto": { "type": "object", "properties": {} }
+    }
+  }
+}
