@@ -17,4 +17,4 @@ COPY . .
 
 EXPOSE 3000
 
-ENTRYPOINT ["pnpm", "run", "dev"]
+ENTRYPOINT ["pnpm", "run", "start:dev"]
