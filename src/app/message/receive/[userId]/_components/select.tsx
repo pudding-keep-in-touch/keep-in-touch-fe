@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/shared/lib/utils'
 import { ChevronLeftIcon } from 'lucide-react'
 import { DmList } from '@/shared/types'
+import { useEffect, useState } from 'react'
 
 const mockData: DmList[] = [
   {
@@ -45,8 +46,40 @@ const mockData: DmList[] = [
   },
 ]
 
-export default function MessageList() {
+export default function MessageList({ userId }: { userId: number }) {
+  const [receivedMessage, setReceivedMessage] = useState<DmList[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true)
+      setError(null)
+
+      try {
+        const response = await fetch(
+          `http://dev-be.keep-in-touch.me:3000/v1/users/${userId}/home`
+        )
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data')
+        }
+
+        const data = await response.json()
+        setReceivedMessage(data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [userId])
+
+  // if (isLoading) return <div>Loading...</div>
+  // if (error) return <div>Error: {error}</div>
 
   return (
     <>
