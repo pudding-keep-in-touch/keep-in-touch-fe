@@ -1,9 +1,9 @@
-import MessageList from './_components/message'
+import Profile from './_components/profile'
 
 export default function Page({
   params: { userId },
 }: {
   params: { userId: number }
 }) {
-  return <MessageList userId={userId} />
+  return <Profile userId={userId} />
 }
