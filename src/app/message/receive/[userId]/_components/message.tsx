@@ -4,8 +4,11 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/shared/lib/utils'
 import { ChevronLeftIcon } from 'lucide-react'
-import { DmList } from '@/shared/types'
-import { useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { DmList } from '@/entities/message/model/types'
+import { useGetInfiniteMessages } from '@/entities/message/api/queries'
 
 const mockData: DmList[] = [
   {
@@ -47,39 +50,19 @@ const mockData: DmList[] = [
 ]
 
 export default function MessageList({ userId }: { userId: number }) {
-  const [receivedMessage, setReceivedMessage] = useState<DmList[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+  const { data, fetchNextPage } = useGetInfiniteMessages({
+    userId,
+    page: 1,
+    limit: 10,
+  })
+  const { ref, inView } = useInView()
 
   useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true)
-      setError(null)
-
-      try {
-        const response = await fetch(
-          `http://dev-be.keep-in-touch.me:3000/v1/users/${userId}/home`
-        )
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch data')
-        }
-
-        const data = await response.json()
-        setReceivedMessage(data)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
-      } finally {
-        setIsLoading(false)
-      }
+    if (inView) {
+      fetchNextPage()
     }
-
-    fetchData()
-  }, [userId])
-
-  // if (isLoading) return <div>Loading...</div>
-  // if (error) return <div>Error: {error}</div>
+  }, [inView])
 
   return (
     <>
@@ -92,7 +75,7 @@ export default function MessageList({ userId }: { userId: number }) {
           받은 쪽지
         </h1>
       </header>
-      <div className='w-full flex flex-col gap-2 py-10 px-6'>
+      <div ref={ref} className='w-full flex flex-col gap-2 py-10 px-6'>
         {mockData.map((message) => (
           <MessageItem key={message.id} {...message} />
         ))}
