@@ -19,6 +19,8 @@ export default function RootLayout({
   return (
     <html lang='en' className='scrollbar-hide'>
       <head>
+        <link rel='icon' href='/icon.ico' sizes='any' />
+
         <Script
           strategy='afterInteractive'
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
