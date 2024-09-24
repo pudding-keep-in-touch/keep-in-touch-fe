@@ -1,10 +1,10 @@
 import HomeLayout from '@/shared/ui/layouts/HomeLayout'
 import Image from 'next/image'
 import UserInfo from './_components/userInfo'
-import { DmList } from '@/shared/types'
 import MessagePreview from './_components/messagePreview'
 import LinkShareButton from './_components/linkShareButton'
 import Tooltip from './_components/tooltip'
+import { DmList } from '@/entities/message/model/types'
 
 export default function Home() {
   const mockData: DmList[] = [
