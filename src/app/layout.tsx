@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
+import QueryProvider from '@/shared/provider'
 
 const GA_ID =
   process.env.NODE_ENV === 'production' ? 'G-6ZWWSPLVD7' : 'G-49Q9HYM5E0'
@@ -18,6 +19,8 @@ export default function RootLayout({
   return (
     <html lang='en' className='scrollbar-hide'>
       <head>
+        <link rel='icon' href='/icon.ico' sizes='any' />
+
         <Script
           strategy='afterInteractive'
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
@@ -36,8 +39,9 @@ export default function RootLayout({
           }}
         />
       </head>
+
       <body className='max-w-[32rem] w-full min-h-screen mr-auto ml-auto'>
-        {children}
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   )
