@@ -1,12 +1,11 @@
 'use client'
 
-import { DmList } from '@/shared/types'
 import Image from 'next/image'
 import { ChevronRightIcon } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
-
+import { DirectMessage } from '@/shared/types'
 interface MessagePreviewProps {
-  dmList?: DmList
+  dmList?: DirectMessage
   title: string
   type: string
 }
