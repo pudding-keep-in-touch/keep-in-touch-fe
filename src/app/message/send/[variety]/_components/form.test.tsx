@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import MessageInput from '../write/_components/messageInput'
 import MessageWriteNextButton from '../write/_components/nextButton'
 import MessageFormProvider from './form'
+import { useParams } from 'next/navigation'
 
 vi.mock('react-dom', () => {
   return {
@@ -16,6 +17,17 @@ vi.mock('react-dom', () => {
     }),
   }
 })
+
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+  }),
+  useParams: () => ({
+    variety: 'thanks',
+  }),
+}))
+
+vi.mock('')
 
 describe('SellForm', () => {
   render(
