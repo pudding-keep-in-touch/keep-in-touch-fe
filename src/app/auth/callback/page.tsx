@@ -12,7 +12,7 @@ export default function Callback() {
 
     if (token) {
       localStorage.setItem('keep_in_touch_token', token)
-      router.push('/')
+      router.push('/home')
     } else {
       router.push('/login')
     }
