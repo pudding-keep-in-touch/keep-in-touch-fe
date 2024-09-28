@@ -1,5 +1,6 @@
 import MessageSendStep from '../../_components/step'
-import MessageWriteForm from './_components/form'
+import MessageInput from './_components/messageInput'
+import MessageWriteNextButton from './_components/nextButton'
 
 export default function Page() {
   return (
@@ -10,7 +11,9 @@ export default function Page() {
 
       <p className='font-medium text-lg mb-10'>내용을 작성하세요.</p>
 
-      <MessageWriteForm />
+      <MessageInput />
+
+      <MessageWriteNextButton />
     </>
   )
 }

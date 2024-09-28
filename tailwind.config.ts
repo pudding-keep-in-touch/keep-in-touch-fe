@@ -19,6 +19,10 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        honestTalkPreview: "url('/honestTalkPreviewBg.png')",
+        thanksPreview: "url('/thanksPreviewBg.png')",
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

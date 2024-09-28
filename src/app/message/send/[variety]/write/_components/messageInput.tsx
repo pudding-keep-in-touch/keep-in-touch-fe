@@ -2,10 +2,10 @@
 
 import { Textarea } from '@/shared/ui/ui/textarea'
 import { useFormContext } from 'react-hook-form'
-import { WriteFormValues } from './formSchema'
+import { MessageFormValues } from '../../_components/formSchema'
 
 export default function MessageInput() {
-  const { watch, register } = useFormContext<WriteFormValues>()
+  const { watch, register } = useFormContext<MessageFormValues>()
   const { message } = watch()
 
   return (
