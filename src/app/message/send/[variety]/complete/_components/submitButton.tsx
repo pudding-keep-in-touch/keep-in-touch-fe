@@ -1,12 +1,12 @@
 'use client'
 
 import { Button } from '@/shared/ui/components/Button'
-import { WriteFormValues } from './formSchema'
 import { useFormContext } from 'react-hook-form'
 import { useFormStatus } from 'react-dom'
+import { MessageFormValues } from '../../_components/formSchema'
 
-export default function MessageWriteSubmitButton() {
-  const { formState } = useFormContext<WriteFormValues>()
+export default function MessageSendSubmitButton() {
+  const { formState } = useFormContext<MessageFormValues>()
   const { pending } = useFormStatus()
   const { isValid } = formState
 
@@ -14,9 +14,9 @@ export default function MessageWriteSubmitButton() {
     <Button
       type='submit'
       disabled={!isValid || pending}
-      className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-auto w-full'
+      className='h-fit p-4 bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
     >
-      {pending ? '생성 중...' : '완료'}
+      {pending ? '보내는 중...' : '쪽지 보내기'}
     </Button>
   )
 }
