@@ -1,4 +1,3 @@
-import LoginForm from '@/features/auth/components/LoginForm'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
 import Image from 'next/image'
 import GoogleButton from './_components/googleButton'

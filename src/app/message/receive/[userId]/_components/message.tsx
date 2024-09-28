@@ -4,7 +4,11 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/shared/lib/utils'
 import { ChevronLeftIcon } from 'lucide-react'
-import { DmList } from '@/shared/types'
+
+import React, { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { DmList } from '@/entities/message/model/types'
+import { useGetInfiniteMessages } from '@/entities/message/api/queries'
 
 const mockData: DmList[] = [
   {
@@ -45,8 +49,20 @@ const mockData: DmList[] = [
   },
 ]
 
-export default function MessageList() {
+export default function MessageList({ userId }: { userId: number }) {
   const router = useRouter()
+  const { data, fetchNextPage } = useGetInfiniteMessages({
+    userId,
+    page: 1,
+    limit: 10,
+  })
+  const { ref, inView } = useInView()
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage()
+    }
+  }, [inView])
 
   return (
     <>
@@ -59,7 +75,7 @@ export default function MessageList() {
           받은 쪽지
         </h1>
       </header>
-      <div className='w-full flex flex-col gap-2 py-10 px-6'>
+      <div ref={ref} className='w-full flex flex-col gap-2 py-10 px-6'>
         {mockData.map((message) => (
           <MessageItem key={message.id} {...message} />
         ))}
