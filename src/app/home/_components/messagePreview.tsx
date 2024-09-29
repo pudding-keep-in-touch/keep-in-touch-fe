@@ -2,25 +2,32 @@
 
 import Image from 'next/image'
 import { ChevronRightIcon } from 'lucide-react'
-import { cn } from '@/shared/lib/utils'
+import { cn, EmotionVariety, getEmotionVarietyData } from '@/shared/lib/utils'
 import { DirectMessage } from '@/shared/types'
+import Link from 'next/link'
 interface MessagePreviewProps {
   dmList?: DirectMessage
   title: string
   type: string
+  userId: number
 }
 
 export default function MessagePreview({
   dmList,
   title,
   type,
+  userId,
 }: MessagePreviewProps) {
+  const emotionUrl = getEmotionVarietyData(
+    dmList?.emotion.name as EmotionVariety | undefined
+  )
+
   return (
     <div className='w-full rounded-2xl bg-white overflow-hidden'>
       <div className='w-full h-[60px] bg-[#F6F7FC] p-5 flex justify-between items-center'>
         <div className='flex gap-2'>
           <h1 className='text-xl font-medium'>{title}</h1>
-          {dmList && (
+          {dmList && dmList.isRead === false && (
             <div className='flex justify-center items-center h-8 bg-[#3182F6] p-2 rounded-full'>
               <p className='text-white text-[13px] font-normal'>
                 새로운 쪽지를 보냈어요!
@@ -29,16 +36,20 @@ export default function MessagePreview({
           )}
         </div>
 
-        {dmList && <ChevronRightIcon className='w-6 h-6 cursor-pointer' />}
+        {dmList && (
+          <Link href={`/message/receive/${userId}`}>
+            <ChevronRightIcon className='w-6 h-6 cursor-pointer' />
+          </Link>
+        )}
       </div>
       <div className='w-full h-[130px] px-5 py-7 bg-white'>
         {dmList ? (
           <div className='flex gap-5'>
             <div className='flex flex-col w-[54px] h-[54px] shrink-0 gap-1'>
               <Image
-                className='bg-zinc-300 rounded-lg w-[54px] h-[54px]'
-                src={dmList.emotion.emoji}
-                alt={dmList.emotion.name}
+                className='bg-zinc-300 rounded-lg w-[54px] h-[54px] shrink-0 object-cover'
+                src={emotionUrl?.src || ''}
+                alt={emotionUrl?.text || dmList.emotion.name}
                 width={54}
                 height={54}
               />

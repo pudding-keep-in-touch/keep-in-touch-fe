@@ -58,7 +58,8 @@ export default function Home() {
             <MessagePreview
               title='받은 쪽지'
               type='received'
-              dmList={home.data.sentDmList[0]}
+              dmList={home.data.receivedDmList[0]}
+              userId={userId}
             />
           </div>
 
