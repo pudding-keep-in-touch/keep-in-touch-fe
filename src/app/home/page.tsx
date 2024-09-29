@@ -7,10 +7,13 @@ import MessagePreview from './_components/messagePreview'
 import LinkShareButton from './_components/linkShareButton'
 import Tooltip from './_components/tooltip'
 import useCurrentMessage from './_hooks/useCurrentMessage'
-import { redirect } from 'next/navigation'
+import { redirect, useSearchParams } from 'next/navigation'
 
 export default function Home() {
-  const home = useCurrentMessage(6)
+  const searchParams = useSearchParams()
+  const userId = searchParams.get('userId') as number | null
+  const home = useCurrentMessage(userId)
+
   console.log(home)
 
   if (!home) return null
