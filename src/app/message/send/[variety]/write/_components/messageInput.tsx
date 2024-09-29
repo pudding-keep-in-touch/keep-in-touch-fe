@@ -3,10 +3,19 @@
 import { Textarea } from '@/shared/ui/ui/textarea'
 import { useFormContext } from 'react-hook-form'
 import { MessageFormValues } from '../../_components/formSchema'
+import React, { useEffect } from 'react'
+
+// interface MessageInputProps {
+//   setSendMessage: React.Dispatch<React.SetStateAction<string>>
+// }
 
 export default function MessageInput() {
   const { watch, register } = useFormContext<MessageFormValues>()
   const { message } = watch()
+
+  // useEffect(() => {
+  //   setSendMessage(message)
+  // }, [message])
 
   return (
     <div className='w-full'>

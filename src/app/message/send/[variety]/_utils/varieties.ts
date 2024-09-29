@@ -24,3 +24,13 @@ export const getVarietyData = (variety: MessageVariety) => {
       }
   }
 }
+
+export const getVarietyNumber = (variety: MessageVariety | undefined) => {
+  switch (variety) {
+    case 'thanks':
+      return 1
+
+    case 'honestTalk':
+      return 2
+  }
+}

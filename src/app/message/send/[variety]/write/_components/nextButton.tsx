@@ -14,7 +14,7 @@ export default function MessageWriteNextButton() {
   const { isValid } = formState
 
   const onClick = () => {
-    router.push(`/message/send/${params.variety}/complete`)
+    router.push(`/message/send/${params.variety}/completion`)
   }
 
   return (

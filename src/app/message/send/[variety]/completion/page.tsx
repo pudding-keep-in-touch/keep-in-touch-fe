@@ -2,7 +2,11 @@ import MessageSendStep from '../../_components/step'
 import MessageSendButtons from './_components/buttons'
 import MessageSendPreview from './_components/preview'
 
-export default function Page() {
+export default function Page({
+  params: { variety },
+}: {
+  params: { variety: string }
+}) {
   return (
     <>
       <div className='mt-[30px] mb-5'>
@@ -16,8 +20,7 @@ export default function Page() {
       </p>
 
       <MessageSendPreview />
-
-      <MessageSendButtons />
+      <MessageSendButtons emotion={variety} />
     </>
   )
 }
