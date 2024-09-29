@@ -46,7 +46,7 @@ export default function Home() {
           </div>
           <div className='absolute top-1/3 flex flex-col pt-[20px] px-6 w-[100%] left-1/2 transform -translate-x-1/2 text-center text-[#333D4B] text-2xl font-bold leading-[150%]'>
             <p>
-              데이터를 불러올 수 없습니다. <br /> 잠시 후 로그인 페이지로
+              잘못된 경로로 접근했어요! <br /> 잠시 후 로그인 페이지로
               이동합니다.
             </p>
           </div>
