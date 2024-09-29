@@ -29,7 +29,7 @@ export default function Home() {
     if (!home?.data) {
       const timer = setTimeout(() => {
         router.push('/login')
-      }, 3000) // 5초 후 리다이렉트
+      }, 3000)
 
       return () => clearTimeout(timer)
     }
