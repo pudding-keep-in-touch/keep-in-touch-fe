@@ -25,6 +25,7 @@ export default function Home() {
 
   if (isLoading) return null
 
+  console.log(home)
   if (!home.data.isOwner) {
     redirect('/message/send/select')
   }
@@ -43,7 +44,7 @@ export default function Home() {
             <MessagePreview
               title='받은 쪽지'
               type='received'
-              dmList={home.data.dmList[0]}
+              dmList={home.data.sentDmList[0]}
             />
           </div>
 
