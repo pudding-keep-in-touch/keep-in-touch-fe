@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import {
   getVarietyData,
-  MessageSendVariety,
+  MessageVariety,
   varieties,
 } from '../../[variety]/_utils/varieties'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -19,7 +19,7 @@ export default function MessageSendSelect() {
   )
 }
 
-function SelectButton({ variety }: { variety: MessageSendVariety }) {
+function SelectButton({ variety }: { variety: MessageVariety }) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
