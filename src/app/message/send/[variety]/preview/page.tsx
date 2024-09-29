@@ -1,13 +1,19 @@
 'use client'
 
-import MessageSendSubmitButton from '../complete/_components/submitButton'
 import { useFormContext } from 'react-hook-form'
 import { MessageFormValues } from '../_components/formSchema'
+import { Button } from '@/shared/ui/components/Button'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const { getValues } = useFormContext<MessageFormValues>()
+  const router = useRouter()
 
   const { message } = getValues()
+
+  const clickHandler = () => {
+    router.back()
+  }
 
   return (
     <>
@@ -17,7 +23,13 @@ export default function Page() {
           {message}
         </p>
       </div>
-      <MessageSendSubmitButton />
+      <Button
+        type='button'
+        className='h-fit p-4 bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
+        onClick={clickHandler}
+      >
+        완료
+      </Button>
     </>
   )
 }
