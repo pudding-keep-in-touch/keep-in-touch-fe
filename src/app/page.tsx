@@ -14,7 +14,7 @@ export default function Main() {
 
       if (!token) {
         setTimeout(() => {
-          router.push('/home')
+          router.push('/login')
         }, 2000)
         return
       }
