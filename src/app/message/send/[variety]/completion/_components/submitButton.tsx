@@ -17,33 +17,37 @@ export default function MessageSendSubmitButton({
   emotionId,
 }: MessageSendSubmitButtonProps) {
   const router = useRouter()
-  const { formState, getValues } = useFormContext<MessageFormValues>()
+  const { formState, getValues, handleSubmit } =
+    useFormContext<MessageFormValues>()
   const { pending } = useFormStatus()
   const { isValid } = formState
 
   const { mutateAsync, isPending } = usePostSendMessage()
 
-  const submitHandler = async () => {
+  const onSubmit = handleSubmit(async (formValues) => {
     try {
-      const formValues = getValues()
-      await mutateAsync({
+      const response = await mutateAsync({
         receiverId: Number(userId),
         emotionId: emotionId || 1,
         content: formValues.message,
       })
 
-      router.replace('/message/send/complete')
+      if (response && response.dmId) {
+        router.push(`/message/send/complete/${response.dmId}`)
+      } else {
+        console.error('dmId가 응답에 없습니다:', response)
+      }
     } catch (error) {
       console.log('쪽지 보내기에 실패했습니다.')
     }
-  }
+  })
 
   return (
     <Button
       type='submit'
       disabled={!isValid || pending}
       className='h-fit p-4 bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
-      onClick={submitHandler}
+      onClick={onSubmit}
     >
       {pending ? '보내는 중...' : '쪽지 보내기'}
     </Button>

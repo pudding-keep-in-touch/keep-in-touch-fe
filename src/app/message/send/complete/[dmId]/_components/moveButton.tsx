@@ -3,10 +3,11 @@
 import { Button } from '@/shared/ui/components/Button'
 import { useRouter } from 'next/navigation'
 
-export default function MoveButton() {
+export default function MoveButton({ dmId }: { dmId: string }) {
+  const userId = localStorage.getItem('keep_in_touch_user_id')
   const router = useRouter()
   const moveHandler = () => {
-    router.replace('/login')
+    router.replace(`/message/send/${userId}/${dmId}`)
   }
   return (
     <Button

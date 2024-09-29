@@ -2,7 +2,11 @@ import { Button } from '@/shared/ui/components/Button'
 import Image from 'next/image'
 import MoveButton from './_components/moveButton'
 
-export default function Page() {
+export default function Page({
+  params: { dmId },
+}: {
+  params: { dmId: string }
+}) {
   return (
     <>
       <div className='mt-auto'>
@@ -17,7 +21,7 @@ export default function Page() {
       </div>
 
       <div className='mt-auto w-full flex justify-center items-center flex-col gap-5'>
-        <MoveButton />
+        <MoveButton dmId={dmId} />
       </div>
     </>
   )
