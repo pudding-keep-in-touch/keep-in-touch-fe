@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import axios from 'axios'
 import { API_BASE_URL } from '../config'
 
@@ -28,11 +29,9 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // Handle global errors (e.g., unauthorized, server errors)
     if (error.response.status === 401) {
-      window.location.href =
-        'http://dev-be.keep-in-touch.me:3000/v1/auth/google/login'
-
-      return Promise.reject(error)
+      redirect('/login')
     }
+    throw new Error('API 요청 실패')
   }
 )
 
