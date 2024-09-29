@@ -25,7 +25,7 @@ export default function Home() {
 
   if (isLoading) return null
 
-  if (!home.data) {
+  if (!home?.data) {
     return (
       <HomeLayout>
         <div className='relative min-h-screen w-[100%]'>
