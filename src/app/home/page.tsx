@@ -25,7 +25,21 @@ export default function Home() {
 
   if (isLoading) return null
 
-  console.log(home)
+  if (!home.data) {
+    return (
+      <HomeLayout>
+        <div className='relative min-h-screen w-[100%]'>
+          <div className='w-[32rem]'>
+            <Image src='/home.svg' alt='home' width={600} height={800} />
+          </div>
+          <div className='absolute top-1 flex flex-col pt-[20px] px-6 w-[100%]'>
+            <UserInfo nickname='loading...' />
+          </div>
+        </div>
+      </HomeLayout>
+    )
+  }
+
   if (!home.data.isOwner) {
     redirect('/message/send/select')
   }
