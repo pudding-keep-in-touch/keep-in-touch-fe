@@ -9,9 +9,11 @@ export default function Callback() {
 
   useEffect(() => {
     const token = searchParams.get('accessToken')
+    const userId = searchParams.get('userId') as string
 
     if (token) {
       localStorage.setItem('keep_in_touch_token', token)
+      localStorage.setItem('keep_in_touch_user_id', userId)
       router.push('/home')
     } else {
       router.push('/login')

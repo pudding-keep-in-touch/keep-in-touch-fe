@@ -11,12 +11,17 @@ import { redirect, useSearchParams } from 'next/navigation'
 
 export default function Home() {
   const searchParams = useSearchParams()
-  const userId = searchParams.get('userId') as number | null
+  let userId: number | null = null
+
+  const userIdFromParams = searchParams.get('userId')
+
+  if (!userIdFromParams) {
+    userId = Number(localStorage.getItem('keep_in_touch_user_id'))
+  } else {
+    userId = Number(userIdFromParams)
+  }
+
   const home = useCurrentMessage(userId)
-
-  console.log(home)
-
-  if (!home) return null
 
   if (!home.data.isOwner) {
     redirect('/message/send/select')
