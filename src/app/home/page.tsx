@@ -61,6 +61,13 @@ export default function Home() {
               dmList={home.data.receivedDmList[0]}
               userId={userId}
             />
+
+            <MessagePreview
+              title='보낸 쪽지'
+              type='send'
+              dmList={home.data.sentDmList[0]}
+              userId={userId}
+            />
           </div>
 
           <Tooltip>

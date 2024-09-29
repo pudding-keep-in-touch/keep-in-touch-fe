@@ -27,7 +27,7 @@ export default function MessagePreview({
       <div className='w-full h-[60px] bg-[#F6F7FC] p-5 flex justify-between items-center'>
         <div className='flex gap-2'>
           <h1 className='text-xl font-medium'>{title}</h1>
-          {dmList && dmList.isRead === false && (
+          {dmList && dmList.isRead === false && type === 'received' && (
             <div className='flex justify-center items-center h-8 bg-[#3182F6] p-2 rounded-full'>
               <p className='text-white text-[13px] font-normal'>
                 새로운 쪽지를 보냈어요!
@@ -37,7 +37,7 @@ export default function MessagePreview({
         </div>
 
         {dmList && (
-          <Link href={`/message/receive/${userId}`}>
+          <Link href={`/message/${type}/${userId}`}>
             <ChevronRightIcon className='w-6 h-6 cursor-pointer' />
           </Link>
         )}
