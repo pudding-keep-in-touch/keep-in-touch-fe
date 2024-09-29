@@ -21,7 +21,9 @@ export default function Home() {
     userId = Number(userIdFromParams)
   }
 
-  const home = useCurrentMessage(userId)
+  const { home, isLoading } = useCurrentMessage(userId)
+
+  if (isLoading) return null
 
   if (!home.data.isOwner) {
     redirect('/message/send/select')

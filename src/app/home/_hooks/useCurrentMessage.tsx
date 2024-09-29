@@ -12,5 +12,5 @@ export default function useCurrentMessage(userId: number | null) {
     queryFn: () => getHome(userId),
   })
 
-  return home
+  return { home, isLoading }
 }
