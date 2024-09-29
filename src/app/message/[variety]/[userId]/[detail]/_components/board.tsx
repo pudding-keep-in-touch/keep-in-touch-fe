@@ -5,11 +5,14 @@ import MessageSendButton from './sendButton'
 import MessageShareButton from './shareButton'
 import { useEffect, useState } from 'react'
 import { DmList } from '@/entities/message/model/types'
+import { varietyType } from '../../_components/message'
 
 export default function MessageBoard({
   directMessageId,
+  variety,
 }: {
   directMessageId: number
+  variety: varietyType
 }) {
   const [message, setMessage] = useState<DmList>()
   const { data } = useGetDetailMessage({ directMessageId })
@@ -34,7 +37,7 @@ export default function MessageBoard({
       {/* <div className='px-6 pb-6 w-full h-fit flex gap-2'> */}
       {/* <MessageShareButton /> */}
       <div className='px-6 pb-6'>
-        <MessageSendButton />
+        <MessageSendButton variety={variety} />
       </div>
       {/* </div> */}
     </div>

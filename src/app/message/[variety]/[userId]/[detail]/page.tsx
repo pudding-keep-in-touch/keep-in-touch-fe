@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import MessageBoard from './_components/board'
 import ReceiveDetailLayout from '@/shared/ui/layouts/ReceiveDetailLayout'
+import { varietyType } from '../_components/message'
 
 export default function Page({
-  params: { detail },
+  params: { variety, detail },
 }: {
-  params: { detail: string }
+  params: { variety: varietyType; detail: string }
 }) {
   const directMessageId = Number(detail)
   return (
@@ -22,7 +23,7 @@ export default function Page({
           <Image src='/receiveDetail.svg' alt='main' width={600} height={800} />
         </div>
 
-        <MessageBoard directMessageId={directMessageId} />
+        <MessageBoard directMessageId={directMessageId} variety={variety} />
       </div>
     </ReceiveDetailLayout>
   )

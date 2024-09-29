@@ -2,12 +2,22 @@
 
 import { Button } from '@/shared/ui/components/Button'
 import { useRouter } from 'next/navigation'
+import { varietyType } from '../../_components/message'
 
-export default function MessageSendButton() {
+export default function MessageSendButton({
+  variety,
+}: {
+  variety: varietyType
+}) {
+  const userId = localStorage.getItem('keep_in_touch_user_id')
   const router = useRouter()
 
   const onClick = () => {
-    router.back()
+    if (userId) {
+      router.push(`/message/${variety}/${userId}`)
+    } else {
+      router.back()
+    }
   }
   return (
     <Button
