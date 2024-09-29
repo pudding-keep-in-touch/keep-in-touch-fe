@@ -26,3 +26,17 @@ jobs:
       with:
         push: true
         tags: keepintouch/keepintouch-fe:develop
+
+    # 인스턴스 접속 & 애플리케이션 실행
+    - name: Connect to Server & Execute Application
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.DEV_FE_HOST }}
+        username: ${{ secrets.DEV_FE_USERNAME }}
+        key: ${{ secrets.DEV_FE_SSH_KEY }}
+        port: 22
+        script: |
+          sudo docker stop $(docker ps -a -q) 
+          sudo docker rm $(docker ps -a -q) 
+          sudo docker pull <docker_hub_username>/<docker_image_name>:develop
+          sudo docker run -d -p 3000:3000 --name <container_name> <docker_hub_username>/<docker_image_name>
