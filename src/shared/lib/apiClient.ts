@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation'
+
 const API_BASE_URL = 'http://dev-be.keep-in-touch.me:3000/'
 
 async function apiClient(
@@ -8,7 +10,7 @@ async function apiClient(
     }
   } = {}
 ) {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('keep_in_touch_token')
 
   const defaultHeaders = {
     Authorization: `Bearer ${token}`,
@@ -23,6 +25,7 @@ async function apiClient(
 
   if (!response.ok) {
     if (response.status === 401) {
+      redirect('/login')
     }
     throw new Error('API 요청 실패')
   }
