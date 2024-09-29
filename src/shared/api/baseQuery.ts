@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const axiosInstance = axios.create({
   //   withCredentials: true,
-  baseURL: 'http://dev-be.keep-in-touch.me:3000',
+  baseURL: 'https://dev-be.keep-in-touch.me:3000',
 })
 
 // Request interceptor
