@@ -20,16 +20,7 @@ export default function SelectBoard({ userId }: { userId: number }) {
         const currentUrl = encodeURIComponent(
           `${window.location.origin}/${userId}/select`
         )
-        const loginUrl = getLoginUrl(currentUrl)
-        window.location.href = loginUrl
-      } else {
-        // 토큰이 유효하지 않으면 다시 로그인
-        localStorage.removeItem('keep_in_touch_token')
-        localStorage.removeItem('keep_in_touch_user_id')
 
-        const currentUrl = encodeURIComponent(
-          `${window.location.origin}/select`
-        )
         const loginUrl = getLoginUrl(currentUrl)
         window.location.href = loginUrl
       }

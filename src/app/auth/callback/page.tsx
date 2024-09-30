@@ -9,6 +9,8 @@ export default function Callback() {
   const searchParams = useSearchParams()
   const redirectUrl = searchParams.get('redirectUrl') || '/home'
 
+  console.log('콜백이다 야야야야야', redirectUrl)
+
   useEffect(() => {
     const token = searchParams.get('accessToken')
     const userId = searchParams.get('userId') as string
@@ -30,3 +32,5 @@ export default function Callback() {
     </MainLayout>
   )
 }
+
+//https://dev-fe.keep-in-touch.me/message/send/20/select
