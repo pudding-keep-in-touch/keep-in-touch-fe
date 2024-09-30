@@ -1,4 +1,3 @@
-import { Button } from '@/shared/ui/components/Button'
 import Image from 'next/image'
 import MoveButton from './_components/moveButton'
 

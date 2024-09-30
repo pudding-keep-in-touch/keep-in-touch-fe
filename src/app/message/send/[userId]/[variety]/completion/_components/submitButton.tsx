@@ -8,13 +8,15 @@ import { usePostSendMessage } from '@/entities/message/api/mutation'
 import { useRouter } from 'next/navigation'
 
 interface MessageSendSubmitButtonProps {
-  userId: number
+  loginId: number
   emotionId: number
+  userId: number
 }
 
 export default function MessageSendSubmitButton({
-  userId,
+  loginId,
   emotionId,
+  userId,
 }: MessageSendSubmitButtonProps) {
   const router = useRouter()
   const { formState, getValues, handleSubmit } =
@@ -27,13 +29,13 @@ export default function MessageSendSubmitButton({
   const onSubmit = handleSubmit(async (formValues) => {
     try {
       const response = await mutateAsync({
-        receiverId: Number(userId),
+        receiverId: Number(loginId),
         emotionId: emotionId || 1,
         content: formValues.message,
       })
 
       if (response && response.dmId) {
-        router.push(`/message/send/complete/${response.dmId}`)
+        router.push(`/message/send/${userId}/complete/${response.dmId}`)
       } else {
         console.error('dmId가 응답에 없습니다:', response)
       }

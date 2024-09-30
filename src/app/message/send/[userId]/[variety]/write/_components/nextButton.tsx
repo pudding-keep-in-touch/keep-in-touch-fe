@@ -6,7 +6,7 @@ import { MessageFormValues } from '../../_components/formSchema'
 import { useParams, useRouter } from 'next/navigation'
 import { MessageVariety } from '../../_utils/varieties'
 
-export default function MessageWriteNextButton() {
+export default function MessageWriteNextButton({ userId }: { userId: number }) {
   const params = useParams<{ variety: MessageVariety }>()
   const router = useRouter()
 
@@ -14,7 +14,7 @@ export default function MessageWriteNextButton() {
   const { isValid } = formState
 
   const onClick = () => {
-    router.push(`/message/send/${params.variety}/completion`)
+    router.push(`/message/send/${userId}/${params.variety}/completion`)
   }
 
   return (

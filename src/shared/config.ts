@@ -10,3 +10,8 @@ export const API_BASE_URL = {
   production: 'https://dev-be.keep-in-touch.me/', // FIXME: production 백엔드 서버 배포한 걸로 추가해야함
   development: 'https://dev-be.keep-in-touch.me/',
 }[APP_ENV]
+
+export const getLoginUrl = (redirectUrl: string) => {
+  const encodedRedirectUrl = encodeURIComponent(redirectUrl)
+  return `${API_BASE_URL}v1/auth/google/login?redirectUrl=${encodedRedirectUrl}`
+}

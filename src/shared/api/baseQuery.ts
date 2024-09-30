@@ -3,11 +3,9 @@ import axios from 'axios'
 import { API_BASE_URL } from '../config'
 
 export const axiosInstance = axios.create({
-  // withCredentials: true,
   baseURL: `${API_BASE_URL}`,
 })
 
-// Request interceptor
 axiosInstance.interceptors.request.use(async (config) => {
   if (!config.headers) return config
 

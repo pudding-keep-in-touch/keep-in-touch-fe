@@ -2,7 +2,6 @@
 
 import { useGetDetailMessage } from '@/entities/message/api/queries'
 import MessageSendButton from './sendButton'
-import MessageShareButton from './shareButton'
 import { useEffect, useState } from 'react'
 import { DmList } from '@/entities/message/model/types'
 import { varietyType } from '../../_components/message'

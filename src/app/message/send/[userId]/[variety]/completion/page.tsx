@@ -3,9 +3,9 @@ import MessageSendButtons from './_components/buttons'
 import MessageSendPreview from './_components/preview'
 
 export default function Page({
-  params: { variety },
+  params: { variety, userId },
 }: {
-  params: { variety: string }
+  params: { variety: string; userId: number }
 }) {
   return (
     <>
@@ -20,7 +20,7 @@ export default function Page({
       </p>
 
       <MessageSendPreview />
-      <MessageSendButtons emotion={variety} />
+      <MessageSendButtons emotion={variety} userId={userId} />
     </>
   )
 }
