@@ -5,18 +5,17 @@ on:
       - develop
     paths-ignore:
       ./*.md
-  
-  inputs:
-    repo_name : 
-      description: "the name of the target repository"
-      type: string
-      required: true
-      default: 'keepintouch-fe'
-    container_name : 
-      description: "the name of the target container to run"
-      type: string
-      required: true
-      default: 'keepintouch-fe'
+  # inputs:
+  #   repo_name : 
+  #     description: "the name of the target repository"
+  #     type: string
+  #     required: true
+  #     default: 'keepintouch-fe'
+  #   container_name : 
+  #     description: "the name of the target container to run"
+  #     type: string
+  #     required: true
+  #     default: 'keepintouch-fe'
     
 jobs:
   build-and-push-image:
@@ -50,7 +49,7 @@ jobs:
         key: ${{ secrets.DEV_FE_SSH_KEY }}
         port: 22
         script: |
-          sudo docker stop ${{ github.event.inputs.container_name }}
-          sudo docker rm ${{ github.event.inputs.container_name }}
-          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.inputs.repo_name }}:develop
-          sudo docker run -d -p 3000:3000 --name ${{ github.event.inputs.container_name }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.inputs.repo_name }}:develop
+          sudo docker stop keepintouch-fe
+          sudo docker rm keepintouch-fe
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/keepintouch-fe:develop
+          sudo docker run -d -p 3000:3000 --name keepintouch-fe ${{ secrets.DOCKERHUB_USERNAME }}/keepintouch-fe:develop
