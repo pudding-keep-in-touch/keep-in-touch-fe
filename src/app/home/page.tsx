@@ -56,7 +56,7 @@ export default function Home() {
   }
 
   if (!home.data.isOwner) {
-    redirect('/message/send/select')
+    redirect(`/message/send/${userId}/select`)
   }
 
   return (

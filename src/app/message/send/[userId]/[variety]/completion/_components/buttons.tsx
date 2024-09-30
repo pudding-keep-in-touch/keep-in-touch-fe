@@ -2,25 +2,25 @@
 
 import { Button } from '@/shared/ui/components/Button'
 import MessageSendSubmitButton from './submitButton'
-import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { getVarietyNumber, MessageVariety } from '../../_utils/varieties'
-import { usePostSendMessage } from '@/entities/message/api/mutation'
 
 interface MessageSendButtonsProps {
   emotion: string
+  userId: number
 }
 
 export default function MessageSendButtons({
   emotion,
+  userId,
 }: MessageSendButtonsProps) {
   const router = useRouter()
   const params = useParams<{ variety: MessageVariety }>()
-  const userId = localStorage.getItem('keep_in_touch_user_id')
+  const loginId = localStorage.getItem('keep_in_touch_user_id')
   const emotionId = getVarietyNumber(emotion as MessageVariety | undefined)
 
   const clickHandler = () => {
-    router.push(`/message/send/${params.variety}/preview`)
+    router.push(`/message/send/${userId}/${params.variety}/preview`)
   }
 
   return (
@@ -34,7 +34,8 @@ export default function MessageSendButtons({
       </Button>
 
       <MessageSendSubmitButton
-        userId={Number(userId)}
+        userId={userId}
+        loginId={Number(loginId)}
         emotionId={Number(emotionId)}
       />
     </div>

@@ -2,7 +2,11 @@ import MessageSendStep from '../../_components/step'
 import MessageInput from './_components/messageInput'
 import MessageWriteNextButton from './_components/nextButton'
 
-export default function Page() {
+export default function Page({
+  params: { userId },
+}: {
+  params: { userId: number }
+}) {
   return (
     <>
       <div className='mt-[30px] mb-5'>
@@ -13,7 +17,7 @@ export default function Page() {
 
       <MessageInput />
 
-      <MessageWriteNextButton />
+      <MessageWriteNextButton userId={userId} />
     </>
   )
 }
