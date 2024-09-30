@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/shared/ui/components/Button'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { varietyType } from '../../_components/message'
 
 export default function MessageSendButton({
@@ -11,10 +11,16 @@ export default function MessageSendButton({
 }) {
   const userId = localStorage.getItem('keep_in_touch_user_id')
   const router = useRouter()
+  const param = useSearchParams()
+  const baseUrl = param.get('base')
 
   const onClick = () => {
     if (userId) {
-      router.push(`/message/${variety}/${userId}`)
+      if (baseUrl) {
+        router.replace(`/message/${variety}/${userId}?base=${baseUrl}`)
+      } else {
+        router.replace(`/message/${variety}/${userId}`)
+      }
     } else {
       router.back()
     }

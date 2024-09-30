@@ -37,7 +37,7 @@ export default function MessagePreview({
         </div>
 
         {dmList && (
-          <Link href={`/message/${type}/${userId}`}>
+          <Link href={`/message/${type}/${userId}?base=home`}>
             <ChevronRightIcon className='w-6 h-6 cursor-pointer' />
           </Link>
         )}
