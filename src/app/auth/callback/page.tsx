@@ -24,7 +24,7 @@ export default function Callback() {
 
   return (
     <MainLayout>
-      <div className='flex items-center justify-center h-screen'>
+      <div className='flex items-center justify-center h-screen text-center text-[#333D4B] text-2xl font-bold'>
         로그인 중...
       </div>
     </MainLayout>
