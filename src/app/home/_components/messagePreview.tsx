@@ -82,7 +82,7 @@ export default function MessagePreview({
         ) : (
           <div className='flex justify-center items-center h-full'>
             <p className='text-[#C5C5C5] text-lg font-medium'>
-              {type === 'send' ? '보낸 쪽지' : '받은 쪽지'}가 없습니다.
+              {type === 'sent' ? '보낸 쪽지' : '받은 쪽지'}가 없습니다.
             </p>
           </div>
         )}

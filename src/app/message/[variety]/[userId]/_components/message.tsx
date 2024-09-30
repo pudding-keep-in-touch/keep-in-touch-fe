@@ -10,7 +10,7 @@ import { useInView } from 'react-intersection-observer'
 import { DmList } from '@/entities/message/model/types'
 import { useGetInfiniteMessages } from '@/entities/message/api/queries'
 
-export type varietyType = 'send' | 'received'
+export type varietyType = 'sent' | 'received'
 
 interface MessageListProps {
   userId: number
@@ -22,8 +22,8 @@ export default function MessageList({ userId, variety }: MessageListProps) {
 
   const { data, fetchNextPage } = useGetInfiniteMessages({
     userId,
-    page: 1,
     limit: 10,
+    type: variety,
   })
   const { ref, inView } = useInView()
 
@@ -47,7 +47,7 @@ export default function MessageList({ userId, variety }: MessageListProps) {
           onClick={() => router.back()}
         />
         <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-          {variety === 'send' ? '보낸 쪽지' : '받은 쪽지'}
+          {variety === 'sent' ? '보낸 쪽지' : '받은 쪽지'}
         </h1>
       </header>
       <div ref={ref} className='w-full flex flex-col gap-2 py-10 px-6'>

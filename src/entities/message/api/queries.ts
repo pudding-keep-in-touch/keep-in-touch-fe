@@ -1,22 +1,18 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { DmList } from '../model/types'
 import { baseQuery } from '@/shared/api/baseQuery'
-
-interface MessageApiResponse {
-  messages: DmList[]
-  nextPage: number | null
-}
+import { varietyType } from '@/app/message/[variety]/[userId]/_components/message'
 
 interface GetMessageQueryProps {
   userId: number
-  page: number
   limit: number
+  type: varietyType
 }
 
 export const useGetInfiniteMessages = ({
   userId,
-  page,
   limit,
+  type,
 }: GetMessageQueryProps) => {
   return useInfiniteQuery({
     queryKey: ['getMessages', userId],
@@ -25,9 +21,9 @@ export const useGetInfiniteMessages = ({
         `/v1/users/${userId}/direct-messages`,
         {
           params: {
-            type: 'received',
+            type: type,
             page: pageParam,
-            limit: 10,
+            limit: limit,
             order: 'desc',
           },
 

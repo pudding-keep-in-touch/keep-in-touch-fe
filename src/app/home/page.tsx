@@ -79,7 +79,7 @@ export default function Home() {
 
             <MessagePreview
               title='보낸 쪽지'
-              type='send'
+              type='sent'
               dmList={home.data.sentDmList[0]}
               userId={userId}
             />
