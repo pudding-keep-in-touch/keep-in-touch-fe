@@ -86,7 +86,7 @@ export default function Home() {
           </div>
 
           <Tooltip>
-            <LinkShareButton />
+            <LinkShareButton userId={userId} />
           </Tooltip>
         </div>
       </div>
