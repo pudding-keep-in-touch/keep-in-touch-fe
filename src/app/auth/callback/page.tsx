@@ -9,6 +9,8 @@ export default function Callback() {
   const searchParams = useSearchParams()
   const redirectUrl = searchParams.get('redirectUrl') || '/home'
 
+  console.log('콜백이다 야야야야야', redirectUrl)
+
   useEffect(() => {
     const token = searchParams.get('accessToken')
     const userId = searchParams.get('userId') as string
@@ -24,9 +26,11 @@ export default function Callback() {
 
   return (
     <MainLayout>
-      <div className='flex items-center justify-center h-screen'>
+      <div className='flex items-center justify-center h-screen text-center text-[#333D4B] text-2xl font-bold'>
         로그인 중...
       </div>
     </MainLayout>
   )
 }
+
+//https://dev-fe.keep-in-touch.me/message/send/20/select

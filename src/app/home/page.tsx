@@ -71,22 +71,22 @@ export default function Home() {
 
           <div className='mt-[100px] flex flex-col gap-6'>
             <MessagePreview
+              title='보낸 쪽지'
+              type='sent'
+              dmList={home.data.sentDmList[0]}
+              userId={userId}
+            />
+
+            <MessagePreview
               title='받은 쪽지'
               type='received'
               dmList={home.data.receivedDmList[0]}
               userId={userId}
             />
-
-            <MessagePreview
-              title='보낸 쪽지'
-              type='send'
-              dmList={home.data.sentDmList[0]}
-              userId={userId}
-            />
           </div>
 
           <Tooltip>
-            <LinkShareButton />
+            <LinkShareButton userId={userId} />
           </Tooltip>
         </div>
       </div>

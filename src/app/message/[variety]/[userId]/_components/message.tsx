@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { cn, EmotionVariety, getEmotionVarietyData } from '@/shared/lib/utils'
 import { ChevronLeftIcon } from 'lucide-react'
 
@@ -10,7 +10,7 @@ import { useInView } from 'react-intersection-observer'
 import { DmList } from '@/entities/message/model/types'
 import { useGetInfiniteMessages } from '@/entities/message/api/queries'
 
-export type varietyType = 'send' | 'received'
+export type varietyType = 'sent' | 'received'
 
 interface MessageListProps {
   userId: number
@@ -19,11 +19,13 @@ interface MessageListProps {
 
 export default function MessageList({ userId, variety }: MessageListProps) {
   const router = useRouter()
+  const param = useSearchParams()
+  const baseUrl = param.get('base')
 
   const { data, fetchNextPage } = useGetInfiniteMessages({
     userId,
-    page: 1,
     limit: 10,
+    type: variety,
   })
   const { ref, inView } = useInView()
 
@@ -39,35 +41,45 @@ export default function MessageList({ userId, variety }: MessageListProps) {
     setDmList(data?.pages[0])
   }, [data])
 
+  const backHandler = () => {
+    if (baseUrl) {
+      router.replace(`/home`)
+    } else {
+      router.back()
+    }
+  }
+
   return (
     <>
       <header className='w-full h-[50px] grid grid-cols-3 items-center px-6'>
         <ChevronLeftIcon
           className='w-6 h-6 cursor-pointer'
-          onClick={() => router.back()}
+          onClick={backHandler}
         />
         <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-          {variety === 'send' ? '보낸 쪽지' : '받은 쪽지'}
+          {variety === 'sent' ? '보낸 쪽지' : '받은 쪽지'}
         </h1>
       </header>
       <div ref={ref} className='w-full flex flex-col gap-2 py-10 px-6'>
         {dmList &&
           dmList.map((message, index) => (
-            <MessageItem key={message.id} {...message} />
+            <MessageItem
+              key={message.id}
+              baseUrl={baseUrl || ''}
+              {...message}
+            />
           ))}
       </div>
     </>
   )
 }
 
-function MessageItem({
-  id,
-  senderId,
-  content,
-  emotion,
-  isRead,
-  createdAt,
-}: DmList) {
+type MessageItemProps = DmList & {
+  baseUrl?: string
+}
+
+function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
+  const { id, senderId, content, emotion, isRead, createdAt } = messageProps
   const pathname = usePathname()
   const router = useRouter()
 
@@ -76,7 +88,11 @@ function MessageItem({
   )
 
   const onClick = () => {
-    router.push(`${pathname}/${id}`)
+    if (baseUrl) {
+      router.push(`${pathname}/${id}?base=${baseUrl}`)
+    } else {
+      router.push(`${pathname}/${id}`)
+    }
   }
 
   return (
