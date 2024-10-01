@@ -22,7 +22,7 @@ export default function MessageList({ userId, variety }: MessageListProps) {
   const param = useSearchParams()
   const baseUrl = param.get('base')
 
-  const { data, fetchNextPage } = useGetInfiniteMessages({
+  const { data, fetchNextPage, refetch } = useGetInfiniteMessages({
     userId,
     limit: 10,
     type: variety,
@@ -35,11 +35,15 @@ export default function MessageList({ userId, variety }: MessageListProps) {
     if (inView) {
       fetchNextPage()
     }
-  }, [inView])
+  }, [inView, fetchNextPage])
 
   useEffect(() => {
-    setDmList(data?.pages[0])
-  }, [data])
+    refetch()
+    if (data?.pages) {
+      const allMessages = data.pages.flatMap((page) => page || [])
+      setDmList(allMessages)
+    }
+  }, [data, refetch])
 
   const backHandler = () => {
     if (baseUrl) {
@@ -48,6 +52,9 @@ export default function MessageList({ userId, variety }: MessageListProps) {
       router.back()
     }
   }
+
+  console.log('variety', variety)
+  console.log('dmList', dmList)
 
   return (
     <>
