@@ -8,13 +8,11 @@ import { usePostSendMessage } from '@/entities/message/api/mutation'
 import { useRouter } from 'next/navigation'
 
 interface MessageSendSubmitButtonProps {
-  loginId: number
   emotionId: number
   userId: number
 }
 
 export default function MessageSendSubmitButton({
-  loginId,
   emotionId,
   userId,
 }: MessageSendSubmitButtonProps) {
@@ -29,7 +27,7 @@ export default function MessageSendSubmitButton({
   const onSubmit = handleSubmit(async (formValues) => {
     try {
       const response = await mutateAsync({
-        receiverId: Number(loginId),
+        receiverId: userId,
         emotionId: emotionId || 1,
         content: formValues.message,
       })

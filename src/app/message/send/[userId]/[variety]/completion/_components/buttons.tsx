@@ -16,7 +16,6 @@ export default function MessageSendButtons({
 }: MessageSendButtonsProps) {
   const router = useRouter()
   const params = useParams<{ variety: MessageVariety }>()
-  const loginId = localStorage.getItem('keep_in_touch_user_id')
   const emotionId = getVarietyNumber(emotion as MessageVariety | undefined)
 
   const clickHandler = () => {
@@ -33,11 +32,7 @@ export default function MessageSendButtons({
         미리보기
       </Button>
 
-      <MessageSendSubmitButton
-        userId={userId}
-        loginId={Number(loginId)}
-        emotionId={Number(emotionId)}
-      />
+      <MessageSendSubmitButton userId={userId} emotionId={Number(emotionId)} />
     </div>
   )
 }
