@@ -9,7 +9,7 @@ export default function MessageSendPreview() {
   const { preview } = getVarietyData(params.variety)
 
   return (
-    <div className='relative w-full'>
+    <div className='relative w-full mb-[50px]'>
       <Image
         src={preview.src}
         alt={preview.text}
