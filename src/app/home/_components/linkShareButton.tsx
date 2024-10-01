@@ -1,11 +1,10 @@
 'use client'
 
-import { API_BASE_URL } from '@/shared/config'
 import { Button } from '@/shared/ui/components/Button'
 
 export default function LinkShareButton({ userId }: { userId: number }) {
   function shareOnUrl() {
-    const contentToCopy = `${API_BASE_URL}message/send/${userId}/select`
+    const contentToCopy = `https://dev-fe.keep-in-touch.me/message/send/${userId}/select`
 
     const urlArea = document.createElement('textarea')
     document.body.appendChild(urlArea)

@@ -16,8 +16,10 @@ export default function MessageSendButton({
 
   const onClick = () => {
     if (userId) {
-      if (baseUrl) {
+      if (baseUrl === 'home') {
         router.replace(`/message/${variety}/${userId}?base=${baseUrl}`)
+      } else if (baseUrl === 'sent') {
+        router.push(`/message/received/${userId}?base=${baseUrl}`)
       } else {
         router.replace(`/message/${variety}/${userId}`)
       }
