@@ -32,7 +32,10 @@ export default function MessageSendButtons({
         미리보기
       </Button>
 
-      <MessageSendSubmitButton userId={userId} emotionId={Number(emotionId)} />
+      <MessageSendSubmitButton
+        userId={Number(userId)}
+        emotionId={Number(emotionId)}
+      />
     </div>
   )
 }
