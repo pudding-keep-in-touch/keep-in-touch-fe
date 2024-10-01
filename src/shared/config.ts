@@ -11,6 +11,10 @@ export const API_BASE_URL = {
   development: 'https://dev-be.keep-in-touch.me/',
 }[APP_ENV]
 
+export const FRONT_API_BASE_URL = {
+  production: 'https://dev-fe.keep-in-touch.me/',
+}
+
 export const getLoginUrl = (redirectUrl: string) => {
   const encodedRedirectUrl = encodeURIComponent(redirectUrl)
   return `${API_BASE_URL}v1/auth/google/login?redirectUrl=${encodedRedirectUrl}`
