@@ -49,6 +49,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       if (exp > Math.floor(Date.now() / 1000)) {
         setIsLoggedIn(true)
         setUserId(storedUserId)
+
         return true
       }
     } catch (error) {
@@ -59,7 +60,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
       console.error('Authentication error:', error)
       // await logout()
-      window.location.href = `${API_BASE_URL}v1/auth/google/login`
+      router.replace(getLoginUrl(window.location.href))
     } finally {
       setIsLoading(false)
     }
