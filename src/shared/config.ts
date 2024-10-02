@@ -15,7 +15,7 @@ export const FRONT_API_BASE_URL = {
   production: 'https://dev-fe.keep-in-touch.me/',
 }
 
-export const getLoginUrl = (redirectUrl: string) => {
-  const encodedRedirectUrl = encodeURIComponent(redirectUrl)
-  return `${API_BASE_URL}v1/auth/google/login?redirectUrl=${encodedRedirectUrl}`
-}
+export const getLoginUrl = (redirectUrl: string) =>
+  `${API_BASE_URL}v1/auth/google/login?redirectUrl=${encodeURI(
+    `${window.location.origin}/v1/auth/google/callback?redirectUrl=${redirectUrl}`
+  )}`
