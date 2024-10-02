@@ -27,5 +27,9 @@ export const usePostSendMessage = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['home'] })
     },
+
+    onError: () => {
+      //
+    },
   })
 }
