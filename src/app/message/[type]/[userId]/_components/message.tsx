@@ -65,6 +65,7 @@ export default function MessageList({ userId, messageType }: MessageListProps) {
             <MessageItem
               key={message.id}
               baseUrl={baseUrl || ''}
+              messageType={messageType}
               {...message}
             />
           ))}
@@ -76,10 +77,15 @@ export default function MessageList({ userId, messageType }: MessageListProps) {
 
 type MessageItemProps = DmList & {
   baseUrl?: string
+  messageType: MessageType
 }
 
-function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
-  const { id, senderId, content, emotion, isRead, createdAt } = messageProps
+function MessageItem({
+  messageType,
+  baseUrl,
+  ...messageProps
+}: MessageItemProps) {
+  const { id, receiverId, content, emotion, isRead, createdAt } = messageProps
   const [emotionType, setEmotionType] = useState<VarietyType>()
   const pathname = usePathname()
   const router = useRouter()
@@ -124,7 +130,7 @@ function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
           <div
             className={cn(
               'flex justify-center items-center py-[5px] w-full rounded-sm',
-              emotion.name === '응원과감사' ? 'bg-[#D7F1FF]' : 'bg-[#FFDDFE]'
+              emotion.name === '응원과 감사' ? 'bg-[#D7F1FF]' : 'bg-[#FFDDFE]'
             )}
           >
             <span className='text-[10px] text-[#1F1F1F] font-medium'>
@@ -134,7 +140,9 @@ function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
         </div>
         <div>
           <div className='font-semibold text-[#333D4B] text-[17px]'>
-            {senderId}
+            {messageType === 'received'
+              ? '익명에게 쪽지가 도착했습니다!'
+              : `To. ${receiverId}에게`}
           </div>
           <div className='text-[#333D4B] mt-1 line-clamp-1 text-base'>
             {content}
