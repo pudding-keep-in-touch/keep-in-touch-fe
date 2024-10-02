@@ -11,14 +11,12 @@ export default function Main() {
     const checkToken = async () => {
       const token = localStorage.getItem('keep_in_touch_token')
       const userId = localStorage.getItem('keep_in_touch_user_id')
-
       if (!token) {
         setTimeout(() => {
           router.push('/login')
         }, 2000)
         return
       }
-
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/user/${userId}/home`,
@@ -28,7 +26,6 @@ export default function Main() {
             },
           }
         )
-
         if (!response.ok) {
           setTimeout(() => router.push('/login'), 2000)
         } else {
@@ -39,21 +36,13 @@ export default function Main() {
         setTimeout(() => router.push('/login'), 2000)
       }
     }
-
     checkToken()
   }, [router])
 
   return (
     <MainLayout>
-      <div className='relative w-[32rem]'>
-        <Image
-          src='/mainTitle.svg'
-          alt='main title'
-          width={200}
-          height={200}
-          className='absolute top-40 left-12'
-        />
-        <Image src='/main.svg' alt='main' width={600} height={800} />
+      <div className='flex flex-col justify-center w-full h-full px-[60px] py-5 mt-[84px]'>
+        <Image src='/mainTitle.svg' alt='main title' width={200} height={200} />
       </div>
     </MainLayout>
   )
