@@ -53,9 +53,6 @@ export default function MessageList({ userId, variety }: MessageListProps) {
     }
   }
 
-  console.log('variety', variety)
-  console.log('dmList', dmList)
-
   return (
     <>
       <header className='w-full h-[50px] grid grid-cols-3 items-center px-6'>
