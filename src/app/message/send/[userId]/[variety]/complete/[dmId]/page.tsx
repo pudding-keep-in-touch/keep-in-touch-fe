@@ -2,9 +2,9 @@ import Image from 'next/image'
 import MoveButton from './_components/moveButton'
 
 export default function Page({
-  params: { dmId },
+  params: { variety, dmId },
 }: {
-  params: { dmId: string }
+  params: { variety: string; dmId: string }
 }) {
   return (
     <>
@@ -20,7 +20,7 @@ export default function Page({
       </div>
 
       <div className='mt-auto w-full flex justify-center items-center flex-col gap-5'>
-        <MoveButton dmId={dmId} />
+        <MoveButton dmId={dmId} variety={variety} />
       </div>
     </>
   )
