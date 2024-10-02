@@ -30,7 +30,7 @@ export default function MessagePreview({
           {dmList && dmList.isRead === false && type === 'received' && (
             <div className='flex justify-center items-center h-8 bg-[#3182F6] p-2 rounded-full'>
               <p className='text-white text-[13px] font-normal'>
-                새로운 쪽지를 보냈어요!
+                새로운 쪽지를 받았어요!
               </p>
             </div>
           )}
