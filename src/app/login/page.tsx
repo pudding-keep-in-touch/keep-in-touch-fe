@@ -1,23 +1,15 @@
-import MainLayout from '@/shared/ui/layouts/MainLayout'
 import Image from 'next/image'
 import GoogleButton from './_components/googleButton'
 
 export default function Login() {
   return (
-    <MainLayout>
-      <div className='relative min-h-screen w-[100%]'>
-        <Image
-          src='/mainTitle.svg'
-          alt='main title'
-          width={200}
-          height={200}
-          className='absolute top-40 left-12'
-        />
-
-        <div className='absolute bottom-0 px-6 pb-6 w-full h-fit flex gap-2'>
-          <GoogleButton />
-        </div>
+    <>
+      <div className='flex flex-col justify-center w-full h-full px-6 py-5 mt-[84px]'>
+        <Image src='/mainTitle.svg' alt='main title' width={200} height={200} />
       </div>
-    </MainLayout>
+      <div className='p-[18px] w-full h-fit flex gap-2 mt-auto'>
+        <GoogleButton />
+      </div>
+    </>
   )
 }
