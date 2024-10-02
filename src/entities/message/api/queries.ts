@@ -1,12 +1,11 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { DmList } from '../model/types'
 import { baseQuery } from '@/shared/api/baseQuery'
-import { varietyType } from '@/app/message/[variety]/[userId]/_components/message'
+import { MessageType } from '@/shared/types'
 
 interface GetMessageQueryProps {
   userId: number
   limit: number
-  type: varietyType
+  type: MessageType
 }
 
 export const useGetInfiniteMessages = ({

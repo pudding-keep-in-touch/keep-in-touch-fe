@@ -1,13 +1,13 @@
 'use client'
 
-import { Button } from '@/shared/ui/components/Button'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { varietyType } from '../../_components/message'
+import { MessageType } from '@/shared/types'
+import { Button } from '@/shared/ui/components/Button'
 
 export default function MessageSendButton({
-  variety,
+  messageType,
 }: {
-  variety: varietyType
+  messageType: MessageType
 }) {
   const userId = localStorage.getItem('keep_in_touch_user_id')
   const router = useRouter()
@@ -17,21 +17,22 @@ export default function MessageSendButton({
   const onClick = () => {
     if (userId) {
       if (baseUrl === 'home') {
-        router.replace(`/message/${variety}/${userId}?base=${baseUrl}`)
+        router.replace(`/message/${messageType}/${userId}?base=${baseUrl}`)
       } else if (baseUrl === 'sent') {
-        router.push(`/message/received/${userId}?base=${baseUrl}`)
+        router.push(`/message/sent/${userId}?base=${baseUrl}`)
       } else {
-        router.replace(`/message/${variety}/${userId}`)
+        router.replace(`/message/${messageType}/${userId}`)
       }
     } else {
       router.back()
     }
   }
+
   return (
     <Button
       onClick={onClick}
       type='button'
-      className='h-fit p-[18px] text-white rounded-2xl font-bold w-full'
+      className='h-fit p-[18px] text-white rounded-2xl font-bold w-full mt-auto'
     >
       완료
     </Button>

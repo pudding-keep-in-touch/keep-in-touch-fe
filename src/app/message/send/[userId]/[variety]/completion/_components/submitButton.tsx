@@ -10,11 +10,13 @@ import { useRouter } from 'next/navigation'
 interface MessageSendSubmitButtonProps {
   emotionId: number
   userId: number
+  variety: string
 }
 
 export default function MessageSendSubmitButton({
   emotionId,
   userId,
+  variety,
 }: MessageSendSubmitButtonProps) {
   const router = useRouter()
   const { formState, getValues, handleSubmit } =
@@ -33,7 +35,9 @@ export default function MessageSendSubmitButton({
       })
 
       if (response && response.dmId) {
-        router.push(`/message/send/${userId}/complete/${response.dmId}`)
+        router.push(
+          `/message/send/${userId}/${variety}/complete/${response.dmId}`
+        )
       } else {
         console.error('dmId가 응답에 없습니다:', response)
       }

@@ -19,8 +19,8 @@ export default function Page({
         미리보기로 내용을 확인하세요!
       </p>
 
-      <MessageSendPreview />
-      <MessageSendButtons emotion={variety} userId={userId} />
+      <MessageSendPreview userId={userId} />
+      <MessageSendButtons variety={variety} userId={userId} />
     </>
   )
 }

@@ -6,17 +6,17 @@ import { useParams, useRouter } from 'next/navigation'
 import { getVarietyNumber, MessageVariety } from '../../_utils/varieties'
 
 interface MessageSendButtonsProps {
-  emotion: string
+  variety: string
   userId: number
 }
 
 export default function MessageSendButtons({
-  emotion,
+  variety,
   userId,
 }: MessageSendButtonsProps) {
   const router = useRouter()
   const params = useParams<{ variety: MessageVariety }>()
-  const emotionId = getVarietyNumber(emotion as MessageVariety | undefined)
+  const emotionId = getVarietyNumber(variety as MessageVariety | undefined)
 
   const clickHandler = () => {
     router.push(`/message/send/${userId}/${params.variety}/preview`)
@@ -35,6 +35,7 @@ export default function MessageSendButtons({
       <MessageSendSubmitButton
         userId={Number(userId)}
         emotionId={Number(emotionId)}
+        variety={variety}
       />
     </div>
   )

@@ -5,45 +5,31 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { cn, EmotionVariety, getEmotionVarietyData } from '@/shared/lib/utils'
 import { ChevronLeftIcon } from 'lucide-react'
 
+import { useInView } from 'react-cool-inview'
 import React, { useEffect, useState } from 'react'
-import { useInView } from 'react-intersection-observer'
 import { DmList } from '@/entities/message/model/types'
 import { useGetInfiniteMessages } from '@/entities/message/api/queries'
-
-export type varietyType = 'sent' | 'received'
+import { MessageType, VarietyType } from '@/shared/types'
 
 interface MessageListProps {
   userId: number
-  variety: varietyType
+  messageType: MessageType
 }
 
-export default function MessageList({ userId, variety }: MessageListProps) {
+export default function MessageList({ userId, messageType }: MessageListProps) {
   const router = useRouter()
   const param = useSearchParams()
   const baseUrl = param.get('base')
+  const { observe, inView } = useInView()
 
-  const { data, fetchNextPage, refetch } = useGetInfiniteMessages({
+  const { data, fetchNextPage, isLoading } = useGetInfiniteMessages({
     userId,
     limit: 10,
-    type: variety,
+    type: messageType,
   })
-  const { ref, inView } = useInView()
 
-  const [dmList, setDmList] = useState<DmList[]>([])
-
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage()
-    }
-  }, [inView, fetchNextPage])
-
-  useEffect(() => {
-    refetch()
-    if (data?.pages) {
-      const allMessages = data.pages.flatMap((page) => page || [])
-      setDmList(allMessages)
-    }
-  }, [data, refetch])
+  const allMessages =
+    data?.pages && (data.pages.flatMap((page) => page || []) as DmList[])
 
   const backHandler = () => {
     if (baseUrl) {
@@ -53,8 +39,12 @@ export default function MessageList({ userId, variety }: MessageListProps) {
     }
   }
 
-  console.log('variety', variety)
-  console.log('dmList', dmList)
+  useEffect(() => {
+    if (inView) {
+      console.log('inview', inView)
+      fetchNextPage()
+    }
+  }, [inView, fetchNextPage])
 
   return (
     <>
@@ -63,19 +53,23 @@ export default function MessageList({ userId, variety }: MessageListProps) {
           className='w-6 h-6 cursor-pointer'
           onClick={backHandler}
         />
-        <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-          {variety === 'sent' ? '보낸 쪽지' : '받은 쪽지'}
-        </h1>
+        {!isLoading && (
+          <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
+            {messageType === 'sent' ? '보낸 쪽지' : '받은 쪽지'}
+          </h1>
+        )}
       </header>
-      <div ref={ref} className='w-full flex flex-col gap-2 py-10 px-6'>
-        {dmList &&
-          dmList.map((message, index) => (
+      <div className='w-full flex flex-col gap-2 py-10 px-6'>
+        {allMessages &&
+          allMessages.map((message) => (
             <MessageItem
               key={message.id}
               baseUrl={baseUrl || ''}
+              messageType={messageType}
               {...message}
             />
           ))}
+        <div ref={observe} />
       </div>
     </>
   )
@@ -83,10 +77,16 @@ export default function MessageList({ userId, variety }: MessageListProps) {
 
 type MessageItemProps = DmList & {
   baseUrl?: string
+  messageType: MessageType
 }
 
-function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
-  const { id, senderId, content, emotion, isRead, createdAt } = messageProps
+function MessageItem({
+  messageType,
+  baseUrl,
+  ...messageProps
+}: MessageItemProps) {
+  const { id, receiverId, content, emotion, isRead, createdAt } = messageProps
+  const [emotionType, setEmotionType] = useState<VarietyType>()
   const pathname = usePathname()
   const router = useRouter()
 
@@ -96,11 +96,19 @@ function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
 
   const onClick = () => {
     if (baseUrl) {
-      router.push(`${pathname}/${id}?base=${baseUrl}`)
+      router.push(`${pathname}/${emotionType}/${id}?base=${baseUrl}`)
     } else {
-      router.push(`${pathname}/${id}`)
+      router.push(`${pathname}/${emotionType}/${id}`)
     }
   }
+
+  useEffect(() => {
+    if (emotion.name === '응원과 감사') {
+      setEmotionType('thanks')
+    } else {
+      setEmotionType('honestTalk')
+    }
+  }, [emotion.name])
 
   return (
     <div
@@ -122,7 +130,7 @@ function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
           <div
             className={cn(
               'flex justify-center items-center py-[5px] w-full rounded-sm',
-              emotion.name === '응원과감사' ? 'bg-[#D7F1FF]' : 'bg-[#FFDDFE]'
+              emotion.name === '응원과 감사' ? 'bg-[#D7F1FF]' : 'bg-[#FFDDFE]'
             )}
           >
             <span className='text-[10px] text-[#1F1F1F] font-medium'>
@@ -132,7 +140,9 @@ function MessageItem({ baseUrl, ...messageProps }: MessageItemProps) {
         </div>
         <div>
           <div className='font-semibold text-[#333D4B] text-[17px]'>
-            {senderId}
+            {messageType === 'received'
+              ? '익명에게 쪽지가 도착했습니다!'
+              : `To. ${receiverId}에게`}
           </div>
           <div className='text-[#333D4B] mt-1 line-clamp-1 text-base'>
             {content}

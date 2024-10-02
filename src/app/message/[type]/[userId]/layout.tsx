@@ -1,3 +1,5 @@
+'use client'
+
 import AuthProvider from '@/shared/provider/Auth'
 
 interface Props {
