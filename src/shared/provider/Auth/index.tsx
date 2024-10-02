@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname, useRouter } from 'next/navigation'
-import { jwtVerify } from 'jose'
+import { decodeJwt } from 'jose'
 import React from 'react'
 import { API_BASE_URL, getLoginUrl } from '@/shared/config'
 
@@ -43,10 +43,14 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       }
 
       // JWT 검증
-      await jwtVerify(accessToken, new TextEncoder().encode('your-secret-key'))
+      const { exp } = decodeJwt(accessToken)
 
-      setIsLoggedIn(true)
-      setUserId(storedUserId)
+      if (!exp) throw new Error('No exp')
+      if (exp > Math.floor(Date.now() / 1000)) {
+        setIsLoggedIn(true)
+        setUserId(storedUserId)
+        return true
+      }
     } catch (error) {
       setIsLoggedIn(false)
       setUserId(null)
