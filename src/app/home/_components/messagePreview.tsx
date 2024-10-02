@@ -3,12 +3,12 @@
 import Image from 'next/image'
 import { ChevronRightIcon } from 'lucide-react'
 import { cn, EmotionVariety, getEmotionVarietyData } from '@/shared/lib/utils'
-import { DirectMessage } from '@/shared/types'
+import { DirectMessage, MessageType } from '@/shared/types'
 import Link from 'next/link'
 interface MessagePreviewProps {
   dmList?: DirectMessage
   title: string
-  type: string
+  type: MessageType
   userId: number
 }
 
@@ -56,7 +56,7 @@ export default function MessagePreview({
               <div
                 className={cn(
                   'flex justify-center items-center py-[5px] w-full rounded-sm',
-                  dmList.emotion.name === '응원과감사'
+                  dmList.emotion.name === '응원과 감사'
                     ? 'bg-[#D7F1FF]'
                     : 'bg-[#FFDDFE]'
                 )}
@@ -68,13 +68,15 @@ export default function MessagePreview({
             </div>
 
             <div>
-              <div className='font-semibold text-[#333D4B] text-[17px]'>
-                {dmList.senderId}
+              <div className='font-semibold text-[#333D4B] text-[17px] line-clamp-1 text-base'>
+                {type === 'received'
+                  ? '익명에게 쪽지가 도착했습니다!'
+                  : `To. ${dmList.receiverId}에게`}
               </div>
               <div className='text-[#333D4B] mt-1 line-clamp-1 text-base'>
                 {dmList.content}
               </div>
-              <div className='text-xs text-[#6B7684] mt-2 text-[13px]'>
+              <div className='text-xs text-[#6B7684] mt-2 text-[13px] line-clamp-1 text-base'>
                 {dmList.createdAt}
               </div>
             </div>
