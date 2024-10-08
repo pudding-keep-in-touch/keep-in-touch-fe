@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   title: 'Keep In Touch',
   description: '너에게 닿기를, Keep In Touch',
 
-  // openGraph: {
-  //   images: ['https://dev-fe.keep-in-touch.me/meta_image.png'],
-  // },
+  openGraph: {
+    images: ['https://dev-fe.keep-in-touch.me/meta_image.png'],
+  },
 }
 
 export default function RootLayout({
