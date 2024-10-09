@@ -2,6 +2,10 @@ export interface MainLayoutProps {
   children: React.ReactNode
 }
 
+export type MessageType = 'sent' | 'received'
+
+export type VarietyType = 'thanks' | 'honestTalk'
+
 interface User {
   id: number
   nickname: string

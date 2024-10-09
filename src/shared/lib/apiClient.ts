@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation'
-
-const API_BASE_URL = 'http://dev-be.keep-in-touch.me:3000/'
+import { API_BASE_URL } from '../config'
 
 async function apiClient(
   endpoint: string,

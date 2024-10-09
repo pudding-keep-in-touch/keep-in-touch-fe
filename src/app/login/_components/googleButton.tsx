@@ -1,5 +1,6 @@
 'use client'
 
+import { API_BASE_URL } from '@/shared/config'
 import { Button } from '@/shared/ui/components/Button'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -10,8 +11,7 @@ export default function GoogleButton() {
   const handleLogin = () => {
     setIsLoading(true)
     try {
-      window.location.href =
-        'http://dev-be.keep-in-touch.me:3000/v1/auth/google/login'
+      window.location.href = `${API_BASE_URL}v1/auth/google/login`
     } catch (error) {
       console.error(error)
       setIsLoading(false)

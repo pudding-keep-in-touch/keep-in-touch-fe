@@ -3,9 +3,11 @@
 import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
+
 export default function Callback() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const redirectUrl = searchParams.get('redirectUrl') || '/home'
 
   useEffect(() => {
     const token = searchParams.get('accessToken')
@@ -14,7 +16,7 @@ export default function Callback() {
     if (token) {
       localStorage.setItem('keep_in_touch_token', token)
       localStorage.setItem('keep_in_touch_user_id', userId)
-      router.push('/home')
+      router.push(decodeURIComponent(redirectUrl))
     } else {
       router.push('/login')
     }
@@ -22,7 +24,7 @@ export default function Callback() {
 
   return (
     <MainLayout>
-      <div className='flex items-center justify-center h-screen'>
+      <div className='flex items-center justify-center h-screen text-center text-[#333D4B] text-2xl font-bold'>
         로그인 중...
       </div>
     </MainLayout>

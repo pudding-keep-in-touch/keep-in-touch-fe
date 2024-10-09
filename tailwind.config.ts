@@ -22,6 +22,8 @@ const config = {
       backgroundImage: {
         honestTalkPreview: "url('/honestTalkPreviewBg.png')",
         thanksPreview: "url('/thanksPreviewBg.png')",
+        home: "url('/home.svg')",
+        main: "url('/bg_splash.svg')",
       },
       colors: {
         border: 'hsl(var(--border))',
