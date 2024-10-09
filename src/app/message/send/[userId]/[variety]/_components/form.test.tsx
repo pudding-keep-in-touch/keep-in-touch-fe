@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event'
 import MessageInput from '../write/_components/messageInput'
 import MessageWriteNextButton from '../write/_components/nextButton'
 import MessageFormProvider from './form'
-import { useParams } from 'next/navigation'
 
 vi.mock('react-dom', () => {
   return {
@@ -33,7 +32,7 @@ describe('SellForm', () => {
   render(
     <MessageFormProvider>
       <MessageInput />
-      <MessageWriteNextButton />
+      <MessageWriteNextButton userId={0} />
     </MessageFormProvider>
   )
 
