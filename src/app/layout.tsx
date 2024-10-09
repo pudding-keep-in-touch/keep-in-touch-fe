@@ -34,7 +34,7 @@ export default function RootLayout({
         />
         <meta
           property='og:image'
-          content='https://file.notion.so/f/f/c8c68fae-7ecf-4c58-abfe-1fe57c336005/12d41153-93c9-4689-a31c-499b403e8455/3be10b58-6a4e-4d16-b370-6d46191457a6.png?table=block&amp;id=611e13a0-bb89-4ecf-8a40-8ffbb110fc21&amp;spaceId=c8c68fae-7ecf-4c58-abfe-1fe57c336005&amp;expirationTimestamp=1727625600000&amp;signature=F2yvlWCE70AEsKedCLWJncmJlM_mvqsNGuvT_o292UA&amp;downloadName=2024-09-20_14.10.03.png'
+          content='https://dev-fe.keep-in-touch.me/meta_image.png'
         />
         <meta property='og:url' content='https://keep-in-touch.me/' />
         <meta property='og:type' content='website' />
