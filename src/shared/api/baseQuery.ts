@@ -1,23 +1,23 @@
+import { redirect } from 'next/navigation'
 import axios from 'axios'
+import { API_BASE_URL } from '../config'
 
 export const axiosInstance = axios.create({
-  //   withCredentials: true,
-  baseURL: 'https://dev-be.keep-in-touch.me:3000',
+  baseURL: `${API_BASE_URL}`,
 })
 
-// Request interceptor
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`
-    }
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
+axiosInstance.interceptors.request.use(async (config) => {
+  if (!config.headers) return config
+
+  const accessToken = localStorage.getItem('keep_in_touch_token')
+  if (!accessToken) throw new Error('No accessToken')
+
+  if (accessToken) {
+    config.headers['Authorization'] = `Bearer ${accessToken}`
   }
-)
+
+  return config
+})
 
 // Response interceptor
 axiosInstance.interceptors.response.use(
@@ -27,9 +27,9 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // Handle global errors (e.g., unauthorized, server errors)
     if (error.response.status === 401) {
-      // Handle unauthorized error (e.g., redirect to login)
+      redirect('/login')
     }
-    return Promise.reject(error)
+    throw new Error('API 요청 실패')
   }
 )
 
