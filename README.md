@@ -22,7 +22,7 @@
 
 ## About The Project
 
-너에게 닿기를(Keep in touch) 2차 프로젝트
+너에게 닿기를(Keep in touch) - 2차 프로젝트
 
 ### 프로젝트 비전
 
