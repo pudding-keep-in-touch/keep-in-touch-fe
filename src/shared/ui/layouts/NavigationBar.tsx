@@ -29,7 +29,7 @@ export const NavigationBar = () => {
                   alt='home_icon'
                   width={24}
                   height={24}
-                />{' '}
+                />
                 <div className='flex justify-center font-semibold text-[13px] leading-none text-[#6b7684]'>
                   홈
                 </div>
@@ -38,7 +38,7 @@ export const NavigationBar = () => {
           </button>
 
           <button onClick={() => router.push('/messagebox')}>
-            {pathname === '/messagebox' ? (
+            {pathname.startsWith('/messagebox') ? (
               <div className='flex flex-col items-center gap-[4px]'>
                 <Image
                   src='/navbar_msgbox_after.svg'
@@ -57,7 +57,7 @@ export const NavigationBar = () => {
                   alt='messagebox_icon'
                   width={18}
                   height={23}
-                />{' '}
+                />
                 <div className='font-semibold text-[13px] leading-none text-[#6b7684]'>
                   쪽지함
                 </div>
