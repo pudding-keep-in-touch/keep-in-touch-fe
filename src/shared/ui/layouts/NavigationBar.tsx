@@ -6,7 +6,7 @@ export const NavigationBar = () => {
   const pathname = usePathname()
 
   return (
-    <div className='fixed bottom-0 w-full'>
+    <div className='fixed bottom-0 w-full max-w-[32rem] bg-[#F7F7FC] mr-auto ml-auto'>
       <div className='w-full h-[50px] flex items-center z-50 pt-[10px]'>
         <div className='flex justify-center w-full gap-[97px]'>
           <button onClick={() => router.push('/')}>
