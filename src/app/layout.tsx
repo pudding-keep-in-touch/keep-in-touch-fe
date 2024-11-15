@@ -45,6 +45,27 @@ export default function RootLayout({
         />
 
         <link rel='icon' href='/icon.ico' sizes='any' />
+
+        {/* Google Tag Manager Script */}
+        <Script
+          strategy='afterInteractive'
+          id='gtm-script'
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){
+                w[l]=w[l]||[]; 
+                w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+                var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:''; 
+                j.async=true;
+                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-M8RGX9S2');
+            `,
+          }}
+        />
+
+        {/* Google Analytics Script */}
         <Script
           strategy='afterInteractive'
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
@@ -63,11 +84,13 @@ export default function RootLayout({
           }}
         />
 
+        {/* ChannelTalk Script */}
         <Script
           strategy='afterInteractive'
           src='./channeltalk/channeltalk.js'
         />
 
+        {/* In-App Browser Script */}
         <Script
           type='text/javascript'
           id='inapp-browser-script'
@@ -131,6 +154,7 @@ export default function RootLayout({
         `}
         </Script>
 
+        {/* Clarity SDK Script */}
         <Script
           strategy='afterInteractive'
           id='clarity-sdk'
@@ -147,6 +171,15 @@ export default function RootLayout({
       </head>
 
       <body className='max-w-[32rem] w-full min-h-screen mr-auto ml-auto'>
+        {/* Google Tag Manager noscript */}
+        <noscript>
+          <iframe
+            src='https://www.googletagmanager.com/ns.html?id=GTM-M8RGX9S2'
+            height='0'
+            width='0'
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
