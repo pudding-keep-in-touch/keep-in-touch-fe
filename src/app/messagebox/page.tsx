@@ -5,23 +5,24 @@ import Link from 'next/link'
 // import MessageItem from './_components/MessageItem'
 
 export default function MessageBox() {
-  const data = {
-    title: '쪽지가 도착했습니다!',
-    desc: '소중한 진심을 확인해보세요',
-    date: '2024.08.31 오후 11:57',
-  }
+  // const data = {
+  //   title: '쪽지가 도착했습니다!',
+  //   desc: '소중한 진심을 확인해보세요',
+  //   date: '2024.08.31 오후 11:57',
+  // }
   return (
-    <InboxLayout>
+    <InboxLayout title={'쪽지함'}>
       <div className='h-[67px] w-full flex items-center justify-between mb-[10px]'>
         <h2 className='font-semibold text-[18px] flex items-center'>
           받은 쪽지
         </h2>
-        <Link href='/messagebox/inbox'>더보기</Link>
+        <Link href='/messagebox/inbox' className='flex items-center gap-[9px]'>
+          <div className='font-[16px] text-[#6B7684]'>더보기</div>
+          <Image src='/nav_icon.svg' alt='watch more' width={18} height={18} />
+        </Link>
       </div>
 
       {/* 데이터가 있는 경우
-      <MessageItem title={data.title} desc={data.desc} date={data.date} />
-      <MessageItem title={data.title} desc={data.desc} date={data.date} />
       <MessageItem title={data.title} desc={data.desc} date={data.date} /> */}
 
       {/* 데이터가 없는 경우 */}
@@ -38,13 +39,15 @@ export default function MessageBox() {
         <h2 className='font-semibold text-[18px] flex items-center'>
           보낸 쪽지
         </h2>
-        <Link href='/messagebox/outbox'>더보기</Link>
+        <Link href='/messagebox/outbox' className='flex items-center gap-[9px]'>
+          <div className='font-[16px] text-[#6B7684]'>더보기</div>
+          <Image src='/nav_icon.svg' alt='watch more' width={18} height={18} />
+        </Link>
       </div>
 
       {/* 데이터가 있는 경우
       <MessageItem title={data.title} desc={data.desc} date={data.date} />
-      <MessageItem title={data.title} desc={data.desc} date={data.date} />
-      <MessageItem title={data.title} desc={data.desc} date={data.date} /> */}
+       */}
 
       <div className='flex flex-col items-center text-[#333D4B] pb-[180px] pt-[110px]'>
         <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
