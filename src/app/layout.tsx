@@ -38,6 +38,12 @@ export default function RootLayout({
         />
         <meta property='og:url' content='https://keep-in-touch.me/' />
         <meta property='og:type' content='website' />
+
+        <meta
+          name='naver-site-verification'
+          content='b672b0f18f18d6fe9a5f9913d06e6a548f17c901'
+        />
+
         <link rel='icon' href='/icon.ico' sizes='any' />
         <Script
           strategy='afterInteractive'
