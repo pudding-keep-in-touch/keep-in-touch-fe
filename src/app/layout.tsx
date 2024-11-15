@@ -154,6 +154,7 @@ export default function RootLayout({
         `}
         </Script>
 
+        {/* Clarity SDK Script */}
         <Script
           strategy='afterInteractive'
           id='clarity-sdk'
