@@ -1,0 +1,33 @@
+'use client'
+
+import { Button } from '@/shared/ui/components/Button'
+import { useFormContext } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { MessageFormValues } from '@/app/message/send/[userId]/[variety]/_components/formSchema'
+
+export default function ReplyNextButton({
+  questionId,
+}: {
+  questionId: number
+}) {
+  const router = useRouter()
+
+  const { formState } = useFormContext<MessageFormValues>()
+  const { isValid } = formState
+
+  const onClick = () => {
+    //todo questionId 변경 필요
+    router.push(`/questions/reply/${questionId}/completion`)
+  }
+
+  return (
+    <Button
+      type='button'
+      disabled={!isValid}
+      className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-auto w-full'
+      onClick={onClick}
+    >
+      다음
+    </Button>
+  )
+}
