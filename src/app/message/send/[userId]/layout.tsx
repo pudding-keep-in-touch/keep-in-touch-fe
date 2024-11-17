@@ -2,9 +2,9 @@
 
 import { ChevronLeftIcon } from 'lucide-react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import { MessageVariety } from './[variety]/_utils/varieties'
-import { cn } from '@/shared/lib/utils'
-import AuthProvider from '@/shared/provider/Auth'
+import { cn } from '@/shared/utils/emotionVariety'
+import AuthProvider from '@/features/auth/context/AuthProvider'
+import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 
 interface Props {
   children: React.ReactNode

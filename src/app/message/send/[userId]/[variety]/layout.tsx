@@ -1,4 +1,4 @@
-import MessageFormProvider from './_components/form'
+import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 
 interface Props {
   children: React.ReactNode

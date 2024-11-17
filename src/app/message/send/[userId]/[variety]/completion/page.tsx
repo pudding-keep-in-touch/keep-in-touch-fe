@@ -1,6 +1,6 @@
-import MessageSendStep from '../../_components/step'
-import MessageSendButtons from './_components/buttons'
-import MessageSendPreview from './_components/preview'
+import MessageSendButtons from '@/features/message/_send/_completion/ui/buttons'
+import MessageSendPreview from '@/features/message/_send/_completion/ui/preview'
+import MessageSendStep from '@/features/message/_send/ui/step'
 
 export default function Page({
   params: { variety, userId },

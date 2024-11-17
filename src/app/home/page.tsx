@@ -1,11 +1,11 @@
 'use client'
 
-import HomeLayout from '@/shared/ui/layouts/HomeLayout'
-import UserInfo from './_components/userInfo'
-import MessagePreview from './_components/messagePreview'
-import LinkShareButton from './_components/linkShareButton'
-import Tooltip from './_components/tooltip'
-import useCurrentMessage from './_hooks/useCurrentMessage'
+import HomeLayout from '@/features/home/ui/layouts/HomeLayout'
+import UserInfo from '../../features/home/ui/userInfo'
+import MessagePreview from '../../features/home/ui/messagePreview'
+import LinkShareButton from '../../features/home/ui/linkShareButton'
+import Tooltip from '../../features/home/ui/tooltip'
+import useCurrentMessage from '../../shared/hooks/useCurrentMessage'
 import { redirect, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 

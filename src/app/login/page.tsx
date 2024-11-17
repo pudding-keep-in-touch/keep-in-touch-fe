@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import GoogleButton from './_components/googleButton'
+import GoogleButton from '../../features/auth/ui/googleButton'
 
 export default function Login() {
   return (

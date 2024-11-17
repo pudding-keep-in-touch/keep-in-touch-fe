@@ -1,5 +1,5 @@
-import { MessageType } from '@/shared/types'
-import MessageList from './_components/message'
+import { MessageType } from '@/shared/types/common.types'
+import MessageList from '../../../../features/message/ui/message'
 
 export default function Page({
   params: { type, userId },

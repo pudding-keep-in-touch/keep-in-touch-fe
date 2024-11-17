@@ -1,5 +1,5 @@
+import MoveButton from '@/features/message/_send/_complete/ui/moveButton'
 import Image from 'next/image'
-import MoveButton from './_components/moveButton'
 
 export default function Page({
   params: { variety, dmId },
