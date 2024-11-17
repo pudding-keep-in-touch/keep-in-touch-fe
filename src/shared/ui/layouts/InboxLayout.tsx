@@ -7,9 +7,10 @@ import { NavigationBar } from './NavigationBar'
 
 interface InboxLayoutProps {
   children: React.ReactNode
+  title: string
 }
 
-export default function InboxLayout({ children }: InboxLayoutProps) {
+export default function InboxLayout({ children, title }: InboxLayoutProps) {
   const router = useRouter()
 
   const backHandler = () => {
@@ -24,7 +25,7 @@ export default function InboxLayout({ children }: InboxLayoutProps) {
           onClick={backHandler}
         />
         <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-          쪽지함
+          {title}
         </h1>
       </header>
 
