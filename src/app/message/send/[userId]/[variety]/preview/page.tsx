@@ -1,9 +1,9 @@
 'use client'
 
 import { useFormContext } from 'react-hook-form'
-import { MessageFormValues } from '../_components/formSchema'
-import { Button } from '@/shared/ui/components/Button'
+import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
+import { MessageFormValues } from '@/features/message/_send/model/formSchema'
 
 export default function Page({
   params: { userId },

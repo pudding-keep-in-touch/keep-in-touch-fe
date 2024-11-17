@@ -1,6 +1,6 @@
-import MessageBoard from './_components/board'
-import { MessageType, VarietyType } from '@/shared/types'
-import MessageDetailLayout from '@/shared/ui/layouts/MessageDetailLayout'
+import MessageBoard from '@/features/message/_detail/ui/board'
+import MessageDetailLayout from '@/features/message/_detail/ui/layouts/MessageDetailLayout'
+import { MessageType, VarietyType } from '@/shared/types/common.types'
 
 export default function Page({
   params: { type, variety, detail },

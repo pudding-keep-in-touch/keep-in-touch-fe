@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainLayoutProps } from '@/shared/types'
+import { MainLayoutProps } from '@/shared/types/common.types'
 
 export default function MainLayout({ children }: MainLayoutProps) {
   return (

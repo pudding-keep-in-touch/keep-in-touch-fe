@@ -1,6 +1,6 @@
-import MessageSendStep from '../../_components/step'
-import MessageInput from './_components/messageInput'
-import MessageWriteNextButton from './_components/nextButton'
+import MessageInput from '@/features/message/_send/_write/ui/messageInput'
+import MessageWriteNextButton from '@/features/message/_send/_write/ui/nextButton'
+import MessageSendStep from '@/features/message/_send/ui/step'
 
 export default function Page({
   params: { userId },
