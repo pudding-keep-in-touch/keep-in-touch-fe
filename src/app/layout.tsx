@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import './globals.css'
+import '@/shared/styles/globals.css'
 import QueryProvider from '@/shared/provider/QueryProvider'
 
 const GA_ID =
