@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function Receive() {
   const router = useRouter()
@@ -37,10 +38,13 @@ export default function Receive() {
       <div className='flex flex-col min-h-screen items-center'>
         <div className='mt-[80px] flex flex-col w-[100%] items-center text-center'>
           {/* todo 아이콘으로 수정 */}
-          <h1 className='text-[#00AFFF] text-2xl font-bold leading-[150%]'>
-            너에게 닿기를
-          </h1>
-          <h2 className='text-[#333D4B] text-xl font-bold leading-[150%] mt-2'>
+          <Image
+            src='/questionsKeepInTouchLogo.svg'
+            alt='questionsKeepInTouchLogo'
+            width={160}
+            height={160}
+          />
+          <h2 className='text-[#333D4B] text-xl font-semibold leading-[150%] mt-6'>
             쪽지를 보내고 싶은 질문을 선택하세요!
           </h2>
         </div>

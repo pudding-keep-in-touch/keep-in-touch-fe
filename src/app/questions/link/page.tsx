@@ -1,8 +1,11 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Button } from '@/shared/ui/components/Button'
 
 export default function ReceiveLink() {
+  const router = useRouter()
   //임시 데이터
   const question = {
     id: 1,
@@ -10,8 +13,10 @@ export default function ReceiveLink() {
     content: '이것은 첫 번째 질문의 내용입니다.',
   }
 
-  const sendReply = () => {
-    console.log('click')
+  const handleQuestionClick = (questionId: number) => {
+    //todo 온보딩 페이지로 이동
+    // router.push(`/onboarding?questionId=${questionId}`);
+    router.push(`/questions/reply/${questionId}`)
   }
 
   return (
@@ -19,10 +24,13 @@ export default function ReceiveLink() {
       <div className='flex flex-col min-h-screen items-center'>
         <div className='mt-[80px] flex flex-col w-[100%] items-center text-center'>
           {/* todo 아이콘으로 수정 */}
-          <h1 className='text-[#00AFFF] text-2xl font-bold leading-[150%]'>
-            너에게 닿기를
-          </h1>
-          <h2 className='text-[#333D4B] text-xl font-bold leading-[150%] mt-2'>
+          <Image
+            src='/questionsKeepInTouchLogo.svg'
+            alt='questionsKeepInTouchLogo'
+            width={160}
+            height={160}
+          />
+          <h2 className='text-[#333D4B] text-xl font-semibold leading-[150%] mt-6'>
             쪽지를 익명으로 보낼 수 있어요!
           </h2>
         </div>
@@ -35,11 +43,12 @@ export default function ReceiveLink() {
               질문
             </h3>
             <p className='text-sm mt-3 mb-3 text-center'>{question.content}</p>
-          </div>
+          </div>{' '}
           <Button
-            type='submit'
-            onClick={sendReply}
-            className='mt-80 bg-[#00AFFF] text-white py-5 px-6 w-full rounded-lg'
+            type='button'
+            onClick={() => handleQuestionClick(question.id)}
+            // onClick={sendReply}
+            className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-80 w-full'
           >
             {' '}
             쪽지 보내기
