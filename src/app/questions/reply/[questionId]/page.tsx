@@ -1,8 +1,8 @@
 'use client'
 
-import MessageInput from '@/app/message/send/[userId]/[variety]/write/_components/messageInput'
-import Step from '@/app/questions/shared/Step'
 import ReplyNextButton from '@/app/questions/reply/[questionId]/ReplyNextButton'
+import Step from '@/app/questions/shared/Step'
+import MessageInput from '@/features/message/_send/_write/ui/messageInput'
 
 // const QuestionsPage = () => {
 //   const searchParams = useSearchParams()

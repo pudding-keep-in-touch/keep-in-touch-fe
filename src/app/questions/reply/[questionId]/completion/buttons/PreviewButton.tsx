@@ -1,5 +1,4 @@
-import { Button } from '@/shared/ui/components/Button'
-
+import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 
 type PreviewButtonProps = {

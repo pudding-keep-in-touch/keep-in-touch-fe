@@ -1,9 +1,9 @@
 'use client'
 
 import { useFormContext } from 'react-hook-form'
-import { Button } from '@/shared/ui/components/Button'
 import { useRouter } from 'next/navigation'
-import { MessageFormValues } from '@/app/message/send/[userId]/[variety]/_components/formSchema'
+import { MessageFormValues } from '@/features/message/_send/model/formSchema'
+import { Button } from '@/shared/components/Button'
 
 export default function PreviewPage() {
   const { getValues } = useFormContext<MessageFormValues>()

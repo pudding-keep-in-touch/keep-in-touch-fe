@@ -1,5 +1,5 @@
-import ReplyButton from '@/app/questions/reply/[questionId]/completion/buttons/ReplyButton'
 // import Preview from '@/app/questions/reply/[questionId]/completion/Preview'
+import ReplyButton from '@/app/questions/reply/[questionId]/completion/buttons/ReplyButton'
 import Step from '@/app/questions/shared/Step'
 
 export default function Completion({

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { Button } from '@/shared/ui/components/Button'
+import { Button } from '@/shared/components/Button'
 
 export default function ReceiveLink() {
   const router = useRouter()

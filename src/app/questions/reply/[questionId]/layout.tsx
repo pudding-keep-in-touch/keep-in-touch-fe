@@ -1,8 +1,7 @@
 'use client'
 
-import MessageFormProvider from '@/app/message/send/[userId]/[variety]/_components/form'
-// import { MessageVariety } from '@/app/message/send/[userId]/[variety]/_utils/varieties'
-import { cn } from '@/shared/lib/utils'
+import MessageFormProvider from '@/features/message/_send/context/FormProvider'
+import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
 // import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useRouter } from 'next/navigation'

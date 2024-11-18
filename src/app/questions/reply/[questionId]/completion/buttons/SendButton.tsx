@@ -1,11 +1,11 @@
 'use client'
 
-import { Button } from '@/shared/ui/components/Button'
 import { useFormContext } from 'react-hook-form'
 import { useFormStatus } from 'react-dom'
-import { usePostSendMessage } from '@/entities/message/api/mutation'
 import { useRouter } from 'next/navigation'
-import { MessageFormValues } from '@/app/message/send/[userId]/[variety]/_components/formSchema'
+import { MessageFormValues } from '@/features/message/_send/model/formSchema'
+import { usePostSendMessage } from '@/features/message/_send/api/sendMutation'
+import { Button } from '@/shared/components/Button'
 
 export default function SendButton({}) {
   const router = useRouter()

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/shared/ui/components/Button'
+import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 
 export default function QuestionButton() {
