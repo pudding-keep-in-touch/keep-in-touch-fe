@@ -1,5 +1,5 @@
 'use client'
-import { MessageBoxType } from '../model/messagebox.types'
+import { MessageBoxType } from '@/features/messagebox/model/messagebox.types'
 
 export default function MessageItem({ title, desc, date }: MessageBoxType) {
   return (

@@ -1,4 +1,4 @@
-import { EmojiProps } from '../model/messagebox.types'
+import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
 
 const emotion = {
   감사: [
