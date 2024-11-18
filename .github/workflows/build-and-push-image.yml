@@ -48,7 +48,8 @@ jobs:
           key: ${{ secrets.DEV_FE_SSH_KEY }}
           port: 22
           script: |
-            sudo docker stop keepintouch-fe
-            sudo docker rm keepintouch-fe
+            sudo docker stop keepintouch-fe-v2
+            sudo docker rm keepintouch-fe-v2
+            sudo docker rmi keepintouch-fe:release-v2
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/keepintouch-fe:release-v2
-            sudo docker run -d -p 3000:3000 --name keepintouch-fe ${{ secrets.DOCKERHUB_USERNAME }}/keepintouch-fe:release-v2
+            sudo docker run -d -p 8000:8000 --name keepintouch-fe-v2 ${{ secrets.DOCKERHUB_USERNAME }}/keepintouch-fe:release-v2
