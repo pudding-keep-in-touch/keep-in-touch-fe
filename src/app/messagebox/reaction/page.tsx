@@ -1,17 +1,6 @@
 import InboxLayout from '@/shared/ui/layouts/InboxLayout'
-import ReactionItem from '../_components/ReactionItem'
-
-type Item = {
-  id: number
-  emoji: string
-  name: string
-}
-type DataType = {
-  감사: Item[]
-  사과: Item[]
-  응원: Item[]
-  화해: Item[]
-}
+import ReactionItem from '@/features/messagebox/ui/ReactionItem'
+import { DataType } from '@/features/messagebox/model/messagebox.types'
 
 export default function ReactionPage() {
   const List: Array<keyof DataType> = ['감사', '사과', '응원', '화해']

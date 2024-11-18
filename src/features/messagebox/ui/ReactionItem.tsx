@@ -1,17 +1,4 @@
-type Item = {
-  id: number
-  emoji: string
-  name: string
-}
-type DataType = {
-  감사: Item[]
-  사과: Item[]
-  응원: Item[]
-  화해: Item[]
-}
-type EmojiProps = {
-  category: keyof DataType
-}
+import { EmojiProps } from '../model/messagebox.types'
 
 const emotion = {
   감사: [
