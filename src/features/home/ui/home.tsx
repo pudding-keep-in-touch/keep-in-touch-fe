@@ -6,8 +6,8 @@ import { QuestionsList } from '@/features/home/ui/questionsList'
 import { Nav } from '@/shared/components/nav'
 
 import useIsVisible from '@/shared/hooks/useIsVisible'
-import { HomeHeader } from '../../../shared/components/homeHeader'
-import { QuestionBanner } from './questionBanner'
+import { QuestionBanner } from '@/features/home/ui/questionBanner'
+import { HomeHeader } from '@/shared/components/homeHeader'
 
 const mockData = [
   {
