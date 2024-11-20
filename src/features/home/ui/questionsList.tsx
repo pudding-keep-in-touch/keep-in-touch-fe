@@ -10,17 +10,26 @@ type QuestionDataType = {
 
 interface QuestionsListProps {
   questionData: QuestionDataType[]
+  isHome: boolean
+  userId: number
 }
 
-export const QuestionsList = ({ questionData }: QuestionsListProps) => {
+export const QuestionsList = ({
+  questionData,
+  isHome,
+  userId,
+}: QuestionsListProps) => {
   return (
     <div>
       {questionData.map((item) => (
         <QuestionsCard
+          userId={userId}
           key={item.id}
+          id={item.id}
           title={item.title}
           description={item.description}
           isFreeQuestion={false}
+          isHome={isHome}
         />
       ))}
     </div>
