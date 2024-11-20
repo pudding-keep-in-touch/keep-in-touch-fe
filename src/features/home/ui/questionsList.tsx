@@ -1,5 +1,6 @@
 import React from 'react'
-import { QuestionsCard } from './questionsCard'
+
+import { QuestionsCard } from '@/features/home/ui/questionsCard'
 
 type QuestionDataType = {
   id: number
