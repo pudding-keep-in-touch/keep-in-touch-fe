@@ -22,7 +22,7 @@ const config = {
       backgroundImage: {
         honestTalkPreview: "url('/honestTalkPreviewBg.png')",
         thanksPreview: "url('/thanksPreviewBg.png')",
-        home: "url('/home.svg')",
+        home: "url('/home_banner_normal.svg')",
         main: "url('/bg_splash.svg')",
       },
       colors: {
@@ -59,6 +59,19 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+
+        // Main Colors
+        'system-green': '#4DDF22',
+        'system-blue': '#35B6FF',
+        'system-pink': '#FFD4FE',
+
+        // Grayscale
+        'gray-1': '#F6F7FC',
+        'gray-2': '#C5C5C5',
+        'gray-3': '#474747',
+        'gray-4': '#1F1F1F',
+        black: '#000000',
+        white: '#FFFFFF',
       },
       borderRadius: {
         lg: 'var(--radius)',
