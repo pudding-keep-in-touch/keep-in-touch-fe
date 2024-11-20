@@ -1,5 +1,3 @@
-'use client'
-
 import AuthProvider from '@/features/auth/context/AuthProvider'
 
 interface Props {
