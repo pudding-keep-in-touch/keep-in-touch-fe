@@ -170,7 +170,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className='max-w-[32rem] w-full min-h-screen mr-auto ml-auto'>
+      <body className='max-w-[390px] w-full min-h-screen mr-auto ml-auto'>
         {/* Google Tag Manager noscript */}
         <noscript>
           <iframe
