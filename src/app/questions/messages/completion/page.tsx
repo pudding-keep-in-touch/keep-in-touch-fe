@@ -1,12 +1,8 @@
 // import Preview from '@/app/questions/reply/[questionId]/completion/Preview'
-import ReplyButton from '@/app/questions/reply/[questionId]/completion/buttons/ReplyButton'
+import ReplyButton from '@/app/questions/messages/completion/buttons/ReplyButton'
 import Step from '@/app/questions/shared/Step'
 
-export default function Completion({
-  params: { questionId },
-}: {
-  params: { questionId: number; userId: number }
-}) {
+export default function Completion() {
   const steps = [1, 2]
   return (
     <>
@@ -23,7 +19,7 @@ export default function Completion({
       {/* <Preview /> */}
       {/* todo preview 이미지 */}
 
-      <ReplyButton questionId={questionId} />
+      <ReplyButton />
     </>
   )
 }

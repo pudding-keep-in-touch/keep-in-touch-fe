@@ -11,8 +11,8 @@ export default function PreviewPage() {
 
   const { message } = getValues()
 
-  const clickHandler = () => {
-    router.push(`/questions/reply/complete`)
+  const onClickSendHandler = () => {
+    router.push(`/questions/messages/complete`)
   }
 
   return (
@@ -30,7 +30,7 @@ export default function PreviewPage() {
       <Button
         type='button'
         className='h-fit p-[18px] bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
-        onClick={clickHandler}
+        onClick={onClickSendHandler}
       >
         쪽지 보내기
       </Button>

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import QuestionButton from '@/app/questions/reply/complete/QuestionButton'
+import QuestionButton from '@/app/questions/messages/complete/QuestionButton'
 
 export default function Complete() {
   return (

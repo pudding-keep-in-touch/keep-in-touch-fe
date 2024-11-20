@@ -5,11 +5,7 @@ import { useRouter } from 'next/navigation'
 import { MessageFormValues } from '@/features/message/_send/model/formSchema'
 import { Button } from '@/shared/components/Button'
 
-export default function ReplyNextButton({
-  questionId,
-}: {
-  questionId: number
-}) {
+export default function ReplyNextButton() {
   const router = useRouter()
 
   const { formState } = useFormContext<MessageFormValues>()
@@ -17,7 +13,7 @@ export default function ReplyNextButton({
 
   const onClick = () => {
     //todo questionId 변경 필요
-    router.push(`/questions/reply/${questionId}/completion`)
+    router.push(`/questions/messages/completion`)
   }
 
   return (
