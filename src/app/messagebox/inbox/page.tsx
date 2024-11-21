@@ -1,11 +1,11 @@
 'use client'
 import InboxLayout from '@/features/messagebox/_detail/ui/layouts/InboxLayout'
-import InboxList from '@/features/messagebox/ui/InboxList'
+// import InboxList from '@/features/messagebox/ui/InboxList'
 import { NavigationBar } from '@/shared/ui/layouts/NavigationBar'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 // import { useGetMessageListProps } from '@/features/messagebox/model/messagebox.types'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import MessageItem from '@/features/messagebox/ui/MessageItem'
 
 interface InboxProps {

@@ -1,12 +1,7 @@
 'use client'
-import InboxLayout from '@/shared/ui/layouts/InboxLayout'
+import InboxLayout from '@/features/messagebox/_detail/ui/layouts/InboxLayout'
+import { NavigationBar } from '@/shared/ui/layouts/NavigationBar'
 // import MessageItem from '@/features/messagebox/ui/MessageItem'
-
-// const data = {
-//   title: '쪽지를 보냈습니다',
-//   desc: '안녕 땡땡아 나는 너가 좋아',
-//   date: '2024.08.31 오후 11:57',
-// }
 
 export default function Outbox() {
   return (
@@ -19,6 +14,7 @@ export default function Outbox() {
       </div>
       {/* 메인쪽지함 페이지에서 쪽지 데이터가 3개 미만이면 더보기 버튼으로 유입 불가 */}
       {/* <MessageItem title={data.title} desc={data.desc} date={data.date} /> */}
+      <NavigationBar />
     </InboxLayout>
   )
 }

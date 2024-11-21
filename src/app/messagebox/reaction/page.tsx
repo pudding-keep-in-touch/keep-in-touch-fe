@@ -1,4 +1,4 @@
-import InboxLayout from '@/shared/ui/layouts/InboxLayout'
+import InboxLayout from '@/features/messagebox/_detail/ui/layouts/InboxLayout'
 import ReactionItem from '@/features/messagebox/ui/ReactionItem'
 import { DataType } from '@/features/messagebox/model/messagebox.types'
 
