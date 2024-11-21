@@ -1,7 +1,35 @@
 export type MessageBoxType = {
-  title: string
-  desc: string
-  date: string
+  messageId: number
+}
+export type BoxType = 'inbox' | 'outbox'
+
+export type MessageType = 'sent' | 'received'
+interface Message {
+  messageId: number
+  receiverId: number
+  receiverNickname: string
+  content: string
+  status?: string
+  createdAt: string
+}
+
+// export interface MessageResponse {
+//   received_message_count: number
+//   nextCursor: string | null
+//   messageList: Message[]
+// }
+
+export interface MessageResponse {
+  received_message_count: number
+  nextCursor: string | null
+  messageList: Message[]
+}
+export interface useGetMessageListProps {
+  userId: number
+  type: MessageType
+  cursor?: Date | null
+  limit?: number
+  order?: string
 }
 
 type Item = {

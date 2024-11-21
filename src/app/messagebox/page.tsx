@@ -1,16 +1,24 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import InboxLayout from '@/shared/ui/layouts/InboxLayout'
+import InboxLayout from '@/features/messagebox/_detail/ui/layouts/InboxLayout'
 import MessageItem from '@/features/messagebox/ui/MessageItem'
+import InboxList from '@/features/messagebox/ui/InboxList'
+import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
+import { useState } from 'react'
 
-const data = {
-  title: '쪽지가 도착했습니다!',
-  desc: '소중한 진심을 확인해보세요',
-  date: '2024.08.31 오후 11:57',
-}
-
+const mockData = { userId: 1, nickname: 'John Doe' }
 export default function MessageBox() {
+  // const { data } = useGetMessageList({ userId })
+  // const { received_message_count, nextCursor, messageList } = data
+  const [cursor, setCursor] = useState<Date>()
+  const { data } = useGetMessageList({
+    userId: mockData.userId,
+    type: 'received',
+    cursor,
+    limit: 3,
+    order: 'desc',
+  })
   return (
     <InboxLayout title={'쪽지함'}>
       <div className='h-[67px] w-full flex items-center justify-between mb-[10px]'>
@@ -24,8 +32,10 @@ export default function MessageBox() {
       </div>
 
       {/* 데이터가 있는 경우 / 기본 height 영역 O */}
-      <MessageItem title={data.title} desc={data.desc} date={data.date} />
-
+      {/* <InboxList userId={mockData.userId} /> */}
+      {data?.messageList.map((message) => (
+        <MessageItem key={message.messageId} messageId={message.messageId} />
+      ))}
       {/* 데이터가 없는 경우 */}
       {/* <div className='flex flex-col items-center text-[#333D4B] pb-[162px] pt-[110px]'>
         <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
@@ -47,7 +57,8 @@ export default function MessageBox() {
       </div>
 
       {/* 데이터가 있는 경우 */}
-      {/* <MessageItem title={data.title} desc={data.desc} date={data.date} /> */}
+
+      {/* <OutboxList userId={mockData.userId} /> */}
 
       {/* 데이터가 없는 경우 */}
       <div className='flex flex-col items-center text-[#333D4B] pb-[180px] pt-[110px]'>
