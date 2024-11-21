@@ -25,7 +25,7 @@ export const QuestionsList = ({
         <QuestionsCard
           userId={userId}
           key={item.id}
-          id={item.id}
+          questionId={item.id}
           title={item.title}
           description={item.description}
           isFreeQuestion={false}
