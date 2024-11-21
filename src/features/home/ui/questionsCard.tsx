@@ -1,8 +1,10 @@
+'use client'
+
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface QuestionsCardProps {
-  id?: number
+  questionId?: number
   userId: number
   title: string
   description: React.ReactElement | string
@@ -11,7 +13,7 @@ interface QuestionsCardProps {
 }
 
 export const QuestionsCard = ({
-  id,
+  questionId,
   userId,
   title,
   description,
@@ -19,16 +21,16 @@ export const QuestionsCard = ({
   isHome,
 }: QuestionsCardProps) => {
   const router = useRouter()
-  const onClick = (id: number) => {
+
+  const onClick = (questionId: number) => {
     if (!isFreeQuestion) {
-      console.log('id', id)
-      router.push(`/home/${userId}/question/${id}`)
+      router.push(`/home/${userId}/question/${questionId}`)
     }
     // TODO : 자유 질문이면 링크 이동처리
   }
   return (
     <div
-      onClick={() => id && onClick(id)}
+      onClick={() => questionId && onClick(questionId)}
       className={`flex-col justify-start w-full bg-opacity-30 border border-[#D0E4FF] rounded-2xl overflow-hidden mt-[10px] relative ${isHome ? 'h-[106px] cursor-pointer' : 'h-fit'}`}
     >
       <div className='flex justify-center items-center w-full h-[44px] bg-gray-1'>
