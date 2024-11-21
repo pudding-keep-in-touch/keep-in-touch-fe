@@ -22,7 +22,7 @@ export const QuestionsCard = ({
 }: QuestionsCardProps) => {
   const router = useRouter()
 
-  const onClick = (questionId: number) => {
+  const onClickMoveHome = (questionId: number) => {
     if (!isFreeQuestion) {
       router.push(`/home/${userId}/question/${questionId}`)
     }
@@ -30,7 +30,7 @@ export const QuestionsCard = ({
   }
   return (
     <div
-      onClick={() => questionId && onClick(questionId)}
+      onClick={() => questionId && onClickMoveHome(questionId)}
       className={`flex-col justify-start w-full bg-opacity-30 border border-[#D0E4FF] rounded-2xl overflow-hidden mt-[10px] relative ${isHome ? 'h-[106px] cursor-pointer' : 'h-fit'}`}
     >
       <div className='flex justify-center items-center w-full h-[44px] bg-gray-1'>
