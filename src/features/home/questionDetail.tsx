@@ -34,7 +34,7 @@ export default function QuestionDetail({
             <div className='flex-grow w-full'>
               <QuestionsCard
                 userId={userId}
-                id={questionId}
+                questionId={questionId}
                 title='질문'
                 description={`10년지기 친구들아 ㅎㅎ 나의 어떤 점이 너`}
                 isFreeQuestion={false}
