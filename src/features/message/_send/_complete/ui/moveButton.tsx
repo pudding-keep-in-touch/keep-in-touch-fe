@@ -10,7 +10,10 @@ export default function MoveButton({
   dmId: string
   variety: string
 }) {
-  const userId = localStorage.getItem('keep_in_touch_user_id')
+  const userId =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('keep_in_touch_user_id')
+      : null
   const router = useRouter()
   const moveHandler = () => {
     router.push(`/message/sent/${userId}/${variety}/${dmId}?base=sent`)

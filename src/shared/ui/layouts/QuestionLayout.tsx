@@ -17,7 +17,8 @@ export const QuestionLayout = ({
   children,
 }: QuestionLayoutProps) => {
   const hasCopied = React.useRef(false) // 플래그로 중복 방지
-  const copyLink = localStorage.getItem('link_copy')
+  const copyLink =
+    typeof window !== 'undefined' ? localStorage.getItem('link_copy') : null
 
   React.useEffect(() => {
     if (copyLink && !hasCopied.current) {

@@ -20,7 +20,10 @@ export default function MessageDetailLayout({
   messageType,
   variety,
 }: MessageDetailLayout) {
-  const userId = localStorage.getItem('keep_in_touch_user_id')
+  const userId =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('keep_in_touch_user_id')
+      : null
   const router = useRouter()
   const param = useSearchParams()
   const baseUrl = param.get('base')

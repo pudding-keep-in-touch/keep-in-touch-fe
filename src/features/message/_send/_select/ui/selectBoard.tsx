@@ -13,7 +13,10 @@ export default function SelectBoard({ userId }: { userId: number }) {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const token = localStorage.getItem('keep_in_touch_token')
+      const token =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_token')
+          : null
 
       if (!token) {
         // 로그인되어 있지 않은 경우

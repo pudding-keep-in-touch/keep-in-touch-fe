@@ -9,7 +9,10 @@ async function apiClient(
     }
   } = {}
 ) {
-  const token = localStorage.getItem('keep_in_touch_token')
+  const token =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('keep_in_touch_token')
+      : null
 
   const defaultHeaders = {
     Authorization: `Bearer ${token}`,

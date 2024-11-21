@@ -35,8 +35,14 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     try {
       setIsLoading(true)
 
-      const accessToken = localStorage.getItem('keep_in_touch_token')
-      const storedUserId = localStorage.getItem('keep_in_touch_user_id')
+      const accessToken =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_token')
+          : null
+      const storedUserId =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_user_id')
+          : null
 
       if (!accessToken || !storedUserId) {
         throw new Error('No accessToken or userId')

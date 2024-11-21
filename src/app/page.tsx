@@ -9,8 +9,15 @@ export default function Main() {
 
   useEffect(() => {
     const checkToken = async () => {
-      const token = localStorage.getItem('keep_in_touch_token')
-      const userId = localStorage.getItem('keep_in_touch_user_id')
+      const token =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_token')
+          : null
+      const userId =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_user_id')
+          : null
+
       if (!token) {
         setTimeout(() => {
           router.push('/login')

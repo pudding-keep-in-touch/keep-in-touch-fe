@@ -9,7 +9,10 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(async (config) => {
   if (!config.headers) return config
 
-  const accessToken = localStorage.getItem('keep_in_touch_token')
+  const accessToken =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('keep_in_touch_token')
+      : null
   if (!accessToken) throw new Error('No accessToken')
 
   if (accessToken) {
