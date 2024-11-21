@@ -12,6 +12,7 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const router = useRouter()
+  //todo userID 추가
   // const params = useParams<{ variety: MessageVariety; userId: string }>()
   // const pathname = usePathname()
 

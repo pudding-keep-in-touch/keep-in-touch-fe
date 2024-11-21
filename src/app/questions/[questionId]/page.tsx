@@ -3,15 +3,10 @@
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/shared/components/Button'
+import { question } from '@/entities/questions/questionData'
 
 export default function ReceiveLink() {
   const router = useRouter()
-  //임시 데이터
-  const question = {
-    id: 1,
-    title: '첫 번째 질문',
-    content: '이것은 첫 번째 질문의 내용입니다.',
-  }
 
   const handleQuestionClick = (questionId: number) => {
     //todo 온보딩 페이지로 이동
@@ -23,7 +18,6 @@ export default function ReceiveLink() {
     <>
       <div className='flex flex-col min-h-screen items-center'>
         <div className='mt-[80px] flex flex-col w-[100%] items-center text-center'>
-          {/* todo 아이콘으로 수정 */}
           <Image
             src='/questionsKeepInTouchLogo.svg'
             alt='questionsKeepInTouchLogo'
@@ -36,7 +30,7 @@ export default function ReceiveLink() {
         </div>
         <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'>
           <div
-            key={question.id}
+            key={question.questionId}
             className='bg-white rounded-lg border-[1px] border-[#CCE8F4] rounded-[12px] flex flex-col items-center'
           >
             <h3 className='text-sm font-semibold text-[#333D4B] bg-gray-100 w-full text-center py-3 rounded-md'>
@@ -46,8 +40,7 @@ export default function ReceiveLink() {
           </div>{' '}
           <Button
             type='button'
-            onClick={() => handleQuestionClick(question.id)}
-            // onClick={sendReply}
+            onClick={() => handleQuestionClick(question.questionId)}
             className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-80 w-full'
           >
             {' '}
