@@ -2,17 +2,9 @@
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-// import { questionType } from '@/app/questions/util/type'
-import { questions } from '@/app/questions/util/data'
 import { useQueryClient } from '@tanstack/react-query'
-import QuestionBox from '@/app/questions/_component/QuestionBox'
-
-// export default function QuestionListPage({
-//   questionId,
-//   userId,
-//   content,
-//   createdAt,
-// }: questionType) {
+import { questions } from '@/entities/questions/questionData'
+import QuestionBox from '@/shared/components/QuestionBox'
 
 export default function QuestionListPage() {
   const router = useRouter()

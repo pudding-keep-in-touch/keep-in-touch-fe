@@ -1,5 +1,5 @@
+import QuestionButton from '@/features/questions/ui/button/QuestionButton'
 import Image from 'next/image'
-import QuestionButton from '@/app/questions/messages/complete/QuestionButton'
 
 export default function Complete() {
   return (

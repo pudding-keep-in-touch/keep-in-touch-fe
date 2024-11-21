@@ -1,7 +1,7 @@
 'use client'
 
-import PreviewButton from '@/app/questions/messages/completion/buttons/PreviewButton'
-import SendButton from '@/app/questions/messages/completion/buttons/SendButton'
+import PreviewButton from '@/features/questions/ui/button/PreviewButton'
+import SendButton from '@/features/questions/ui/button/SendButton'
 
 export default function ReplyButton() {
   return (

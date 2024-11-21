@@ -1,9 +1,9 @@
 'use client'
 
-import QuestionBox from '@/app/questions/_component/QuestionBox'
-import ReplyNextButton from '@/app/questions/messages/ReplyNextButton'
-import Step from '@/app/questions/shared/Step'
 import MessageInput from '@/features/message/_send/_write/ui/messageInput'
+import ReplyNextButton from '@/features/questions/ui/button/ReplyNextButton'
+import QuestionBox from '@/shared/components/QuestionBox'
+import Step from '@/shared/ui/Step'
 import { useQueryClient } from '@tanstack/react-query'
 
 export default function ReplyPage() {

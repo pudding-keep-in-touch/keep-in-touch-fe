@@ -1,4 +1,4 @@
-import { questionsType, questionType } from '@/app/questions/util/type'
+import { questionsType, questionType } from '@/entities/questions/questionType'
 
 export const questions: questionsType = [
   {

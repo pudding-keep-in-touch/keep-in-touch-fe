@@ -1,6 +1,6 @@
 // import Preview from '@/app/questions/reply/[questionId]/completion/Preview'
-import ReplyButton from '@/app/questions/messages/completion/buttons/ReplyButton'
-import Step from '@/app/questions/shared/Step'
+import ReplyButton from '@/features/questions/ui/button/ReplyButton'
+import Step from '@/shared/ui/Step'
 
 export default function Completion() {
   const steps = [1, 2]

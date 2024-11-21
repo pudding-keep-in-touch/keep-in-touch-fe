@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/shared/components/Button'
-import { question } from '@/app/questions/util/data'
+import { question } from '@/entities/questions/questionData'
 
 export default function ReceiveLink() {
   const router = useRouter()
