@@ -1,8 +1,12 @@
 'use client'
 
 import { Button } from '@/shared/components/Button'
+import { useRouter } from 'next/navigation'
 
 export default function LinkShareButton({ userId }: { userId: number }) {
+  const router = useRouter()
+  const userIdString = userId?.toString()
+
   function shareOnUrl() {
     const contentToCopy = `https://dev-fe.keep-in-touch.me/message/send/${userId}/select`
 
@@ -12,16 +16,18 @@ export default function LinkShareButton({ userId }: { userId: number }) {
     urlArea.select()
     document.execCommand('copy')
     document.body.removeChild(urlArea)
-    alert('클립보드로 내 링크가 복사되었습니다.')
+
+    localStorage.setItem('link_copy', userIdString)
+    router.push(`/home/${userId}`)
   }
 
   return (
     <Button
       type='button'
-      className='h-fit p-[18px] bg-[#0788D1] text-white rounded-2xl font-bold w-full'
+      className='h-fit p-[18px] bg-system-blue text-white rounded-2xl font-bold w-full'
       onClick={shareOnUrl}
     >
-      <h1 className='text-lg font-semibold text-center'>내 링크 전달하기</h1>
+      <h1 className='text-lg font-semibold text-center'>질문 공유하기</h1>
     </Button>
   )
 }
