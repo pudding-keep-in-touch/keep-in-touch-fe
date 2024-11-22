@@ -111,7 +111,7 @@ const emotion = {
   ],
 }
 
-const ReactionItem: React.FC<EmojiProps> = ({ category }) => {
+const ReactionList: React.FC<EmojiProps> = ({ category }) => {
   const items = emotion[category] || []
   return (
     <>
@@ -139,4 +139,4 @@ const ReactionItem: React.FC<EmojiProps> = ({ category }) => {
   )
 }
 
-export default ReactionItem
+export default ReactionList

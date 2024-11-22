@@ -4,7 +4,7 @@ import {
   MessageResponse,
   useGetMessageListProps,
 } from '@/features/messagebox/model/messagebox.types'
-import { baseQuery } from '@/shared/api/baseQuery'
+// import { baseQuery } from '@/shared/api/baseQuery'
 
 const receivedMockData = {
   received_message_count: 3,
