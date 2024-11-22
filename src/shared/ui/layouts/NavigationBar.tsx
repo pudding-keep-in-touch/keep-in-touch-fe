@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 
@@ -17,7 +18,8 @@ export const NavigationBar = () => {
                   alt='home_icon'
                   width={24}
                   height={24}
-                />{' '}
+                  style={{ width: 24, height: 24 }}
+                />
                 <div className='flex justify-center font-semibold text-[13px] leading-none text-[#1f1f1f] '>
                   홈
                 </div>
@@ -29,6 +31,7 @@ export const NavigationBar = () => {
                   alt='home_icon'
                   width={24}
                   height={24}
+                  style={{ width: 24, height: 24 }}
                 />
                 <div className='flex justify-center font-semibold text-[13px] leading-none text-[#6b7684]'>
                   홈
@@ -45,6 +48,7 @@ export const NavigationBar = () => {
                   alt='messagebox_icon'
                   width={18}
                   height={23}
+                  style={{ width: 18, height: 23 }}
                 />
                 <div className='font-semibold text-[13px] leading-none text-[#1f1f1f]'>
                   쪽지함
@@ -57,6 +61,7 @@ export const NavigationBar = () => {
                   alt='messagebox_icon'
                   width={18}
                   height={23}
+                  style={{ width: 18, height: 23 }}
                 />
                 <div className='font-semibold text-[13px] leading-none text-[#6b7684]'>
                   쪽지함
