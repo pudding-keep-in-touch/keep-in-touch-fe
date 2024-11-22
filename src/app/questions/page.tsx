@@ -5,10 +5,13 @@ import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import { questions } from '@/entities/questions/questionData'
 import QuestionBox from '@/shared/components/QuestionBox'
+import { useRandomDescriptionQuery } from '@/features/questions/hooks/query/useRandomDescriptionQuery'
+import { Spinner } from '@/shared/components/Sppiner'
 
 export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
+  const { isLoading: isRandomDescriptionLoading } = useRandomDescriptionQuery()
 
   //todo 로그인 state추가
 
@@ -43,22 +46,28 @@ export default function QuestionListPage() {
 
         <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'>
           {/* 자유질문 */}
-          <QuestionBox
-            questionId={99}
-            variant='custom'
-            // description='질문을 쓰지 않은 글쓰기 양식입니다. 자유롭게 쪽지를 보낼 수 있어요!'
-            onClick={handleQuestionClick}
-          />
+          {isRandomDescriptionLoading ? (
+            <div className='w-full h-[200px] flex justify-center items-center'>
+              <Spinner />
+            </div>
+          ) : (
+            <>
+              <QuestionBox
+                questionId={99}
+                variant='custom'
+                onClick={handleQuestionClick}
+              />
 
-          {/* 일반 질문 */}
-          {questions.map((question) => (
-            <QuestionBox
-              key={question.questionId}
-              questionId={question.questionId}
-              content={question.content}
-              onClick={handleQuestionClick}
-            />
-          ))}
+              {questions.map((question) => (
+                <QuestionBox
+                  key={question.questionId}
+                  questionId={question.questionId}
+                  content={question.content}
+                  onClick={handleQuestionClick}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </>
