@@ -2,7 +2,7 @@
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 import { useState } from 'react'
 import MessageItem from '@/features/messagebox/ui/MessageItem'
-import { MessageType } from '../_detail/model/messagebox.types'
+import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 import Link from 'next/link'
 
 const userMockData = { userId: 1, nickname: 'jieun' }

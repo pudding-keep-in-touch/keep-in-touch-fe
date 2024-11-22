@@ -10,8 +10,10 @@ const mockData = { userId: 1, nickname: 'John Doe' }
 // userId, userId: number,
 export default function ViewAllMessage({
   messageType,
+  userId,
 }: {
   messageType: MessageType
+  userId: number
 }) {
   // const { data } = useGetMessageList({ userId })
   // const { received_message_count, nextCursor, messageList } = data

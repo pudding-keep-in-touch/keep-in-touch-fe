@@ -134,7 +134,6 @@ const ReactionList: React.FC<EmojiProps> = ({ category }) => {
           ))}
         </div>
       </div>
-      <div className='border-b-[6px] border-b-[#F6F7FC] w-screen'></div>
     </>
   )
 }

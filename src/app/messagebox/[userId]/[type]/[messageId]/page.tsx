@@ -2,9 +2,11 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 import MessageDetail from '@/features/messagebox/ui/MessageDetail'
 
 export default function Page({
-  params: { type, messageId },
+  params: { userId, type, messageId },
 }: {
-  params: { type: MessageType; messageId: number }
+  params: { userId: number; type: MessageType; messageId: number }
 }) {
-  return <MessageDetail messageId={messageId} messageType={type} />
+  return (
+    <MessageDetail userId={userId} messageId={messageId} messageType={type} />
+  )
 }
