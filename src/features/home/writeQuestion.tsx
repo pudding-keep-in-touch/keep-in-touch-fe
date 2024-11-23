@@ -5,6 +5,7 @@ import LinkShareButton from '@/features/home/ui/linkShareButton'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import WriteInput from '@/features/home/ui/writeInput'
 import React from 'react'
+import CompleteButton from './ui/completeButton'
 
 interface WriteQuestionProps {
   userId: number
@@ -12,6 +13,7 @@ interface WriteQuestionProps {
 
 export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
   const [toggle, setToggle] = React.useState(false)
+  const [isError, setIsError] = React.useState(true)
 
   const [isKeyboardVisible, setIsKeyboardVisible] = React.useState(false)
 
@@ -39,6 +41,8 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
     }
   }, [])
 
+  console.log('isError', isError)
+
   const onClickToggle = () => {
     setToggle((prev) => !prev)
   }
@@ -53,7 +57,12 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
               질문 작성하기
             </p>
             <MessageFormProvider>
-              <WriteInput isColor type='question' maxLength={140} />
+              <WriteInput
+                isColor
+                type='question'
+                maxLength={140}
+                setIsError={setIsError}
+              />
             </MessageFormProvider>
           </div>
           <div className='w-full h-2 bg-gray-1' />
@@ -96,7 +105,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
               isKeyboardVisible ? 'bottom-[300px]' : 'bottom-[20px]'
             }`}
           >
-            <LinkShareButton userId={userId} />
+            <CompleteButton userId={userId} isDisabled={isError} />
           </div>
         </div>
       </div>
