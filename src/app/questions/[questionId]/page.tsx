@@ -44,7 +44,7 @@ export default function ReceiveLink() {
             className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-80 w-full'
           >
             {' '}
-            쪽지 보내기
+            마음 전하러 가기
           </Button>
         </div>
       </div>
