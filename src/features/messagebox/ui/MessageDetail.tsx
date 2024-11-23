@@ -22,10 +22,7 @@ export default function MessageDetail({
 
   return (
     <div className='w-full flex flex-col text-black gap-4'>
-      <QuestionBox
-        questionId={data.question.questionId}
-        content={data.question.content}
-      />
+      <QuestionBox content={data.question.content} />
       <MessageBoard
         receiverNickname={data.receiverNickname}
         content={data.content}

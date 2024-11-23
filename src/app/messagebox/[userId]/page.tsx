@@ -1,6 +1,5 @@
 import InboxLayout from '@/features/messagebox/ui/InboxLayout'
 import ViewAllMessage from '@/features/messagebox/ui/ViewAllMessage'
-// import { MessageType } from "@/shared/types/common.types";
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 
 export default function Page({

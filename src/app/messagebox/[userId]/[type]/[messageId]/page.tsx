@@ -3,7 +3,6 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 import MessageDetail from '@/features/messagebox/ui/MessageDetail'
 import React, { useState } from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function Page({
@@ -11,7 +10,6 @@ export default function Page({
 }: {
   params: { userId: number; type: MessageType; messageId: number }
 }) {
-  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
     setIsOpen(true)
@@ -28,29 +26,11 @@ export default function Page({
             </button>
             {isOpen ? (
               <div className=' bg-black w-[100px] h-[56px] rounded-2xl text-white'>
-                {/* <button
-                  onClick={() =>
-                    router.push(
-                      `/messagebox/${userId}/${type}/${messageId}/report`
-                    )
-                  }
-                >
-                  신고하기
-                </button> */}
                 <Link
                   href={`/messagebox/${userId}/${type}/${messageId}/report`}
                 >
                   신고하기
                 </Link>
-                {/* <button
-                  onClick={() =>
-                    router.push(
-                      `/messagebox/${userId}/${type}/${messageId}/hide`
-                    )
-                  }
-                >
-                  숨기기
-                </button> */}
                 <Link href={`/messagebox/${userId}/${type}/${messageId}/hide`}>
                   숨기기
                 </Link>
