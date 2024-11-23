@@ -8,10 +8,6 @@ export default function Page({
 }) {
   // /reaction, /report, /hide 제외 나머지 페이지 예외 처리 필요
   return (
-    <ReactionPage
-      messageType={type}
-      userId={userId}
-      messageId={messageId}
-    ></ReactionPage>
+    <ReactionPage messageType={type} userId={userId} messageId={messageId} />
   )
 }

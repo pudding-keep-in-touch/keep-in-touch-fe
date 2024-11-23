@@ -24,7 +24,7 @@ export default function Page({
             <button type='button' onClick={openModal}>
               <img src='/header_more.svg' />
             </button>
-            {isOpen ? (
+            {isOpen && (
               <div className=' bg-black w-[100px] h-[56px] rounded-2xl text-white'>
                 <Link
                   href={`/messagebox/${userId}/${type}/${messageId}/report`}
@@ -35,8 +35,6 @@ export default function Page({
                   숨기기
                 </Link>
               </div>
-            ) : (
-              ''
             )}
           </div>
         </header>
