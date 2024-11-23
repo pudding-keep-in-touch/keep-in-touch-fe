@@ -41,7 +41,7 @@ export const QuestionLayout = ({
 
   return (
     <div className='w-full h-screen flex flex-col relative'>
-      <HomeHeader isVisible={isVisible} /> {/* 네비게이션 바 */}
+      <HomeHeader isVisible={isVisible} isHome={isHome} /> {/* 네비게이션 바 */}
       {children}
       {/* {!isHome && <ShareButton userId={userId} />} */}
       <Toaster
