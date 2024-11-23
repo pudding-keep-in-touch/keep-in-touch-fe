@@ -6,6 +6,7 @@ export default function Page({
 }: {
   params: { userId: number; type: MessageType; messageId: number }
 }) {
+  // /reaction, /report, /hide 제외 나머지 페이지 예외 처리 필요
   return (
     <ReactionPage
       messageType={type}
