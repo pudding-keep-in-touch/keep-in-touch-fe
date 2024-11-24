@@ -1,10 +1,11 @@
 'use client'
 
+// import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
 // import { useParams, usePathname, useRouter } from 'next/navigation'
-import { usePathname, useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 
 interface Props {
   children: React.ReactNode
@@ -18,15 +19,9 @@ export default function Layout({ children }: Props) {
 
   //todo 배경 변경 필요
 
-  // const makeBgClass = pathname.endsWith('/preview')
-  //   ? `bg-cover bg-center ${
-  //       params.variety === 'thanks'
-  //         ? 'bg-thanksPreview'
-  //         : 'bg-honestTalkPreview'
-  //     }`
-  //   : 'bg-[#F7F7FC]'
-
-  const makeBgClass = 'bg-[#F7F7FC]'
+  const makeBgClass = pathname.endsWith('/preview')
+    ? `bg-cover bg-center ${'bg-messageDetail'}`
+    : 'bg-[#F7F7FC]'
 
   return (
     <>
