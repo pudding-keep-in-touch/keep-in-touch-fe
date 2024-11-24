@@ -5,13 +5,10 @@ import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import { questions } from '@/entities/questions/questionData'
 import QuestionBox from '@/shared/components/QuestionBox'
-import { useRandomDescriptionQuery } from '@/features/questions/hooks/query/useRandomDescriptionQuery'
-import { Spinner } from '@/shared/components/Sppiner'
 
 export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
-  const { isLoading: isRandomDescriptionLoading } = useRandomDescriptionQuery()
 
   //todo 로그인 state추가
 
@@ -50,28 +47,22 @@ export default function QuestionListPage() {
 
         <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6 '>
           {/* 자유질문 */}
-          {isRandomDescriptionLoading ? (
-            <div className='w-full h-[200px] flex justify-center items-center '>
-              <Spinner />
-            </div>
-          ) : (
-            <>
+          <>
+            <QuestionBox
+              questionId={'99'}
+              variant='custom'
+              onClick={handleQuestionClick}
+            />
+
+            {questions.map((question) => (
               <QuestionBox
-                questionId={'99'}
-                variant='custom'
+                key={question.questionId}
+                questionId={question.questionId}
+                content={question.content}
                 onClick={handleQuestionClick}
               />
-
-              {questions.map((question) => (
-                <QuestionBox
-                  key={question.questionId}
-                  questionId={question.questionId}
-                  content={question.content}
-                  onClick={handleQuestionClick}
-                />
-              ))}
-            </>
-          )}
+            ))}
+          </>
         </div>
       </div>
     </>

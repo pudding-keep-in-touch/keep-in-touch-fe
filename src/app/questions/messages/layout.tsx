@@ -17,8 +17,6 @@ export default function Layout({ children }: Props) {
   // const params = useParams<{ variety: MessageVariety; userId: string }>()
   const pathname = usePathname()
 
-  //todo 배경 변경 필요
-
   const makeBgClass = pathname.endsWith('/preview')
     ? `bg-cover bg-center ${'bg-messageDetail'}`
     : 'bg-[#F7F7FC]'

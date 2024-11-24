@@ -40,7 +40,7 @@ export default function SendButton({}) {
       className='h-fit p-4 bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
       onClick={onSubmit}
     >
-      {pending ? '보내는 중...' : '쪽지 보내기'}
+      {pending ? '보내는 중...' : '전송하기'}
     </Button>
   )
 }

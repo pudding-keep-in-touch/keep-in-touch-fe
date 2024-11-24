@@ -1,9 +1,13 @@
 // import Preview from '@/app/questions/reply/[questionId]/completion/Preview'
+import Preview from '@/app/questions/messages/completion/Preview'
 import ReplyButton from '@/features/questions/ui/button/ReplyButton'
 import Step from '@/shared/ui/Step'
 
 export default function Completion() {
   const steps = [1, 2]
+
+  //todo userNickname 받아야 함 지금은 테스트 용도
+  const userNickname = 'test'
   return (
     <>
       <div className='mt-[30px] mb-5'>
@@ -16,7 +20,7 @@ export default function Completion() {
         미리보기로 내용을 확인하세요!
       </p>
 
-      {/* <Preview /> */}
+      <Preview userNickname={userNickname} />
       {/* todo preview 이미지 */}
 
       <ReplyButton />
