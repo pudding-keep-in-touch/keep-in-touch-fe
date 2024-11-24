@@ -30,7 +30,7 @@ export default function ViewAllMessage({
   if (error) return <div>Error fetching messages.</div>
 
   return (
-    <>
+    <div className='w-full'>
       <div className='h-[67px] w-full flex items-center justify-between mb-[10px]'>
         <h2 className='font-semibold text-[18px] flex items-center'>
           받은 쪽지
@@ -116,6 +116,6 @@ export default function ViewAllMessage({
           아직 보낸 쪽지가 없어요!
         </p>
       </div>
-    </>
+    </div>
   )
 }

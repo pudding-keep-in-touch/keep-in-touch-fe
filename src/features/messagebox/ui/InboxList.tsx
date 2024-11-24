@@ -22,7 +22,7 @@ export default function InboxList({
   })
 
   return (
-    <>
+    <div className='w-full'>
       <div className='w-full h-[67px] flex items-center gap-[10px]'>
         <h2 className='font-semibold text-[18px] flex items-center'>
           {messageType === 'sent' ? '보낸 쪽지함' : '받은 쪽지함'}
@@ -39,6 +39,6 @@ export default function InboxList({
           </Link>
         </div>
       ))}
-    </>
+    </div>
   )
 }
