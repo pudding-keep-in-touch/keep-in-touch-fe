@@ -1,10 +1,63 @@
+// import { MessageType } from "@/shared/types/common.types"
+import { MessageType } from '../_detail/model/messagebox.types'
+
 export type MessageBoxType = {
   messageId: number
 }
-export type BoxType = 'inbox' | 'outbox'
+// export type ExtendedMessageType = MessageType | 'reaction'
 
-export type MessageType = 'sent' | 'received'
-interface Message {
+type questionContainer = {
+  questionId: number
+  content: string
+}
+type emotionContainer = {
+  emotionId: number
+  name: string
+  emoji: string
+}
+
+type reactionContainer = {
+  reactionId: number
+  content: string
+  type: string
+  emoji: string
+}
+
+// 받은 쪽지 상세 조회 타입
+// export interface MessageDetail {
+//   messageId: number
+//   type: string
+//   receiverId: number
+//   receiverNickname: string
+//   content: string
+//   emotion?: emotionContainer
+//   question: questionContainer
+//   reactions: reactionContainer[]
+//   status?: string
+//   createdAt: string
+// }
+
+export interface MessageDetail {
+  messageId: number
+  type: string
+  receiverId: number
+  receiverNickname: string
+  content: string
+  question: {
+    questionId: number
+    content: string
+  }
+  reactions: {
+    reactionId: number
+    content: string
+    type: string
+    emoji: string
+  }[]
+  status?: string
+  createdAt: string
+}
+
+type Message = {
   messageId: number
   receiverId: number
   receiverNickname: string
@@ -12,13 +65,7 @@ interface Message {
   status?: string
   createdAt: string
 }
-
-// export interface MessageResponse {
-//   received_message_count: number
-//   nextCursor: string | null
-//   messageList: Message[]
-// }
-
+// 받은 쪽지 리스트 조회 타입
 export interface MessageResponse {
   received_message_count: number
   nextCursor: string | null
