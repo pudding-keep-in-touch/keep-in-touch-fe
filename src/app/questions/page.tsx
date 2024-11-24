@@ -28,6 +28,11 @@ export default function QuestionListPage() {
     router.push('/questions/messages')
   }
 
+  const handleFreeQuestionClick = () => {
+    //todo 자유질문 플로우
+    router.push('/message/send/81/select')
+  }
+
   return (
     <>
       <div className='flex flex-col min-h-screen items-center'>
