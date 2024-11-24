@@ -111,7 +111,7 @@ const emotion = {
   ],
 }
 
-const ReactionItem: React.FC<EmojiProps> = ({ category }) => {
+const ReactionList: React.FC<EmojiProps> = ({ category }) => {
   const items = emotion[category] || []
   return (
     <>
@@ -124,7 +124,7 @@ const ReactionItem: React.FC<EmojiProps> = ({ category }) => {
         <div className='w-full flex flex-wrap gap-[8px]'>
           {items.map((e) => (
             <div key={e.id} className='flex-none'>
-              <div className='w-full p-[12px] h-[35px] bg-white rounded-[60px] flex items-center border-[0.5px] border-[#C5C5C5]  gap-[4px]'>
+              <div className='w-full p-[12px] h-[35px] bg-white rounded-[60px] flex items-center cursor-pointer border-[0.5px] hover:bg-[#35B6FF] hover:bg-opacity-40 hover:border-[#35B6FF]  border-[#C5C5C5] gap-[4px]'>
                 <div>{e.emoji}</div>
                 <div className='w-full flex text-[15px] font-semibold leading-[68.1%] tracking-[-2%]'>
                   {e.name}
@@ -134,9 +134,8 @@ const ReactionItem: React.FC<EmojiProps> = ({ category }) => {
           ))}
         </div>
       </div>
-      <div className='border-b-[6px] border-b-[#F6F7FC] w-screen'></div>
     </>
   )
 }
 
-export default ReactionItem
+export default ReactionList

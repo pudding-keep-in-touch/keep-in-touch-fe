@@ -23,6 +23,7 @@ const config = {
       },
 
       backgroundImage: {
+        messageDetail: "url('/detailMessageBg.png')",
         honestTalkPreview: "url('/honestTalkPreviewBg.png')",
         thanksPreview: "url('/thanksPreviewBg.png')",
         home: "url('/home_banner_normal.svg')",

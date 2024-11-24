@@ -13,3 +13,6 @@ export type ListItem = {
     },
   ]
 }
+
+// reaction 구조 잡고 타입 재검토 필요
+export type MessageType = 'sent' | 'received'

@@ -1,46 +1,44 @@
+'use client'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
-// import { useGetMessageListProps } from '@/features/messagebox/model/messagebox.types'
-import MessageItem from './MessageItem'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import MessageItem from '@/features/messagebox/ui/MessageItem'
+import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import Link from 'next/link'
 
-interface InboxProps {
-  userId: number
-}
-
-export default function InboxList({ userId }: InboxProps) {
-  const [cursor, setCursor] = useState<Date>() // 초기 cursor 설정
+const userMockData = { userId: 1, nickname: 'jieun' }
+// userId, , userId: number props로 mockdata 제거하고 추가
+export default function InboxList({
+  messageType,
+}: {
+  messageType: MessageType
+}) {
+  const [cursor, setCursor] = useState<Date>()
   const { data } = useGetMessageList({
-    userId,
-    type: 'received',
+    userId: userMockData.userId, // mockData, api 추가되면 수정 필요
+    type: messageType,
     cursor,
     limit: 10,
     order: 'desc',
   })
-  // useEffect(() => {
-  //   // 데이터의 nextCursor 값에 따라 cursor 업데이트
-  //   if (data && data.nextCursor) {
-  //     setCursor(new Date(data.nextCursor)) // 다음 요청을 위한 cursor 업데이트
-  //   } else {
-  //     setCursor(undefined) // 더 이상 요청할 데이터가 없다면 cursor를 null로 설정
-  //   }
-  // }, [data]) // data가 변경될 때 마다 실행
 
-  // Handle loading and error states
-  // if (status === 'loading') {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (status === 'error') {
-  //   return <div>Error fetching messages.</div>;
-  // }
-
-  console.log(data?.received_message_count)
   return (
-    <div>
-      <div>받은거Total number: {data?.received_message_count || 0}</div>
+    <>
+      <div className='w-full h-[67px] flex items-center gap-[10px]'>
+        <h2 className='font-semibold text-[18px] flex items-center'>
+          {messageType === 'sent' ? '보낸 쪽지함' : '받은 쪽지함'}
+        </h2>
+        <div>{data?.received_message_count || 0}</div>
+      </div>
       {data?.messageList.map((message) => (
-        <MessageItem key={message.messageId} messageId={message.messageId} />
+        <div key={message.messageId}>
+          <Link
+            href={`/messagebox/${userMockData.userId}/${messageType}/${message.messageId}`}
+            className='flex items-center gap-[9px]'
+          >
+            <MessageItem messageId={message.messageId} />
+          </Link>
+        </div>
       ))}
-    </div>
+    </>
   )
 }
