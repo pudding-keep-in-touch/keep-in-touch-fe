@@ -4,11 +4,11 @@ import React from 'react'
 type QuestionBoxVariant = 'default' | 'custom'
 
 interface QuestionBoxProps {
-  questionId: number
+  questionId?: string
   content?: string
   description?: string // 자유질문의 설명 추가
   variant?: QuestionBoxVariant
-  onClick?: (questionId: number, content: string) => void
+  onClick?: (questionId: string, content: string) => void
 }
 
 const QuestionBox: React.FC<QuestionBoxProps> = ({
@@ -20,13 +20,13 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
   const { data: randomDescription } = useRandomDescriptionQuery()
   const handleClick = () => {
     if (onClick) {
-      onClick(questionId, content || '')
+      onClick(questionId || '', content || '')
     }
   }
 
   return (
     <div
-      className='bg-white rounded-lg border-[1px] border-[#CCE8F4] rounded-[12px] flex flex-col items-center'
+      className='bg-white rounded-lg border-[1px] border-[#CCE8F4] rounded-[12px] flex flex-col items-center cursor-pointer'
       onClick={handleClick}
     >
       <h3 className='text-sm font-semibold text-[#333D4B] bg-gray-100 w-full text-center py-3 rounded-md'>

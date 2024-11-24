@@ -8,7 +8,7 @@ import { question } from '@/entities/questions/questionData'
 export default function ReceiveLink() {
   const router = useRouter()
 
-  const handleQuestionClick = (questionId: number) => {
+  const handleQuestionClick = (questionId: string) => {
     //todo 온보딩 페이지로 이동
     // router.push(`/onboarding?questionId=${questionId}`);
     router.push(`/questions/reply/${questionId}`)

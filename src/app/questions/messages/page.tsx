@@ -10,7 +10,7 @@ export default function ReplyPage() {
   const queryClient = useQueryClient()
 
   const selectedQuestion = queryClient.getQueryData<{
-    questionId: number
+    questionId: string
     content: string
   }>(['selectedQuestion'])
 

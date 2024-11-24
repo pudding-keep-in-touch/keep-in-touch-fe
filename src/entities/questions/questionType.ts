@@ -1,13 +1,13 @@
 export type questionsType = {
-  questionId: number
-  userId: number
+  questionId: string
+  userId: string
   content: string
   createdAt: string
 }[]
 
 export type questionType = {
-  questionId: number
-  userId: number
+  questionId: string
+  userId: string
   content: string
   isHidden: false
   createdAt: string
