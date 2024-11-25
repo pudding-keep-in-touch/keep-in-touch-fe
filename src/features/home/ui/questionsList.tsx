@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { QuestionsCard } from '@/features/home/ui/questionsCard'
+import { TypeQuestionCard } from './typeQuestionCard'
 
 type QuestionDataType = {
   id: number
@@ -20,7 +21,10 @@ export const QuestionsList = ({
   userId,
 }: QuestionsListProps) => {
   return (
-    <div>
+    <div className='bg-[#F6F7FC] px-[24px]'>
+      {/* 자유 질문 */}
+      <TypeQuestionCard userId={userId} isHome={true} />
+
       {questionData.map((item) => (
         <QuestionsCard
           userId={userId}
@@ -28,7 +32,6 @@ export const QuestionsList = ({
           questionId={item.id}
           title={item.title}
           description={item.description}
-          isFreeQuestion={false}
           isHome={isHome}
         />
       ))}
