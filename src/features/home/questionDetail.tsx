@@ -2,10 +2,11 @@
 
 import useIsVisible from '@/shared/hooks/useIsVisible'
 import { QuestionLayout } from '@/shared/ui/layouts/QuestionLayout'
-import { QuestionsCard } from './ui/questionsCard'
-import Tooltip from './ui/tooltip'
-import LinkShareButton from './ui/linkShareButton'
+import { QuestionsCard } from '@/features/home/ui/questionsCard'
+import Tooltip from '@/features/home/ui/tooltip'
+import LinkShareButton from '@/features/home/ui/linkShareButton'
 import React from 'react'
+import { TypeQuestionCard } from '@/features/home/ui/typeQuestionCard'
 
 interface QuestionDetailProps {
   questionId: number
@@ -32,15 +33,15 @@ export default function QuestionDetail({
       <div className='flex-grow w-full h-screen pt-[82px] h-815:pb-[200px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
         <div className='w-full px-[24px]'>
           <div className='flex-grow w-full'>
+            <TypeQuestionCard userId={userId} isHome={true} />
+
             <QuestionsCard
               userId={userId}
               questionId={questionId}
               title='질문'
               description={`10년지기 친구들아 ㅎㅎ 나의 어떤 점이 너`}
-              isFreeQuestion={false}
               isHome={false}
             />
-
             <div className='flex flex-col mt-5 mb-4 gap-2'>
               <h3 className='font-semibold text-[16px] tracking-[-0.75px]'>
                 숨기기 설정
@@ -50,7 +51,6 @@ export default function QuestionDetail({
                 않습니다.
               </p>
             </div>
-
             {!toggle ? (
               <button
                 onClick={onClickToggle}
