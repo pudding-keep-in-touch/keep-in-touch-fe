@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface QuestionsCardProps {
-  questionId?: number
+  questionId?: string
   userId: number
   title: string
   description: React.ReactElement | string
@@ -20,7 +20,7 @@ export const QuestionsCard = ({
 }: QuestionsCardProps) => {
   const router = useRouter()
 
-  const onClickMoveHome = (questionId: number) => {
+  const onClickMoveHome = (questionId: string) => {
     router.push(`/home/${userId}/question/${questionId}`)
 
     // TODO : 자유 질문이면 링크 이동처리

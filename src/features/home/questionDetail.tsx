@@ -6,10 +6,9 @@ import { QuestionsCard } from '@/features/home/ui/questionsCard'
 import Tooltip from '@/features/home/ui/tooltip'
 import LinkShareButton from '@/features/home/ui/linkShareButton'
 import React from 'react'
-import { TypeQuestionCard } from '@/features/home/ui/typeQuestionCard'
 
 interface QuestionDetailProps {
-  questionId: number
+  questionId: string
   userId: number
 }
 
@@ -33,8 +32,6 @@ export default function QuestionDetail({
       <div className='flex-grow w-full h-screen pt-[82px] h-815:pb-[200px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
         <div className='w-full px-[24px]'>
           <div className='flex-grow w-full'>
-            <TypeQuestionCard userId={userId} isHome={true} />
-
             <QuestionsCard
               userId={userId}
               questionId={questionId}

@@ -4,7 +4,7 @@ import { QuestionsCard } from '@/features/home/ui/questionsCard'
 import { TypeQuestionCard } from '@/features/home/ui/typeQuestionCard'
 
 type QuestionDataType = {
-  id: number
+  questionId: string
   title: string
   description: React.ReactElement | string
 }
@@ -22,14 +22,14 @@ export const QuestionsList = React.forwardRef<
   return (
     <div ref={ref} className='px-[24px]'>
       {/* 자유 질문 */}
-      <TypeQuestionCard userId={userId} isHome={true} />
+      <TypeQuestionCard isHome={true} />
 
       {questionData &&
         questionData.map((item) => (
           <QuestionsCard
             userId={userId}
-            key={item.id}
-            questionId={item.id}
+            key={item.questionId}
+            questionId={item.questionId}
             title={item.title}
             description={item.description}
             isHome={isHome}

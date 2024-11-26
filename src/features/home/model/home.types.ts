@@ -14,7 +14,7 @@ export interface HomeData {
 }
 
 export interface QuestionData {
-  id: number
+  questionId: string
   title: string
   description: string
 }

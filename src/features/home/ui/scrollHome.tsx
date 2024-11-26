@@ -7,6 +7,7 @@ import { QuestionData } from '@/features/home/model/home.types'
 import { useCookies } from 'react-cookie'
 import { API_BASE_URL } from '@/shared/config/env'
 import { usePathname } from 'next/navigation'
+import { TypeQuestionCard } from '@/features/home/ui/typeQuestionCard'
 
 const randomMockData = [
   {
@@ -145,22 +146,22 @@ export default function ScrollHome({
             {/* 툴팁 */}
           </div>
         </div>
-        {/* {questionData ? ( */}
-        <div className='flex flex-col mt-[52px] pb-[90px] bg-[#F6F7FC]'>
-          {/* 질문 리스트  */}
-          <QuestionListHeader userId={userId} />
-          <QuestionsList
-            ref={questionListRef}
-            questionData={questionData}
-            isHome
-            userId={userId}
-          />
-        </div>
-        {/* ) : (
+        {questionData ? (
+          <div className='flex flex-col mt-[52px] pb-[90px] bg-[#F6F7FC]'>
+            {/* 질문 리스트  */}
+            <QuestionListHeader userId={userId} />
+            <QuestionsList
+              ref={questionListRef}
+              questionData={questionData}
+              isHome
+              userId={userId}
+            />
+          </div>
+        ) : (
           <div className='flex flex-col mt-[52px] w-full h-[calc(100vh-7rem)] bg-[#F6F7FC]'>
             <QuestionListHeader userId={userId} />
             <div className='w-full px-[24px] flex flex-col gap-8'>
-              <TypeQuestionCard userId={userId} isHome={true} />
+              <TypeQuestionCard isHome={true} />
               <div className='w-full h-[100px] flex justify-center items-center'>
                 <Image
                   src='/emptyData.svg'
@@ -171,7 +172,7 @@ export default function ScrollHome({
               </div>
             </div>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   )
