@@ -49,11 +49,11 @@ export default function MessageList({
                         ? '퐁이 도착했어요!'
                         : '퐁을 보냈어요!'}
                     </div>
-                    <div className='text-[#474747] text-[14px] leading-[130%] h-[24px] tracking-[-0.75px] mb-[14px]'>
-                      {message.readAt instanceof Date
+                    {message.readAt
+                      ? message.readAt instanceof Date
                         ? `${message.content}`
-                        : '소중한 진심을 확인해보세요'}
-                    </div>
+                        : '소중한 진심을 확인해보세요'
+                      : `${message.content}`}
                     <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px]'>
                       {`${message.createdAt}`}
                     </div>
