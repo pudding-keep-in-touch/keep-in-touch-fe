@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 interface QuestionListHeaderProps {
   className?: string
-  userId: string
+  userId: number
 }
 
 export const QuestionListHeader = React.forwardRef<

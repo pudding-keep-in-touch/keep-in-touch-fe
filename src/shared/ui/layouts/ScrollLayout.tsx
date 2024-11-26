@@ -48,6 +48,7 @@ export const ScrollLayout = ({
         {/* 질문 리스트 헤더  */}
         {questionData !== undefined && currentStep === 1 && (
           <QuestionListHeader
+            userId={userId}
             className={`sticky mb-[-8px] top-0 left-0 w-full z-10 shadow-custom-bottom transition-shadow duration-300 ease-in-out`}
           />
         )}

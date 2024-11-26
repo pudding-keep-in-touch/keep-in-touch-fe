@@ -10,7 +10,7 @@ type QuestionDataType = {
 }
 
 interface QuestionsListProps {
-  questionData: QuestionDataType[]
+  questionData?: QuestionDataType[]
   isHome: boolean
   userId: number
 }
@@ -24,16 +24,17 @@ export const QuestionsList = React.forwardRef<
       {/* 자유 질문 */}
       <TypeQuestionCard userId={userId} isHome={true} />
 
-      {questionData.map((item) => (
-        <QuestionsCard
-          userId={userId}
-          key={item.id}
-          questionId={item.id}
-          title={item.title}
-          description={item.description}
-          isHome={isHome}
-        />
-      ))}
+      {questionData &&
+        questionData.map((item) => (
+          <QuestionsCard
+            userId={userId}
+            key={item.id}
+            questionId={item.id}
+            title={item.title}
+            description={item.description}
+            isHome={isHome}
+          />
+        ))}
     </div>
   )
 })
