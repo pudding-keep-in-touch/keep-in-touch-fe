@@ -6,8 +6,10 @@ import { usePathname, useRouter } from 'next/navigation'
 
 export default function InboxLayout({
   children,
+  title,
 }: {
   children: React.ReactNode
+  title: string
 }) {
   // const userId = mockData.userId
   // const userId =
@@ -25,18 +27,20 @@ export default function InboxLayout({
   return (
     <div
       className={
-        'w-full min-h-screen flex flex-col items-center pb-16 px-6 bg-cover bg-center bg-[#F7F7FC]'
+        'w-full min-h-screen flex flex-col items-center bg-cover bg-center bg-[#F7F7FC]'
       }
     >
-      <header className='w-full h-[50px] grid grid-cols-3 items-center z-50 '>
-        <ChevronLeftIcon
-          className='w-6 h-6 cursor-pointer'
-          onClick={() => router.back()}
-        />
-        <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-          쪽지함
-        </h1>
-      </header>
+      <div className='flex w-full justify-center px-6'>
+        <header className='w-full h-[50px] grid grid-cols-3 items-center z-50 '>
+          <ChevronLeftIcon
+            className='w-6 h-6 cursor-pointer'
+            onClick={() => router.back()}
+          />
+          <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
+            {title}
+          </h1>
+        </header>
+      </div>
       {children}
     </div>
   )
