@@ -26,9 +26,22 @@ export default function MessageList({
   if (error) return <div>error: fetching messages</div>
   if (!data) return <div>no data</div>
 
+  const dateFormat = (e: Date) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    }
+
+    const formatter = new Intl.DateTimeFormat('ko-KR', options)
+    return formatter.format(e).replace(' ', '').replace(',', '')
+  }
   return (
     <div className='max-w-[390px]'>
-      <div className='pt-2'>
+      <div className='pt-2 w-full'>
         {data.messageList.map((message: Message) => (
           <div key={message.messageId}>
             <Link
@@ -49,17 +62,21 @@ export default function MessageList({
                         ? '퐁이 도착했어요!'
                         : '퐁을 보냈어요!'}
                     </div>
-                    {message.readAt
-                      ? message.readAt instanceof Date
-                        ? `${message.content}`
-                        : '소중한 진심을 확인해보세요'
-                      : `${message.content}`}
-                    <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px]'>
-                      {`${message.createdAt}`}
+                    <div className='text-gray-3 text-[14px] h-[20px] leading-[130%] tracking-[-0.75px]'>
+                      {messageType === 'received'
+                        ? message.readAt instanceof Date
+                          ? `${message.content}`
+                          : '소중한 진심을 확인해보세요'
+                        : `${message.content}`}
+                    </div>
+                    <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px] mt-1'>
+                      {message.createdAt && dateFormat(message.createdAt)}
                     </div>
                   </div>
                 </div>
-                <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full'></div>
+                {!message.readAt && (
+                  <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full'></div>
+                )}
               </div>
             </Link>
           </div>

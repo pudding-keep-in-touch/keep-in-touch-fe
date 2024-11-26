@@ -24,7 +24,7 @@ export default function MessagesBlock({
   if (!data) return null
 
   return (
-    <div className='max-w-[390px] px-6'>
+    <div className='max-w-[390px] px-6 w-full'>
       <div className='w-full h-[67px] flex items-center gap-1'>
         <h2 className='font-semibold text-[18px] flex items-center gap-2'>
           <div>{messageType === 'sent' ? '보낸 퐁' : '받은 퐁'}</div>

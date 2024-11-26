@@ -31,7 +31,7 @@ export default function ViewAllMessage({
   if (!data) return <div>no data</div>
 
   return (
-    <div className='max-w-[390px]'>
+    <div className='max-w-[390px] w-full'>
       <div className='w-full pb-6 px-6'>
         <div className='h-[67px] w-full flex items-center justify-between'>
           <h2 className='font-semibold text-[18px] flex items-center'>
