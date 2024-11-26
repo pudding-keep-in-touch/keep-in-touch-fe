@@ -82,6 +82,8 @@ interface HomeProps {
 }
 
 export default function Home({ userId }: HomeProps) {
+  const [domLoaded, setDomLoaded] = React.useState(false)
+
   const [visibleRef, isVisible] = useIsVisible({
     options: { threshold: 0, rootMargin: '0px' },
     initialState: false,
@@ -96,28 +98,36 @@ export default function Home({ userId }: HomeProps) {
       topOffset: 50, // Header 높이
     })
 
+  React.useEffect(() => {
+    setDomLoaded(true)
+  }, [])
+
   return (
-    <ScrollLayout
-      isVisible={isVisible}
-      isHome
-      userId={userId}
-      header={<HomeHeader isVisible={isVisible} isHome />}
-      questionData={undefined}
-      currentStep={currentStep}
-      onClickToTop={onClickToTop}
-      stepRefsInitialized={stepRefsInitialized}
-    >
-      {({ scrollElement }) => (
-        <ScrollHome
-          visibleRef={visibleRef}
+    <>
+      {domLoaded && (
+        <ScrollLayout
+          isVisible={isVisible}
+          isHome
           userId={userId}
-          scrollElement={scrollElement}
-          questionData={undefined}
+          header={<HomeHeader isVisible={isVisible} isHome />}
+          questionData={mockData}
           currentStep={currentStep}
-          setScrollElementState={setScrollElementState}
-          questionListRef={questionListRef}
-        />
+          onClickToTop={onClickToTop}
+          stepRefsInitialized={stepRefsInitialized}
+        >
+          {({ scrollElement }) => (
+            <ScrollHome
+              visibleRef={visibleRef}
+              userId={userId}
+              scrollElement={scrollElement}
+              questionData={mockData}
+              currentStep={currentStep}
+              setScrollElementState={setScrollElementState}
+              questionListRef={questionListRef}
+            />
+          )}
+        </ScrollLayout>
       )}
-    </ScrollLayout>
+    </>
   )
 }
