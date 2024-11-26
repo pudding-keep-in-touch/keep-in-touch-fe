@@ -46,7 +46,7 @@ export const ScrollLayout = ({
         className='relative flex flex-col w-full h-screen overflow-y-scroll scrollbar-hide'
       >
         {/* 질문 리스트 헤더  */}
-        {currentStep === 1 && (
+        {questionData !== undefined && currentStep === 1 && (
           <QuestionListHeader
             className={`sticky mb-[-8px] top-0 left-0 w-full z-10 shadow-custom-bottom transition-shadow duration-300 ease-in-out`}
           />

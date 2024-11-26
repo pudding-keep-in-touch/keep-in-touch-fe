@@ -76,7 +76,7 @@ export default function ScrollHome({
           </div>
         </div>
         {questionData ? (
-          <div className='flex flex-col mt-[52px] pb-[90px] bg-[#F6F7FC]'>
+          <div className='flex flex-col mt-[52px] bg-[#F6F7FC]'>
             {/* 질문 리스트  */}
             <QuestionListHeader />
             <QuestionsList
@@ -87,15 +87,18 @@ export default function ScrollHome({
             />
           </div>
         ) : (
-          <div className='flex flex-col mt-[52px] w-full h-[calc(100vh-7rem)] bg-[#F6F7FC] gap-8'>
-            <TypeQuestionCard userId={userId} isHome={true} />
-            <div className='w-full h-[100px] flex justify-center items-center'>
-              <Image
-                src='/emptyData.svg'
-                alt='empty data'
-                width={165}
-                height={92}
-              />
+          <div className='flex flex-col mt-[52px] w-full h-[calc(100vh-7rem)] bg-[#F6F7FC]'>
+            <QuestionListHeader />
+            <div className='w-full px-[24px] flex flex-col gap-8'>
+              <TypeQuestionCard userId={userId} isHome={true} />
+              <div className='w-full h-[100px] flex justify-center items-center'>
+                <Image
+                  src='/emptyData.svg'
+                  alt='empty data'
+                  width={165}
+                  height={92}
+                />
+              </div>
             </div>
           </div>
         )}
