@@ -2,30 +2,22 @@
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Message } from '@/features/messagebox/model/messagebox.types'
+import {
+  Message,
+  MessageResponse,
+} from '@/features/messagebox/model/messagebox.types'
 import { useGetMessageList } from '../_detail/api/detailQuery'
 import { useState } from 'react'
 
 export default function MessageList({
+  data,
   userId,
   messageType,
 }: {
+  data: MessageResponse
   userId: number
   messageType: MessageType
 }) {
-  const [cursor, setCursor] = useState<Date>()
-  const { data, error, isLoading } = useGetMessageList({
-    userId,
-    type: messageType,
-    cursor,
-    limit: 3,
-    order: 'desc',
-  })
-
-  if (isLoading) return <div>keep loading...</div>
-  if (error) return <div>error: fetching messages</div>
-  if (!data) return <div>no data</div>
-
   const dateFormat = (e: Date) => {
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
@@ -74,9 +66,10 @@ export default function MessageList({
                     </div>
                   </div>
                 </div>
-                {!message.readAt && (
-                  <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full'></div>
-                )}
+                {messageType === 'sent' ||
+                  (!message.readAt && (
+                    <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full'></div>
+                  ))}
               </div>
             </Link>
           </div>
