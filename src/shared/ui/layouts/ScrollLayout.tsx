@@ -1,3 +1,4 @@
+import { QuestionData } from '@/features/home/model/home.types'
 import { QuestionListHeader } from '@/features/home/ui/questionListHeader'
 import { ScrollToTopButton } from '@/features/home/ui/scrollToTopButton'
 import { Nav } from '@/shared/components/nav'
@@ -12,6 +13,8 @@ interface ScrollLayoutProps {
   children:
     | ((props: { scrollElement: HTMLElement | null }) => React.ReactNode)
     | React.ReactNode
+
+  questionData: QuestionData[] | undefined
   currentStep: number
   onClickToTop: () => void
   stepRefsInitialized: boolean
@@ -23,6 +26,7 @@ export const ScrollLayout = ({
   isVisible,
   header,
   children,
+  questionData,
   currentStep,
   onClickToTop,
   stepRefsInitialized,
@@ -53,10 +57,14 @@ export const ScrollLayout = ({
             : children}
         </div>
       </div>
-      <ScrollToTopButton
-        onClickToTop={onClickToTop}
-        stepRefsInitialized={stepRefsInitialized}
-      />
+
+      {questionData !== undefined && currentStep === 1 && (
+        <ScrollToTopButton
+          onClickToTop={onClickToTop}
+          stepRefsInitialized={stepRefsInitialized}
+        />
+      )}
+
       <Nav type='home' userId={userId} isNew={true} />
       <Toaster
         position='bottom-center'
