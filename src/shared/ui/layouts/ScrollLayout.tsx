@@ -41,7 +41,6 @@ export const ScrollLayout = ({
       <div
         ref={(el) => {
           setScrollElement(el)
-          console.log('scrollElement set to:', el)
         }}
         className='relative flex flex-col w-full h-screen overflow-y-scroll scrollbar-hide'
       >

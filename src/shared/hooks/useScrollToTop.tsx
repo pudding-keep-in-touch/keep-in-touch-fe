@@ -33,16 +33,10 @@ export const useHomeScrollToTopStep = ({
       !!stepRefs[HomeScrollToTopStep.QUESTIONLIST]?.current
     const scrollElementSet = !!scrollElement
 
-    console.log('Refs initialized:', {
-      questionListRefSet,
-      scrollElementSet,
-    })
-
     return questionListRefSet && scrollElementSet
   }, [stepRefs, scrollElement])
 
   const scrollEvent = React.useCallback(() => {
-    console.log('ScrollEvent called')
     if (!scrollElement) {
       console.warn('scrollElement is not set. Skipping scroll event.')
       return
@@ -53,17 +47,9 @@ export const useHomeScrollToTopStep = ({
 
     const scrollTop = scrollElement.scrollTop
 
-    console.log('Scroll calculation:', {
-      scrollTop,
-      topOffset,
-      questionListOffset,
-      result: scrollTop + topOffset < questionListOffset,
-    })
-
     // 스크롤이 최상단일 때
     if (scrollTop === 0) {
       if (currentStep !== 0) {
-        console.log('현재 스크롤이 최상단입니다. HEADER로 설정.')
         setCurrentStep(0)
       }
       return
@@ -72,7 +58,6 @@ export const useHomeScrollToTopStep = ({
     // `QUESTIONLIST` 영역이 최상단에 위치한 경우
     if (Math.abs(scrollTop - questionListOffset) <= 1) {
       if (currentStep !== 1) {
-        console.log('현재 QUESTIONLIST가 최상단에 위치해 있습니다.')
         setCurrentStep(1)
       }
       return
@@ -81,21 +66,17 @@ export const useHomeScrollToTopStep = ({
     // `QUESTIONLIST`보다 위에 있을 때
     if (scrollTop + topOffset < questionListOffset) {
       if (currentStep !== 0) {
-        console.log('현재 영역은 HEADER입니다.!')
         setCurrentStep(0)
       }
     } else {
       // `QUESTIONLIST` 아래에 있을 때
       if (currentStep !== 1) {
-        console.log('현재 영역은 QUESTIONLIST입니다.!')
         setCurrentStep(1)
       }
     }
   }, [scrollElement, stepRefs, topOffset, currentStep])
 
   const onClickToTop = React.useCallback(() => {
-    console.log('버튼 클릭! 현재 Step:', currentStep)
-
     if (!scrollElement) {
       console.error('scrollElement is null.')
       return
@@ -117,7 +98,6 @@ export const useHomeScrollToTopStep = ({
 
     // QUESTIONLIST 아래에 있을 경우 → QUESTIONLIST로 이동
     if (scrollTop > questionListOffset) {
-      console.log('QUESTIONLIST 아래에서 QUESTIONLIST로 이동')
       scrollElement.scrollTo({
         top: questionListOffset - topOffset,
         behavior: 'smooth',
@@ -127,7 +107,6 @@ export const useHomeScrollToTopStep = ({
 
     // QUESTIONLIST 영역에 있을 경우 → HEADER로 이동
     if (currentStep === 1) {
-      console.log('QUESTIONLIST에서 HEADER로 이동')
       scrollElement.scrollTo({
         top: 0, // 최상단으로 이동
         behavior: 'smooth',
@@ -135,30 +114,6 @@ export const useHomeScrollToTopStep = ({
       setCurrentStep(0)
     }
   }, [currentStep, scrollElement, stepRefs, topOffset])
-
-  // React.useEffect(() => {
-  //   if (!scrollElement) {
-  //     console.warn(
-  //       'scrollElement is not set yet. Skipping scroll event registration.'
-  //     )
-  //     return
-  //   }
-
-  //   const handleScrollEvent = () => {
-  //     console.log('Scroll event triggered.')
-  //     scrollEvent() // 실제 이벤트 핸들러 호출
-  //   }
-
-  //   console.log('Adding scroll event listener to:', scrollElement)
-  //   scrollElement.addEventListener('scroll', () => {
-  //     console.log('Scroll top value:', scrollElement.scrollTop)
-  //   })
-
-  //   return () => {
-  //     console.log('Removing scroll event listener from:', scrollElement)
-  //     scrollElement.removeEventListener('scroll', handleScrollEvent)
-  //   }
-  // }, [scrollElement, scrollEvent])
 
   React.useEffect(() => {
     if (!scrollElement) {
@@ -168,17 +123,13 @@ export const useHomeScrollToTopStep = ({
       return
     }
 
-    console.log('Adding scroll event listener to:', scrollElement)
-
     const handleScrollEvent = () => {
-      console.log('ScrollEvent called')
       scrollEvent() // scrollEvent 내부에서 로그 찍힘 여부 확인
     }
 
     scrollElement.addEventListener('scroll', handleScrollEvent)
 
     return () => {
-      console.log('Removing scroll event listener from:', scrollElement)
       scrollElement.removeEventListener('scroll', handleScrollEvent)
     }
   }, [scrollElement, scrollEvent])
