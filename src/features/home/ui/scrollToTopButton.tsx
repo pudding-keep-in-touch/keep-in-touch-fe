@@ -1,4 +1,3 @@
-import { HomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
 import Image from 'next/image'
 
 interface ScrollToTopButtonProps {

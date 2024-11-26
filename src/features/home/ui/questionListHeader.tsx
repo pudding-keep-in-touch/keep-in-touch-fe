@@ -27,9 +27,7 @@ export const QuestionListHeader = React.forwardRef<
             전체 공유하기
           </span>
         </div>
-        {/* <div className='flex justify-center items-center w-full h-fit'> */}
         <Image src='/icon_send.svg' alt='send icon' width={17} height={17} />
-        {/* </div> */}
       </button>
     </div>
   )

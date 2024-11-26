@@ -1,10 +1,8 @@
 import React, { LegacyRef } from 'react'
-import { TypeQuestionCard } from '@/features/home/ui/typeQuestionCard'
 import { QuestionsList } from '@/features/home/ui/questionsList'
 import { QuestionBanner } from '@/features/home/ui/questionBanner'
-import { HomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
 import Image from 'next/image'
-import { QuestionListHeader } from './questionListHeader'
+import { QuestionListHeader } from '@/features/home/ui/questionListHeader'
 
 const mockData = [
   {
@@ -125,14 +123,6 @@ export default function ScrollHome({
     setScrollElementState(scrollElement)
   }, [scrollElement])
 
-  React.useEffect(() => {
-    if (!questionListRef.current) {
-      console.warn('Refs are not initialized yet.')
-    }
-  }, [])
-
-  console.log('currentStep', currentStep)
-
   return (
     <div className='w-full h-full flex flex-col overflow-auto'>
       <div className='flex-grow w-full overflow-y-auto scrollbar-hide'>
@@ -153,10 +143,7 @@ export default function ScrollHome({
 
         <div className='flex flex-col mt-[52px] pb-[90px] bg-[#F6F7FC]'>
           {/* 질문 리스트  */}
-
-          <QuestionListHeader
-          // className={`${currentStep === 1 ? 'opacity-[100%]' : ''}`}
-          />
+          <QuestionListHeader />
           <QuestionsList
             ref={questionListRef}
             questionData={mockData}

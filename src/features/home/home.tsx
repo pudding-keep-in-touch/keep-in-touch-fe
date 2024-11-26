@@ -5,10 +5,8 @@ import React from 'react'
 import { HomeHeader } from '@/shared/components/homeHeader'
 
 import { useHomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
-import ScrollHome from './ui/scrollHome'
+import ScrollHome from '@/features/home/ui/scrollHome'
 import { ScrollLayout } from '@/shared/ui/layouts/ScrollLayout'
-import { QuestionListHeader } from './ui/questionListHeader'
-import clsx from 'clsx'
 
 interface HomeProps {
   userId: number

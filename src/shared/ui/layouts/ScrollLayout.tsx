@@ -1,7 +1,6 @@
 import { QuestionListHeader } from '@/features/home/ui/questionListHeader'
 import { ScrollToTopButton } from '@/features/home/ui/scrollToTopButton'
 import { Nav } from '@/shared/components/nav'
-import { HomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 
@@ -44,6 +43,7 @@ export const ScrollLayout = ({
         }}
         className='relative flex flex-col w-full h-screen overflow-y-scroll scrollbar-hide'
       >
+        {/* 질문 리스트 헤더  */}
         {currentStep === 1 && (
           <QuestionListHeader
             className={`sticky mb-[-8px] top-0 left-0 w-full z-10 shadow-md transition-shadow duration-300 ease-in-out`}
@@ -59,7 +59,7 @@ export const ScrollLayout = ({
         onClickToTop={onClickToTop}
         stepRefsInitialized={stepRefsInitialized}
       />
-      <Nav type='home' />
+      <Nav type='home' userId={userId} />
       <Toaster
         position='bottom-center'
         containerStyle={{
