@@ -8,7 +8,7 @@ import {
   MessageResponse,
 } from '@/features/messagebox/model/messagebox.types'
 
-export default function InboxList({
+export default function MessageList({
   data,
   userId,
   messageType,

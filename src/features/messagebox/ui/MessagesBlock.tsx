@@ -2,7 +2,7 @@
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 import { useState } from 'react'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import InboxList from './InboxList'
+import MessageList from '@/features/messagebox/ui/MessageList'
 
 export default function MessagesBlock({
   messageType,
@@ -31,7 +31,7 @@ export default function MessagesBlock({
           <div>({data?.receivedMessageCount || 0})</div>
         </h2>
       </div>
-      <InboxList data={data} userId={userId} messageType={messageType} />
+      <MessageList data={data} userId={userId} messageType={messageType} />
     </div>
   )
 }

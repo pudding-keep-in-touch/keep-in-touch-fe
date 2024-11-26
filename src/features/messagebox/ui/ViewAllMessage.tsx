@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 import { useState } from 'react'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import InboxList from './InboxList'
+import MessageList from '@/features/messagebox/ui/MessageList'
 
 // userId, userId: number,
 export default function ViewAllMessage({
@@ -49,7 +49,7 @@ export default function ViewAllMessage({
           </Link>
         </div>
         {data ? (
-          <InboxList data={data} messageType={'received'} userId={userId} />
+          <MessageList data={data} messageType={'received'} userId={userId} />
         ) : (
           <div className='flex flex-col items-center text-[#333D4B] pb-[162px] pt-[110px]'>
             <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
@@ -63,7 +63,7 @@ export default function ViewAllMessage({
       <div className='w-full pb-6 px-6'>
         <div className='h-[67px] w-full flex items-center justify-between'>
           <h2 className='font-semibold text-[18px] flex items-center'>
-            보낸 퐁 ({data?.receivedMessageCount || 0})
+            보낸 퐁 ({data?.sentMessageCount || 0})
           </h2>
           <Link
             href={`/messagebox/${userId}/sent`}
@@ -79,7 +79,7 @@ export default function ViewAllMessage({
           </Link>
         </div>
         {data ? (
-          <InboxList data={data} messageType={'sent'} userId={userId} />
+          <MessageList data={data} messageType={'sent'} userId={userId} />
         ) : (
           <div className='flex flex-col items-center text-[#333D4B] pb-[162px] pt-[110px]'>
             <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
