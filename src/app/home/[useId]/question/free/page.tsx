@@ -5,5 +5,5 @@ export default function QuestionDetailPage({
 }: {
   params: { questionId: number; userId: number }
 }) {
-  return <QuestionDetail questionId={questionId} userId={userId} isFree />
+  return <QuestionDetail questionId={questionId} userId={userId} />
 }

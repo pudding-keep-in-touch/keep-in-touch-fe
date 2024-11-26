@@ -1,3 +1,4 @@
+import { QuestionListHeader } from '@/features/home/ui/questionListHeader'
 import { ScrollToTopButton } from '@/features/home/ui/scrollToTopButton'
 import { Nav } from '@/shared/components/nav'
 import { HomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
@@ -30,9 +31,12 @@ export const ScrollLayout = ({
   const [scrollElement, setScrollElement] =
     React.useState<HTMLDivElement | null>(null)
 
+  console.log('테스트 currentStep', currentStep)
+
   return (
     <div className='relative w-full h-full flex flex-col'>
       {header}
+
       <div
         ref={(el) => {
           setScrollElement(el)
@@ -40,6 +44,11 @@ export const ScrollLayout = ({
         }}
         className='relative flex flex-col w-full h-screen overflow-y-scroll scrollbar-hide'
       >
+        {currentStep === 1 && (
+          <QuestionListHeader
+            className={`sticky mb-[-8px] top-0 left-0 w-full z-10 shadow-md transition-shadow duration-300 ease-in-out`}
+          />
+        )}
         <div className='absolute top-0 left-0 w-full'>
           {typeof children === 'function'
             ? children({ scrollElement })
@@ -50,7 +59,7 @@ export const ScrollLayout = ({
         onClickToTop={onClickToTop}
         stepRefsInitialized={stepRefsInitialized}
       />
-      <Nav />
+      <Nav type='home' />
       <Toaster
         position='bottom-center'
         containerStyle={{

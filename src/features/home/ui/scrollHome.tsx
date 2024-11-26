@@ -151,13 +151,18 @@ export default function ScrollHome({
           </div>
         </div>
 
-        <div className='flex flex-col mt-[52px] pb-[90px]'>
+        <div className='flex flex-col mt-[52px] pb-[90px] bg-[#F6F7FC]'>
           {/* 질문 리스트  */}
+
           <QuestionListHeader
-            ref={questionListRef}
-            className={`${currentStep === 1 ? 'sticky mb-[-8px] top-[50px] left-0 w-full z-10' : ''}`}
+          // className={`${currentStep === 1 ? 'opacity-[100%]' : ''}`}
           />
-          <QuestionsList questionData={mockData} isHome userId={userId} />
+          <QuestionsList
+            ref={questionListRef}
+            questionData={mockData}
+            isHome
+            userId={userId}
+          />
         </div>
       </div>
     </div>

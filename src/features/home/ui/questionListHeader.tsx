@@ -14,8 +14,7 @@ export const QuestionListHeader = React.forwardRef<
     <div
       ref={ref}
       className={clsx(
-        'w-full h-[50px] flex justify-between items-center px-[24px] bg-[#F6F7FC] z-10',
-
+        'w-full h-[50px] flex justify-between items-center px-[24px] bg-[#F6F7FC]',
         className
       )}
     >

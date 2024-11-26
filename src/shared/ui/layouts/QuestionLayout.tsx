@@ -60,7 +60,7 @@ export const QuestionLayout = ({
           },
         }}
       />
-      <Nav />
+      <Nav type='home' />
     </div>
   )
 }

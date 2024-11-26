@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { QuestionsCard } from '@/features/home/ui/questionsCard'
-import { TypeQuestionCard } from './typeQuestionCard'
+import { TypeQuestionCard } from '@/features/home/ui/typeQuestionCard'
 
 type QuestionDataType = {
   id: number
@@ -15,13 +15,12 @@ interface QuestionsListProps {
   userId: number
 }
 
-export const QuestionsList = ({
-  questionData,
-  isHome,
-  userId,
-}: QuestionsListProps) => {
+export const QuestionsList = React.forwardRef<
+  HTMLDivElement,
+  QuestionsListProps
+>(({ questionData, isHome, userId }, ref) => {
   return (
-    <div className='bg-[#F6F7FC] px-[24px]'>
+    <div ref={ref} className='px-[24px]'>
       {/* 자유 질문 */}
       <TypeQuestionCard userId={userId} isHome={true} />
 
@@ -37,4 +36,6 @@ export const QuestionsList = ({
       ))}
     </div>
   )
-}
+})
+
+QuestionsList.displayName = 'QuestionsList'

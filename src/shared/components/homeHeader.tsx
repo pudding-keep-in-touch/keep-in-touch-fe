@@ -10,9 +10,11 @@ export const HomeHeader = ({ isVisible, isHome }: HomeHeaderProps) => {
   const router = useRouter()
 
   return (
-    <div className='absolute top-0 left-0 w-full z-10'>
+    <div
+      className={`absolute top-0 left-0 w-full z-10 ${!isVisible && 'hidden'}`}
+    >
       <header
-        className={`flex-grow flex justify-between items-center w-full h-[60px] px-[19px] bg-transparent ${!isVisible && 'hidden'}`}
+        className={`flex-grow flex justify-between items-center w-full h-[60px] px-[19px] bg-transparent`}
       >
         {isHome ? (
           <div />
