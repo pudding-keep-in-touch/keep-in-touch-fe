@@ -30,8 +30,6 @@ export const ScrollLayout = ({
   const [scrollElement, setScrollElement] =
     React.useState<HTMLDivElement | null>(null)
 
-  console.log('테스트 currentStep', currentStep)
-
   return (
     <div className='relative w-full h-full flex flex-col'>
       {header}
@@ -46,7 +44,7 @@ export const ScrollLayout = ({
         {/* 질문 리스트 헤더  */}
         {currentStep === 1 && (
           <QuestionListHeader
-            className={`sticky mb-[-8px] top-0 left-0 w-full z-10 shadow-md transition-shadow duration-300 ease-in-out`}
+            className={`sticky mb-[-8px] top-0 left-0 w-full z-10 shadow-custom-bottom transition-shadow duration-300 ease-in-out`}
           />
         )}
         <div className='absolute top-0 left-0 w-full'>
@@ -59,7 +57,7 @@ export const ScrollLayout = ({
         onClickToTop={onClickToTop}
         stepRefsInitialized={stepRefsInitialized}
       />
-      <Nav type='home' userId={userId} />
+      <Nav type='home' userId={userId} isNew={true} />
       <Toaster
         position='bottom-center'
         containerStyle={{
