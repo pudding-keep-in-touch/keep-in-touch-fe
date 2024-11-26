@@ -26,7 +26,7 @@ export default function MessageList({
               href={`/messagebox/${userId}/${messageType}/${message.messageId}`}
               className='flex items-center gap-[9px]'
             >
-              {message.readAt ? (
+              {message.readAt instanceof Date ? (
                 <MessageItem messageId={Number(message.messageId)} />
               ) : (
                 <div className='relative bg-white w-full rounded-2xl flex justify-between h-[106px] px-[20px] py-[14px] gap-[5px] mb-[12px]'>
