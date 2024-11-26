@@ -12,3 +12,9 @@ export interface HomeData {
   friendUser: FriendUser | null
   emotions: EmotionOption[] | null
 }
+
+export interface QuestionData {
+  id: number
+  title: string
+  description: string
+}
