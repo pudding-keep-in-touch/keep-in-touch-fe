@@ -31,7 +31,7 @@ export default function MessagesBlock({
           <div>({data?.receivedMessageCount || 0})</div>
         </h2>
       </div>
-      <MessageList data={data} userId={userId} messageType={messageType} />
+      <MessageList userId={userId} messageType={messageType} />
     </div>
   )
 }

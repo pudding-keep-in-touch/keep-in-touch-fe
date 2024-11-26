@@ -24,6 +24,7 @@ export default function ViewAllMessage({
     limit: 3,
     order: 'desc',
   })
+  console.log(messageType)
 
   if (isLoading) return <div>keep loading...</div>
   if (error) return <div>error: fetching messages</div>
@@ -52,7 +53,7 @@ export default function ViewAllMessage({
           )}
         </div>
         {data ? (
-          <MessageList data={data} messageType={'received'} userId={userId} />
+          <MessageList messageType={'received'} userId={userId} />
         ) : (
           <div className='flex flex-col items-center text-[#333D4B] pb-[162px] pt-[110px]'>
             <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
@@ -84,7 +85,7 @@ export default function ViewAllMessage({
           )}
         </div>
         {data ? (
-          <MessageList data={data} messageType={'sent'} userId={userId} />
+          <MessageList messageType={'sent'} userId={userId} />
         ) : (
           <div className='flex flex-col items-center text-[#333D4B] pb-[162px] pt-[110px]'>
             <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
