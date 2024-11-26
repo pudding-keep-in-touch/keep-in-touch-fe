@@ -13,6 +13,7 @@ interface WriteInputProps {
   type: string
   maxLength: number
   setIsError: React.Dispatch<React.SetStateAction<boolean>>
+  desc?: string
 }
 
 export default function WriteInput({
@@ -20,6 +21,7 @@ export default function WriteInput({
   type,
   maxLength,
   setIsError,
+  desc,
 }: WriteInputProps) {
   const { watch, register } = useFormContext<MessageFormValues>()
   const { message } = watch()
@@ -47,8 +49,6 @@ export default function WriteInput({
     }
   }, [error])
 
-  console.log('error', error)
-
   return (
     <div className='w-full'>
       <Textarea
@@ -59,7 +59,7 @@ export default function WriteInput({
           backgroundColorStyle,
           inputTypeStyle
         )}
-        placeholder='글을 입력해 주세요'
+        placeholder={desc ? desc : '글을 입력해 주세요'}
         inputMode='text'
         maxLength={maxLength}
         minLength={minLength}

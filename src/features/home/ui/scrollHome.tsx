@@ -72,7 +72,7 @@ export default function ScrollHome({
               height={100}
             />
             {/* 배너 */}
-            <QuestionBanner randomMockData={randomMockData} />
+            <QuestionBanner userId={userId} randomMockData={randomMockData} />
           </div>
         </div>
         {questionData ? (
