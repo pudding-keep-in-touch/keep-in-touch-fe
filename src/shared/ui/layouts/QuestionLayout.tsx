@@ -24,14 +24,12 @@ export const QuestionLayout = ({
     if (copyLink && !hasCopied.current) {
       toast(
         <div className='w-full flex items-center space-x-3 relative justify-center'>
-          <div className='absolute left-1 gap-3 flex items-center'>
-            <img
-              src='/icon-check-fill.svg'
-              alt='check icon fill'
-              className='w-5 h-5'
-            />
-            <p>링크가 복사되었습니다.</p>
-          </div>
+          <img
+            src='/icon-check-fill.svg'
+            alt='check icon fill'
+            className='w-5 h-5'
+          />
+          <p>링크가 복사되었습니다.</p>
         </div>
       )
       localStorage.removeItem('link_copy') // 바로 삭제
@@ -60,7 +58,7 @@ export const QuestionLayout = ({
           },
         }}
       />
-      <Nav type='home' />
+      <Nav type='home' userId={userId} isNew={false} />
     </div>
   )
 }
