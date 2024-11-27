@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { getLoginUrl } from '@/shared/config/env'
 import MessageSendStep from '../../ui/step'
 
-export default function SelectBoard({ userId }: { userId: number }) {
+export default function SelectBoard({ userId }: { userId: string }) {
   // const accessToken = localStorage.getItem('keep_in_touch_token')
   const router = useRouter()
 

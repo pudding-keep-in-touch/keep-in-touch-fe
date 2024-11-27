@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
 import Link from 'next/link'
 
-export default function MessageSendNextButton({ userId }: { userId: number }) {
+export default function MessageSendNextButton({ userId }: { userId: string }) {
   const searchParams = useSearchParams()
 
   const variety = searchParams.get('variety')
