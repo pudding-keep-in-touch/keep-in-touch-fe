@@ -1,4 +1,5 @@
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import InboxLayout from '@/features/messagebox/ui/InboxLayout'
 import ReactionPage from '@/features/messagebox/ui/ReactionPage'
 
 export default function Page({
@@ -8,6 +9,8 @@ export default function Page({
 }) {
   // /reaction, /report, /hide 제외 나머지 페이지 예외 처리 필요
   return (
-    <ReactionPage messageType={type} userId={userId} messageId={messageId} />
+    <InboxLayout title={'반응 보내기'}>
+      <ReactionPage messageType={type} userId={userId} messageId={messageId} />
+    </InboxLayout>
   )
 }
