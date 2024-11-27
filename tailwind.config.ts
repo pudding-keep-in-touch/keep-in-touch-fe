@@ -16,6 +16,10 @@ const config = {
       padding: '2rem',
     },
     extend: {
+      boxShadow: {
+        'custom-top': '0px -2px 6px rgba(0, 0, 0, 0.05)', // nav 상단 그림자
+        'custom-bottom': '0px 2px 6px rgba(0, 0, 0, 0.08)', // nav 하단 그림자
+      },
       screens: {
         '2xl': '1400px',
         'h-815': { raw: '(max-height: 815px)' }, // 높이 기준 브레이크포인트 추가

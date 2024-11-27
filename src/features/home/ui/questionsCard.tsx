@@ -4,11 +4,10 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface QuestionsCardProps {
-  questionId?: number
+  questionId?: string
   userId: number
   title: string
   description: React.ReactElement | string
-  isFreeQuestion: boolean
   isHome: boolean
 }
 
@@ -17,15 +16,13 @@ export const QuestionsCard = ({
   userId,
   title,
   description,
-  isFreeQuestion,
   isHome,
 }: QuestionsCardProps) => {
   const router = useRouter()
 
-  const onClickMoveHome = (questionId: number) => {
-    if (!isFreeQuestion) {
-      router.push(`/home/${userId}/question/${questionId}`)
-    }
+  const onClickMoveHome = (questionId: string) => {
+    router.push(`/home/${userId}/question/${questionId}`)
+
     // TODO : 자유 질문이면 링크 이동처리
   }
   return (
@@ -35,7 +32,7 @@ export const QuestionsCard = ({
     >
       <div className='flex justify-center items-center w-full h-[44px] bg-gray-1'>
         <h3 className='text-gray-4 text-sm font-semibold'>{title}</h3>
-        {isHome && !isFreeQuestion && (
+        {isHome && (
           <button className='absolute right-4'>
             <img src='/icon_hide.svg' />
           </button>
