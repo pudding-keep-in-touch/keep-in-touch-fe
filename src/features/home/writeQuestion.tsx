@@ -12,6 +12,7 @@ interface WriteQuestionProps {
 }
 
 export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
+  const [currentDescription, setCurrentDescription] = React.useState('')
   const [toggle, setToggle] = React.useState(false)
   const [isError, setIsError] = React.useState(true)
 
@@ -47,6 +48,15 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
     setToggle((prev) => !prev)
   }
 
+  React.useEffect(() => {
+    const desc =
+      typeof window !== 'undefined' ? localStorage.getItem('description') : null
+
+    if (desc) {
+      setCurrentDescription(desc)
+    }
+  }, [])
+
   return (
     <div className='w-full h-screen flex flex-col relative'>
       <BackHeader title='질문 만들기' />
@@ -62,6 +72,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
                 type='question'
                 maxLength={140}
                 setIsError={setIsError}
+                desc={currentDescription}
               />
             </MessageFormProvider>
           </div>

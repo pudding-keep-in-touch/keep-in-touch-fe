@@ -71,4 +71,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .swiper-pagination {
+    @apply absolute left-0 w-full flex justify-center;
+  }
+
+  .swiper-pagination-bullet {
+    @apply !bg-gray-2 w-3 h-3 rounded-full opacity-50;
+  }
+
+  .swiper-pagination-bullet-active {
+    @apply !bg-[#35B6FF] opacity-100 transition-all;
+  }
 }

@@ -6,7 +6,7 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   return (
-    <div className='flex flex-col min-h-screen items-center bg-gradient-to-b from-sky-100 to-sky-500'>
+    <div className='w-full min-h-screen flex flex-col items-center bg-white border-l border-r border-[#D0E4FF] box-border'>
       {children}
     </div>
   )

@@ -1,58 +1,79 @@
 'use client'
 
-import { QuestionsCard } from '@/features/home/ui/questionsCard'
-import { QuestionsList } from '@/features/home/ui/questionsList'
-import { QuestionBanner } from '@/features/home/ui/questionBanner'
-import { QuestionLayout } from '@/shared/ui/layouts/QuestionLayout'
-
 import useIsVisible from '@/shared/hooks/useIsVisible'
 import React from 'react'
+import { HomeHeader } from '@/shared/components/homeHeader'
+
+import { useHomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
+import ScrollHome from '@/features/home/ui/scrollHome'
+import { ScrollLayout } from '@/shared/ui/layouts/ScrollLayout'
 
 const mockData = [
   {
-    id: 1,
+    questionId: '1',
     title: '질문',
     description: '나에게 하고 싶었던 말이 있다면?',
   },
-
   {
-    id: 2,
+    questionId: '2',
     title: '질문',
     description: '그동안 하지 못했던 말을 해줘! 아무말이라도 써주셈요',
   },
-
   {
-    id: 3,
+    questionId: '3',
     title: '질문',
     description:
       '이건 테스트인데요 아무말이나 해주면 걍 답변어쩌구 저쩌구 문장 길이를 테스트하기 위한 겁니다요',
   },
-]
-
-const randomMockData = [
   {
-    id: 1,
-    description: '내 첫인상 어땠어?',
+    questionId: '4',
+    title: '질문',
+    description: '너희가 가장 기억하는 나의 모습은 어떤 모습일까?',
   },
-
   {
-    id: 2,
-    description: '기억에 남는 나와의 에피소드는?',
+    questionId: '5',
+    title: '질문',
+    description: '나와 함께한 가장 즐거운 순간은 언제였어?',
   },
-
   {
-    id: 3,
-    description: '나랑 친구하는 이유가 뭐야?',
+    questionId: '6',
+    title: '질문',
+    description: '나와의 추억 중 가장 웃겼던 일은 뭐였을까?',
   },
-
   {
-    id: 4,
-    description: '내 장점 알려줘!',
+    questionId: '7',
+    title: '질문',
+    description: '내가 너희들에게 어떤 존재였는지 궁금해!',
   },
-
   {
-    id: 5,
-    description: '나한테 서운한 적 있어?',
+    questionId: '8',
+    title: '질문',
+    description: '내가 고치면 좋겠다고 생각한 점이 있다면?',
+  },
+  {
+    questionId: '9',
+    title: '질문',
+    description: '요즘 내가 가장 많이 웃었던 이유는 뭘까?',
+  },
+  {
+    questionId: '10',
+    title: '질문',
+    description: '너희가 나에게 고맙다고 느꼈던 순간이 있다면 언제야?',
+  },
+  {
+    questionId: '11',
+    title: '질문',
+    description: '우리의 우정을 한마디로 표현한다면 뭐라고 말할래?',
+  },
+  {
+    questionId: '12',
+    title: '질문',
+    description: '내가 가장 잘하는 점은 뭐라고 생각해?',
+  },
+  {
+    questionId: '13',
+    title: '질문',
+    description: '내가 바뀌어서 너희가 놀랐던 점이 있다면?',
   },
 ]
 
@@ -61,60 +82,52 @@ interface HomeProps {
 }
 
 export default function Home({ userId }: HomeProps) {
+  const [domLoaded, setDomLoaded] = React.useState(false)
+
   const [visibleRef, isVisible] = useIsVisible({
     options: { threshold: 0, rootMargin: '0px' },
     initialState: false,
   })
 
+  const [scrollElementState, setScrollElementState] =
+    React.useState<HTMLElement | null>(null)
+
+  const { currentStep, questionListRef, onClickToTop, stepRefsInitialized } =
+    useHomeScrollToTopStep({
+      scrollElement: scrollElementState,
+      topOffset: 50, // Header 높이
+    })
+
+  React.useEffect(() => {
+    setDomLoaded(true)
+  }, [])
+
   return (
-    <QuestionLayout isVisible={isVisible} isHome userId={userId}>
-      <div className='w-full h-screen flex flex-col overflow-hidden absolute'>
-        <div className='flex-grow w-full overflow-auto scrollbar-hide'>
-          {/* 썸네일 */}
-          <div className='w-full relative'>
-            <img ref={visibleRef} src='/home_banner_normal.svg' alt='bg img' />
-            {/* 배너 */}
-            <QuestionBanner randomMockData={randomMockData} />
-          </div>
-
-          <div className='flex flex-col px-[24px] mt-[52px]'>
-            {/* 전체공유하기 */}
-            <div className='flex flex-col justify-start px-5 py-[18px] w-full h-[86px] bg-[#35B6FF] bg-opacity-30 rounded-2xl relative'>
-              <h3 className='text-[#0788D1] text-lg font-bold leading-[1.4] tracking-tightest'>
-                모든 질문 공유하기
-              </h3>
-              <p className='text-[#6B7684] text-[15px] font-medium leading-[1.4] tracking-tightest'>
-                숨긴 질문을 제외한 모든 질문을 공유할 수 있어요!
-              </p>
-
-              <img
-                src='/icon_send.svg'
-                className='absolute right-4'
-                alt='send icon'
-              />
-            </div>
-
-            {/* 자유 질문 */}
-            <QuestionsCard
+    <>
+      {domLoaded && (
+        <ScrollLayout
+          isVisible={isVisible}
+          isHome
+          userId={userId}
+          header={<HomeHeader isVisible={isVisible} isHome />}
+          questionData={mockData}
+          currentStep={currentStep}
+          onClickToTop={onClickToTop}
+          stepRefsInitialized={stepRefsInitialized}
+        >
+          {({ scrollElement }) => (
+            <ScrollHome
+              visibleRef={visibleRef}
               userId={userId}
-              title='자유 질문'
-              description={
-                <>
-                  질문을 쓰지 않은 글쓰기 양식입니다. <br />
-                  자유롭게 쪽지를 받을 수 있어요!
-                </>
-              }
-              isFreeQuestion
-              isHome
+              scrollElement={scrollElement}
+              questionData={mockData}
+              currentStep={currentStep}
+              setScrollElementState={setScrollElementState}
+              questionListRef={questionListRef}
             />
-          </div>
-
-          {/* 질문 리스트  */}
-          <div className='flex-grow w-full overflow-auto px-[24px] space-y-4 pb-[100px]'>
-            <QuestionsList questionData={mockData} isHome userId={userId} />
-          </div>
-        </div>
-      </div>
-    </QuestionLayout>
+          )}
+        </ScrollLayout>
+      )}
+    </>
   )
 }

@@ -10,9 +10,11 @@ export const HomeHeader = ({ isVisible, isHome }: HomeHeaderProps) => {
   const router = useRouter()
 
   return (
-    <div className='absolute top-0 left-0 w-full z-10'>
+    <div
+      className={`absolute top-0 left-0 w-full z-10 ${isHome && !isVisible ? 'hidden' : ''}`}
+    >
       <header
-        className={`flex-grow flex justify-between items-center w-full h-[60px] px-[19px] ${isVisible ? 'bg-transparent' : 'bg-white'}`}
+        className={`flex-grow flex justify-between items-center w-full h-[60px] px-[19px] ${isHome ? 'bg-transparent' : 'bg-white'}`}
       >
         {isHome ? (
           <div />
@@ -22,10 +24,12 @@ export const HomeHeader = ({ isVisible, isHome }: HomeHeaderProps) => {
             onClick={() => router.back()}
           />
         )}
-        <img
-          className={`${isHome && 'translate-x-3'}`}
-          src='/header_title.svg'
-        />
+        {isHome && (
+          <img
+            className={`${isHome && 'translate-x-3'}`}
+            src='/header_title.svg'
+          />
+        )}
         <button className='w-6'>
           <img src='/header_more.svg' />
         </button>
