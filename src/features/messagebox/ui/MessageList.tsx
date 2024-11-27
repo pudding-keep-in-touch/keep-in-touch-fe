@@ -55,11 +55,9 @@ export default function MessageList({
                         : '퐁을 보냈어요!'}
                     </div>
                     <div className='text-gray-3 text-[14px] h-[20px] leading-[130%] tracking-[-0.75px]'>
-                      {messageType === 'received'
-                        ? message.readAt instanceof Date
-                          ? `${message.content}`
-                          : '소중한 진심을 확인해보세요'
-                        : `${message.content}`}
+                      {messageType === 'received' && message.readAt === null
+                        ? '소중한 진심을 확인해보세요'
+                        : message.content}
                     </div>
                     <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px] mt-1'>
                       {message.createdAt && dateFormat(message.createdAt)}
