@@ -33,7 +33,7 @@ export default function QuestionListPage() {
   return (
     <>
       <div className='flex flex-col min-h-screen items-center'>
-        <div className='mt-[80px] flex flex-col w-[100%] items-center text-center'>
+        <div className='mt-[40px] flex flex-col w-[100%] items-center text-center'>
           <Image
             src='/questionsKeepInTouchLogo.svg'
             alt='questionsKeepInTouchLogo'
