@@ -1,6 +1,6 @@
-import InboxList from '@/features/messagebox/ui/InboxList'
 import InboxLayout from '@/features/messagebox/ui/InboxLayout'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import MessagesBlock from '@/features/messagebox/ui/MessagesBlock'
 
 export default function Page({
   params: { type, userId },
@@ -8,9 +8,11 @@ export default function Page({
   params: { type: MessageType; userId: number }
 }) {
   // userId={userId}
+  // messageType이 아닌 url 접근 처리 필요
+
   return (
-    <InboxLayout>
-      <InboxList messageType={type} />
+    <InboxLayout title={'My 퐁'}>
+      <MessagesBlock messageType={type} userId={userId} />
     </InboxLayout>
   )
 }
