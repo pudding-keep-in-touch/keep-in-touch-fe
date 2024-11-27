@@ -4,6 +4,7 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 import Link from 'next/link'
 import QuestionBox from '@/features/messagebox/_detail/ui/component/QuestionBox'
 import MessageBoard from '@/features/messagebox/_detail/ui/component/MessageBoard'
+import Tooltip from './Tooltip'
 
 export default function MessageDetail({
   userId,
@@ -21,25 +22,26 @@ export default function MessageDetail({
   if (!data) return null
 
   return (
-    <div className='w-full flex flex-col text-black gap-4'>
-      <QuestionBox content={data.question.content} />
+    <div className='w-full h-full flex flex-col justify-center items-center text-black gap-4'>
+      <QuestionBox content={data.data.question.content} />
       <MessageBoard
-        receiverNickname={data.receiverNickname}
-        content={data.content}
+        receiverNickname={data.data.receiverNickname}
+        content={data.data.content}
       />
-
-      {messageType === 'received' && data.reactions.length === 0 ? (
-        <div className='fixed bottom-0'>
-          <Link
-            href={`/messagebox/${userId}/${messageType}/${messageId}/reaction`}
-            className='h-fit p-4 bg-black text-white rounded-2xl font-bold mt-80 w-full'
-          >
-            반응보내기
-          </Link>
+      {messageType === 'received' && data.data.reactions?.length === 0 ? (
+        <div className='fixed flex w-full justify-center items-center bottom-0 pb-[10px] max-w-[390px] z-10 mr-auto ml-auto'>
+          <Tooltip>
+            <Link
+              href={`/messagebox/${userId}/${messageType}/${messageId}/reaction`}
+              className='h-fit p-4 bg-black text-white rounded-2xl font-bold w-full flex justify-center items-center'
+            >
+              반응 보내기
+            </Link>
+          </Tooltip>
         </div>
       ) : (
         <div className='w-full flex flex-wrap gap-[8px]'>
-          {data.reactions.map((reaction) => (
+          {data.data.reactions?.map((reaction) => (
             <div key={reaction.reactionId} className='flex-none'>
               <div className='w-full p-[12px] h-[35px] bg-white bg-opacity-90 rounded-2xl flex items-center border-[0.5px] border-gray-2 gap-[4px]'>
                 <div>{reaction.emoji}</div>
