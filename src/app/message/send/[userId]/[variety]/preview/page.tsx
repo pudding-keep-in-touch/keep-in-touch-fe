@@ -8,7 +8,7 @@ import { MessageFormValues } from '@/features/message/_send/model/formSchema'
 export default function Page({
   params: { userId },
 }: {
-  params: { userId: number }
+  params: { userId: string }
 }) {
   const { getValues } = useFormContext<MessageFormValues>()
   const router = useRouter()

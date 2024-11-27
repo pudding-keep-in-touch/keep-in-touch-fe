@@ -7,7 +7,7 @@ import {
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 
-export default function MessageSendPreview({ userId }: { userId: number }) {
+export default function MessageSendPreview({ userId }: { userId: string }) {
   const params = useParams<{ variety: MessageVariety }>()
   const { preview } = getVarietyData(params.variety)
 

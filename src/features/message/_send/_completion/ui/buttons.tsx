@@ -10,7 +10,7 @@ import {
 
 interface MessageSendButtonsProps {
   variety: string
-  userId: number
+  userId: string
 }
 
 export default function MessageSendButtons({

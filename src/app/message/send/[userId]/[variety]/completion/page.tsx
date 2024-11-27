@@ -5,7 +5,7 @@ import MessageSendStep from '@/features/message/_send/ui/step'
 export default function Page({
   params: { variety, userId },
 }: {
-  params: { variety: string; userId: number }
+  params: { variety: string; userId: string }
 }) {
   return (
     <>
