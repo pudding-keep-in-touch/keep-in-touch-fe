@@ -13,8 +13,10 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const router = useRouter()
-  //todo userID 추가
-  // const params = useParams<{ variety: MessageVariety; userId: string }>()
+  //todo userNickname 추가, 현재 임시값
+  // const params = useParams<{ userNickname: string }>()
+  const userNickname = 'luna'
+
   const pathname = usePathname()
 
   const makeBgClass = pathname.endsWith('/preview')
@@ -35,11 +37,12 @@ export default function Layout({ children }: Props) {
             onClick={() => router.back()}
           />
 
-          {/* {!pathname.endsWith('/preview') && (
+          {!pathname.endsWith('/preview') && (
             <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-              {`To. ${params.userId}에게`}
+              {/* {`To. ${params.userNickname}에게`} */}
+              {`To. ${userNickname}에게`}
             </h1>
-          )} */}
+          )}
         </header>
         <MessageFormProvider>{children}</MessageFormProvider>
       </div>
