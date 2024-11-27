@@ -6,6 +6,7 @@ import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import WriteInput from '@/features/home/ui/writeInput'
 import React from 'react'
 import CompleteButton from './ui/completeButton'
+import Image from 'next/image'
 
 interface WriteQuestionProps {
   userId: number
@@ -91,9 +92,14 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
             {!toggle ? (
               <button
                 onClick={onClickToggle}
-                className='flex w-[159px] py-2 w-380:w-full h-[47px] justify-center items-center px-4 bg-gray-1 rounded-2xl gap-[13px]'
+                className='flex w-[159px] py-2 w-380:w-full h-[47px] justify-between items-center px-4 bg-gray-1 rounded-2xl'
               >
-                <img src='/icon_show.svg' alt='show icon' />
+                <Image
+                  src='/icon_show.svg'
+                  alt='show icon'
+                  width={30}
+                  height={30}
+                />
                 <span className='font-medium text-[14px] leading-[22px] tracking-[-0.43px] text-gray-3'>
                   이 질문 숨기기
                 </span>
@@ -101,9 +107,14 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
             ) : (
               <button
                 onClick={onClickToggle}
-                className='flex w-[198px] py-2 w-380:w-full h-[47px] justify-center items-center px-4 bg-[#C5C5C5] rounded-2xl gap-[13px]'
+                className='flex w-[198px] py-2 w-380:w-full h-[47px] justify-between items-center px-4 bg-[#C5C5C5] rounded-2xl'
               >
-                <img src='/icon_hide.svg' alt='hide icon' />
+                <Image
+                  src='/icon_hide.svg'
+                  alt='hide icon'
+                  width={30}
+                  height={30}
+                />
                 <span className='font-medium text-[14px] leading-[22px] tracking-[-0.43px] text-gray-3'>
                   숨김 처리된 질문입니다
                 </span>

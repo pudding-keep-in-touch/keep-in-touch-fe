@@ -1,5 +1,6 @@
 import { HomeHeader } from '@/shared/components/homeHeader'
 import { Nav } from '@/shared/components/nav'
+import Image from 'next/image'
 import React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
@@ -24,10 +25,12 @@ export const QuestionLayout = ({
     if (copyLink && !hasCopied.current) {
       toast(
         <div className='w-full flex items-center space-x-3 relative justify-center'>
-          <img
+          <Image
             src='/icon-check-fill.svg'
             alt='check icon fill'
             className='w-5 h-5'
+            width={20}
+            height={20}
           />
           <p>링크가 복사되었습니다.</p>
         </div>
