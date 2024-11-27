@@ -38,7 +38,7 @@ export default function QuestionPage() {
             key={question.questionId}
             questionId={question.questionId}
             content={question.content}
-            onClick={handleQuestionClick}
+            onQuestionClick={handleQuestionClick}
           />
 
           <Button

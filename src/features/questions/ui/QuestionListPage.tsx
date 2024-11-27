@@ -7,12 +7,10 @@ import QuestionBox from '@/shared/components/QuestionBox'
 import { questions } from '@/entities/questions/questionData'
 import { useState } from 'react'
 
-const devUrl = `https://dev-fe.keep-in-touch.me/`
-
 export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
-  const [userId, setUserId] = useState<string | null>(null)
+  //   const [userId, setUserId] = useState<string | null>(null)
 
   //todo 로그인 state추가
 
@@ -30,11 +28,8 @@ export default function QuestionListPage() {
   }
 
   const handleTypeMessageClick = () => {
-    // 자유질문 페이지로 이동할 때 임시 userId를 URL에 포함하여 전달
-    const tempUserId = '1' // 임시 userId (테스트용)
-    setUserId(tempUserId) // state 업데이트
-    // `userId`는 즉시 사용되면 안 되므로 tempUserId를 직접 전달
-    router.push(`/questions/freeQuestion`)
+    const userId = '1' // 임시 userId (테스트용)
+    router.push(`/message/send/${userId}/select`)
   }
 
   return (
@@ -56,9 +51,10 @@ export default function QuestionListPage() {
           {/* 자유질문 */}
           <>
             <QuestionBox
+              key={99}
               questionId={'99'}
               variant='custom'
-              onClick={handleTypeMessageClick}
+              onTypeClick={handleTypeMessageClick}
             />
 
             {questions.map((question) => (
@@ -66,7 +62,7 @@ export default function QuestionListPage() {
                 key={question.questionId}
                 questionId={question.questionId}
                 content={question.content}
-                onClick={handleQuestionClick}
+                onQuestionClick={handleQuestionClick}
               />
             ))}
           </>
