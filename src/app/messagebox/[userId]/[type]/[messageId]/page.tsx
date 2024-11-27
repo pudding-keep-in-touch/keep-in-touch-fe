@@ -4,6 +4,7 @@ import MessageDetail from '@/features/messagebox/ui/MessageDetail'
 import React, { useState } from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Page({
   params: { userId, type, messageId },
@@ -12,7 +13,7 @@ export default function Page({
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
-    setIsOpen(true)
+    setIsOpen((e) => !e)
   }
 
   return (
@@ -22,10 +23,18 @@ export default function Page({
           <ChevronLeftIcon className='w-6 h-6 cursor-pointer' />
           <div className='flex flex-col items-end'>
             <button type='button' onClick={openModal}>
-              <img src='/header_more.svg' />
+              <Image
+                src='/header_more.svg'
+                alt='header modal button'
+                width={5}
+                height={5}
+              />
             </button>
             {isOpen && (
-              <div className=' bg-black w-[100px] h-[56px] rounded-2xl text-white'>
+              <div
+                onClick={openModal}
+                className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
+              >
                 <Link
                   href={`/messagebox/${userId}/${type}/${messageId}/report`}
                 >
