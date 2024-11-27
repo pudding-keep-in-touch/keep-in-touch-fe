@@ -7,18 +7,25 @@ interface QuestionBoxProps {
   questionId?: string
   content?: string
   variant?: QuestionBoxVariant
-  onClick?: (questionId: string, content: string) => void
+  userId?: string
+  onQuestionClick?: (questionId: string, content: string) => void
+  onTypeClick?: (userId: string) => void
 }
 
 const QuestionBox: React.FC<QuestionBoxProps> = ({
   questionId,
   content,
+  userId,
   variant = 'default',
-  onClick,
+  onQuestionClick,
+  onTypeClick,
 }) => {
   const handleClick = () => {
-    if (onClick) {
-      onClick(questionId || '', content || '')
+    if (onQuestionClick) {
+      onQuestionClick(questionId || '', content || '')
+    }
+    if (onTypeClick) {
+      onTypeClick(userId || '')
     }
   }
 
