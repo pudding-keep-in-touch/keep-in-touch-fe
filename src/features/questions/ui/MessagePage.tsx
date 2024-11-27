@@ -11,15 +11,18 @@ import { useEffect, useRef, useState } from 'react'
 export default function MessagePage() {
   const queryClient = useQueryClient()
   const divRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile() // 모바일 여부를 확인하는 훅 사용
 
   useEffect(() => {
+    if (!isMobile) return // 모바일에서만 동작하도록 설정
+
     const adjustButtonPosition = () => {
       if (divRef.current && window.visualViewport) {
         const viewportHeight = window.visualViewport.height || 0
-        const scrollY = window.scrollY || 0
+        const keyboardHeight = window.innerHeight - viewportHeight // 키보드 높이 계산
 
-        // 버튼 위치를 키보드 위로 이동 (스크롤 + 뷰포트 높이 계산)
-        divRef.current.style.bottom = `${scrollY + window.innerHeight - viewportHeight}px`
+        // 버튼 위치를 키보드 바로 위로 설정
+        divRef.current.style.bottom = `${keyboardHeight}px`
       }
     }
 
@@ -35,13 +38,15 @@ export default function MessagePage() {
     return () => {
       window.visualViewport?.removeEventListener('resize', adjustButtonPosition)
     }
-  }, [])
+  }, [isMobile]) // 모바일 여부가 변경될 때마다 실행
 
   useEffect(() => {
+    if (!isMobile) return // 모바일에서만 동작하도록 설정
+
     const textarea = document.querySelector('textarea')
 
     const handleFocus = () => {
-      divRef.current!.style.bottom = '300px' // 예상 키보드 높이
+      divRef.current!.style.bottom = '30px' // 예상 키보드 높이
     }
 
     const handleBlur = () => {
@@ -55,7 +60,7 @@ export default function MessagePage() {
       textarea?.removeEventListener('focus', handleFocus)
       textarea?.removeEventListener('blur', handleBlur)
     }
-  }, [])
+  }, [isMobile]) // 모바일 여부가 변경될 때마다 실행
 
   const selectedQuestion = queryClient.getQueryData<{
     questionId: string
@@ -85,16 +90,13 @@ export default function MessagePage() {
 
       <MessageInput />
 
-      {/* <ReplyNextButton content={selectedQuestion.content}/> */}
       <div
         ref={divRef}
-        className='fixed left-0 w-full px-4 transition-all duration-300'
-        style={{ bottom: '0px' }} // 기본 위치는 화면 하단
+        className='fixed w-full max-w-[24rem] px-4 transition-all duration-300'
+        style={{ bottom: '12px' }} // 기본 위치는 화면 하단 고정
       >
         <ReplyNextButton />
       </div>
-
-      {/* <ReplyNextButton /> */}
     </>
   )
 }
