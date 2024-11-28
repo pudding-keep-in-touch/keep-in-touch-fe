@@ -1,6 +1,5 @@
 'use client'
 
-import PortalToaster from '@/shared/components/portalToaster'
 import QueryProvider from '@/shared/provider/QueryProvider'
 import React from 'react'
 import { Toaster, ToasterProps } from 'react-hot-toast'
