@@ -35,14 +35,15 @@ export const ScrollLayout = ({
     React.useState<HTMLDivElement | null>(null)
 
   return (
-    <div className='relative w-full h-full flex flex-col'>
+    <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
       {header}
+      {/* StyledLayout */}
 
       <div
         ref={(el) => {
           setScrollElement(el)
         }}
-        className='relative flex flex-col w-full h-screen overflow-y-scroll scrollbar-hide'
+        className='relative w-full h-full overflow-y-scroll scrollbar-hide'
       >
         {/* 질문 리스트 헤더  */}
         {questionData !== undefined && currentStep === 1 && (
@@ -51,6 +52,7 @@ export const ScrollLayout = ({
             className={`sticky mb-[-8px] top-0 left-0 w-full z-10 shadow-custom-bottom transition-shadow duration-300 ease-in-out`}
           />
         )}
+
         <div className='absolute top-0 left-0 w-full'>
           {typeof children === 'function'
             ? children({ scrollElement })
@@ -58,30 +60,14 @@ export const ScrollLayout = ({
         </div>
       </div>
 
+      <Nav type='home' userId={9} isNew={true} />
+
       {questionData !== undefined && currentStep === 1 && (
         <ScrollToTopButton
           onClickToTop={onClickToTop}
           stepRefsInitialized={stepRefsInitialized}
         />
       )}
-
-      <Nav type='home' userId={userId} isNew={true} />
-      <Toaster
-        position='bottom-center'
-        containerStyle={{
-          bottom: '100px', // Nav 높이를 고려한 여백
-        }}
-        toastOptions={{
-          className: '',
-          style: {
-            width: '100%',
-            height: '56px',
-            backgroundColor: '#474747',
-            color: 'white',
-            borderRadius: 16,
-          },
-        }}
-      />
     </div>
   )
 }

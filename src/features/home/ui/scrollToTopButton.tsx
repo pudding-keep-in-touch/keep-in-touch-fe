@@ -19,7 +19,7 @@ export const ScrollToTopButton = ({
   }
 
   return (
-    <div className='absolute flex justify-center items-start bottom-[100px] left-0 w-full p-[16px] pt-0'>
+    <div className='sticky flex justify-center items-start bottom-[100px] left-0 w-full p-[16px] pt-0'>
       <div className='flex items-center justify-end w-full h-full'>
         <div className='bottom-[40px] h-[50px] w-[50px] no-underline'>
           <button
