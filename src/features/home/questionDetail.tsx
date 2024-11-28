@@ -52,7 +52,7 @@ export default function QuestionDetail({
             {!toggle ? (
               <button
                 onClick={onClickToggle}
-                className='flex w-[159px] py-2 w-380:w-full h-[47px] justify-between items-center px-4 bg-gray-1 rounded-2xl'
+                className='flex w-[159px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-gray-1 rounded-2xl'
               >
                 <Image
                   src='/icon_show.svg'
@@ -67,7 +67,7 @@ export default function QuestionDetail({
             ) : (
               <button
                 onClick={onClickToggle}
-                className='flex w-[198px] py-2 w-380:w-full h-[47px] justify-between items-center px-4 bg-[#C5C5C5] rounded-2xl'
+                className='flex w-[198px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-[#C5C5C5] rounded-2xl'
               >
                 <Image
                   src='/icon_hide.svg'
@@ -84,13 +84,13 @@ export default function QuestionDetail({
         </div>
 
         {/* 공유 버튼 */}
-        <div className='w-full bottom-0 mb-[114px] flex justify-between items-center px-[24px] absolute z-10'>
-          <Tooltip>
-            <LinkShareButton userId={userId} />
-          </Tooltip>
-        </div>
       </div>
-      {/* </div> */}
+
+      <div className='sticky flex justify-center items-start bottom-[100px] left-0 w-full p-[16px] pt-0'>
+        <Tooltip>
+          <LinkShareButton userId={userId} />
+        </Tooltip>
+      </div>
     </QuestionLayout>
   )
 }

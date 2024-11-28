@@ -38,7 +38,6 @@ export const ScrollLayout = ({
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
       {header}
       {/* StyledLayout */}
-
       <div
         ref={(el) => {
           setScrollElement(el)

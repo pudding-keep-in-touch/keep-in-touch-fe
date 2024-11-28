@@ -41,26 +41,9 @@ export const QuestionLayout = ({
   }, [copyLink])
 
   return (
-    <div className='w-full h-screen flex flex-col relative'>
+    <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
       <HomeHeader isVisible={isVisible} isHome={isHome} /> {/* 네비게이션 바 */}
       {children}
-      {/* {!isHome && <ShareButton userId={userId} />} */}
-      <Toaster
-        position='bottom-center'
-        containerStyle={{
-          bottom: '100px', // Nav 높이를 고려한 여백
-        }}
-        toastOptions={{
-          className: '',
-          style: {
-            width: '100%',
-            height: '56px',
-            backgroundColor: '#474747',
-            color: 'white',
-            borderRadius: 16,
-          },
-        }}
-      />
       <Nav type='home' userId={userId} isNew={false} />
     </div>
   )
