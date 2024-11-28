@@ -16,6 +16,13 @@ const config = {
       padding: '2rem',
     },
     extend: {
+      height: {
+        'screen-safe': 'var(--viewport-height)', // iOS 사파리 대응
+      },
+      spacing: {
+        'safe-bottom': 'env(safe-area-inset-bottom)', // 안전 영역을 위한 padding/margin
+        inherit: 'inherit', // `h-inherit`, `w-inherit` 등을 위한 설정
+      },
       boxShadow: {
         'custom-top': '0px -2px 6px rgba(0, 0, 0, 0.05)', // nav 상단 그림자
         'custom-bottom': '0px 2px 6px rgba(0, 0, 0, 0.08)', // nav 하단 그림자
