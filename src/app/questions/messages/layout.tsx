@@ -1,10 +1,11 @@
 'use client'
 
+// import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
 // import { useParams, usePathname, useRouter } from 'next/navigation'
-import { useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 
 interface Props {
   children: React.ReactNode
@@ -12,21 +13,15 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const router = useRouter()
-  //todo userID 추가
-  // const params = useParams<{ variety: MessageVariety; userId: string }>()
-  // const pathname = usePathname()
+  //todo userNickname 추가, 현재 임시값
+  // const params = useParams<{ userNickname: string }>()
+  const userNickname = 'luna'
 
-  //todo 배경 변경 필요
+  const pathname = usePathname()
 
-  //   const makeBgClass = pathname.endsWith('/preview')
-  //     ? `bg-cover bg-center ${
-  //         params.variety === 'thanks'
-  //           ? 'bg-thanksPreview'
-  //           : 'bg-honestTalkPreview'
-  //       }`
-  //     : 'bg-[#F7F7FC]'
-
-  const makeBgClass = 'bg-[#F7F7FC]'
+  const makeBgClass = pathname.endsWith('/preview')
+    ? `bg-cover bg-center ${'bg-messageDetail'}`
+    : 'bg-[#F7F7FC]'
 
   return (
     <>
@@ -42,11 +37,12 @@ export default function Layout({ children }: Props) {
             onClick={() => router.back()}
           />
 
-          {/* {!pathname.endsWith('/preview') && (
+          {!pathname.endsWith('/preview') && (
             <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-              {`To. ${params.userId}에게`}
+              {/* {`To. ${params.userNickname}에게`} */}
+              {`To. ${userNickname}에게`}
             </h1>
-          )} */}
+          )}
         </header>
         <MessageFormProvider>{children}</MessageFormProvider>
       </div>

@@ -1,11 +1,11 @@
 'use client'
 
+import { useFormStatus } from 'react-dom'
 import { Button } from '@/shared/components/Button'
 import { useFormContext } from 'react-hook-form'
-import { useFormStatus } from 'react-dom'
-import { MessageFormValues } from '../../model/formSchema'
 import { useRouter } from 'next/navigation'
-import { usePostSendMessage } from '../../api/sendMutation'
+import { MessageFormValues } from '@/features/message/_send/model/formSchema'
+import { usePostSendMessage } from '@/features/message/_send/api/sendMutation'
 
 interface MessageSendSubmitButtonProps {
   emotionId: number

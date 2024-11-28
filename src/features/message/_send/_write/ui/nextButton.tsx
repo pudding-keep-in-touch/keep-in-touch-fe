@@ -6,7 +6,7 @@ import { MessageFormValues } from '../../model/formSchema'
 import { useParams, useRouter } from 'next/navigation'
 import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 
-export default function MessageWriteNextButton({ userId }: { userId: number }) {
+export default function MessageWriteNextButton({ userId }: { userId: string }) {
   const params = useParams<{ variety: MessageVariety }>()
   const router = useRouter()
 
