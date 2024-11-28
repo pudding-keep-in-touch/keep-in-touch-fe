@@ -72,3 +72,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .selected-emoji {
+    background-color: rgba(53, 182, 255, 0.4);
+    border: 2px solid #35b6ff;
+  }
+}
