@@ -7,7 +7,7 @@ import WriteInput from '@/features/home/ui/writeInput'
 import React from 'react'
 import CompleteButton from './ui/completeButton'
 import Image from 'next/image'
-
+import { debounce } from 'lodash'
 interface WriteQuestionProps {
   userId: number
 }
@@ -17,33 +17,76 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
   const [toggle, setToggle] = React.useState(false)
   const [isError, setIsError] = React.useState(true)
 
-  const [isKeyboardVisible, setIsKeyboardVisible] = React.useState(false)
+  const [isFocus, setIsFocus] = React.useState(false)
+  const [keyboardHeight, setKeyboardHeight] = React.useState(0)
+  const contentRef = React.useRef<HTMLDivElement | null>(null)
+  const scrollableRef = React.useRef<HTMLDivElement | null>(null)
 
+  // 키보드 높이 계산 및 상태 업데이트
   React.useEffect(() => {
-    const handleResize = () => {
-      // 키보드가 활성화된 상태인지 확인
-      const isKeyboard = window.visualViewport?.height
-        ? window.innerHeight > window.visualViewport.height
-        : false
+    const handleResize = debounce(() => {
+      const viewportHeight = window.visualViewport?.height || window.innerHeight
+      const heightDiff = window.innerHeight - viewportHeight
+      const isKeyboardVisible = heightDiff > 0
 
-      setIsKeyboardVisible(isKeyboard)
-    }
+      console.log('Viewport Height:', viewportHeight)
+      console.log('Inner Height:', window.innerHeight)
+      console.log('Height Difference:', heightDiff)
+      console.log('isKeyboardVisible', isKeyboardVisible)
 
-    // 이벤트 리스너 등록
+      // 키보드 높이 정규화
+      const normalizedHeight = isKeyboardVisible
+        ? heightDiff > 250
+          ? 300
+          : 270
+        : 0
+
+      setKeyboardHeight((prev) =>
+        Math.abs(prev - normalizedHeight) > 20 ? normalizedHeight : prev
+      )
+    }, 50) // 디바운스 50ms
+
     window.visualViewport?.addEventListener('resize', handleResize)
-    window.addEventListener('resize', handleResize)
-
-    // 초기 상태 확인
-    handleResize()
 
     return () => {
-      // 이벤트 리스너 해제
       window.visualViewport?.removeEventListener('resize', handleResize)
-      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
-  console.log('isError', isError)
+  // 포커스 처리
+  const onFocus = () => {
+    setIsFocus(true)
+    if (scrollableRef.current && contentRef.current) {
+      scrollableRef.current.style.height = `calc(100% + 1px)`
+      contentRef.current.style.overflow = 'hidden'
+    }
+  }
+
+  const onFocusOut = () => {
+    setIsFocus(false)
+    if (scrollableRef.current && contentRef.current) {
+      scrollableRef.current.style.height = `0`
+      contentRef.current.style.overflow = ''
+    }
+  }
+
+  // 활성화된 요소로 스크롤
+  const scrollToActiveElement = () => {
+    if (contentRef.current && window.visualViewport) {
+      const viewScrollHeight = contentRef.current.scrollHeight
+      const offset = viewScrollHeight - window.visualViewport.height
+      contentRef.current.scrollTo(0, offset)
+    }
+  }
+
+  React.useEffect(() => {
+    if (isFocus) {
+      onFocus()
+      scrollToActiveElement()
+    } else {
+      onFocusOut()
+    }
+  }, [isFocus])
 
   const onClickToggle = () => {
     setToggle((prev) => !prev)
@@ -59,9 +102,9 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
   }, [])
 
   return (
-    <div className='w-full h-screen flex flex-col relative'>
+    <div id='wrapper' className='w-full h-screen flex flex-col relative'>
       <BackHeader title='질문 만들기' />
-      <div className='w-full h-screen flex flex-col relative'>
+      <div id='content' className='w-full h-screen flex flex-col relative'>
         <div className='flex-grow w-full h-screen pt-[82px] h-815:pb-[200px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
           <div className='w-full px-[24px]'>
             <p className='font-semibold text-base mb-4 text-gray-4'>
@@ -74,6 +117,8 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
                 maxLength={140}
                 setIsError={setIsError}
                 desc={currentDescription}
+                onFocus={() => setIsFocus(true)} // 포커스 시 상태 업데이트
+                onBlur={() => setIsFocus(false)} // 포커스 해제 시 상태 초기화
               />
             </MessageFormProvider>
           </div>
@@ -121,16 +166,26 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
               </button>
             )}
           </div>
+        </div>
 
-          <div
-            className={`w-full flex justify-between items-center px-[24px] absolute z-10 transition-all duration-300 ${
-              isKeyboardVisible ? 'bottom-[300px]' : 'bottom-[20px]'
-            }`}
-          >
-            <CompleteButton userId={userId} isDisabled={isError} />
-          </div>
+        <div
+          className={`sticky w-full flex justify-between items-center px-[24px] z-10`}
+          style={{
+            bottom: keyboardHeight > 0 ? `${keyboardHeight + 60}px` : '100px',
+            transition: 'bottom 0.2s ease-out',
+            position: 'absolute',
+            width: '100%',
+          }}
+        >
+          <CompleteButton
+            userId={userId}
+            isDisabled={isError}
+            keyboardHeight={keyboardHeight}
+          />
         </div>
       </div>
+
+      {/* <div id='make-scrollable' /> */}
     </div>
   )
 }
