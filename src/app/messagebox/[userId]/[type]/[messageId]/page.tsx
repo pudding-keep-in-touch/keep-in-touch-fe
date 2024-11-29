@@ -5,12 +5,14 @@ import React, { useState } from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function Page({
   params: { userId, type, messageId },
 }: {
   params: { userId: number; type: MessageType; messageId: number }
 }) {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
     setIsOpen((e) => !e)
@@ -19,8 +21,11 @@ export default function Page({
   return (
     <div className='w-full h-full'>
       <div className='flex justify-between h-full mb-[20px]'>
-        <header className='w-full h-[50px] flex justify-between items-center z-50 '>
-          <ChevronLeftIcon className='w-6 h-6 cursor-pointer' />
+        <header className='w-full h-[50px] flex justify-between items-center z-50 px-6'>
+          <ChevronLeftIcon
+            className='w-6 h-6 cursor-pointer'
+            onClick={() => router.back()}
+          />
           <div className='flex flex-col items-end'>
             <button type='button' onClick={openModal}>
               <Image

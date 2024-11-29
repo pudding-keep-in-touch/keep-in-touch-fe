@@ -22,7 +22,7 @@ export default function MessageDetail({
   if (!data) return null
 
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center text-black gap-4'>
+    <div className='w-full h-full flex flex-col justify-center items-center text-black gap-4 px-6'>
       <QuestionBox content={data.data.question.content} />
       <MessageBoard
         receiverNickname={data.data.receiverNickname}

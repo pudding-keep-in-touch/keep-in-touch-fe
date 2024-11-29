@@ -23,6 +23,12 @@ export default function ReactionPage({
   const onSubmit = () => {
     // 데이터 보내는 로직 추가
     // console.log(...selected)
+    // if(success){
+    //   modal open
+    // "반응이 전송되었습니다!"
+    // 하고 router 이동
+    // 실패 시 에러 처리도 필요
+    // }
     router.push(`/messagebox/${userId}/${messageType}/${messageId}`)
   }
 
@@ -67,7 +73,6 @@ export default function ReactionPage({
           color: '#fff',
           width: '100%',
           height: '56px',
-          marginBottom: '60px',
           paddingLeft: '1.5rem',
           paddingRight: '1.5rem',
         },
@@ -75,7 +80,7 @@ export default function ReactionPage({
     }
   }
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full pb-20'>
       {lists.map((type) => (
         <div
           key={type}

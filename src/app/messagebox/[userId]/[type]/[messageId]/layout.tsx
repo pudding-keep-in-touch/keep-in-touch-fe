@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/shared/utils/emotionVariety'
 
@@ -13,11 +14,10 @@ export default function Layout({
   const makeBgClass = pathname.endsWith('/reaction')
     ? 'bg-[#FFFFFF]'
     : 'bg-messageDetail'
-
   return (
     <div
       className={cn(
-        'w-full min-h-screen flex flex-col bg-cover bg-center items-center pb-16 px-6',
+        'w-full min-h-screen flex flex-col bg-cover bg-center items-center',
         makeBgClass
       )}
     >

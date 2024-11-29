@@ -37,7 +37,7 @@ export default function MessagesBlock({
             )
           </div>
         </h2>
-        {data.receivedMessageCount! > 2 && (
+        {data.receivedMessageCount! > 3 && (
           <Link
             href={`/messagebox/${userId}/received`}
             className='flex items-center gap-[9px]'
