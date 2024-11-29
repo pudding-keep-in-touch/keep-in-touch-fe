@@ -7,7 +7,7 @@ export const NavigationBar = () => {
   const pathname = usePathname()
 
   return (
-    <div className='fixed bottom-0 h-[84px] w-full max-w-[32rem] bg-gray-1 mr-auto ml-auto'>
+    <div className='fixed bottom-0 h-[84px] w-full max-w-[390px] bg-gray-1 mr-auto ml-auto'>
       <div className='w-full h-full flex items-center z-50 '>
         <div className='flex justify-center items-center w-full gap-[97px]'>
           <button onClick={() => router.push('/')}>
