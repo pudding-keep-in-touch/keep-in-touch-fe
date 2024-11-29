@@ -7,9 +7,9 @@ export const NavigationBar = () => {
   const pathname = usePathname()
 
   return (
-    <div className='fixed bottom-0 w-full max-w-[32rem] bg-[#F7F7FC] mr-auto ml-auto'>
-      <div className='w-full h-[50px] flex items-center z-50 pt-[10px]'>
-        <div className='flex justify-center w-full gap-[97px]'>
+    <div className='fixed bottom-0 h-[84px] w-full max-w-[32rem] bg-gray-1 mr-auto ml-auto'>
+      <div className='w-full h-full flex items-center z-50 '>
+        <div className='flex justify-center items-center w-full gap-[97px]'>
           <button onClick={() => router.push('/')}>
             {pathname === '/' ? (
               <div className='flex flex-col items-center gap-[3px]'>
@@ -18,7 +18,6 @@ export const NavigationBar = () => {
                   alt='home_icon'
                   width={24}
                   height={24}
-                  style={{ width: 24, height: 24 }}
                 />
                 <div className='flex justify-center font-semibold text-[13px] leading-none text-[#1f1f1f] '>
                   홈
@@ -31,7 +30,6 @@ export const NavigationBar = () => {
                   alt='home_icon'
                   width={24}
                   height={24}
-                  style={{ width: 24, height: 24 }}
                 />
                 <div className='flex justify-center font-semibold text-[13px] leading-none text-[#6b7684]'>
                   홈
@@ -48,10 +46,9 @@ export const NavigationBar = () => {
                   alt='messagebox_icon'
                   width={18}
                   height={23}
-                  style={{ width: 18, height: 23 }}
                 />
-                <div className='font-semibold text-[13px] leading-none text-[#1f1f1f]'>
-                  쪽지함
+                <div className='font-semibold text-[11px] leading-none text-[#1f1f1f]'>
+                  My 퐁
                 </div>
               </div>
             ) : (
@@ -61,10 +58,9 @@ export const NavigationBar = () => {
                   alt='messagebox_icon'
                   width={18}
                   height={23}
-                  style={{ width: 18, height: 23 }}
                 />
-                <div className='font-semibold text-[13px] leading-none text-[#6b7684]'>
-                  쪽지함
+                <div className='font-semibold text-[11px] leading-none text-[#6b7684]'>
+                  My 퐁
                 </div>
               </div>
             )}

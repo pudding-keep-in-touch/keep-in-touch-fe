@@ -3,6 +3,7 @@ import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/shared/utils/emotionVariety'
+import { NavigationBar } from '@/shared/ui/layouts/NavigationBar'
 
 export default function InboxLayout({
   children,
@@ -44,6 +45,7 @@ export default function InboxLayout({
         </header>
       </div>
       {children}
+      <NavigationBar />
     </div>
   )
 }
