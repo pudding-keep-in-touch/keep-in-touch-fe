@@ -8,7 +8,7 @@ import {
 
 // 받은 쪽지 리스트
 const receivedMockData = {
-  receivedMessageCount: 3,
+  receivedMessageCount: 4,
   nextCursor: new Date('2024-11-15T08:08:38.654Z'),
   messageList: [
     {
@@ -16,43 +16,43 @@ const receivedMockData = {
       receiverId: '1',
       receiverNickname: 'John Doe',
       content: 'Hello!',
-      status: 'normal',
+      status: 'reported',
       createdAt: new Date('2024-09-01'),
       readAt: new Date('2024-09-04'),
     },
-    {
-      messageId: '2',
-      receiverId: '1',
-      receiverNickname: 'John Doe',
-      content: 'How are you?',
-      status: 'normal',
-      createdAt: new Date('2024-09-02'),
-      readAt: null,
-    },
-    {
-      messageId: '3',
-      receiverId: '1',
-      receiverNickname: 'John Doe',
-      content: 'Goodbye!',
-      status: 'normal',
-      createdAt: new Date('2024-09-03'),
-      readAt: new Date('2024-09-06'),
-    },
-    {
-      messageId: '4',
-      receiverId: '1',
-      receiverNickname: 'John Doe',
-      content: 'Hello!',
-      status: 'normal',
-      createdAt: new Date('2024-09-04'),
-      readAt: new Date('2024-09-07'),
-    },
+    // {
+    //   messageId: '2',
+    //   receiverId: '1',
+    //   receiverNickname: 'John Doe',
+    //   content: 'How are you?',
+    //   status: 'normal',
+    //   createdAt: new Date('2024-09-02'),
+    //   readAt: null,
+    // },
+    // {
+    //   messageId: '3',
+    //   receiverId: '1',
+    //   receiverNickname: 'John Doe',
+    //   content: 'Goodbye!',
+    //   status: 'hidden',
+    //   createdAt: new Date('2024-09-03'),
+    //   readAt: new Date('2024-09-06'),
+    // },
+    // {
+    //   messageId: '4',
+    //   receiverId: '1',
+    //   receiverNickname: 'John Doe',
+    //   content: 'Hello!',
+    //   status: 'normal',
+    //   createdAt: new Date('2024-09-04'),
+    //   readAt: new Date('2024-09-07'),
+    // },
   ],
 }
 
 // 보낸 쪽지 리스트
 const sentMockData = {
-  sentMessageCount: 3,
+  sentMessageCount: 4,
   nextCursor: new Date('2024-11-15T08:08:38.654Z'),
   messageList: [
     {
@@ -75,6 +75,13 @@ const sentMockData = {
       receiverNickname: 'Jisu Kim',
       content: '연말 파티하자',
       createdAt: new Date('2024-09-02'),
+    },
+    {
+      messageId: '4',
+      receiverId: '1',
+      receiverNickname: 'Jisu Kim',
+      content: '코스튬도 입어?',
+      createdAt: new Date('2024-09-05'),
     },
   ],
 }

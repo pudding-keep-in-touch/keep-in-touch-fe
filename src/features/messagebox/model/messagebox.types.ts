@@ -28,6 +28,10 @@ export interface MessageDetail {
     createdAt: Date | null
   }
 }
+type reaction = {
+  readAt: Date | null
+  createdAt: Date | null
+}
 export type Message = {
   messageId: string
   receiverId: string
@@ -36,6 +40,7 @@ export type Message = {
   status?: string
   createdAt: Date | null
   readAt?: Date | null
+  reactionInfo?: reaction[] | null
 }
 
 // 받은 쪽지 리스트 조회 타입
