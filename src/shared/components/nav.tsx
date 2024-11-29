@@ -42,10 +42,10 @@ export const Nav = ({ type, userId, isNew }: NavProps) => {
 
   return (
     <div
-      className={`w-full h-[84px] shadow-custom-top bottom-0 flex justify-center items-start px-[10px] pt-3 absolute z-10 gap-[97px] rounded-tl-[16px] rounded-tr-[16px] ${type === 'home' ? 'bg-white' : 'bg-gray-1'}`}
+      className={`sticky w-full h-[84px] shadow-custom-top bottom-0 flex justify-center items-start px-[10px] pt-3 z-10 gap-[97px] rounded-tl-[16px] rounded-tr-[16px] ${type === 'home' ? 'bg-white' : 'bg-gray-1'}`}
     >
       {tabs.map((tab) => {
-        const isActive = activeTab === tab.link // 활성 상태 비교
+        const isActive = activeTab === tab.link
 
         return (
           <>
@@ -73,10 +73,7 @@ export const Nav = ({ type, userId, isNew }: NavProps) => {
                         fill='none'
                         xmlns='http://www.w3.org/2000/svg'
                       >
-                        <path
-                          d='M8 8L0 0H16L8 8Z'
-                          fill='#35B6FF' /* 배경 색상 변경 가능 */
-                        />
+                        <path d='M8 8L0 0H16L8 8Z' fill='#35B6FF' />
                       </svg>
                     </div>
                   </div>

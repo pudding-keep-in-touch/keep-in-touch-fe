@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 interface QuestionsCardProps {
@@ -16,10 +17,12 @@ export const TypeQuestionCard = ({ isHome }: QuestionsCardProps) => {
       </div>
       <div className='flex justify-center items-center w-full bg-white overflow-hidden'>
         {/* 이미지 */}
-        <img
-          className='object-cover w-full h-full'
+        <Image
+          className='object-cover min-w-[342px] min-h-[142px] w-full'
           src='/free_question.svg'
           alt='자유 질문 이미지'
+          width={342}
+          height={142}
         />
       </div>
     </div>

@@ -6,6 +6,7 @@ import { QuestionsCard } from '@/features/home/ui/questionsCard'
 import Tooltip from '@/features/home/ui/tooltip'
 import LinkShareButton from '@/features/home/ui/linkShareButton'
 import React from 'react'
+import Image from 'next/image'
 
 interface QuestionDetailProps {
   questionId: string
@@ -51,9 +52,14 @@ export default function QuestionDetail({
             {!toggle ? (
               <button
                 onClick={onClickToggle}
-                className='flex w-[159px] py-2 w-380:w-full h-[47px] justify-center items-center px-4 bg-gray-1 rounded-2xl gap-[13px]'
+                className='flex w-[159px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-gray-1 rounded-2xl'
               >
-                <img src='/icon_show.svg' alt='show icon' />
+                <Image
+                  src='/icon_show.svg'
+                  alt='show icon'
+                  width={30}
+                  height={30}
+                />
                 <span className='font-medium text-[14px] leading-[22px] tracking-[-0.43px] text-gray-3'>
                   이 질문 숨기기
                 </span>
@@ -61,9 +67,14 @@ export default function QuestionDetail({
             ) : (
               <button
                 onClick={onClickToggle}
-                className='flex w-[198px] py-2 w-380:w-full h-[47px] justify-center items-center px-4 bg-[#C5C5C5] rounded-2xl gap-[13px]'
+                className='flex w-[198px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-[#C5C5C5] rounded-2xl'
               >
-                <img src='/icon_hide.svg' alt='hide icon' />
+                <Image
+                  src='/icon_hide.svg'
+                  alt='hide icon'
+                  width={30}
+                  height={30}
+                />
                 <span className='font-medium text-[14px] leading-[22px] tracking-[-0.43px] text-gray-3'>
                   숨김 처리된 질문입니다
                 </span>
@@ -73,13 +84,13 @@ export default function QuestionDetail({
         </div>
 
         {/* 공유 버튼 */}
-        <div className='w-full bottom-0 mb-[114px] flex justify-between items-center px-[24px] absolute z-10'>
-          <Tooltip>
-            <LinkShareButton userId={userId} />
-          </Tooltip>
-        </div>
       </div>
-      {/* </div> */}
+
+      <div className='sticky flex justify-center items-start bottom-[100px] left-0 w-full p-[16px] pt-0'>
+        <Tooltip>
+          <LinkShareButton userId={userId} />
+        </Tooltip>
+      </div>
     </QuestionLayout>
   )
 }

@@ -10,6 +10,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 type QuestionBannerType = {
   id: number
@@ -82,7 +83,12 @@ export const QuestionBanner = ({
             onClick={onClickRandomQuestionWriting} // 버튼 클릭 시 페이지 이동
             className='z-10 cursor-pointer w-[40px] h-[40px] absolute right-2 rounded-full bg-[#35B6FF] flex justify-center items-center'
           >
-            <img src='/cross_shape.svg' alt='cross icon' />
+            <Image
+              src='/cross_shape.svg'
+              alt='cross icon'
+              width={16}
+              height={16}
+            />
           </button>
         </div>
       </div>
