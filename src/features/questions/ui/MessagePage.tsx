@@ -12,9 +12,10 @@ export default function MessagePage() {
   const queryClient = useQueryClient()
   const divRef = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile() // 모바일 여부를 확인하는 훅 사용
+  const [keyboardHeight, setKeyboardHeight] = useState(0) // 키보드 높이 상태 추가
 
   useEffect(() => {
-    if (!isMobile) return // 모바일에서만 동작하도록 설정
+    if (isMobile) return // 모바일에서만 동작하도록 설정
 
     const adjustButtonPosition = () => {
       if (divRef.current && window.visualViewport) {
@@ -22,7 +23,7 @@ export default function MessagePage() {
         const keyboardHeight = window.innerHeight - viewportHeight // 키보드 높이 계산
 
         // 버튼 위치를 키보드 바로 위로 설정
-        divRef.current.style.bottom = `${keyboardHeight}px`
+        setKeyboardHeight(keyboardHeight)
       }
     }
 
@@ -41,16 +42,16 @@ export default function MessagePage() {
   }, [isMobile]) // 모바일 여부가 변경될 때마다 실행
 
   useEffect(() => {
-    if (!isMobile) return // 모바일에서만 동작하도록 설정
+    if (isMobile) return // 모바일에서만 동작하도록 설정
 
     const textarea = document.querySelector('textarea')
 
     const handleFocus = () => {
-      divRef.current!.style.bottom = '30px' // 예상 키보드 높이
+      setKeyboardHeight(300) // 예상 키보드 높이
     }
 
     const handleBlur = () => {
-      divRef.current!.style.bottom = '0px'
+      setKeyboardHeight(0) // 키보드가 닫힐 때 높이 0으로 설정
     }
 
     textarea?.addEventListener('focus', handleFocus)
@@ -93,7 +94,10 @@ export default function MessagePage() {
       <div
         ref={divRef}
         className='fixed w-full max-w-[24rem] px-4 transition-all duration-300'
-        style={{ bottom: '12px' }} // 기본 위치는 화면 하단 고정
+        style={{
+          bottom: isMobile ? keyboardHeight + 60 : 12, // 모바일에서만 위치 조정
+          // transition: 'bottom 0.2s ease-out', // smooth transition
+        }}
       >
         <ReplyNextButton />
       </div>
