@@ -13,9 +13,9 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const router = useRouter()
-  //todo userNickname 추가, 현재 임시값
-  // const params = useParams<{ userNickname: string }>()
-  const userNickname = 'luna'
+  //todo nickname 추가, 현재 임시값
+  // const params = useParams<{ nickname: string }>()
+  const nickname = 'luna'
 
   const pathname = usePathname()
 
@@ -39,8 +39,8 @@ export default function Layout({ children }: Props) {
 
           {!pathname.endsWith('/preview') && (
             <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-              {/* {`To. ${params.userNickname}에게`} */}
-              {`To. ${userNickname}에게`}
+              {/* {`To. ${params.nickname}에게`} */}
+              {`To. ${nickname}에게`}
             </h1>
           )}
         </header>

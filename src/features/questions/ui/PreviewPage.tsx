@@ -7,11 +7,7 @@ import { Button } from '@/shared/components/Button'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
 
-export default function PreviewPage({
-  userNickname,
-}: {
-  userNickname: string
-}) {
+export default function PreviewPage({ nickname }: { nickname: string }) {
   const { getValues } = useFormContext<MessageFormValues>()
   const router = useRouter()
   const queryClient = useQueryClient()
@@ -40,7 +36,7 @@ export default function PreviewPage({
       </div>
       {/* todo 질문 내용 추가 */}
       <div className='backdrop-blur-md bg-white/50 w-full h-full min-h-[380px] rounded-2xl mt-4 px-6 py-5 mb-3'>
-        <p className='text-[#1F1F1F] font-bold text-lg mb-4'>{`To. ${userNickname}에게`}</p>
+        <p className='text-[#1F1F1F] font-bold text-lg mb-4'>{`To. ${nickname}에게`}</p>
         <p className='text-[#191F28] break-all whitespace-pre-wrap text-lg'>
           {message}
         </p>

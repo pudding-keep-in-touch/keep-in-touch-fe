@@ -14,7 +14,7 @@ export default function Layout({ children }: Props) {
   const params = useParams<{ variety: MessageVariety; userId: string }>()
   const pathname = usePathname()
 
-  //todo userNickname으로 변환 필요
+  //todo nickname으로 변환 필요
 
   const makeBgClass = pathname.endsWith('/preview')
     ? `bg-cover bg-center ${

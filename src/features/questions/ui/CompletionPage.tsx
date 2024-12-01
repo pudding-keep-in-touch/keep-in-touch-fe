@@ -6,8 +6,8 @@ import Step from '@/shared/ui/Step'
 export default function CompletionPage() {
   const steps = [1, 2]
 
-  //todo userNickname 받아야 함 지금은 테스트 용도
-  const userNickname = 'luna'
+  //todo nickname 받아야 함 지금은 테스트 용도
+  const nickname = 'luna'
   return (
     <>
       <div className='mt-[30px] mb-5'>
@@ -20,7 +20,7 @@ export default function CompletionPage() {
         미리보기로 내용을 확인하세요!
       </p>
 
-      <Preview userNickname={userNickname} />
+      <Preview nickname={nickname} />
 
       <ReplyButton />
     </>
