@@ -15,6 +15,8 @@ export default function QuestionListPage() {
   const userId = questions.map((question) => question.userId)
 
   //todo nickname 가져오기
+  console.log('questions', questions)
+  const nickname = 'luna'
 
   //todo 로그인 state추가
   const redirectToLoginIfNeeded = (callback: () => void) => {
@@ -27,8 +29,6 @@ export default function QuestionListPage() {
       callback()
     }
   }
-
-  console.log('questions', questions)
 
   const handleQuestionClick = (questionId: string, content: string) => {
     // redirectToLoginIfNeeded(() => {
