@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import '@/shared/styles/globals.css'
 import QueryProvider from '@/shared/provider/QueryProvider'
+import { DefaultLayout } from '@/shared/ui/layouts/DefaultLayout'
 
 const GA_ID =
   process.env.NODE_ENV === 'production' ? 'G-6ZWWSPLVD7' : 'G-49Q9HYM5E0'
@@ -21,12 +22,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className='scrollbar-hide'>
+    <html lang='en' className='scrollbar-hide overflow-hidden'>
       <head>
         <meta
           name='viewport'
-          content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+          content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
         />
+
         <meta property='og:title' content='Keep In Touch' />
         <meta
           property='og:description'
@@ -169,8 +171,7 @@ export default function RootLayout({
           }}
         />
       </head>
-
-      <body className='max-w-[390px] w-full min-h-screen mr-auto ml-auto'>
+      <body>
         {/* Google Tag Manager noscript */}
         <noscript>
           <iframe
@@ -180,7 +181,7 @@ export default function RootLayout({
             style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
         </noscript>
-        <QueryProvider>{children}</QueryProvider>
+        <DefaultLayout>{children}</DefaultLayout>
       </body>
     </html>
   )

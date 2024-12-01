@@ -1,4 +1,5 @@
 import { ChevronLeftIcon } from 'lucide-react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 interface HomeHeaderProps {
@@ -25,14 +26,23 @@ export const HomeHeader = ({ isVisible, isHome }: HomeHeaderProps) => {
           />
         )}
         {isHome && (
-          <img
-            className={`${isHome && 'translate-x-3'}`}
+          <Image
+            className={`${isHome && 'translate-x-3'} max-w-[142px] max-h-[20.84px] w-full`}
+            alt='logo icon'
             src='/header_title.svg'
+            width={0}
+            height={0}
           />
         )}
-        <button className='w-6'>
-          <img src='/header_more.svg' />
-        </button>
+        {/* <button className='w-6'> */}
+        <Image
+          className='max-w-[6px] w-full h-[22px]'
+          src='/header_more.svg'
+          width={0}
+          height={0}
+          alt='more icon'
+        />
+        {/* </button> */}
       </header>
     </div>
   )

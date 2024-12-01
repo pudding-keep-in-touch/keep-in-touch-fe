@@ -30,10 +30,12 @@ export const OnBoardingStep = ({
       <p className='text-gray-4 font-normal text-[15px] tracking-[-0.75px] text-center'>
         {description}
       </p>
-      <img
-        className='mt-[35px] mb-7'
+      <Image
+        className='mt-[35px] mb-7 min-w-[390px] min-h-[274px] w-full'
         src={imageUrl}
         alt='onboarding step image'
+        width={390}
+        height={274}
       />
     </div>
   )

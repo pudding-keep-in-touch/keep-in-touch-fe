@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --viewport-height: 100vh; /* 기본값 */
+}
+
+@supports (-webkit-touch-callout: none) {
+  :root {
+    --viewport-height: calc(100vh - env(safe-area-inset-bottom))
+      /* iOS 사파리 대응 */;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -82,5 +93,38 @@
 
   .swiper-pagination-bullet-active {
     @apply !bg-[#35B6FF] opacity-100 transition-all;
+  }
+
+  .pb-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .scrollbar-hide {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toast-animation {
+    animation: none !important;
+  }
+
+  /* css */
+  #wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  #content {
+    width: 100%;
+    height: auto;
+  }
+
+  #make-scrollable {
+    position: absolute;
+    left: 0;
+    width: 1px;
+    height: 0;
+    transition: height 0.5s linear;
   }
 }

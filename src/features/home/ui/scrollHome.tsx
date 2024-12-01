@@ -147,7 +147,7 @@ export default function ScrollHome({
           </div>
         </div>
         {questionData ? (
-          <div className='flex flex-col mt-[52px] pb-[90px] bg-[#F6F7FC]'>
+          <div className='flex flex-col mt-[52px] bg-[#F6F7FC] pb-[200px]'>
             {/* 질문 리스트  */}
             <QuestionListHeader userId={userId} />
             <QuestionsList
@@ -158,7 +158,7 @@ export default function ScrollHome({
             />
           </div>
         ) : (
-          <div className='flex flex-col mt-[52px] w-full h-[calc(100vh-7rem)] bg-[#F6F7FC]'>
+          <div className='flex flex-col mt-[52px] w-full bg-[#F6F7FC]'>
             <QuestionListHeader userId={userId} />
             <div className='w-full px-[24px] flex flex-col gap-8'>
               <TypeQuestionCard isHome={true} />

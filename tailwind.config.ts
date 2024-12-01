@@ -16,6 +16,13 @@ const config = {
       padding: '2rem',
     },
     extend: {
+      height: {
+        'screen-safe': 'var(--viewport-height)', // iOS 사파리 대응
+      },
+      spacing: {
+        'safe-bottom': 'env(safe-area-inset-bottom)', // 안전 영역을 위한 padding/margin
+        inherit: 'inherit', // `h-inherit`, `w-inherit` 등을 위한 설정
+      },
       boxShadow: {
         'custom-top': '0px -2px 6px rgba(0, 0, 0, 0.05)', // nav 상단 그림자
         'custom-bottom': '0px 2px 6px rgba(0, 0, 0, 0.08)', // nav 하단 그림자
@@ -24,6 +31,8 @@ const config = {
         '2xl': '1400px',
         'h-815': { raw: '(max-height: 815px)' }, // 높이 기준 브레이크포인트 추가
         'w-380': { raw: '(max-width: 380px)' },
+
+        'w-320': { raw: '(max-width: 320px)' },
       },
 
       backgroundImage: {

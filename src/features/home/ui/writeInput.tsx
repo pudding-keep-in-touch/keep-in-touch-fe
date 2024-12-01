@@ -14,6 +14,8 @@ interface WriteInputProps {
   maxLength: number
   setIsError: React.Dispatch<React.SetStateAction<boolean>>
   desc?: string
+  onFocus?: () => unknown
+  onBlur?: () => unknown
 }
 
 export default function WriteInput({
@@ -22,6 +24,8 @@ export default function WriteInput({
   maxLength,
   setIsError,
   desc,
+  onFocus,
+  onBlur,
 }: WriteInputProps) {
   const { watch, register } = useFormContext<MessageFormValues>()
   const { message } = watch()
@@ -63,6 +67,8 @@ export default function WriteInput({
         inputMode='text'
         maxLength={maxLength}
         minLength={minLength}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
 
       <div className={cn('flex mt-2 mb-2', errorFlexStyle)}>

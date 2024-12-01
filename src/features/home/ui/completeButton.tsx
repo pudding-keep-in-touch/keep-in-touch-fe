@@ -8,11 +8,13 @@ import toast from 'react-hot-toast'
 interface CompleteButtonProps {
   userId: number
   isDisabled: boolean
+  keyboardHeight: number
 }
 
 export default function CompleteButton({
   userId,
   isDisabled,
+  keyboardHeight,
 }: CompleteButtonProps) {
   const router = useRouter()
 
@@ -29,7 +31,10 @@ export default function CompleteButton({
       type='button'
       className='h-fit p-[18px] bg-system-blue text-white rounded-2xl font-bold w-full'
       disabled={isDisabled}
-      onClick={onClickComplete}
+      onClick={() => {
+        console.log('Bottom:', keyboardHeight)
+        onClickComplete()
+      }}
     >
       <h1 className='text-lg font-semibold text-center'>작성 완료</h1>
     </Button>

@@ -27,10 +27,12 @@ export const QuestionListHeader = React.forwardRef<
 
     toast(
       <div className='w-full flex items-center space-x-3 relative justify-center'>
-        <img
+        <Image
           src='/icon-check-fill.svg'
           alt='check icon fill'
           className='w-5 h-5'
+          width={20}
+          height={20}
         />
         <p>링크가 복사되었습니다.</p>
       </div>

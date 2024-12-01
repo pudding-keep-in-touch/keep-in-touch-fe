@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -34,7 +35,12 @@ export const QuestionsCard = ({
         <h3 className='text-gray-4 text-sm font-semibold'>{title}</h3>
         {isHome && (
           <button className='absolute right-4'>
-            <img src='/icon_hide.svg' />
+            <Image
+              src='/icon_hide.svg'
+              alt='hide icon'
+              width={30}
+              height={30}
+            />
           </button>
         )}
       </div>

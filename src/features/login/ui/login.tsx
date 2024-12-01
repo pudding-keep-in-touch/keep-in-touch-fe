@@ -42,7 +42,7 @@ export const Login = () => {
           <Swiper
             // direction='vertical'
             modules={[EffectCoverflow, Autoplay, Pagination]}
-            //   autoplay={{ delay: 5000, disableOnInteraction: false }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
             loop
             slidesPerView='auto'
             speed={500}
