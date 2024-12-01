@@ -1,4 +1,5 @@
 import { cn } from '@/shared/utils/emotionVariety'
+import { Fragment } from 'react'
 
 interface Props {
   steps: number[]
@@ -9,7 +10,7 @@ export default function Step({ steps, active }: Props) {
   return (
     <div className='flex items-center'>
       {steps.map((step) => (
-        <div key={step} className='flex items-center'>
+        <Fragment key={step}>
           <div
             className={cn(
               'w-[30px] h-[30px] rounded-full border border-black flex items-center justify-center bg-[#4DDF22]',
@@ -19,7 +20,7 @@ export default function Step({ steps, active }: Props) {
             <span className='font-medium text-lg'>{step}</span>
           </div>
           <div className='w-2 h-px bg-[#4DDF22] last:hidden' />
-        </div>
+        </Fragment>
       ))}
     </div>
   )
