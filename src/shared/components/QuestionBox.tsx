@@ -29,6 +29,8 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
     }
   }
 
+  console.log('userId', userId)
+
   return (
     <div
       className='bg-white rounded-lg border-[1px] border-[#CCE8F4] overflow-hidden cursor-pointer'

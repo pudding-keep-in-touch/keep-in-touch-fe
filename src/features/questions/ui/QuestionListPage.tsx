@@ -58,9 +58,10 @@ export default function QuestionListPage() {
           </h2>
         </div>
 
-        <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6 '>
-          {/* 자유질문 */}
-          <>
+        <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+          <div className='w-full px-[24px] grid grid-cols-1 gap-6'>
+            {/* <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'> */}
+            {/* 자유질문 */}
             <QuestionBox
               key={99}
               questionId={'99'}
@@ -77,7 +78,8 @@ export default function QuestionListPage() {
                 onQuestionClick={handleQuestionClick}
               />
             ))}
-          </>
+            {/* </div> */}
+          </div>
         </div>
       </div>
     </>

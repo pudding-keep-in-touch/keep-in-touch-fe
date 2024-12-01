@@ -14,6 +14,7 @@ const fetchNicknameByUserId = async (
     throw new Error('userId is required')
   }
 
+  //todo api 재확인 필요(토큰)
   const response = await axios.get(`/v2/users/${userId}/nickname`)
   return response.data.data.nickname // 닉네임 반환
 }
