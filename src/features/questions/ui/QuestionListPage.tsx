@@ -6,29 +6,38 @@ import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { questions } from '@/entities/questions/questionData'
 import { useState } from 'react'
+import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 
 export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
-  //   const [userId, setUserId] = useState<string | null>(null)
+
+  const userId = questions.map((question) => question.userId)
+
+  //todo userNickname 가져오기
 
   //todo 로그인 state추가
-
-  // const handleQuestionClick = (questionId: number) => {
-  //   //todo 온보딩 페이지로 이동
-  //   // router.push(`/onboarding?questionId=${questionId}`);
-  //   router.push(`/questions/messages`)
-  // }
+  const redirectToLoginIfNeeded = (callback: () => void) => {
+    if (!isUserLoggedIn()) {
+      // 로그인 페이지로 이동 (현재 경로 포함)
+      const currentPath = window.location.pathname
+      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`)
+    } else {
+      // 로그인 상태면 콜백 실행
+      callback()
+    }
+  }
 
   const handleQuestionClick = (questionId: string, content: string) => {
+    // redirectToLoginIfNeeded(() => {
     // 선택된 질문 데이터를 캐싱
     queryClient.setQueryData(['selectedQuestion'], { questionId, content })
     // ReplyPage로 이동
     router.push('/questions/messages')
+    // })
   }
 
   const handleTypeMessageClick = () => {
-    const userId = '1' // 임시 userId (테스트용)
     router.push(`/message/send/${userId}/select`)
   }
 
@@ -61,6 +70,7 @@ export default function QuestionListPage() {
               <QuestionBox
                 key={question.questionId}
                 questionId={question.questionId}
+                userId={question.userId}
                 content={question.content}
                 onQuestionClick={handleQuestionClick}
               />
