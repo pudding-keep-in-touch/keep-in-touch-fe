@@ -2,7 +2,8 @@
 import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-// import { cn } from '@/shared/utils/emotionVariety'
+import { cn } from '@/shared/utils/emotionVariety'
+import { NavigationBar } from '@/shared/ui/layouts/NavigationBar'
 
 export default function InboxLayout({
   children,
@@ -18,19 +19,21 @@ export default function InboxLayout({
   //     : null
 
   const router = useRouter()
-  // const pathname = usePathname()
+  const pathname = usePathname()
 
-  // const makeBgClass = pathname.endsWith('/reaction')
-  //   ? `bg-[#FFFFFF]`
-  //   : `bg-[#F7F7FC]`
+  const makeBgClass = pathname.endsWith('/reaction')
+    ? `bg-[#FFFFFF]`
+    : `bg-[#F7F7FC]`
 
+  const makePxClass = pathname.endsWith('/reaction') ? `px-0` : `px-6`
   return (
     <div
-      className={
-        'w-full min-h-screen flex flex-col items-center bg-cover bg-center bg-[#F7F7FC]'
-      }
+      className={cn(
+        'w-full min-h-screen flex flex-col items-center bg-cover bg-center',
+        makeBgClass
+      )}
     >
-      <div className='flex w-full justify-center px-6'>
+      <div className={cn('flex w-full justify-center', makePxClass)}>
         <header className='w-full h-[50px] grid grid-cols-3 items-center z-50 '>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
@@ -42,6 +45,7 @@ export default function InboxLayout({
         </header>
       </div>
       {children}
+      <NavigationBar />
     </div>
   )
 }

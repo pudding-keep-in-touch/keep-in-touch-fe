@@ -4,28 +4,42 @@ import MessageDetail from '@/features/messagebox/ui/MessageDetail'
 import React, { useState } from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function Page({
   params: { userId, type, messageId },
 }: {
   params: { userId: number; type: MessageType; messageId: number }
 }) {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
-    setIsOpen(true)
+    setIsOpen((e) => !e)
   }
 
   return (
     <div className='w-full h-full'>
       <div className='flex justify-between h-full mb-[20px]'>
-        <header className='w-full h-[50px] flex justify-between items-center z-50 '>
-          <ChevronLeftIcon className='w-6 h-6 cursor-pointer' />
+        <header className='w-full h-[50px] flex justify-between items-center z-50 px-6'>
+          <ChevronLeftIcon
+            className='w-6 h-6 cursor-pointer'
+            onClick={() => router.back()}
+          />
           <div className='flex flex-col items-end'>
             <button type='button' onClick={openModal}>
-              <img src='/header_more.svg' />
+              <Image
+                src='/header_more.svg'
+                alt='header modal button'
+                width={5}
+                height={5}
+              />
             </button>
             {isOpen && (
-              <div className=' bg-black w-[100px] h-[56px] rounded-2xl text-white'>
+              <div
+                onClick={openModal}
+                className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
+              >
                 <Link
                   href={`/messagebox/${userId}/${type}/${messageId}/report`}
                 >
