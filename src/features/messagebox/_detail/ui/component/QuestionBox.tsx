@@ -9,7 +9,9 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({ content }) => {
       <h3 className='text-sm font-semibold text-[#333D4B] bg-gray-1 w-full text-center py-3 rounded-2xl'>
         질문
       </h3>
-      <p className='text-sm text-[#6B7684] text-center mt-3 mb-3'>{content}</p>
+      <p className='text-sm text-[#6B7684] text-center my-2.5 mx-11'>
+        {content}
+      </p>
     </div>
   )
 }
