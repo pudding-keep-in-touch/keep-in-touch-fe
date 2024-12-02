@@ -17,12 +17,14 @@ export default function Layout({
   return (
     <div
       className={cn(
-        'w-full min-h-screen flex flex-col bg-cover bg-center items-center',
+        'relative w-full pb-safe-bottom z-0 h-screen-safe flex flex-col bg-cover bg-center items-center',
         makeBgClass
       )}
     >
-      {children}
-      {modal}
+      <div className='relative w-full h-full z-0 overflow-y-scroll scrollbar-hide'>
+        {children}
+        {modal}
+      </div>
     </div>
   )
 }

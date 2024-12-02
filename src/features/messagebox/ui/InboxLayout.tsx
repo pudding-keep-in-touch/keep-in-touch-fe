@@ -29,7 +29,7 @@ export default function InboxLayout({
   return (
     <div
       className={cn(
-        'w-full min-h-screen flex flex-col items-center bg-cover bg-center',
+        'relative w-full pb-safe-bottom z-0 h-screen-safe flex flex-col items-center bg-cover bg-center',
         makeBgClass
       )}
     >
@@ -44,7 +44,9 @@ export default function InboxLayout({
           </h1>
         </header>
       </div>
-      {children}
+      <div className='relative w-full h-full overflow-y-scroll scrollbar-hide'>
+        {children}
+      </div>
       <NavigationBar />
     </div>
   )

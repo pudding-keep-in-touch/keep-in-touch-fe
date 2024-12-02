@@ -13,7 +13,7 @@ export default function Page({
   const router = useRouter()
   // /reaction, /report, /hide 제외 나머지 페이지 예외 처리 필요
   return (
-    <div className='w-full h-full'>
+    <div className='absolute top-0 left-0 w-full'>
       <div className='flex justify-center w-full'>
         <header className='w-full h-[50px] grid grid-cols-3 items-center z-50 px-6'>
           <ChevronLeftIcon
