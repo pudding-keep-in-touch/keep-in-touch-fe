@@ -44,12 +44,12 @@ export default function MessageList({
                   className={`relative ${messageType === 'sent' || message.readAt ? '' : 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`}
                 >
                   <div className='relative w-[49px] h-[49px] rounded-lg bg-gradient-to-br from-[#BEAFFB] to-[#F975F0]'>
+                    <Lottie animationData={unWatchedJson} loop={0} />
                     {!message.readAt && (
-                      <div className='absolute leading-[27.2%] border border-white px-[6px] py-[5px] -tracking-widest bottom-[1.1rem] right-[0.3rem] bg-white opacity-[80%] rounded-2xl z-10 text-[8px] text-gray-4 font-semibold flex justify-center'>
+                      <div className='absolute leading-[27.2%] border border-white px-[6px] py-[5px] -tracking-widest bottom-[1.1rem] right-[0.3rem] bg-white opacity-[80%] rounded-2xl text-[8px] text-gray-4 font-semibold flex justify-center'>
                         읽지 않음
                       </div>
                     )}
-                    <Lottie animationData={unWatchedJson} loop={0} />
                   </div>
                   <div className='flex flex-col'>
                     <div className='text-[#333D4B] font-semibold text-[17px] mb-[4px] leading-none'>
