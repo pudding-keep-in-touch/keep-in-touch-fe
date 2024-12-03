@@ -19,8 +19,7 @@ export default function MessageSendSubmitButton({
   variety,
 }: MessageSendSubmitButtonProps) {
   const router = useRouter()
-  const { formState, getValues, handleSubmit } =
-    useFormContext<MessageFormValues>()
+  const { formState, handleSubmit } = useFormContext<MessageFormValues>()
   const { pending } = useFormStatus()
   const { isValid } = formState
 

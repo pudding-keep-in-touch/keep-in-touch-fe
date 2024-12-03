@@ -32,7 +32,7 @@ describe('SellForm', () => {
   render(
     <MessageFormProvider>
       <MessageInput />
-      <MessageWriteNextButton userId={0} />
+      <MessageWriteNextButton userId={'0'} />
     </MessageFormProvider>
   )
 

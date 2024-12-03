@@ -7,17 +7,21 @@ import React from 'react'
 interface QuestionsCardProps {
   questionId?: string
   userId: number
-  title: string
+  createdAt: string
   description: React.ReactElement | string
+  isHidden: boolean
   isHome: boolean
+  title?: string
 }
 
 export const QuestionsCard = ({
   questionId,
   userId,
-  title,
+  createdAt,
   description,
+  isHidden,
   isHome,
+  title,
 }: QuestionsCardProps) => {
   const router = useRouter()
 
@@ -33,7 +37,7 @@ export const QuestionsCard = ({
     >
       <div className='flex justify-center items-center w-full h-[44px] bg-gray-1'>
         <h3 className='text-gray-4 text-sm font-semibold'>{title}</h3>
-        {isHome && (
+        {isHome && isHidden && (
           <button className='absolute right-4'>
             <Image
               src='/icon_hide.svg'

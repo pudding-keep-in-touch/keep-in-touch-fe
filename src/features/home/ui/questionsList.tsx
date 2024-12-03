@@ -2,15 +2,10 @@ import React from 'react'
 
 import { QuestionsCard } from '@/features/home/ui/questionsCard'
 import { TypeQuestionCard } from '@/features/home/ui/typeQuestionCard'
-
-type QuestionDataType = {
-  questionId: string
-  title: string
-  description: React.ReactElement | string
-}
+import { QuestionData } from '../model/home.types'
 
 interface QuestionsListProps {
-  questionData?: QuestionDataType[]
+  questionData: QuestionData[]
   isHome: boolean
   userId: number
 }
@@ -24,15 +19,17 @@ export const QuestionsList = React.forwardRef<
       {/* 자유 질문 */}
       <TypeQuestionCard isHome={true} />
 
-      {questionData &&
+      {questionData.length > 1 &&
         questionData.map((item) => (
           <QuestionsCard
             userId={userId}
             key={item.questionId}
             questionId={item.questionId}
-            title={item.title}
-            description={item.description}
+            isHidden={item.isHidden}
+            description={item.content}
+            createdAt={item.createdAt}
             isHome={isHome}
+            title='질문'
           />
         ))}
     </div>

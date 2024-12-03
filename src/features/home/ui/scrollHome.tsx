@@ -158,7 +158,7 @@ export default function ScrollHome({
             />
           </div>
         ) : (
-          <div className='flex flex-col mt-[52px] w-full bg-[#F6F7FC]'>
+          <div className='flex flex-col mt-[52px] w-full h-screen max-h-[700px] bg-[#F6F7FC]'>
             <QuestionListHeader userId={userId} />
             <div className='w-full px-[24px] flex flex-col gap-8'>
               <TypeQuestionCard isHome={true} />
