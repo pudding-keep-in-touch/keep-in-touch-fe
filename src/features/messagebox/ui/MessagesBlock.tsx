@@ -24,33 +24,29 @@ export default function MessagesBlock({
   if (error) return <div>Error fetching message details.</div>
   if (!data) return null
 
+  const messageCount =
+    messageType === 'sent'
+      ? data.sentMessageCount
+      : data.receivedMessageCount || 0
+
+  const moreLink = messageCount! > 3 && (
+    <Link
+      href={`/messagebox/${userId}/${messageType}`}
+      className='flex items-center gap-[9px]'
+    >
+      <p className=' text-[#6B7684]'>더보기</p>
+      <Image src='/nav_icon.svg' alt='watch more' width={18} height={18} />
+    </Link>
+  )
+
   return (
     <div className='max-w-[390px] px-6 w-full min-h-[368px]'>
       <div className='w-full h-[67px] flex items-center justify-between gap-1'>
         <h2 className='font-semibold text-[18px] flex items-center gap-2'>
           <div>{messageType === 'sent' ? '보낸 퐁' : '받은 퐁'}</div>
-          <div>
-            (
-            {messageType === 'sent'
-              ? data?.sentMessageCount
-              : data?.receivedMessageCount || 0}
-            )
-          </div>
+          <div>({messageCount})</div>
         </h2>
-        {data.receivedMessageCount! > 3 && (
-          <Link
-            href={`/messagebox/${userId}/received`}
-            className='flex items-center gap-[9px]'
-          >
-            <p className=' text-[#6B7684]'>더보기</p>
-            <Image
-              src='/nav_icon.svg'
-              alt='watch more'
-              width={18}
-              height={18}
-            />
-          </Link>
-        )}
+        {moreLink}
       </div>
       <MessageList data={data} userId={userId} messageType={messageType} />
     </div>
