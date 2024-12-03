@@ -31,21 +31,31 @@ export default function MessageList({
     const formatter = new Intl.DateTimeFormat('ko-KR', options)
     return formatter.format(e).replace(' ', '').replace(',', '')
   }
+
   return (
-    <div className='max-w-[390px]'>
-      <div className='pt-2 w-full'>
-        {data.messageList.map((message: Message) => (
+    <>
+      {data.messageList.map((message: Message) => {
+        const isMessageNormal = !message.status || message.status === 'normal'
+        const isReceived = messageType === 'received'
+        const isUnread = !message.readAt
+        const messageContent = isReceived
+          ? message.readAt === null
+            ? '소중한 진심을 확인해보세요'
+            : message.content
+          : message.content
+
+        const messageClassName = `relative ${!isReceived || !isUnread ? '' : 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
+
+        return (
           <div key={message.messageId}>
             <Link
               href={`/messagebox/${userId}/${messageType}/${message.messageId}`}
             >
-              {!message.status || message.status === 'normal' ? (
-                <div
-                  className={`relative ${messageType === 'sent' || message.readAt ? '' : 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`}
-                >
+              {isMessageNormal ? (
+                <div className={messageClassName}>
                   <div className='relative w-[49px] h-[49px] rounded-lg bg-gradient-to-br from-[#BEAFFB] to-[#F975F0]'>
                     <Lottie animationData={unWatchedJson} loop={0} />
-                    {!message.readAt && (
+                    {isUnread && (
                       <div className='absolute leading-[27.2%] border border-white px-[6px] py-[5px] -tracking-widest bottom-[1.1rem] right-[0.3rem] bg-white opacity-[80%] rounded-2xl text-[8px] text-gray-4 font-semibold flex justify-center'>
                         읽지 않음
                       </div>
@@ -53,21 +63,16 @@ export default function MessageList({
                   </div>
                   <div className='flex flex-col'>
                     <div className='text-[#333D4B] font-semibold text-[17px] mb-[4px] leading-none'>
-                      {messageType === 'received'
-                        ? '퐁이 도착했어요!'
-                        : '퐁을 보냈어요!'}
+                      {isReceived ? '퐁이 도착했어요!' : '퐁을 보냈어요!'}
                     </div>
                     <div className='text-gray-3 text-[14px] h-[20px] leading-[130%] tracking-[-0.75px]'>
-                      {messageType === 'received' && message.readAt === null
-                        ? '소중한 진심을 확인해보세요'
-                        : message.content}
+                      {messageContent}
                     </div>
                     <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px] mt-[14px]'>
                       {message.createdAt && dateFormat(message.createdAt)}
                     </div>
                   </div>
-
-                  {!message.readAt && messageType === 'received' && (
+                  {isUnread && isReceived && (
                     <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full'></div>
                   )}
                 </div>
@@ -93,8 +98,8 @@ export default function MessageList({
               )}
             </Link>
           </div>
-        ))}
-      </div>
-    </div>
+        )
+      })}
+    </>
   )
 }
