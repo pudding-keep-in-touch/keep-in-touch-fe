@@ -5,7 +5,7 @@ import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 // import ReactionList from '@/features/messagebox/ui/ReactionList'
 import { useGetEmoji } from '../_detail/api/detailQuery'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import Image from 'next/image'
 export default function ReactionPage({
@@ -19,6 +19,10 @@ export default function ReactionPage({
 }) {
   const lists = ['감사', '사과', '응원', '화해']
   const [selected, setSelected] = useState<string[]>([])
+  const [grouped, setGrouped] = useState<
+    Record<EmojiProps['type'], EmojiProps[]>
+  >({})
+
   const router = useRouter()
   const onSubmit = () => {
     // 데이터 보내는 로직 추가
@@ -34,23 +38,26 @@ export default function ReactionPage({
 
   const { data, error, isLoading } = useGetEmoji()
 
+  useEffect(() => {
+    const groupedData: Record<EmojiProps['type'], EmojiProps[]> = lists.reduce(
+      (acc, type) => {
+        acc[type] = []
+        return acc
+      },
+      {} as Record<EmojiProps['type'], EmojiProps[]>
+    )
+    if (data) {
+      data.forEach((item) => {
+        if (groupedData[item.type]) {
+          groupedData[item.type].push(item)
+        }
+      })
+    }
+    setGrouped(groupedData)
+  }, [data])
+
   if (isLoading) return <div>임시 로딩중..</div>
   if (error) return <div>Error fetching emojis.</div>
-  if (!data) return null
-
-  const groupedData: Record<EmojiProps['type'], EmojiProps[]> = lists.reduce(
-    (acc, type) => {
-      acc[type] = []
-      return acc
-    },
-    {} as Record<EmojiProps['type'], EmojiProps[]>
-  )
-
-  data.forEach((item) => {
-    if (groupedData[item.type]) {
-      groupedData[item.type].push(item)
-    }
-  })
 
   const storedData = (e: string) => {
     if (selected.includes(e)) {
@@ -80,15 +87,15 @@ export default function ReactionPage({
     }
   }
   return (
-    <div className='w-full h-full pb-20'>
+    <div className='absolute top-0 left-0 w-full h-full pb-20 '>
       {lists.map((type) => (
         <div
           key={type}
-          className='w-full flex flex-col py-[20px] h-full border-b-[6px] border-b-gray-1 px-6'
+          className='w-full flex flex-col py-[20px] border-b-[6px] border-b-gray-1 px-6'
         >
           <h2 className='text-base font-semibold tracking-[-0.75px]'>{type}</h2>
           <div className='flex w-full flex-wrap gap-2 pt-[20px]'>
-            {groupedData[type].map((item) => (
+            {grouped[type]?.map((item) => (
               <div
                 key={item.templateId}
                 onClick={() => storedData(item.templateId)}
