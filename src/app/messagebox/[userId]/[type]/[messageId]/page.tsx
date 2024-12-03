@@ -19,7 +19,7 @@ export default function Page({
   }
 
   return (
-    <div className='w-full h-full'>
+    <div className='absolute top-0 left-0 w-full'>
       <div className='flex justify-between h-full mb-[20px]'>
         <header className='w-full h-[50px] flex justify-between items-center z-50 px-6'>
           <ChevronLeftIcon

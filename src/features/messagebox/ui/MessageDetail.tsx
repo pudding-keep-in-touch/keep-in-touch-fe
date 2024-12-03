@@ -4,7 +4,7 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 import Link from 'next/link'
 import QuestionBox from '@/features/messagebox/_detail/ui/component/QuestionBox'
 import MessageBoard from '@/features/messagebox/_detail/ui/component/MessageBoard'
-import Tooltip from './Tooltip'
+import Tooltip from '@/features/messagebox/ui/Tooltip'
 
 export default function MessageDetail({
   userId,
