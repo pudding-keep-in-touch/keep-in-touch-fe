@@ -1,11 +1,3 @@
-'use client'
-
-import { HomeHeader } from '@/shared/components/homeHeader'
-import { Nav } from '@/shared/components/nav'
-import useIsVisible from '@/shared/hooks/useIsVisible'
-import React from 'react'
-import { Toaster } from 'react-hot-toast'
-
 interface Props {
   children: React.ReactNode
 }

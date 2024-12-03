@@ -7,6 +7,7 @@ import { HomeHeader } from '@/shared/components/homeHeader'
 import { useHomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
 import ScrollHome from '@/features/home/ui/scrollHome'
 import { ScrollLayout } from '@/shared/ui/layouts/ScrollLayout'
+import { useGetQuestionList } from './api/api'
 
 const mockData = [
   {
@@ -84,6 +85,8 @@ interface HomeProps {
 export default function Home({ userId }: HomeProps) {
   const [domLoaded, setDomLoaded] = React.useState(false)
 
+  const { data } = useGetQuestionList({ userId })
+
   const [visibleRef, isVisible] = useIsVisible({
     options: { threshold: 0, rootMargin: '0px' },
     initialState: false,
@@ -110,7 +113,7 @@ export default function Home({ userId }: HomeProps) {
           isHome
           userId={userId}
           header={<HomeHeader isVisible={isVisible} isHome />}
-          questionData={mockData}
+          questionData={data}
           currentStep={currentStep}
           onClickToTop={onClickToTop}
           stepRefsInitialized={stepRefsInitialized}
@@ -120,7 +123,7 @@ export default function Home({ userId }: HomeProps) {
               visibleRef={visibleRef}
               userId={userId}
               scrollElement={scrollElement}
-              questionData={mockData}
+              questionData={data}
               currentStep={currentStep}
               setScrollElementState={setScrollElementState}
               questionListRef={questionListRef}

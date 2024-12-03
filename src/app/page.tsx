@@ -49,9 +49,9 @@ export default function Main() {
   //   checkToken()
   // }, [router])
 
-  // React.useEffect(() => {
-  //   setTimeout(() => router.push('/login'), 2000)
-  // })
+  React.useEffect(() => {
+    setTimeout(() => router.push('/login'), 2000)
+  })
 
   return (
     <MainLayout>

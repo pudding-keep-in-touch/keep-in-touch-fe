@@ -9,6 +9,6 @@ export type questionType = {
   questionId: string
   userId: string
   content: string
-  isHidden: false
+  isHidden: boolean
   createdAt: string
 }

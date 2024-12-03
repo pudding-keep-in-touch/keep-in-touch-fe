@@ -7,6 +7,8 @@ import Tooltip from '@/features/home/ui/tooltip'
 import LinkShareButton from '@/features/home/ui/linkShareButton'
 import React from 'react'
 import Image from 'next/image'
+import { useGetQuestionList } from './api/api'
+import { QuestionData } from './model/home.types'
 
 interface QuestionDetailProps {
   questionId: string
@@ -18,14 +20,23 @@ export default function QuestionDetail({
   userId,
 }: QuestionDetailProps) {
   const [toggle, setToggle] = React.useState(false)
+  const [detailQuestion, setDetailQuestion] = React.useState<QuestionData[]>()
   const [visibleRef, isVisible] = useIsVisible({
     options: { threshold: 0, rootMargin: '0px' },
     initialState: false,
   })
 
+  const { data } = useGetQuestionList({ userId })
+
   const onClickToggle = () => {
     setToggle((prev) => !prev)
   }
+
+  React.useEffect(() => {
+    const filterData = data?.filter((item) => item.questionId === questionId)
+
+    setDetailQuestion(filterData)
+  }, [data])
 
   return (
     <QuestionLayout isVisible={isVisible} isHome={false} userId={userId}>
@@ -33,13 +44,19 @@ export default function QuestionDetail({
       <div className='flex-grow w-full h-screen pt-[82px] h-815:pb-[200px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
         <div className='w-full px-[24px]'>
           <div className='flex-grow w-full'>
-            <QuestionsCard
-              userId={userId}
-              questionId={questionId}
-              title='질문'
-              description={`10년지기 친구들아 ㅎㅎ 나의 어떤 점이 너`}
-              isHome={false}
-            />
+            {detailQuestion?.map((question) => (
+              <QuestionsCard
+                key={question.questionId}
+                userId={userId}
+                questionId={questionId}
+                isHidden={question.isHidden}
+                description={question.content}
+                createdAt={question.createdAt}
+                isHome={false}
+                title='질문'
+              />
+            ))}
+
             <div className='flex flex-col mt-5 mb-4 gap-2'>
               <h3 className='font-semibold text-[16px] tracking-[-0.75px]'>
                 숨기기 설정

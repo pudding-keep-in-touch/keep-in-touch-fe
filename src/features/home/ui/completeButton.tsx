@@ -9,26 +9,32 @@ interface CompleteButtonProps {
   userId: number
   isDisabled: boolean
   keyboardHeight: number
+  onSubmit: () => unknown
 }
 
 export default function CompleteButton({
   userId,
   isDisabled,
   keyboardHeight,
+  onSubmit,
 }: CompleteButtonProps) {
   const router = useRouter()
 
+  console.log('isDisabled', isDisabled)
+
   const onClickComplete = () => {
+    console.log('onClickComplete 실행됨!')
     if (!isDisabled) {
-      router.back()
+      console.log('onSubmit 실행!')
+      onSubmit()
     } else {
+      console.log('버튼 비활성화 상태')
       toast('질문 작성이 필요합니다')
     }
   }
-
   return (
     <Button
-      type='button'
+      type='submit'
       className='h-fit p-[18px] bg-system-blue text-white rounded-2xl font-bold w-full'
       disabled={isDisabled}
       onClick={() => {
