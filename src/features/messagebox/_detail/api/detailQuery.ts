@@ -8,110 +8,133 @@ import {
 
 // 받은 쪽지 리스트
 const receivedMockData = {
-  received_message_count: 3,
-  nextCursor: '2024-11-15T08:08:38.654Z',
+  receivedMessageCount: 4,
+  nextCursor: new Date('2024-11-15T08:08:38.654Z'),
   messageList: [
     {
-      messageId: 1,
-      receiverId: 11,
+      messageId: '1',
+      receiverId: '1',
       receiverNickname: 'John Doe',
       content: 'Hello!',
-      createdAt: '2024-10-01',
+      status: 'reported',
+      createdAt: new Date('2024-09-01'),
+      readAt: new Date('2024-09-04'),
     },
-    {
-      messageId: 2,
-      receiverId: 11,
-      receiverNickname: 'John Doe',
-      content: 'How are you?',
-      createdAt: '2024-10-02',
-    },
-    {
-      messageId: 3,
-      receiverId: 11,
-      receiverNickname: 'John Doe',
-      content: 'Goodbye!',
-      createdAt: '2024-10-03',
-    },
+    // {
+    //   messageId: '2',
+    //   receiverId: '1',
+    //   receiverNickname: 'John Doe',
+    //   content: 'How are you?',
+    //   status: 'normal',
+    //   createdAt: new Date('2024-09-02'),
+    //   readAt: null,
+    // },
+    // {
+    //   messageId: '3',
+    //   receiverId: '1',
+    //   receiverNickname: 'John Doe',
+    //   content: 'Goodbye!',
+    //   status: 'hidden',
+    //   createdAt: new Date('2024-09-03'),
+    //   readAt: new Date('2024-09-06'),
+    // },
+    // {
+    //   messageId: '4',
+    //   receiverId: '1',
+    //   receiverNickname: 'John Doe',
+    //   content: 'Hello!',
+    //   status: 'normal',
+    //   createdAt: new Date('2024-09-04'),
+    //   readAt: new Date('2024-09-07'),
+    // },
   ],
 }
 
 // 보낸 쪽지 리스트
 const sentMockData = {
-  sentMessageCount: 3,
-  nextCursor: '2024-11-15T08:08:38.654',
+  sentMessageCount: 4,
+  nextCursor: new Date('2024-11-15T08:08:38.654Z'),
   messageList: [
     {
-      messageId: 1,
-      receiverId: 1,
+      messageId: '1',
+      receiverId: '1',
       receiverNickname: 'Jisu Kim',
-      content: '안녕, 너가 토이 프로젝트를 배포까지 하다니 진짜 대단하다..!!',
-      status: 'normal',
-      createdAt: '2024-09-02',
+      content: '안녕1',
+      createdAt: new Date('2024-09-02'),
     },
     {
-      messageId: 2,
-      receiverId: 1,
+      messageId: '2',
+      receiverId: '1',
       receiverNickname: 'Jisu Kim',
-      content: '안녕, 너가 토이 프로젝트를 배포까지 하다니 진짜 대단하다..!!',
-      status: 'normal',
-      createdAt: '2024-09-02',
+      content: '언제 만날래??!!!',
+      createdAt: new Date('2024-09-02'),
     },
     {
-      messageId: 3,
-      receiverId: 1,
+      messageId: '3',
+      receiverId: '1',
       receiverNickname: 'Jisu Kim',
-      content: '안녕, 너가 토이 프로젝트를 배포까지 하다니 진짜 대단하다..!!',
-      status: 'normal',
-      createdAt: '2024-09-02',
+      content: '연말 파티하자',
+      createdAt: new Date('2024-09-02'),
+    },
+    {
+      messageId: '4',
+      receiverId: '1',
+      receiverNickname: 'Jisu Kim',
+      content: '코스튬도 입어?',
+      createdAt: new Date('2024-09-05'),
     },
   ],
 }
 
 // 받은 쪽지 상세
 const receivedDetailMockData = {
-  messageId: 1,
-  type: 'received',
-  receiverId: 11,
-  receiverNickname: '제인',
-  content: '질문에 대한 상세 대답',
-  question: {
-    questionId: 1,
-    content: '상세임 여기',
+  status: 200,
+  message: '쪽지 조회 성공',
+  data: {
+    messageId: '1',
+    type: 'received',
+    receiverId: '1',
+    receiverNickname: '제인',
+    content: '안녕 나 누구게',
+    question: {
+      questionId: '1',
+      content: '질문 남겨주라',
+    },
+    reactions: [
+      // {
+      //   reactionId: '1',
+      //   content: '고마워',
+      //   type: '감사',
+      //   emoji: '🖤',
+      // },
+      // {
+      //   reactionId: '2',
+      //   content: '미안해',
+      //   type: '사과',
+      //   emoji: '💙',
+      // },
+      // {
+      //   reactionId: '3',
+      //   content: '궁금해',
+      //   type: '응원',
+      //   emoji: '💛',
+      // },
+      // {
+      //   reactionId: '4',
+      //   content: '만나서 얘기하자',
+      //   type: '사과',
+      //   emoji: '🧡',
+      // },
+      // {
+      //   reactionId: '5',
+      //   content: '너밖에 없어',
+      //   type: '감사',
+      //   emoji: '🤍',
+      // },
+    ],
+    status: 'normal',
+    createdAt: new Date('2024-09-02'),
   },
-  reactions: [
-    {
-      reactionId: 1,
-      content: '고마워',
-      type: '감사',
-      emoji: '🖤',
-    },
-    {
-      reactionId: 2,
-      content: '미안해',
-      type: '사과',
-      emoji: '💙',
-    },
-    {
-      reactionId: 3,
-      content: '항상 응원해',
-      type: '응원',
-      emoji: '💛',
-    },
-    {
-      reactionId: 4,
-      content: '만나서 얘기하자',
-      type: '사과',
-      emoji: '🧡',
-    },
-    {
-      reactionId: 5,
-      content: '너밖에 없어',
-      type: '감사',
-      emoji: '🤍',
-    },
-  ],
-  status: 'normal',
-  createdAt: '2024-09-02',
 }
 
 // 보낸 쪽지 상세
@@ -119,9 +142,9 @@ const sentDetailMockData = {
   status: 200,
   message: '쪽지 조회 성공',
   data: {
-    messageId: 1,
+    messageId: '1',
     type: 'sent',
-    receiverId: 11,
+    receiverId: '11',
     receiverNickname: 'Jisu Kim',
     content: '안녕, 너가 토이 프로젝트를 배포까지 하다니 진짜 대단하다..!!',
     emotion: {
@@ -131,17 +154,17 @@ const sentDetailMockData = {
     },
     reactions: [
       {
-        reactionId: 1,
+        reactionId: '1',
         content: '감사감사합니다~',
         type: '감사',
         emoji: '🧐',
       },
     ],
-    createdAt: '2024-09-02',
+    createdAt: new Date('2024-09-02'),
   },
 }
 
-// 목 데이터 테스트
+// 리스트 테스트
 export const useGetMessageList = ({
   userId,
   type,
@@ -152,7 +175,7 @@ export const useGetMessageList = ({
   return useQuery<MessageResponse, Error>({
     queryKey: ['getMessageList', userId, type, cursor, limit, order],
     queryFn: async () => {
-      return receivedMockData
+      return type === 'received' ? receivedMockData : sentMockData
     },
     enabled: true,
   })
@@ -189,7 +212,7 @@ export const useGetMessageList = ({
 //   })
 // }
 
-// mock 데이터 테스트
+// 상세 테스트
 export const useGetMessageDetail = ({ messageId }: { messageId: number }) => {
   return useQuery<MessageDetail, Error>({
     queryKey: ['getDetailMessage', messageId],
@@ -205,6 +228,153 @@ export const useGetMessageDetail = ({ messageId }: { messageId: number }) => {
 //     queryKey: ['getDetailMessage', messageId],
 //     queryFn: async () => {
 //       const { data } = await baseQuery.get(`/v2/messages/${messageId}`, {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+//         },
+//       })
+//       return data
+//     },
+//   })
+// }
+
+const emojis = [
+  {
+    templateId: '1',
+    type: '감사',
+    emoji: '😊',
+    content: '고마워',
+  },
+  {
+    templateId: '2',
+    type: '감사',
+    emoji: '🥰',
+    content: '덕분이야',
+  },
+  {
+    templateId: '3',
+    type: '감사',
+    emoji: '😘',
+    content: '최고야',
+  },
+  {
+    templateId: '4',
+    type: '감사',
+    emoji: '🥹',
+    content: '감동이야',
+  },
+  {
+    templateId: '5',
+    type: '감사',
+    emoji: '🤭',
+    content: '너밖에 없어',
+  },
+  {
+    templateId: '6',
+    type: '사과',
+    emoji: '🥲',
+    content: '내가 더 잘할게',
+  },
+  {
+    templateId: '7',
+    type: '사과',
+    emoji: '😔',
+    content: '잘못했어',
+  },
+  {
+    templateId: '8',
+    type: '사과',
+    emoji: '🥹',
+    content: '죄인이오',
+  },
+  {
+    templateId: '9',
+    type: '사과',
+    emoji: '😭',
+    content: '반성하는 중',
+  },
+  {
+    templateId: '10',
+    type: '사과',
+    emoji: '🥺',
+    content: '미안해',
+  },
+  {
+    templateId: '11',
+    type: '응원',
+    emoji: '😎',
+    content: '화이팅',
+  },
+  {
+    templateId: '12',
+    type: '응원',
+    emoji: '🤩',
+    content: '멋있어',
+  },
+  {
+    templateId: '13',
+    type: '응원',
+    emoji: '👏',
+    content: '고생 많았어',
+  },
+  {
+    templateId: '14',
+    type: '응원',
+    emoji: '💪',
+    content: '응원할게',
+  },
+  {
+    templateId: '15',
+    type: '응원',
+    emoji: '🍀',
+    content: '행운을 빌어요',
+  },
+  {
+    templateId: '16',
+    type: '화해',
+    emoji: '☺️',
+    content: '그럴 수 있지',
+  },
+  {
+    templateId: '17',
+    type: '화해',
+    emoji: '🤗',
+    content: '괜찮아',
+  },
+  {
+    templateId: '18',
+    type: '화해',
+    emoji: '😁',
+    content: '잘 부탁해',
+  },
+  {
+    templateId: '19',
+    type: '화해',
+    emoji: '😤',
+    content: '나한테 잘해',
+  },
+  {
+    templateId: '20',
+    type: '화해',
+    emoji: '😉',
+    content: '한 번만 봐줄게',
+  },
+]
+
+export const useGetEmoji = () => {
+  return useQuery({
+    queryKey: ['getEmoji'],
+    queryFn: async () => {
+      return emojis
+    },
+  })
+}
+
+// 본 테스트
+// export const getEmojis = () => {
+//   return useQuery({
+//     queryKey: ['getEmoji'],
+//     queryFn: async () => {
+//       const { data } = await baseQuery.get(`/v2/reactions/templates`, {
 //         headers: {
 //           Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
 //         },
