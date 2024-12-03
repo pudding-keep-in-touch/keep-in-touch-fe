@@ -4,7 +4,7 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 import ReactionPage from '@/features/messagebox/ui/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-
+import { Toaster } from 'react-hot-toast'
 export default function Page({
   params: { userId, type, messageId },
 }: {
@@ -13,7 +13,8 @@ export default function Page({
   const router = useRouter()
   // /reaction, /report, /hide 제외 나머지 페이지 예외 처리 필요
   return (
-    <div className='absolute top-0 left-0 w-full'>
+    <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
+      <Toaster position='bottom-center' reverseOrder={false} />
       <div className='flex justify-center w-full'>
         <header className='w-full h-[50px] grid grid-cols-3 items-center z-50 px-6'>
           <ChevronLeftIcon
@@ -25,7 +26,13 @@ export default function Page({
           </h1>
         </header>
       </div>
-      <ReactionPage messageType={type} userId={userId} messageId={messageId} />
+      <div className='relative w-full h-full overflow-y-scroll scrollbar-hide'>
+        <ReactionPage
+          messageType={type}
+          userId={userId}
+          messageId={messageId}
+        />
+      </div>
     </div>
   )
 }
