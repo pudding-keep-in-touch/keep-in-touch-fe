@@ -1,8 +1,8 @@
 import apiClient from '../../auth/api/apiClient'
 
-export const getHome = async (userId: number | null) => {
+export const getQuestionList = async (userId: number | null) => {
   try {
-    const response = await apiClient(`v1/users/${userId}/home`)
+    const response = await apiClient(`v2/users/${userId}/questions`)
     return response
   } catch (error) {
     console.error(error)
