@@ -1,3 +1,4 @@
+import QuestionFormProvider from '@/features/home/context/FormProvider'
 import { WriteQuestion } from '@/features/home/writeQuestion'
 
 export default function WriteQuestionPage({
@@ -5,5 +6,9 @@ export default function WriteQuestionPage({
 }: {
   params: { userId: number }
 }) {
-  return <WriteQuestion userId={userId} />
+  return (
+    <QuestionFormProvider>
+      <WriteQuestion userId={userId} />
+    </QuestionFormProvider>
+  )
 }

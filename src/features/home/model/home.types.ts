@@ -15,6 +15,7 @@ export interface HomeData {
 
 export interface QuestionData {
   questionId: string
-  title: string
-  description: string
+  content: string
+  isHidden: boolean
+  createdAt: string
 }
