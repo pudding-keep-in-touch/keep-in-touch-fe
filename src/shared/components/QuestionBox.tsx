@@ -8,7 +8,11 @@ interface QuestionBoxProps {
   content?: string
   variant?: QuestionBoxVariant
   userId?: string
-  onQuestionClick?: (questionId: string, content: string) => void
+  onQuestionClick?: (
+    questionId: string,
+    content: string,
+    userId: string
+  ) => void
   onTypeClick?: (userId: string) => void
 }
 
@@ -22,14 +26,12 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
 }) => {
   const handleClick = () => {
     if (onQuestionClick) {
-      onQuestionClick(questionId || '', content || '')
+      onQuestionClick(questionId || '', content || '', userId || '')
     }
     if (onTypeClick) {
       onTypeClick(userId || '')
     }
   }
-
-  console.log('userId', userId)
 
   return (
     <div

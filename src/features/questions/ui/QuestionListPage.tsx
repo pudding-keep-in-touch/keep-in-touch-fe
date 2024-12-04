@@ -7,6 +7,7 @@ import QuestionBox from '@/shared/components/QuestionBox'
 import { questions } from '@/entities/questions/questionData'
 import { useState } from 'react'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
+import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
 
 export default function QuestionListPage() {
   const router = useRouter()
@@ -14,8 +15,10 @@ export default function QuestionListPage() {
 
   const userId = questions.map((question) => question.userId)
 
+  // const { data: nickname } = useGetNickname(userId)
+
   //todo nickname 가져오기
-  const nickname = 'luna'
+  // const nickname = 'luna'
 
   //todo 로그인 state추가
   // 수정된 redirectToLoginIfNeeded 함수
@@ -30,13 +33,29 @@ export default function QuestionListPage() {
     }
   }
 
-  const handleQuestionClick = (questionId: string, content: string) => {
-    redirectToLoginIfNeeded(() => {
-      // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
-      queryClient.setQueryData(['selectedQuestion'], { questionId, content })
-      router.push('/questions/messages')
+  const handleQuestionClick = (
+    questionId: string,
+    content: string,
+    userId: string
+  ) => {
+    // redirectToLoginIfNeeded(() => {
+    // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
+    queryClient.setQueryData(['selectedQuestion'], {
+      questionId,
+      content,
+      userId,
     })
+    router.push('/questions/messages')
+    // })
   }
+
+  // const handleQuestionClick = (questionId: string, content: string, userId: string) => {
+  //   // 선택된 질문 데이터를 캐시에 저장
+  //   queryClient.setQueryData(['selectedQuestion'], { questionId, content, userId })
+
+  //   // MessagePage로 라우팅
+  //   router.push('/questions/messages')
+  // }
 
   const handleTypeMessageClick = () => {
     router.push(`/message/send/${userId}/select`)

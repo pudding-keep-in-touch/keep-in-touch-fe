@@ -66,7 +66,10 @@ export default function MessagePage() {
   const selectedQuestion = queryClient.getQueryData<{
     questionId: string
     content: string
+    userId: string
   }>(['selectedQuestion'])
+
+  // console.log('selectedQuestion', selectedQuestion)
 
   const steps = [1, 2]
 
