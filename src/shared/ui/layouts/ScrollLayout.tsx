@@ -40,7 +40,9 @@ export const ScrollLayout = ({
       {/* StyledLayout */}
       <div
         ref={(el) => {
-          setScrollElement(el)
+          if (el && scrollElement !== el) {
+            setScrollElement(el)
+          }
         }}
         className='relative w-full h-full overflow-y-scroll scrollbar-hide'
       >
@@ -59,14 +61,15 @@ export const ScrollLayout = ({
         </div>
       </div>
 
-      <Nav type='home' userId={9} isNew={true} />
-
       {questionData !== undefined && currentStep === 1 && (
         <ScrollToTopButton
           onClickToTop={onClickToTop}
           stepRefsInitialized={stepRefsInitialized}
         />
       )}
+
+      {/* TODO : isNew API 맹그러지면 추가해야함 */}
+      <Nav type='home' userId={userId} isNew={false} />
     </div>
   )
 }

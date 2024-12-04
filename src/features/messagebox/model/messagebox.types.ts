@@ -3,8 +3,13 @@ import { MessageType } from '../_detail/model/messagebox.types'
 export type MessageBoxType = {
   messageId: number
 }
-
-// 받은 쪽지 상세 조회 타입
+export type Reactions = {
+  reactionId: string
+  content: string
+  type: string
+  emoji: string
+}
+// 쪽지 상세 조회
 export interface MessageDetail {
   status: number
   message: string
@@ -43,10 +48,11 @@ export type Message = {
   reactionInfo?: reaction | null
 }
 
-// 받은 쪽지 리스트 조회 타입
+// 쪽지 리스트 조회
 export interface MessageResponse {
   receivedMessageCount?: number
   sentMessageCount?: number
+  unreadMessageCount?: number // 받은 쪽지만
   nextCursor: Date | null
   messageList: Message[]
 }

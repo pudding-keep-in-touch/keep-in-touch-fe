@@ -57,9 +57,37 @@ export const usePostQuestionList = () => {
   })
 }
 
-// export const usePostQuestionHidden = () => {
-//   return useMutation({
-//     mutationKey: ['postQuestionHidden'],
-//     mutationFn: async({}),
-//   })
-// }
+interface usePostQuestionHiddenProps {
+  questionId: string
+  isHidden: boolean
+}
+
+export const usePostQuestionHidden = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationKey: ['postQuestionHidden'],
+    mutationFn: async ({
+      questionId,
+      isHidden,
+    }: usePostQuestionHiddenProps) => {
+      const { data } = await baseQuery.patch(
+        `/v2/questions/${questionId}`, // 백틱 사용
+        { isHidden }, // 요청 바디
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+          },
+        }
+      )
+
+      return data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['questionList'] })
+      console.log('Toggle mutation successful')
+    },
+    onError: (error) => {
+      console.error('Toggle mutation failed:', error)
+    },
+  })
+}

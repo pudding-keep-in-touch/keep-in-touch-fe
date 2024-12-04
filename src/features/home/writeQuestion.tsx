@@ -10,7 +10,6 @@ import { usePostQuestionList } from './api/api'
 import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { QuestionFormValues } from './model/formSchema'
-import QuestionFormProvider from './context/FormProvider'
 interface WriteQuestionProps {
   userId: number
 }
@@ -36,11 +35,6 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
       const viewportHeight = window.visualViewport?.height || window.innerHeight
       const heightDiff = window.innerHeight - viewportHeight
       const isKeyboardVisible = heightDiff > 0
-
-      console.log('Viewport Height:', viewportHeight)
-      console.log('Inner Height:', window.innerHeight)
-      console.log('Height Difference:', heightDiff)
-      console.log('isKeyboardVisible', isKeyboardVisible)
 
       // 키보드 높이 정규화
       const normalizedHeight = isKeyboardVisible
@@ -98,7 +92,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
       if (response) {
         router.push(`/home/${userId}`)
       } else {
-        console.error('respons가 응답에 없습니다:', response)
+        console.error('response가 응답에 없습니다:', response)
       }
     } catch (error) {
       console.log('질문 작성에 실패했습니다.')

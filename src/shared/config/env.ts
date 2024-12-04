@@ -21,6 +21,6 @@ export const LOCAL_URL = {
 }[APP_ENV]
 
 export const getLoginUrl = (redirectUrl: string) =>
-  `${API_BASE_URL}?redirectUrl=${encodeURI(
+  `${API_BASE_URL}?redirectUrl=${encodeURIComponent(
     `${window.location.origin}/v2/auth/google/callback?redirectUrl=${redirectUrl}`
   )}`

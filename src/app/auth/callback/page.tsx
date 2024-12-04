@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import React from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
 
@@ -8,30 +8,25 @@ export default function Callback() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  console.log('Callback 컴포넌트 렌더링됨') // 렌더링 여부 확인
-
-  const redirectUrl = searchParams.get('redirectUrl') || '/home'
-  console.log('redirectUrl:', redirectUrl)
-
-  useEffect(() => {
-    console.log('useEffect 실행됨') // useEffect가 실행되는지 확인
-
+  React.useEffect(() => {
     const token = searchParams.get('accessToken')
     const userId = searchParams.get('userId') as string
 
-    console.log('토큰:', token)
-    console.log('유저 ID:', userId)
+    // redirectUrl 결정
+    const redirectUrl =
+      searchParams.get('redirectUrl') || // 쿼리 파라미터에 redirectUrl이 있는 경우
+      localStorage.getItem('redirect_before_login') || // 로컬스토리지에 저장된 이전 경로가 있는 경우
+      (userId ? `/home/${userId}` : `/login`) // userId가 있으면 /home/${userId}, 없으면 /login
 
-    if (token) {
+    if (token && userId) {
       localStorage.setItem('keep_in_touch_token', token)
       localStorage.setItem('keep_in_touch_user_id', userId)
-      const decodedRedirectUrl = decodeURIComponent(redirectUrl)
-      console.log('Redirecting to:', decodedRedirectUrl)
-      router.push(decodedRedirectUrl)
+      localStorage.removeItem('redirect_before_login') // 초기화
+      router.push(decodeURIComponent(redirectUrl)) // 최종 redirectUrl로 이동
     } else {
-      router.push('/login')
+      router.push('/login') // 토큰 또는 userId가 없으면 /login으로 이동
     }
-  }, [searchParams, router, redirectUrl])
+  }, [searchParams, router])
 
   return (
     <MainLayout>

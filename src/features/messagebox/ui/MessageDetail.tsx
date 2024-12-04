@@ -5,6 +5,7 @@ import Link from 'next/link'
 import QuestionBox from '@/features/messagebox/_detail/ui/component/QuestionBox'
 import MessageBoard from '@/features/messagebox/_detail/ui/component/MessageBoard'
 import Tooltip from '@/features/messagebox/ui/Tooltip'
+import { Reactions } from '@/features/messagebox/model/messagebox.types'
 
 export default function MessageDetail({
   userId,
@@ -23,12 +24,12 @@ export default function MessageDetail({
 
   return (
     <div className='w-full h-full flex flex-col justify-center items-center text-black gap-4 px-6'>
-      <QuestionBox content={data.data.question.content} />
+      <QuestionBox content={data.question.content} />
       <MessageBoard
-        receiverNickname={data.data.receiverNickname}
-        content={data.data.content}
+        receiverNickname={data.receiverNickname}
+        content={data.content}
       />
-      {messageType === 'received' && data.data.reactions?.length === 0 ? (
+      {messageType === 'received' && data.reactions?.length === 0 ? (
         <div className='fixed flex w-full justify-center items-center bottom-0 pb-[10px] max-w-[390px] z-10 mr-auto ml-auto'>
           <Tooltip>
             <Link
@@ -41,7 +42,7 @@ export default function MessageDetail({
         </div>
       ) : (
         <div className='w-full flex flex-wrap gap-[8px]'>
-          {data.data.reactions?.map((reaction) => (
+          {data.reactions?.map((reaction: Reactions) => (
             <div key={reaction.reactionId} className='flex-none'>
               <div className='w-full p-[12px] h-[35px] bg-white bg-opacity-90 rounded-2xl flex items-center border-[0.5px] border-gray-2 gap-[4px]'>
                 <div>{reaction.emoji}</div>
