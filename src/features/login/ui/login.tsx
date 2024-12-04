@@ -72,7 +72,8 @@ export const Login = () => {
           </Swiper>
         </div>
         <div className='font-medium bottom-0 p-[18px] w-full h-fit flex flex-col gap-2 mt-auto mb-[30px] leading-[130%] tracking-[-1px] absolute z-10'>
-          <KakaoButton />
+          {/* TODO : 카카오 로그인 API 완성되면 추가해야함 */}
+          {/* <KakaoButton /> */}
           <GoogleButton />
         </div>
       </div>

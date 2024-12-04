@@ -59,7 +59,8 @@ export const ScrollLayout = ({
         </div>
       </div>
 
-      <Nav type='home' userId={9} isNew={true} />
+      {/* TODO : isNew API 맹그러지면 추가해야함 */}
+      <Nav type='home' userId={userId} isNew={false} />
 
       {questionData !== undefined && currentStep === 1 && (
         <ScrollToTopButton
