@@ -15,28 +15,27 @@ export default function QuestionListPage() {
   const userId = questions.map((question) => question.userId)
 
   //todo nickname 가져오기
-  console.log('questions', questions)
   const nickname = 'luna'
 
   //todo 로그인 state추가
+  // 수정된 redirectToLoginIfNeeded 함수
   const redirectToLoginIfNeeded = (callback: () => void) => {
     if (!isUserLoggedIn()) {
-      // 로그인 페이지로 이동 (현재 경로 포함)
-      const currentPath = window.location.pathname
-      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`)
+      // 로그인 페이지로 이동, 원래 페이지인 /questions/messages 경로를 redirectUrl로 전달
+      const redirectUrl = encodeURIComponent('/questions/messages')
+      router.push(`/login?redirectUrl=${redirectUrl}`)
     } else {
-      // 로그인 상태면 콜백 실행
+      // 로그인 상태라면 콜백 실행
       callback()
     }
   }
 
   const handleQuestionClick = (questionId: string, content: string) => {
-    // redirectToLoginIfNeeded(() => {
-    // 선택된 질문 데이터를 캐싱
-    queryClient.setQueryData(['selectedQuestion'], { questionId, content })
-    // ReplyPage로 이동
-    router.push('/questions/messages')
-    // })
+    redirectToLoginIfNeeded(() => {
+      // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
+      queryClient.setQueryData(['selectedQuestion'], { questionId, content })
+      router.push('/questions/messages')
+    })
   }
 
   const handleTypeMessageClick = () => {
