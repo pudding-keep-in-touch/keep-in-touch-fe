@@ -23,11 +23,10 @@ export default function QuestionDetail({
     options: { threshold: 0, rootMargin: '0px' },
     initialState: false,
   })
-
   const [isHidden, setIsHidden] = React.useState(false)
-  const { mutateAsync } = usePostQuestionHidden()
 
   const { data } = useGetQuestionList({ userId })
+  const { mutateAsync } = usePostQuestionHidden()
 
   const handleToggle = async (isToggle: boolean) => {
     try {
