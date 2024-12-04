@@ -33,7 +33,7 @@ export default function GoogleButton() {
         height={20}
         className='absolute left-6'
       />
-      <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
+      <h1 className='text-lg font-medium text-center text-[#333D4B] leading-[130%] tracking-[-1px]'>
         {isLoading ? '로그인 중...' : '구글로 로그인하기'}
       </h1>
     </Button>

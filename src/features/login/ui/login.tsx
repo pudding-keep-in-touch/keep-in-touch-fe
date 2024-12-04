@@ -36,7 +36,7 @@ export const Login = () => {
   }
 
   return (
-    <div className='w-full h-screen flex flex-col justify-start items-center relative'>
+    <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
       <div className='w-full h-full overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
         <div className='mt-[82px] h-815:mb-[178px]'>
           <Swiper
@@ -71,11 +71,11 @@ export const Login = () => {
             <div className='swiper-pagination absolute left-0 w-full flex justify-center'></div>
           </Swiper>
         </div>
-        <div className='font-medium bottom-0 p-[18px] w-full h-fit flex flex-col gap-2 mt-auto mb-[30px] leading-[130%] tracking-[-1px] absolute z-10'>
-          {/* TODO : 카카오 로그인 API 완성되면 추가해야함 */}
-          {/* <KakaoButton /> */}
-          <GoogleButton />
-        </div>
+      </div>
+      <div className='sticky w-full h-[84px] bottom-0 flex flex-col justify-center items-start px-[10px] py-[20px] pt-3 gap-[97px] rounded-tl-[16px] rounded-tr-[16px] z-20'>
+        {/* TODO : 카카오 로그인 API 완성되면 추가해야함 */}
+        {/* <KakaoButton /> */}
+        <GoogleButton />
       </div>
     </div>
   )
