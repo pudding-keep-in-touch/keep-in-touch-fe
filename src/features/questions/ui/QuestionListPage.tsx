@@ -36,15 +36,15 @@ export default function QuestionListPage() {
     content: string,
     userId: string
   ) => {
-    // redirectToLoginIfNeeded(() => {
-    // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
-    queryClient.setQueryData(['selectedQuestion'], {
-      questionId,
-      content,
-      userId,
+    redirectToLoginIfNeeded(() => {
+      // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
+      queryClient.setQueryData(['selectedQuestion'], {
+        questionId,
+        content,
+        userId,
+      })
+      router.push('/questions/messages')
     })
-    router.push('/questions/messages')
-    // })
   }
 
   // const handleQuestionClick = (questionId: string, content: string, userId: string) => {
