@@ -4,7 +4,7 @@ import {
   MessageResponse,
   useGetMessageListProps,
 } from '@/features/messagebox/model/messagebox.types'
-// import { baseQuery } from '@/shared/api/baseQuery'
+import { baseQuery } from '@/shared/api/baseQuery'
 
 // 받은 쪽지 리스트
 const receivedMockData = {
@@ -52,7 +52,7 @@ const receivedMockData = {
 
 // 보낸 쪽지 리스트
 const sentMockData = {
-  sentMessageCount: 4,
+  sentMessageCount: 3,
   nextCursor: new Date('2024-11-15T08:08:38.654Z'),
   messageList: [
     {
@@ -88,17 +88,17 @@ const sentMockData = {
         createdAt: new Date('2024-09-02T08:08:38.654'),
       },
     },
-    {
-      messageId: '4',
-      receiverId: '1',
-      receiverNickname: 'Jisu Kim',
-      content: '보낸 쪽지 상세 4 코스튬도 입어?',
-      createdAt: new Date('2024-09-05'),
-      reactionInfo: {
-        readAt: null,
-        createdAt: new Date('2024-09-02T08:08:38.654'),
-      },
-    },
+    // {
+    //   messageId: '4',
+    //   receiverId: '1',
+    //   receiverNickname: 'Jisu Kim',
+    //   content: '보낸 쪽지 상세 4 코스튬도 입어?',
+    //   createdAt: new Date('2024-09-05'),
+    //   reactionInfo: {
+    //     readAt: null,
+    //     createdAt: new Date('2024-09-02T08:08:38.654'),
+    //   },
+    // },
   ],
 }
 
@@ -181,7 +181,6 @@ const sentDetailMockData = {
   },
 }
 
-// 리스트 테스트
 export const useGetMessageList = ({
   userId,
   type,
@@ -192,67 +191,57 @@ export const useGetMessageList = ({
   return useQuery<MessageResponse, Error>({
     queryKey: ['getMessageList', userId, type, cursor, limit, order],
     queryFn: async () => {
-      return type === 'received' ? receivedMockData : sentMockData
+      const baseUrl = `/v2/users/${userId}/messages?type=${type}`
+      const params = new URLSearchParams()
+      if (cursor) {
+        params.append(
+          'cursor',
+          typeof cursor === 'string' ? cursor : cursor.toISOString()
+        )
+      }
+      if (limit) {
+        params.append('limit', limit.toString())
+      }
+      if (order) {
+        params.append('order', order)
+      }
+
+      const url = params.toString()
+        ? `${baseUrl}&${params.toString()}`
+        : baseUrl
+
+      try {
+        const { data } = await baseQuery.get(url, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+          },
+        })
+        if (!data) {
+          throw new Error('No data received')
+        }
+        return data
+      } catch (error) {
+        console.error('Error fetching messages:', error)
+        throw Error
+      }
     },
-    enabled: true,
   })
 }
 
 // 본 테스트
-// export const useGetMessageList = ({
-//   userId,
-//   type,
-//   cursor,
-//   limit,
-//   order,
-// }: useGetMessageListProps) => {
-//   return useQuery<MessageResponse, Error>({
-//     queryKey: ['getMessageList', userId, type, cursor],
-//     queryFn: async () => {
-//       const { data } = await baseQuery.get(
-//         `/v2/users/${userId}/messages?type=${type}&cursor=${cursor}&limit=${limit}&order=${order}`,
-//         {
-//           params: {
-//             type,
-//             cursor,
-//             limit,
-//             order,
-//           },
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
-//           },
-//         }
-//       )
-//       return data
-//     },
-//     enabled: true,
-//   })
-// }
-
-// 상세 테스트
 export const useGetMessageDetail = ({ messageId }: { messageId: number }) => {
-  return useQuery<MessageDetail, Error>({
+  return useQuery({
     queryKey: ['getDetailMessage', messageId],
     queryFn: async () => {
-      return receivedDetailMockData
+      const { data } = await baseQuery.get(`/v2/messages/${messageId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+        },
+      })
+      return data
     },
   })
 }
-
-// 본 테스트
-// export const useGetMessageDetail = ({ messageId }: MessageDetail) => {
-//   return useQuery({
-//     queryKey: ['getDetailMessage', messageId],
-//     queryFn: async () => {
-//       const { data } = await baseQuery.get(`/v2/messages/${messageId}`, {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
-//         },
-//       })
-//       return data
-//     },
-//   })
-// }
 
 const emojis = [
   {
