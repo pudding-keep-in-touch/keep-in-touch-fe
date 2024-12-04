@@ -40,7 +40,7 @@ export type Message = {
   status?: string
   createdAt: Date | null
   readAt?: Date | null
-  reactionInfo?: reaction[] | null
+  reactionInfo?: reaction | null
 }
 
 // 받은 쪽지 리스트 조회 타입

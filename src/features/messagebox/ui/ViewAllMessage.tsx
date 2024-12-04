@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 import { useState } from 'react'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import MessagesBlock from './MessagesBlock'
+import MessagesBlock from '@/features/messagebox/ui/MessagesBlock'
 
 // userId, userId: number,
 export default function ViewAllMessage({

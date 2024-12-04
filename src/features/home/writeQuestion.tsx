@@ -1,18 +1,22 @@
 'use client'
 
 import { BackHeader } from '@/shared/ui/BackHeader'
-import LinkShareButton from '@/features/home/ui/linkShareButton'
-import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import WriteInput from '@/features/home/ui/writeInput'
 import React from 'react'
 import CompleteButton from './ui/completeButton'
 import Image from 'next/image'
 import { debounce } from 'lodash'
+import { usePostQuestionList } from './api/api'
+import { useFormContext } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { QuestionFormValues } from './model/formSchema'
+import QuestionFormProvider from './context/FormProvider'
 interface WriteQuestionProps {
   userId: number
 }
 
 export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
+  const router = useRouter()
   const [currentDescription, setCurrentDescription] = React.useState('')
   const [toggle, setToggle] = React.useState(false)
   const [isError, setIsError] = React.useState(true)
@@ -21,6 +25,10 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
   const [keyboardHeight, setKeyboardHeight] = React.useState(0)
   const contentRef = React.useRef<HTMLDivElement | null>(null)
   const scrollableRef = React.useRef<HTMLDivElement | null>(null)
+  const { formState, handleSubmit } = useFormContext<QuestionFormValues>()
+
+  const { mutateAsync, isPending } = usePostQuestionList()
+  const { isValid } = formState
 
   // 키보드 높이 계산 및 상태 업데이트
   React.useEffect(() => {
@@ -79,6 +87,24 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
     }
   }
 
+  const onSubmit = handleSubmit(async (formValues) => {
+    console.log('formValues', formValues)
+    try {
+      const response = await mutateAsync({
+        content: formValues.question,
+        isHidden: toggle,
+      })
+
+      if (response) {
+        router.push(`/home/${userId}`)
+      } else {
+        console.error('respons가 응답에 없습니다:', response)
+      }
+    } catch (error) {
+      console.log('질문 작성에 실패했습니다.')
+    }
+  })
+
   React.useEffect(() => {
     if (isFocus) {
       onFocus()
@@ -110,17 +136,16 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
             <p className='font-semibold text-base mb-4 text-gray-4'>
               질문 작성하기
             </p>
-            <MessageFormProvider>
-              <WriteInput
-                isColor
-                type='question'
-                maxLength={140}
-                setIsError={setIsError}
-                desc={currentDescription}
-                onFocus={() => setIsFocus(true)} // 포커스 시 상태 업데이트
-                onBlur={() => setIsFocus(false)} // 포커스 해제 시 상태 초기화
-              />
-            </MessageFormProvider>
+
+            <WriteInput
+              isColor
+              type='question'
+              maxLength={140}
+              setIsError={setIsError}
+              desc={currentDescription}
+              onFocus={() => setIsFocus(true)} // 포커스 시 상태 업데이트
+              onBlur={() => setIsFocus(false)} // 포커스 해제 시 상태 초기화
+            />
           </div>
           <div className='w-full h-2 bg-gray-1' />
 
@@ -179,8 +204,9 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
         >
           <CompleteButton
             userId={userId}
-            isDisabled={isError}
+            isDisabled={isError && isValid}
             keyboardHeight={keyboardHeight}
+            onSubmit={onSubmit}
           />
         </div>
       </div>
