@@ -6,13 +6,26 @@ import {
   getVarietyData,
   MessageVariety,
 } from '@/entities/message/utils/messageVarieties'
+import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 
 // export default function MessageSendPreview({ userId }: { userId: number }) {
-export default function PreviewStepPage({ nickname }: { nickname: string }) {
+export default function PreviewStepPage() {
   //   const params = useParams<{ variety: MessageVariety }>()
   //   const { preview } = getVarietyData(params.variety)
+  const queryClient = useQueryClient()
+
+  const selectedQuestion = queryClient.getQueryData<{
+    questionId: string
+    content: string
+    userId: string
+  }>(['selectedQuestion'])
+
+  const userId = selectedQuestion?.userId
+
+  const { data: nickname } = useGetNickname(userId ?? '')
 
   // todo getVarietyData 추가?
 
