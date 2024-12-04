@@ -7,12 +7,11 @@ export default function Page({
 }: {
   params: { type: MessageType; userId: number }
 }) {
-  // userId={userId}
   // messageType이 아닌 url 접근 처리 필요
 
   return (
     <InboxLayout title={'My 퐁'}>
-      <MessagesBlock messageType={type} userId={userId} />
+      <MessagesBlock messageType={type} userId={userId} limit={10} />
     </InboxLayout>
   )
 }
