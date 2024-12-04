@@ -1,20 +1,10 @@
-// todo 새로운 이미지로 변경 필요
-
 'use client'
 
-import {
-  getVarietyData,
-  MessageVariety,
-} from '@/entities/message/utils/messageVarieties'
 import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
 import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
-import { useParams } from 'next/navigation'
 
-// export default function MessageSendPreview({ userId }: { userId: number }) {
 export default function PreviewStepPage() {
-  //   const params = useParams<{ variety: MessageVariety }>()
-  //   const { preview } = getVarietyData(params.variety)
   const queryClient = useQueryClient()
 
   const selectedQuestion = queryClient.getQueryData<{
@@ -26,8 +16,6 @@ export default function PreviewStepPage() {
   const userId = selectedQuestion?.userId
 
   const { data: nickname } = useGetNickname(userId ?? '')
-
-  // todo getVarietyData 추가?
 
   return (
     <div className='relative w-full mb-[50px]'>

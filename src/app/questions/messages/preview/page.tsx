@@ -1,9 +1,9 @@
 import PreviewPage from '@/features/questions/ui/PreviewPage'
 
-export default function Page({ nickname }: { nickname: string }) {
+export default function Page() {
   return (
     <>
-      <PreviewPage nickname={nickname} />
+      <PreviewPage />
     </>
   )
 }
