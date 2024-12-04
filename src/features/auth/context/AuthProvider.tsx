@@ -68,8 +68,12 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     } catch (error) {
       console.error('Authentication error:', error)
       console.log('4')
-      const redirectUrl = storedUserId ? `/home/${storedUserId}` : '/login'
-      router.replace(getLoginUrl(`${window.location.origin}${redirectUrl}`))
+      // 강제 로그아웃
+      localStorage.removeItem('keep_in_touch_token')
+      localStorage.removeItem('keep_in_touch_user_id')
+      router.replace('/login') // 로그인 페이지로 리다이렉트
+      // const redirectUrl = storedUserId ? `/home/${storedUserId}` : '/login'
+      // router.replace(getLoginUrl(`${window.location.origin}${redirectUrl}`))
 
       setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
     }
