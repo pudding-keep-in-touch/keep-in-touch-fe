@@ -10,21 +10,24 @@ export const ScrollToTopButton = ({
   stepRefsInitialized,
 }: ScrollToTopButtonProps) => {
   const handleButtonClick = () => {
-    console.log('stepRefsInitialized')
     if (!stepRefsInitialized) {
-      console.warn('Refs or scrollElement are not initialized.')
+      console.warn('Refs or scrollElement are not initialized. Ignoring click.')
       return
     }
     onClickToTop()
   }
-
   return (
     <div className='sticky flex justify-center items-start bottom-[100px] left-0 w-full p-[16px] pt-0'>
       <div className='flex items-center justify-end w-full h-full'>
         <div className='bottom-[40px] h-[50px] w-[50px] no-underline'>
           <button
-            className='flex flex-col justify-center items-center gap-1 w-full h-[50px] border-none rounded-full shadow-[0_4px_8px_rgba(0,0,0,0.15)] bg-[#6B7684] leading-[22px] cursor-pointer'
-            onClick={handleButtonClick} // 방어 로직이 추가된 핸들러
+            className={`flex flex-col justify-center items-center gap-1 w-full h-[50px] border-none rounded-full shadow-[0_4px_8px_rgba(0,0,0,0.15)] bg-[#6B7684] leading-[22px] ${
+              stepRefsInitialized
+                ? 'cursor-pointer'
+                : 'cursor-not-allowed opacity-50'
+            }}`}
+            disabled={!stepRefsInitialized}
+            onClick={handleButtonClick}
           >
             <Image
               className='w-[10px]'
