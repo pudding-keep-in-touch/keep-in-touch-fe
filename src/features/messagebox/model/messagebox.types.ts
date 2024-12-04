@@ -3,7 +3,12 @@ import { MessageType } from '../_detail/model/messagebox.types'
 export type MessageBoxType = {
   messageId: number
 }
-
+export type Reactions = {
+  reactionId: string
+  content: string
+  type: string
+  emoji: string
+}
 // 쪽지 상세 조회
 export interface MessageDetail {
   status: number

@@ -180,7 +180,7 @@ const sentDetailMockData = {
     createdAt: new Date('2024-09-02'),
   },
 }
-
+// 쪽지 리스트 api
 export const useGetMessageList = ({
   userId,
   type,
@@ -228,7 +228,7 @@ export const useGetMessageList = ({
   })
 }
 
-// 본 테스트
+// 쪽지 상세 api
 export const useGetMessageDetail = ({ messageId }: { messageId: number }) => {
   return useQuery({
     queryKey: ['getDetailMessage', messageId],
