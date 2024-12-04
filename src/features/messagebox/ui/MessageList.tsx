@@ -31,7 +31,13 @@ export default function MessageList({
     const formatter = new Intl.DateTimeFormat('ko-KR', options)
     return formatter.format(e).replace(' ', '').replace(',', '')
   }
-
+  const formattedDate = (createdAt: Date) => {
+    const date = new Date(createdAt)
+    if (isNaN(date.getTime())) {
+      return '유효하지 않은 날짜' // null일 경우 처리
+    }
+    return dateFormat(date)
+  }
   return (
     <>
       {data.messageList.map((message: Message) => {
@@ -43,7 +49,7 @@ export default function MessageList({
             ? '소중한 진심을 확인해보세요'
             : message.content
           : message.content
-
+        console.log(message.createdAt)
         const messageClassName = `relative ${!isReceived || !isUnread ? '' : 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
 
         return (
@@ -69,7 +75,7 @@ export default function MessageList({
                       {messageContent}
                     </div>
                     <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px] mt-[14px]'>
-                      {message.createdAt && dateFormat(message.createdAt)}
+                      {message.createdAt && formattedDate(message.createdAt)}
                     </div>
                   </div>
                   {isUnread && isReceived && (
@@ -90,7 +96,7 @@ export default function MessageList({
                         숨김 처리되었습니다.
                       </div>
                       <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px]'>
-                        {message.createdAt && dateFormat(message.createdAt)}
+                        {message.createdAt && formattedDate(message.createdAt)}
                       </div>
                     </div>
                   </div>
