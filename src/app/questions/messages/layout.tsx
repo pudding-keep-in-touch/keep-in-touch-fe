@@ -51,8 +51,7 @@ export default function Layout({ children }: Props) {
           />
 
           {!pathname.endsWith('/preview') && (
-            <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-              {/* {`To. ${params.nickname}에게`} */}
+            <h1 className='text-lg font-semibold text-center text-[#333D4B] whitespace-nowrap w-full'>
               {`To. ${nickname}에게`}
             </h1>
           )}
