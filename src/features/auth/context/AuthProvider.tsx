@@ -104,16 +104,10 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       !authState.isLoading &&
       pathname !== '/login'
     ) {
-      const redirectUrl = `/home/${authState.userId || ''}`
-      router.replace(getLoginUrl(`${window.location.origin}${redirectUrl}`))
+      localStorage.setItem('redirect_before_login', pathname) // 이전 경로 저장
+      router.replace('/login')
     }
-  }, [
-    authState.isLoggedIn,
-    authState.isLoading,
-    pathname,
-    router,
-    authState.userId,
-  ])
+  }, [authState.isLoggedIn, authState.isLoading, pathname, router])
 
   const value = React.useMemo(
     () => ({
