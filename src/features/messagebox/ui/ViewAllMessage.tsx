@@ -12,7 +12,7 @@ export default function ViewAllMessage({
   return (
     <div className='max-w-[390px] w-full'>
       <div className='w-full pb-6'>
-        <MessagesBlock messageType='received' userId={userId} />
+        <MessagesBlock messageType='received' userId={userId} limit={3} />
       </div>
       <div className='border-b-[6px] border-b-white w-full mb-2'></div>
       <div className='w-full pb-6'>
