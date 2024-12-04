@@ -7,9 +7,8 @@ import Tooltip from '@/features/home/ui/tooltip'
 import LinkShareButton from '@/features/home/ui/linkShareButton'
 import React from 'react'
 import Image from 'next/image'
-import { useGetQuestionList } from './api/api'
-import { QuestionData } from './model/home.types'
-
+import { useGetQuestionList, usePostQuestionHidden } from './api/api'
+import { QuestionData } from '@/features/home/model/home.types'
 interface QuestionDetailProps {
   questionId: string
   userId: number
@@ -19,24 +18,41 @@ export default function QuestionDetail({
   questionId,
   userId,
 }: QuestionDetailProps) {
-  const [toggle, setToggle] = React.useState(false)
   const [detailQuestion, setDetailQuestion] = React.useState<QuestionData[]>()
   const [visibleRef, isVisible] = useIsVisible({
     options: { threshold: 0, rootMargin: '0px' },
     initialState: false,
   })
 
+  const [isHidden, setIsHidden] = React.useState(false)
+  const { mutateAsync } = usePostQuestionHidden()
+
   const { data } = useGetQuestionList({ userId })
 
-  const onClickToggle = () => {
-    setToggle((prev) => !prev)
+  const handleToggle = async (isToggle: boolean) => {
+    try {
+      console.log('Mutation payload:', { questionId, isHidden: isToggle })
+      setIsHidden(isToggle) // 상태 업데이트
+      const response = await mutateAsync({
+        questionId,
+        isHidden: isToggle,
+      })
+
+      if (!response) {
+        console.error('Response is empty:', response)
+      }
+    } catch (error) {
+      console.error('Failed to toggle question visibility:', error)
+    }
   }
 
   React.useEffect(() => {
     const filterData = data?.filter((item) => item.questionId === questionId)
-
     setDetailQuestion(filterData)
-  }, [data])
+    if (filterData?.length) {
+      setIsHidden(filterData[0].isHidden) // 초기 상태 설정
+    }
+  }, [data, questionId])
 
   return (
     <QuestionLayout isVisible={isVisible} isHome={false} userId={userId}>
@@ -66,9 +82,9 @@ export default function QuestionDetail({
                 않습니다.
               </p>
             </div>
-            {!toggle ? (
+            {!isHidden ? (
               <button
-                onClick={onClickToggle}
+                onClick={() => handleToggle(true)}
                 className='flex w-[159px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-gray-1 rounded-2xl'
               >
                 <Image
@@ -83,7 +99,7 @@ export default function QuestionDetail({
               </button>
             ) : (
               <button
-                onClick={onClickToggle}
+                onClick={() => handleToggle(false)}
                 className='flex w-[198px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-[#C5C5C5] rounded-2xl'
               >
                 <Image

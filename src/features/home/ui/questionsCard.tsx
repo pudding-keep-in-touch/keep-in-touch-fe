@@ -51,11 +51,19 @@ export const QuestionsCard = ({
       <div
         className={`flex justify-center items-center w-full bg-white ${isHome ? 'h-[62px] p-[10px]' : 'h-full py-[10px] p-[12px]'}`}
       >
-        <p
-          className={`whitespace-pre-wrap font-normal text-[15px] text-center leading-[140%] tracking-[-1px] ${isHome ? 'text-gray-2' : 'text-gray-4'}`}
-        >
-          {description}
-        </p>
+        {isHome ? (
+          <p
+            className={`whitespace-pre-wrap font-normal text-[15px] text-center leading-[140%] tracking-[-1px] ${isHidden ? 'text-gray-2' : 'text-gray-4'}`}
+          >
+            {description}
+          </p>
+        ) : (
+          <p
+            className={`whitespace-pre-wrap font-normal text-[15px] text-center leading-[140%] tracking-[-1px] ${isHidden ? 'text-gray-2' : 'text-gray-4'}`}
+          >
+            {description}
+          </p>
+        )}
       </div>
     </div>
   )
