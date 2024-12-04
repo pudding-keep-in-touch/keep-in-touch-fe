@@ -98,7 +98,7 @@ export default function ScrollHome({
           <div ref={visibleRef} className='w-full relative'>
             <Image
               className='w-full'
-              src='/home_banner_normal.svg'
+              src='/home_banner_santa.svg'
               alt='bg img'
               width={100}
               height={100}
