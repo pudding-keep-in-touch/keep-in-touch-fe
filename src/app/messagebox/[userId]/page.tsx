@@ -8,7 +8,7 @@ export default function Page({
   params: { type: MessageType; userId: number }
 }) {
   return (
-    <InboxLayout title='My 퐁'>
+    <InboxLayout title='My 퐁' userId={userId}>
       <ViewAllMessage messageType={type} userId={userId} />
     </InboxLayout>
   )
