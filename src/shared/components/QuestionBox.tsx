@@ -8,7 +8,11 @@ interface QuestionBoxProps {
   content?: string
   variant?: QuestionBoxVariant
   userId?: string
-  onQuestionClick?: (questionId: string, content: string) => void
+  onQuestionClick?: (
+    questionId: string,
+    content: string,
+    userId: string
+  ) => void
   onTypeClick?: (userId: string) => void
 }
 
@@ -22,7 +26,7 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
 }) => {
   const handleClick = () => {
     if (onQuestionClick) {
-      onQuestionClick(questionId || '', content || '')
+      onQuestionClick(questionId || '', content || '', userId || '')
     }
     if (onTypeClick) {
       onTypeClick(userId || '')
@@ -36,7 +40,7 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
     >
       {/* 상단 텍스트 */}
       <div className='text-sm font-semibold text-[#333D4B] bg-gray-100 text-center py-3 rounded-t-md'>
-        {variant === 'custom' ? '자유질문' : '질문'}
+        {variant === 'custom' ? '질문 없이도 퐁을 보낼 수 있어요' : '질문'}
       </div>
 
       {/* 하단 내용 */}

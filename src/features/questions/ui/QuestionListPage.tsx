@@ -5,30 +5,57 @@ import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { questions } from '@/entities/questions/questionData'
-import { useState } from 'react'
+import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 
 export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
-  //   const [userId, setUserId] = useState<string | null>(null)
+
+  const userId = questions.map((question) => question.userId)
+
+  // const { data: nickname } = useGetNickname(userId)
+
+  //todo nickname 가져오기
+  // const nickname = 'luna'
 
   //todo 로그인 state추가
-
-  // const handleQuestionClick = (questionId: number) => {
-  //   //todo 온보딩 페이지로 이동
-  //   // router.push(`/onboarding?questionId=${questionId}`);
-  //   router.push(`/questions/messages`)
-  // }
-
-  const handleQuestionClick = (questionId: string, content: string) => {
-    // 선택된 질문 데이터를 캐싱
-    queryClient.setQueryData(['selectedQuestion'], { questionId, content })
-    // ReplyPage로 이동
-    router.push('/questions/messages')
+  // 수정된 redirectToLoginIfNeeded 함수
+  const redirectToLoginIfNeeded = (callback: () => void) => {
+    if (!isUserLoggedIn()) {
+      // 로그인 페이지로 이동, 원래 페이지인 /questions/messages 경로를 redirectUrl로 전달
+      const redirectUrl = encodeURIComponent('/questions/messages')
+      router.push(`/login?redirectUrl=${redirectUrl}`)
+    } else {
+      // 로그인 상태라면 콜백 실행
+      callback()
+    }
   }
 
+  const handleQuestionClick = (
+    questionId: string,
+    content: string,
+    userId: string
+  ) => {
+    redirectToLoginIfNeeded(() => {
+      // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
+      queryClient.setQueryData(['selectedQuestion'], {
+        questionId,
+        content,
+        userId,
+      })
+      router.push('/questions/messages')
+    })
+  }
+
+  // const handleQuestionClick = (questionId: string, content: string, userId: string) => {
+  //   // 선택된 질문 데이터를 캐시에 저장
+  //   queryClient.setQueryData(['selectedQuestion'], { questionId, content, userId })
+
+  //   // MessagePage로 라우팅
+  //   router.push('/questions/messages')
+  // }
+
   const handleTypeMessageClick = () => {
-    const userId = '1' // 임시 userId (테스트용)
     router.push(`/message/send/${userId}/select`)
   }
 
@@ -47,9 +74,10 @@ export default function QuestionListPage() {
           </h2>
         </div>
 
-        <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6 '>
-          {/* 자유질문 */}
-          <>
+        <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+          <div className='w-full px-[24px] grid grid-cols-1 gap-6'>
+            {/* <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'> */}
+            {/* 자유질문 */}
             <QuestionBox
               key={99}
               questionId={'99'}
@@ -61,11 +89,13 @@ export default function QuestionListPage() {
               <QuestionBox
                 key={question.questionId}
                 questionId={question.questionId}
+                userId={question.userId}
                 content={question.content}
                 onQuestionClick={handleQuestionClick}
               />
             ))}
-          </>
+            {/* </div> */}
+          </div>
         </div>
       </div>
     </>

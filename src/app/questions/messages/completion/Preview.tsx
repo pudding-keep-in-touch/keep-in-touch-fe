@@ -1,9 +1,9 @@
 import PreviewStepPage from '@/features/questions/ui/PreviewStepPage'
 
-export default function Page({ userNickname }: { userNickname: string }) {
+export default function Page() {
   return (
     <>
-      <PreviewStepPage userNickname={userNickname} />
+      <PreviewStepPage />
     </>
   )
 }

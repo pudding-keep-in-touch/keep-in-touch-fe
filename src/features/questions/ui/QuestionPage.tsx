@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/shared/components/Button'
-import { question } from '@/entities/questions/questionData'
+import { question, questions } from '@/entities/questions/questionData'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { useQueryClient } from '@tanstack/react-query'
 

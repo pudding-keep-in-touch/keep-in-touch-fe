@@ -2,7 +2,9 @@
 
 // import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
+import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
 import { cn } from '@/shared/utils/emotionVariety'
+import { useQueryClient } from '@tanstack/react-query'
 import { ChevronLeftIcon } from 'lucide-react'
 // import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useParams, usePathname, useRouter } from 'next/navigation'
@@ -12,12 +14,23 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
+  const queryClient = useQueryClient()
   const router = useRouter()
-  //todo userNickname 추가, 현재 임시값
-  // const params = useParams<{ userNickname: string }>()
-  const userNickname = 'luna'
+  //todo nickname 추가, 현재 임시값
+  // const params = useParams<{ nickname: string }>()
+  // const nickname = 'test'
 
   const pathname = usePathname()
+
+  const selectedQuestion = queryClient.getQueryData<{
+    questionId: string
+    content: string
+    userId: string
+  }>(['selectedQuestion'])
+
+  const userId = selectedQuestion?.userId
+
+  const { data: nickname } = useGetNickname(userId ?? '')
 
   const makeBgClass = pathname.endsWith('/preview')
     ? `bg-cover bg-center ${'bg-messageDetail'}`
@@ -38,9 +51,8 @@ export default function Layout({ children }: Props) {
           />
 
           {!pathname.endsWith('/preview') && (
-            <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
-              {/* {`To. ${params.userNickname}에게`} */}
-              {`To. ${userNickname}에게`}
+            <h1 className='text-lg font-semibold text-center text-[#333D4B] whitespace-nowrap w-full'>
+              {`To. ${nickname}에게`}
             </h1>
           )}
         </header>
