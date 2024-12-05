@@ -3,19 +3,17 @@ import { useEffect, useState } from 'react'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 import MessageList from '@/features/messagebox/ui/MessageList'
-import Link from 'next/link'
 import Image from 'next/image'
 import { MessageResponse } from '@/features/messagebox/model/messagebox.types'
 import { useInView } from 'react-cool-inview'
+import { Spinner } from '@/shared/components/Sppiner'
 
 export default function MessagesBlock({
   messageType,
   userId,
-  limit,
 }: {
   messageType: MessageType
   userId: number
-  limit?: number
 }) {
   const [cursor, setCursor] = useState<string | null>(null)
   const [messages, setMessages] = useState<MessageResponse>()
@@ -25,7 +23,7 @@ export default function MessagesBlock({
     userId,
     type: messageType,
     cursor,
-    limit,
+    limit: 10,
     order: 'desc',
   })
 
@@ -72,16 +70,6 @@ export default function MessagesBlock({
       ? data?.sentMessageCount || 0
       : data?.receivedMessageCount || 0
 
-  const moreLink = messageCount > 3 && (
-    <Link
-      href={`/messagebox/${userId}/${messageType}`}
-      className='flex items-center gap-[9px]'
-    >
-      <p className='text-[#6B7684]'>더보기</p>
-      <Image src='/nav_icon.svg' alt='watch more' width={18} height={18} />
-    </Link>
-  )
-
   const description =
     messageType === 'sent' ? '아직 보낸 퐁이 없어요!' : '아직 받은 퐁이 없어요!'
 
@@ -92,9 +80,10 @@ export default function MessagesBlock({
           <div>{messageType === 'sent' ? '보낸 퐁' : '받은 퐁'}</div>
           <div>({messageCount})</div>
         </h2>
-        {moreLink}
       </div>
       <div>
+        {/* 이후 스피너 대신 로딩 페이지 추가 */}
+        {isLoading && <Spinner />}
         {messageCount > 0 ? (
           <MessageList
             messages={messages}
@@ -108,8 +97,6 @@ export default function MessagesBlock({
             <p className='leading-none pt-[11px] text-[17px]'>{description}</p>
           </div>
         )}
-        {/* // 로딩 페이지로 이후 변경 */}
-        {isLoading && <div>Loading...</div>}
       </div>
     </div>
   )
