@@ -16,7 +16,7 @@ export default function ViewAllMessage({
       </div>
       <div className='border-b-[6px] border-b-white w-full mb-2'></div>
       <div className='w-full pb-6'>
-        <MessagesBlock messageType='sent' userId={userId} />
+        <MessagesBlock messageType='sent' userId={userId} limit={3} />
       </div>
     </div>
   )
