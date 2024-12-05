@@ -1,19 +1,32 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { questions } from '@/entities/questions/questionData'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
+import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
 
 export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
 
-  const userId = questions.map((question) => question.userId)
+  // const userId = questions.map((question) => question.userId)
+  const searchParams = useSearchParams()
 
-  // const { data: nickname } = useGetNickname(userId)
+  const userId = searchParams.get('userId') || ''
+
+  // 쿼리 파라미터에서 userId 가져오기
+  // const userId = searchParams.get('userId')
+
+  // TanStack Query로 질문 데이터 가져오기
+  // const { data: data, isLoading, isError } = useQuestionsQuery(userId || '')
+  const { data: data } = useGetQuestionList({ userId })
+
+  console.log('data', data)
+
+  //todo 데이터가 없을 떄
 
   //todo nickname 가져오기
   // const nickname = 'luna'
