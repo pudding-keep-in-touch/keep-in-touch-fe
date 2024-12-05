@@ -46,7 +46,7 @@ export default function MessageList({
       {messages?.messageList.map((message: Message, index: number) => {
         const isMessageNormal = !message.status || message.status === 'normal'
         const isReceived = messageType === 'received'
-        const isUnread = !message.readAt
+        const isUnread = !message.readAt || !message.reactionInfo
         const isLastItem = index === (messages?.messageList.length || 0) - 1
         const messageContent = isReceived
           ? message.readAt === null
