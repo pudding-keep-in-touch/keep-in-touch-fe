@@ -19,9 +19,18 @@ export default function QuestionPage() {
 
   console.log(question)
 
-  const handleQuestionClick = (questionId: string, content: string) => {
+  const handleQuestionClick = (
+    questionId: string,
+    content: string,
+    userId: string
+  ) => {
+    console.log('click')
     // 선택된 질문 데이터를 캐싱
-    queryClient.setQueryData(['selectedQuestion'], { questionId, content })
+    queryClient.setQueryData(['selectedQuestion'], {
+      questionId,
+      content,
+      userId,
+    })
     // ReplyPage로 이동
     router.push('/questions/messages')
   }
@@ -52,7 +61,13 @@ export default function QuestionPage() {
 
           <Button
             type='button'
-            onClick={() => handleQuestionClick}
+            onClick={() =>
+              handleQuestionClick(
+                question?.questionId || '',
+                question?.content || '',
+                question?.userId || ''
+              )
+            } // 함수 호출
             className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-60 w-full'
           >
             {' '}
