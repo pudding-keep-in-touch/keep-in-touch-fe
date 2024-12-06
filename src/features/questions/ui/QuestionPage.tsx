@@ -1,15 +1,23 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/shared/components/Button'
-import { question, questions } from '@/entities/questions/questionData'
+// import { question, questions } from '@/entities/questions/questionData'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { useQueryClient } from '@tanstack/react-query'
+import { useGetQuestion } from '@/features/questions/hooks/query/useQuestionQuery'
 
 export default function QuestionPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
+
+  // URL에서 questionId를 가져옵니다.
+  const { questionId } = useParams<{ questionId: string }>()
+
+  const { data: question } = useGetQuestion(questionId)
+
+  console.log(question)
 
   const handleQuestionClick = (questionId: string, content: string) => {
     // 선택된 질문 데이터를 캐싱
@@ -35,9 +43,10 @@ export default function QuestionPage() {
 
         <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'>
           <QuestionBox
-            key={question.questionId}
-            questionId={question.questionId}
-            content={question.content}
+            key={question?.questionId}
+            questionId={question?.questionId}
+            content={question?.content}
+            userId={question?.userId}
             onQuestionClick={handleQuestionClick}
           />
 

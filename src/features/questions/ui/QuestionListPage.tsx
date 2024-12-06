@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
-// import { questions } from '@/entities/questions/questionData'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
 
