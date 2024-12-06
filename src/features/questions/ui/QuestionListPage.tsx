@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
+// import { questions } from '@/entities/questions/questionData'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
 
@@ -20,15 +21,25 @@ export default function QuestionListPage() {
   //todo 데이터가 없을 떄
 
   //todo 로그인 state추가F=${
-  // 수정된 redirectToLoginIfNeeded 함수
+  // const redirectToLoginIfNeeded = (callback: () => void) => {
+  //   if (!isUserLoggedIn()) {
+  //     // 로그인 페이지로 이동, 원래 페이지인 /questions/messages 경로를 redirectUrl로 전달
+  //     const redirectUrl = encodeURIComponent('/questions/messages')
+  //     router.push(`/login?redirectUrl=${redirectUrl}`)
+  //   } else {
+  //     // 로그인 상태라면 콜백 실행
+  //     callback()
+  //   }
+  // }
+
   const redirectToLoginIfNeeded = (callback: () => void) => {
     if (!isUserLoggedIn()) {
-      // 로그인 페이지로 이동, 원래 페이지인 /questions/messages 경로를 redirectUrl로 전달
-      const redirectUrl = encodeURIComponent('/questions/messages')
-      router.push(`/login?redirectUrl=${redirectUrl}`)
+      // /questions/messages로 리다이렉트하도록 설정
+      const redirectUrl = '/questions/messages'
+      localStorage.setItem('redirect_before_login', redirectUrl) // 이전 경로 저장
+      router.push(`/login?redirectUrl=${encodeURIComponent(redirectUrl)}`)
     } else {
-      // 로그인 상태라면 콜백 실행
-      callback()
+      callback() // 로그인 상태라면 콜백 실행
     }
   }
 
