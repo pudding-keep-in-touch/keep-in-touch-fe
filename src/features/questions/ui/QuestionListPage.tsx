@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
-import { questions } from '@/entities/questions/questionData'
+// import { questions } from '@/entities/questions/questionData'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
 
@@ -12,26 +12,15 @@ export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
 
-  // const userId = questions.map((question) => question.userId)
   const searchParams = useSearchParams()
 
   const userId = searchParams.get('userId') || ''
 
-  // 쿼리 파라미터에서 userId 가져오기
-  // const userId = searchParams.get('userId')
-
-  // TanStack Query로 질문 데이터 가져오기
-  // const { data: data, isLoading, isError } = useQuestionsQuery(userId || '')
-  const { data: data } = useGetQuestionList({ userId })
-
-  console.log('data', data)
+  const { data: questions, isLoading } = useGetQuestionList(userId)
 
   //todo 데이터가 없을 떄
 
-  //todo nickname 가져오기
-  // const nickname = 'luna'
-
-  //todo 로그인 state추가
+  //todo 로그인 state추가F=${
   // 수정된 redirectToLoginIfNeeded 함수
   const redirectToLoginIfNeeded = (callback: () => void) => {
     if (!isUserLoggedIn()) {
@@ -59,14 +48,6 @@ export default function QuestionListPage() {
       router.push('/questions/messages')
     })
   }
-
-  // const handleQuestionClick = (questionId: string, content: string, userId: string) => {
-  //   // 선택된 질문 데이터를 캐시에 저장
-  //   queryClient.setQueryData(['selectedQuestion'], { questionId, content, userId })
-
-  //   // MessagePage로 라우팅
-  //   router.push('/questions/messages')
-  // }
 
   const handleTypeMessageClick = () => {
     router.push(`/message/send/${userId}/select`)
@@ -98,9 +79,9 @@ export default function QuestionListPage() {
               onTypeClick={handleTypeMessageClick}
             />
 
-            {questions.map((question) => (
+            {questions?.map((question) => (
               <QuestionBox
-                key={question.questionId}
+                key={question?.questionId}
                 questionId={question.questionId}
                 userId={question.userId}
                 content={question.content}
