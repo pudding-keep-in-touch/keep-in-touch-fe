@@ -19,7 +19,6 @@ export const useGetNickname = (userId: string) => {
       })
 
       // 응답에서 nickname만 추출하여 반환
-      console.log('data', data)
       return data?.nickname || null // nickname 값만 반환
     },
     enabled: !!userId && !!token,
