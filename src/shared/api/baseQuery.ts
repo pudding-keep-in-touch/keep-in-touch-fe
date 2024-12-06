@@ -6,6 +6,11 @@ export const axiosInstance = axios.create({
   baseURL: `${API_BASE_URL}`,
 })
 
+// 인증이 불필요할 때
+export const publicQuery = axios.create({
+  baseURL: `${API_BASE_URL}`,
+})
+
 axiosInstance.interceptors.request.use(async (config) => {
   if (!config.headers) return config
 
