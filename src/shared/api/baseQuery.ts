@@ -41,4 +41,14 @@ axiosInstance.interceptors.response.use(
   }
 )
 
+publicQuery.interceptors.response.use(
+  (response) => {
+    return response.data // 동일한 응답 처리
+  },
+  (error) => {
+    console.error('Public API 요청 실패:', error)
+    throw error // 필요한 경우, 비인증 요청도 오류 처리 추가
+  }
+)
+
 export const baseQuery = axiosInstance
