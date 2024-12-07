@@ -6,6 +6,11 @@ export const axiosInstance = axios.create({
   baseURL: `${API_BASE_URL}`,
 })
 
+// 인증이 불필요할 때
+export const publicQuery = axios.create({
+  baseURL: `${API_BASE_URL}`,
+})
+
 axiosInstance.interceptors.request.use(async (config) => {
   if (!config.headers) return config
 
@@ -33,6 +38,16 @@ axiosInstance.interceptors.response.use(
       redirect('/login')
     }
     throw new Error('API 요청 실패')
+  }
+)
+
+publicQuery.interceptors.response.use(
+  (response) => {
+    return response.data // 동일한 응답 처리
+  },
+  (error) => {
+    console.error('Public API 요청 실패:', error)
+    throw error // 필요한 경우, 비인증 요청도 오류 처리 추가
   }
 )
 

@@ -41,6 +41,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const checkAuth = async () => {
     const accessToken = getFromLocalStorage('keep_in_touch_token')
     const storedUserId = getFromLocalStorage('keep_in_touch_user_id')
+    const redirectUrl = localStorage.getItem('redirect_before_login')
 
     try {
       setAuthState((prev) => ({ ...prev, isLoading: true }))
@@ -64,6 +65,12 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
       console.log('3')
       setAuthState({ isLoggedIn: true, isLoading: false, userId: storedUserId })
+
+      // 로그인 성공 시 redirect 처리
+      if (redirectUrl) {
+        localStorage.removeItem('redirect_before_login')
+        router.replace(redirectUrl) // 이전 경로로 이동
+      }
       return true
     } catch (error) {
       console.error('Authentication error:', error)

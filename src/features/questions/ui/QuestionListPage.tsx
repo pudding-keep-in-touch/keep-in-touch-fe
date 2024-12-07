@@ -1,33 +1,45 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
-import { questions } from '@/entities/questions/questionData'
+// import { questions } from '@/entities/questions/questionData'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
+import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
 
 export default function QuestionListPage() {
   const router = useRouter()
   const queryClient = useQueryClient()
 
-  const userId = questions.map((question) => question.userId)
+  const searchParams = useSearchParams()
 
-  // const { data: nickname } = useGetNickname(userId)
+  const userId = searchParams.get('userId') || ''
 
-  //todo nickname 가져오기
-  // const nickname = 'luna'
+  const { data: questions, isLoading } = useGetQuestionList(userId)
 
-  //todo 로그인 state추가
-  // 수정된 redirectToLoginIfNeeded 함수
+  //todo 데이터가 없을 떄
+
+  //todo 로그인 state추가F=${
+  // const redirectToLoginIfNeeded = (callback: () => void) => {
+  //   if (!isUserLoggedIn()) {
+  //     // 로그인 페이지로 이동, 원래 페이지인 /questions/messages 경로를 redirectUrl로 전달
+  //     const redirectUrl = encodeURIComponent('/questions/messages')
+  //     router.push(`/login?redirectUrl=${redirectUrl}`)
+  //   } else {
+  //     // 로그인 상태라면 콜백 실행
+  //     callback()
+  //   }
+  // }
+
   const redirectToLoginIfNeeded = (callback: () => void) => {
     if (!isUserLoggedIn()) {
-      // 로그인 페이지로 이동, 원래 페이지인 /questions/messages 경로를 redirectUrl로 전달
-      const redirectUrl = encodeURIComponent('/questions/messages')
-      router.push(`/login?redirectUrl=${redirectUrl}`)
+      // /questions/messages로 리다이렉트하도록 설정
+      const redirectUrl = '/questions/messages'
+      localStorage.setItem('redirect_before_login', redirectUrl) // 이전 경로 저장
+      router.push(`/login?redirectUrl=${encodeURIComponent(redirectUrl)}`)
     } else {
-      // 로그인 상태라면 콜백 실행
-      callback()
+      callback() // 로그인 상태라면 콜백 실행
     }
   }
 
@@ -46,14 +58,6 @@ export default function QuestionListPage() {
       router.push('/questions/messages')
     })
   }
-
-  // const handleQuestionClick = (questionId: string, content: string, userId: string) => {
-  //   // 선택된 질문 데이터를 캐시에 저장
-  //   queryClient.setQueryData(['selectedQuestion'], { questionId, content, userId })
-
-  //   // MessagePage로 라우팅
-  //   router.push('/questions/messages')
-  // }
 
   const handleTypeMessageClick = () => {
     router.push(`/message/send/${userId}/select`)
@@ -85,9 +89,9 @@ export default function QuestionListPage() {
               onTypeClick={handleTypeMessageClick}
             />
 
-            {questions.map((question) => (
+            {questions?.map((question) => (
               <QuestionBox
-                key={question.questionId}
+                key={question?.questionId}
                 questionId={question.questionId}
                 userId={question.userId}
                 content={question.content}
