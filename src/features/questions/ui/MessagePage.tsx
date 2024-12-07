@@ -30,13 +30,22 @@ export default function MessagePage() {
       queryClient.setQueryData(['selectedQuestion'], selectedQuestion)
       localStorage.removeItem('selectedQuestion') // 복원 후 삭제
     }
-  }, [queryClient, selectedQuestion])
+  }, [selectedQuestion, queryClient])
 
-  console.log(
-    'Selected Question:',
-    queryClient.getQueryData(['selectedQuestion'])
-  )
-  // console.log('selectedQuestion', selectedQuestion)
+  console.log('setQueryData', selectedQuestion)
+
+  // // 화면에 렌더링된 후에도 `selectedQuestion` 데이터를 확인하여 UI 업데이트
+  // const questionData = queryClient.getQueryData<{
+  //   questionId: string
+  //   content: string
+  //   userId: string
+  // }>(['selectedQuestion'])
+
+  // console.log('Selected Question:', questionData)
+
+  // if (!questionData) {
+  //   return <p>선택된 질문이 없습니다.</p>
+  // }
 
   useEffect(() => {
     if (isMobile) return // 모바일에서만 동작하도록 설정

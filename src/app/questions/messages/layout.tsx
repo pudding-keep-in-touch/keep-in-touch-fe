@@ -23,14 +23,19 @@ export default function Layout({ children }: Props) {
 
   const pathname = usePathname()
 
-  const selectedQuestion = queryClient.getQueryData<{
-    questionId: string
-    content: string
-    userId: string
-  }>(['selectedQuestion'])
+  // const selectedQuestion = queryClient.getQueryData<{
+  //   questionId: string
+  //   content: string
+  //   userId: string
+  // }>(['selectedQuestion'])
 
-  const userId = selectedQuestion?.userId
+  // const userId = selectedQuestion?.userId
 
+  // const { data: nickname } = useGetNickname(userId ?? '')
+
+  const userId = useQueryClient().getQueryData<{ userId: string }>([
+    'selectedQuestion',
+  ])?.userId
   const { data: nickname } = useGetNickname(userId ?? '')
 
   const makeBgClass = pathname.endsWith('/preview')
