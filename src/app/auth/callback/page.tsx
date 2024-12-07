@@ -10,13 +10,22 @@ export default function Callback() {
 
   React.useEffect(() => {
     const token = searchParams.get('accessToken')
-    const userId = searchParams.get('userId') as string
+    const userId = searchParams.get('userId')
+    const storedRedirectUrl = localStorage.getItem('redirect_before_login') // 로컬스토리지 값
 
     // redirectUrl 결정
     const redirectUrl =
-      searchParams.get('redirectUrl') || // 쿼리 파라미터에 redirectUrl이 있는 경우
-      localStorage.getItem('redirect_before_login') || // 로컬스토리지에 저장된 이전 경로가 있는 경우
-      (userId ? `/home/${userId}` : `/login`) // userId가 있으면 /home/${userId}, 없으면 /login
+      searchParams.get('redirectUrl') || // URL에 있는 경우
+      storedRedirectUrl || // 로컬스토리지 값
+      (userId ? `/home/${userId}` : `/login`) // 기본값
+
+    // 디버깅 코드 : 삭제예정
+    console.log('searchParams redirectUrl:', searchParams.get('redirectUrl'))
+    console.log(
+      'localStorage redirect_before_login:',
+      localStorage.getItem('redirect_before_login')
+    )
+    console.log('redirectUrl 결정:', redirectUrl)
 
     if (token && userId) {
       localStorage.setItem('keep_in_touch_token', token)
