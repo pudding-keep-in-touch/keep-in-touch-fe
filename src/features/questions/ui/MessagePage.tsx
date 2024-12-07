@@ -25,6 +25,23 @@ export default function MessagePage() {
   )
 
   // selectedQuestion 데이터가 유효한 경우에만 QueryClient에 데이터 설정
+  // useEffect(() => {
+  //   if (Object.keys(selectedQuestion).length > 0) {
+  //     queryClient.setQueryData(['selectedQuestion'], selectedQuestion)
+  //     localStorage.removeItem('selectedQuestion') // 복원 후 삭제
+  //   }
+  // }, [selectedQuestion, queryClient])
+  // useEffect(() => {
+  //   const storedSelectedQuestion = localStorage.getItem('selectedQuestion');
+  //   if (storedSelectedQuestion) {
+  //     const parsedData = JSON.parse(storedSelectedQuestion);
+  //     if (Object.keys(parsedData).length > 0) {
+  //       queryClient.setQueryData(['selectedQuestion'], parsedData);
+  //       localStorage.removeItem('selectedQuestion'); // 복원 후 삭제
+  //     }
+  //   }
+  // }, [queryClient]);
+
   useEffect(() => {
     if (Object.keys(selectedQuestion).length > 0) {
       queryClient.setQueryData(['selectedQuestion'], selectedQuestion)

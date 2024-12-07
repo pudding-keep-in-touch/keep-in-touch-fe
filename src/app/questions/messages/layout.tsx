@@ -9,6 +9,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { ChevronLeftIcon } from 'lucide-react'
 // import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 interface Props {
   children: React.ReactNode
@@ -33,9 +34,33 @@ export default function Layout({ children }: Props) {
 
   // const { data: nickname } = useGetNickname(userId ?? '')
 
-  const userId = useQueryClient().getQueryData<{ userId: string }>([
-    'selectedQuestion',
-  ])?.userId
+  // const userId = useQueryClient().getQueryData<{ userId: string }>([
+  //   'selectedQuestion',
+  // ])?.userId
+  // const { data: nickname } = useGetNickname(userId ?? '')
+
+  // localStorage에서 데이터를 가져와 queryClient에 설정
+  useEffect(() => {
+    const storedSelectedQuestion = localStorage.getItem('selectedQuestion')
+    if (storedSelectedQuestion) {
+      const parsedData = JSON.parse(storedSelectedQuestion)
+      if (Object.keys(parsedData).length > 0) {
+        queryClient.setQueryData(['selectedQuestion'], parsedData)
+        localStorage.removeItem('selectedQuestion') // 복원 후 삭제
+      }
+    }
+  }, [queryClient])
+
+  // selectedQuestion 데이터
+  const selectedQuestion = queryClient.getQueryData<{
+    questionId: string
+    content: string
+    userId: string
+  }>(['selectedQuestion'])
+
+  const userId = selectedQuestion?.userId
+
+  // 닉네임 가져오기
   const { data: nickname } = useGetNickname(userId ?? '')
 
   const makeBgClass = pathname.endsWith('/preview')
