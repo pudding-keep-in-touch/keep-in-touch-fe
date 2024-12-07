@@ -14,6 +14,30 @@ export default function MessagePage() {
   const isMobile = useIsMobile() // 모바일 여부를 확인하는 훅 사용
   const [keyboardHeight, setKeyboardHeight] = useState(0) // 키보드 높이 상태 추가
 
+  // const selectedQuestion = queryClient.getQueryData<{
+  //   questionId: string
+  //   content: string
+  //   userId: string
+  // }>(['selectedQuestion'])
+
+  const selectedQuestion = JSON.parse(
+    localStorage.getItem('selectedQuestion') || '{}'
+  )
+
+  // selectedQuestion 데이터가 유효한 경우에만 QueryClient에 데이터 설정
+  useEffect(() => {
+    if (Object.keys(selectedQuestion).length > 0) {
+      queryClient.setQueryData(['selectedQuestion'], selectedQuestion)
+      localStorage.removeItem('selectedQuestion') // 복원 후 삭제
+    }
+  }, [queryClient, selectedQuestion])
+
+  console.log(
+    'Selected Question:',
+    queryClient.getQueryData(['selectedQuestion'])
+  )
+  // console.log('selectedQuestion', selectedQuestion)
+
   useEffect(() => {
     if (isMobile) return // 모바일에서만 동작하도록 설정
 
@@ -62,27 +86,6 @@ export default function MessagePage() {
       textarea?.removeEventListener('blur', handleBlur)
     }
   }, [isMobile]) // 모바일 여부가 변경될 때마다 실행
-
-  // const selectedQuestion = queryClient.getQueryData<{
-  //   questionId: string
-  //   content: string
-  //   userId: string
-  // }>(['selectedQuestion'])
-
-  const selectedQuestion = JSON.parse(
-    localStorage.getItem('selectedQuestion') || '{}'
-  )
-  if (selectedQuestion) {
-    queryClient.setQueryData(['selectedQuestion'], selectedQuestion)
-    localStorage.removeItem('selectedQuestion') // 복원 후 삭제
-  }
-
-  console.log(
-    'Selected Question:',
-    queryClient.getQueryData(['selectedQuestion'])
-  )
-
-  // console.log('selectedQuestion', selectedQuestion)
 
   const steps = [1, 2]
 
