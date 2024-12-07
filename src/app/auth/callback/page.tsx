@@ -35,10 +35,22 @@ export default function Callback() {
     if (redirectUrl) {
       const token = searchParams.get('accessToken')
       const userId = searchParams.get('userId')
+      const selectedQuestion = localStorage.getItem('selectedQuestion')
 
       if (token && userId) {
         localStorage.setItem('keep_in_touch_token', token)
         localStorage.setItem('keep_in_touch_user_id', userId)
+        // redirectUrl이 /questions/messages인 경우 selectedQuestion 확인
+        if (redirectUrl === '/questions/messages') {
+          localStorage.setItem('selectedQuestion', selectedQuestion || '')
+          // const selectedQuestion = localStorage.getItem('selectedQuestion')
+          if (!selectedQuestion) {
+            console.error('selectedQuestion 데이터가 없습니다.')
+            // 필요 시 추가 조치 (예: 에러 페이지로 리다이렉트)
+            // router.push('/error?message=missingSelectedQuestion')
+            return
+          }
+        }
         localStorage.removeItem('redirect_before_login') // 초기화
         router.push(decodeURIComponent(redirectUrl)) // 최종 redirectUrl로 이동
       } else {

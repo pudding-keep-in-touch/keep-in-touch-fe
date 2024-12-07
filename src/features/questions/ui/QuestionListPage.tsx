@@ -48,16 +48,36 @@ export default function QuestionListPage() {
     content: string,
     userId: string
   ) => {
+    const selectedQuestion = {
+      questionId,
+      content,
+      userId,
+    }
+
+    // 데이터를 즉시 localStorage에 저장
+    localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
+
+    // 로그인 상태에 따라 리다이렉트
     redirectToLoginIfNeeded(() => {
-      const selectedQuestion = {
-        questionId,
-        content,
-        userId,
-      }
-      localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
       router.push('/questions/messages')
     })
   }
+
+  // const handleQuestionClick = (
+  //   questionId: string,
+  //   content: string,
+  //   userId: string
+  // ) => {
+  //   redirectToLoginIfNeeded(() => {
+  //     // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
+  //     queryClient.setQueryData(['selectedQuestion'], {
+  //       questionId,
+  //       content,
+  //       userId,
+  //     })
+  //     router.push('/questions/messages')
+  //   })
+  // }
 
   console.log(
     'Selected Question:',
