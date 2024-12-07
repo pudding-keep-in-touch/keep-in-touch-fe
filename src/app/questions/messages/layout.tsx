@@ -1,5 +1,6 @@
 'use client'
 
+import AuthProvider from '@/features/auth/context/AuthProvider'
 // import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
@@ -37,7 +38,7 @@ export default function Layout({ children }: Props) {
     : 'bg-[#F7F7FC]'
 
   return (
-    <>
+    <AuthProvider>
       <div
         className={cn(
           'w-full min-h-screen flex flex-col items-center pb-16 px-6',
@@ -58,6 +59,6 @@ export default function Layout({ children }: Props) {
         </header>
         <MessageFormProvider>{children}</MessageFormProvider>
       </div>
-    </>
+    </AuthProvider>
   )
 }
