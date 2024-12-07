@@ -1,11 +1,11 @@
-export type questionsType = {
+export type QuestionsType = {
   questionId: string
   userId: string
   content: string
   createdAt: string
 }[]
 
-export type questionType = {
+export type QuestionType = {
   questionId: string
   userId: string
   content: string
