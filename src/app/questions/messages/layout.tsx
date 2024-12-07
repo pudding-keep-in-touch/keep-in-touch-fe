@@ -19,6 +19,8 @@ export default function Layout({ children }: Props) {
   const router = useRouter()
   const pathname = usePathname()
 
+  console.log(' localStorage.getItem', localStorage.getItem('selectedQuestion'))
+
   // `localStorage`와 `QueryClient` 동기화
   useEffect(() => {
     const storedSelectedQuestion = localStorage.getItem('selectedQuestion')
@@ -29,10 +31,9 @@ export default function Layout({ children }: Props) {
         localStorage.removeItem('selectedQuestion') // 복원 후 삭제
       }
     }
-    console.log('1')
   }, [queryClient])
 
-  console.log('2')
+  console.log('1')
 
   // `selectedQuestion` 데이터 가져오기
   const selectedQuestion = queryClient.getQueryData<{
@@ -41,11 +42,13 @@ export default function Layout({ children }: Props) {
     userId: string
   }>(['selectedQuestion'])
 
-  console.log('3')
+  console.log(' localStorage.getItem', localStorage.getItem('selectedQuestion'))
+
+  console.log('selectedQuestion', selectedQuestion)
+
+  console.log('캐시 데이터 확인:', queryClient.getQueryCache())
 
   const userId = selectedQuestion?.userId
-
-  console.log('4')
 
   // 닉네임 가져오기
   const { data: nickname } = useGetNickname(userId ?? '')
