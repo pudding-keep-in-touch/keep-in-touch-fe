@@ -12,8 +12,9 @@ export const API_BASE_URL = {
 }[APP_ENV]
 
 export const FRONT_API_BASE_URL = {
-  production: 'https://dev-be-v2.keep-in-touch.me/',
-}
+  production: 'https://dev-fe-v2.keep-in-touch.me/',
+  development: 'https://dev-fe-v2.keep-in-touch.me/',
+}[APP_ENV]
 
 export const getLoginUrl = (redirectUrl: string) =>
   `${API_BASE_URL}?redirectUrl=${encodeURIComponent(

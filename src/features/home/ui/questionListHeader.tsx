@@ -1,3 +1,4 @@
+import { FRONT_API_BASE_URL } from '@/shared/config/env'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -13,10 +14,8 @@ export const QuestionListHeader = React.forwardRef<
   HTMLDivElement,
   QuestionListHeaderProps
 >(({ className, userId }, ref) => {
-  const pathname = usePathname()
-
   function shareOnUrl() {
-    const contentToCopy = `https://dev-fe.keep-in-touch.me${pathname}`
+    const contentToCopy = `${FRONT_API_BASE_URL}questions?userId=${userId}`
 
     const urlArea = document.createElement('textarea')
     document.body.appendChild(urlArea)
