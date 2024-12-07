@@ -1,7 +1,6 @@
 'use client'
 
 import AuthProvider from '@/features/auth/context/AuthProvider'
-// import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
 import { cn } from '@/shared/utils/emotionVariety'
@@ -19,8 +18,6 @@ export default function Layout({ children }: Props) {
   const router = useRouter()
   const pathname = usePathname()
 
-  console.log(' localStorage.getItem', localStorage.getItem('selectedQuestion'))
-
   // `localStorage`와 `QueryClient` 동기화
   useEffect(() => {
     const storedSelectedQuestion = localStorage.getItem('selectedQuestion')
@@ -33,20 +30,12 @@ export default function Layout({ children }: Props) {
     }
   }, [queryClient])
 
-  console.log('1')
-
   // `selectedQuestion` 데이터 가져오기
   const selectedQuestion = queryClient.getQueryData<{
     questionId: string
     content: string
     userId: string
   }>(['selectedQuestion'])
-
-  console.log(' localStorage.getItem', localStorage.getItem('selectedQuestion'))
-
-  console.log('selectedQuestion', selectedQuestion)
-
-  console.log('캐시 데이터 확인:', queryClient.getQueryCache())
 
   const userId = selectedQuestion?.userId
 
@@ -73,7 +62,7 @@ export default function Layout({ children }: Props) {
 
           {!pathname.endsWith('/preview') && (
             <h1 className='text-lg font-semibold text-center text-[#333D4B] whitespace-nowrap w-full'>
-              {`To. ${nickname}에게`}
+              {`To. ${nickname ?? '받는 사람'}에게`}
             </h1>
           )}
         </header>

@@ -14,6 +14,19 @@ export default function MessagePage() {
   const isMobile = useIsMobile() // 모바일 여부를 확인하는 훅 사용
   const [keyboardHeight, setKeyboardHeight] = useState(0) // 키보드 높이 상태 추가
 
+  useEffect(() => {
+    const storedQuestion = localStorage.getItem('selectedQuestion')
+    if (storedQuestion) {
+      const parsedData = JSON.parse(storedQuestion)
+      queryClient.setQueryData(['selectedQuestion'], parsedData)
+      localStorage.removeItem('selectedQuestion') // 복원 후 삭제
+    }
+  }, [queryClient])
+
+  console.log('localStorage.getItem', localStorage.getItem('selectedQuestion'))
+
+  console.log('캐시 데이터 확인:', queryClient.getQueryCache())
+
   const selectedQuestion = queryClient.getQueryData<{
     questionId: string
     content: string
@@ -25,21 +38,6 @@ export default function MessagePage() {
   console.log('selectedQuestion', selectedQuestion)
 
   console.log('캐시 데이터 확인:', queryClient.getQueryCache())
-
-  useEffect(() => {
-    const storedQuestion = localStorage.getItem('selectedQuestion')
-    if (storedQuestion) {
-      const parsedData = JSON.parse(storedQuestion)
-      queryClient.setQueryData(['selectedQuestion'], parsedData)
-      localStorage.removeItem('selectedQuestion') // 복원 후 삭제
-    }
-  }, [queryClient])
-
-  console.log('3localStorage.getItem', localStorage.getItem('selectedQuestion'))
-
-  console.log('3selectedQuestion', selectedQuestion)
-
-  console.log('3캐시 데이터 확인:', queryClient.getQueryCache())
 
   useEffect(() => {
     if (isMobile) return
