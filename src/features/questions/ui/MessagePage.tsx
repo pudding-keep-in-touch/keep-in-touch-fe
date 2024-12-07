@@ -52,13 +52,13 @@ export default function MessagePage() {
   console.log('setQueryData', selectedQuestion)
 
   // // 화면에 렌더링된 후에도 `selectedQuestion` 데이터를 확인하여 UI 업데이트
-  // const questionData = queryClient.getQueryData<{
-  //   questionId: string
-  //   content: string
-  //   userId: string
-  // }>(['selectedQuestion'])
+  const questionData = queryClient.getQueryData<{
+    questionId: string
+    content: string
+    userId: string
+  }>(['selectedQuestion'])
 
-  // console.log('Selected Question:', questionData)
+  console.log('Selected Question:', questionData)
 
   // if (!questionData) {
   //   return <p>선택된 질문이 없습니다.</p>
