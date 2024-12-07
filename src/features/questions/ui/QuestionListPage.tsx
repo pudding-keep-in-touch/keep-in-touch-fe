@@ -49,15 +49,20 @@ export default function QuestionListPage() {
     userId: string
   ) => {
     redirectToLoginIfNeeded(() => {
-      // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
-      queryClient.setQueryData(['selectedQuestion'], {
+      const selectedQuestion = {
         questionId,
         content,
         userId,
-      })
+      }
+      localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
       router.push('/questions/messages')
     })
   }
+
+  console.log(
+    'Selected Question:',
+    queryClient.getQueryData(['selectedQuestion'])
+  )
 
   const handleTypeMessageClick = () => {
     router.push(`/message/send/${userId}/select`)

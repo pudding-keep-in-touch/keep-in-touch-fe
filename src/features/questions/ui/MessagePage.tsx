@@ -63,11 +63,24 @@ export default function MessagePage() {
     }
   }, [isMobile]) // 모바일 여부가 변경될 때마다 실행
 
-  const selectedQuestion = queryClient.getQueryData<{
-    questionId: string
-    content: string
-    userId: string
-  }>(['selectedQuestion'])
+  // const selectedQuestion = queryClient.getQueryData<{
+  //   questionId: string
+  //   content: string
+  //   userId: string
+  // }>(['selectedQuestion'])
+
+  const selectedQuestion = JSON.parse(
+    localStorage.getItem('selectedQuestion') || '{}'
+  )
+  if (selectedQuestion) {
+    queryClient.setQueryData(['selectedQuestion'], selectedQuestion)
+    localStorage.removeItem('selectedQuestion') // 복원 후 삭제
+  }
+
+  console.log(
+    'Selected Question:',
+    queryClient.getQueryData(['selectedQuestion'])
+  )
 
   // console.log('selectedQuestion', selectedQuestion)
 
