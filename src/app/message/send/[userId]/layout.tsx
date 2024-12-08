@@ -18,6 +18,7 @@ export default function Layout({ children }: Props) {
   const userId = params.userId
 
   const { data: nickname } = useGetNickname(userId ?? '')
+  console.log(nickname)
 
   const makeBgClass = pathname.endsWith('/preview')
     ? `bg-cover bg-center ${

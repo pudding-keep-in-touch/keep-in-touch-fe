@@ -2,8 +2,8 @@ import { baseQuery } from '@/shared/api/baseQuery'
 import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
 
 interface usePostSendMessageProps {
-  receiverId: number
-  emotionId: number
+  receiverId: string
+  emotionId: string
   content: string
 }
 

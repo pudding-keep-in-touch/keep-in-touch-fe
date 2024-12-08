@@ -19,7 +19,7 @@ export default function MessageSendButtons({
 }: MessageSendButtonsProps) {
   const router = useRouter()
   const params = useParams<{ variety: MessageVariety }>()
-  const emotionId = getVarietyNumber(variety as MessageVariety | undefined)
+  const emotionId = variety as MessageVariety | ''
 
   const clickHandler = () => {
     router.push(`/message/send/${userId}/${params.variety}/preview`)
@@ -36,8 +36,8 @@ export default function MessageSendButtons({
       </Button>
 
       <MessageSendSubmitButton
-        userId={Number(userId)}
-        emotionId={Number(emotionId)}
+        userId={userId}
+        // emotionId={emotionId}
         variety={variety}
       />
     </div>

@@ -3,8 +3,8 @@ import { baseQuery } from '@/shared/api/baseQuery'
 import { MessageType } from '@/shared/types/common.types'
 
 interface GetMessageQueryProps {
-  userId: number
-  limit: number
+  userId: string
+  limit: string
   type: MessageType
 }
 
