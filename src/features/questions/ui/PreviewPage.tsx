@@ -3,10 +3,10 @@
 import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { MessageFormValues } from '@/features/message/_send/model/formSchema'
-import { Button } from '@/shared/components/Button'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
+import SendButton from '@/features/questions/ui/button/SendButton'
 
 export default function PreviewPage() {
   const { getValues } = useFormContext<MessageFormValues>()
@@ -50,13 +50,14 @@ export default function PreviewPage() {
         *쪽지는 모두 익명으로 전달됩니다
       </div>
       {/* <SendButton></SendButton> */}
-      <Button
+      <SendButton />
+      {/* <Button
         type='button'
         className='h-fit p-[18px] bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
         onClick={onClickSendHandler}
       >
         쪽지 보내기
-      </Button>
+      </Button> */}
     </>
   )
 }

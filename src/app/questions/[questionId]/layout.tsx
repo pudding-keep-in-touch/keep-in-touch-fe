@@ -1,5 +1,3 @@
-import AuthProvider from '@/features/auth/context/AuthProvider'
-
 interface Props {
   children: React.ReactNode
 }
