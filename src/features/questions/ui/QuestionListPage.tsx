@@ -63,22 +63,6 @@ export default function QuestionListPage() {
     // })
   }
 
-  // const handleQuestionClick = (
-  //   questionId: string,
-  //   content: string,
-  //   userId: string
-  // ) => {
-  //   redirectToLoginIfNeeded(() => {
-  //     // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
-  //     queryClient.setQueryData(['selectedQuestion'], {
-  //       questionId,
-  //       content,
-  //       userId,
-  //     })
-  //     router.push('/questions/messages')
-  //   })
-  // }
-
   console.log(
     'Selected Question:',
     queryClient.getQueryData(['selectedQuestion'])
@@ -109,9 +93,10 @@ export default function QuestionListPage() {
             {/* 자유질문 */}
             <QuestionBox
               key={99}
-              questionId={'99'}
+              // questionId={'99'}
               variant='custom'
               onTypeClick={handleTypeMessageClick}
+              userId={userId}
             />
 
             {questions?.map((question) => (

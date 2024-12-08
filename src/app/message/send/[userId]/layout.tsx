@@ -4,7 +4,6 @@ import { ChevronLeftIcon } from 'lucide-react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/shared/utils/emotionVariety'
 import { MessageVariety } from '@/entities/message/utils/messageVarieties'
-import { useQueryClient } from '@tanstack/react-query'
 import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
 
 interface Props {
@@ -15,19 +14,8 @@ export default function Layout({ children }: Props) {
   const router = useRouter()
   const params = useParams<{ variety: MessageVariety; userId: string }>()
   const pathname = usePathname()
-  const queryClient = useQueryClient()
 
-  //todo nickname으로 변환 필요
-
-  const selectedQuestion = queryClient.getQueryData<{
-    questionId: string
-    content: string
-    userId: string
-  }>(['selectedQuestion'])
-
-  console.log('selectedQuestion', selectedQuestion)
-
-  const userId = selectedQuestion?.userId
+  const userId = params.userId
 
   const { data: nickname } = useGetNickname(userId ?? '')
 
@@ -53,7 +41,7 @@ export default function Layout({ children }: Props) {
         />
 
         {!pathname.endsWith('/preview') && (
-          <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
+          <h1 className='text-lg font-semibold text-center text-[#333D4B] whitespace-nowrap w-full'>
             {`To. ${nickname}에게`}
           </h1>
         )}
