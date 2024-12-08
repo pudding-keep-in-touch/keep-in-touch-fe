@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { usePostQuestionHidden } from '../api/api'
 
 interface QuestionsCardProps {
   questionId: string
@@ -25,34 +24,11 @@ export const QuestionsCard = ({
   title,
 }: QuestionsCardProps) => {
   const router = useRouter()
-  const [isHiddenState, setIsHiddenState] = React.useState(false)
-  const { mutateAsync } = usePostQuestionHidden()
 
   const onClickMoveDetail = (questionId: string) => {
     router.push(`/home/${userId}/question/${questionId}`)
     // TODO : 자유 질문이면 링크 이동처리
   }
-
-  const handleToggle = async (isToggle: boolean) => {
-    try {
-      console.log('Mutation payload:', { questionId, isHidden: isToggle })
-      setIsHiddenState(isToggle) // 상태 업데이트
-      const response = await mutateAsync({
-        questionId,
-        isHidden: isToggle,
-      })
-
-      if (!response) {
-        console.error('Response is empty:', response)
-      }
-    } catch (error) {
-      console.error('Failed to toggle question visibility:', error)
-    }
-  }
-
-  React.useEffect(() => {
-    setIsHiddenState(isHidden) // 초기 상태 설정
-  }, [isHidden])
 
   return (
     <div
@@ -61,18 +37,8 @@ export const QuestionsCard = ({
     >
       <div className='flex justify-center items-center w-full h-[44px] bg-gray-1'>
         <h3 className='text-gray-4 text-sm font-semibold'>{title}</h3>
-        {isHome && isHiddenState && (
-          <button
-            className='absolute right-4'
-            onClick={(e) => {
-              e.stopPropagation()
-              if (isHidden == true) {
-                handleToggle(false)
-              } else {
-                handleToggle(true)
-              }
-            }}
-          >
+        {isHome && isHidden && (
+          <button className='absolute right-4'>
             <Image
               src='/icon_hide.svg'
               alt='hide icon'
@@ -87,7 +53,7 @@ export const QuestionsCard = ({
       >
         {isHome ? (
           <p
-            className={`whitespace-pre-wrap font-normal text-[15px] text-center leading-[140%] tracking-[-1px] ${isHidden ? 'text-gray-2' : 'text-gray-4'}`}
+            className={`whitespace-nowrap overflow-hidden  text-ellipsis font-normal text-[15px] text-center leading-[140%] tracking-[-1px] ${isHidden ? 'text-gray-2' : 'text-gray-4'}`}
           >
             {description}
           </p>
