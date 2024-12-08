@@ -15,18 +15,22 @@ export default function Layout({ children }: Props) {
     switch (step) {
       case 1:
         return (
-          <div className='w-full min-h-screen flex flex-col items-center bg-white border-l border-r border-[#D0E4FF] box-border'>
-            <Lottie
-              className='lottie-player'
-              animationData={splashJson}
-              loop={0}
-            />
+          <div className='relative w-full min-h-screen bg-gradient-to-b from-[#BFE5FF] to-[#34B5FE] via-[#BFE5FF] via-50%'>
+            <div className='flex flex-col w-full min-h-screen'>
+              <div className='flex-1 bg-[#BFE5FF]' />
+              <Lottie
+                className='lottie-player'
+                animationData={splashJson}
+                loop={0}
+              />
+              <div className='flex-1 bg-[#34B5FE]' />
+            </div>
           </div>
         )
 
       case 2:
         return (
-          <div className='w-full min-h-screen flex flex-col items-center bg-white border-l border-r border-[#D0E4FF] box-border'>
+          <div className='w-full min-h-screen flex flex-col items-center bg-white box-border'>
             {children}
           </div>
         )
@@ -34,15 +38,12 @@ export default function Layout({ children }: Props) {
   }
 
   React.useEffect(() => {
-    if (step === 1) {
-      const timer = setTimeout(() => setStep(2), 2000)
-
-      // 클린업 함수
-      return () => clearTimeout(timer)
-    }
+    // if (step === 1) {
+    //   const timer = setTimeout(() => setStep(2), 2000)
+    //   // 클린업 함수
+    //   return () => clearTimeout(timer)
+    // }
   }, [step])
-
-  console.log('step', step)
 
   return <>{renderStep(step)}</>
 }
