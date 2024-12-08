@@ -49,6 +49,7 @@ export default function PreviewPage() {
       <div className='text-white text-left w-full text-sm'>
         *쪽지는 모두 익명으로 전달됩니다
       </div>
+      {/* <SendButton></SendButton> */}
       <Button
         type='button'
         className='h-fit p-[18px] bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'

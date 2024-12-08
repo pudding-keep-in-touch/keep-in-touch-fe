@@ -41,8 +41,8 @@ export const usePostMessage = () => {
     }: {
       receiverId: string
       content: string
-      questionId: string
-      emotionId: string
+      questionId?: string
+      emotionId?: string
     }) => {
       const token = localStorage.getItem('keep_in_touch_token')
 
