@@ -40,12 +40,18 @@ export default function Layout({ children }: Props) {
   const userId = selectedQuestion?.userId
 
   // 닉네임 가져오기
-  const { data: nickname } = useGetNickname(userId ?? '')
+  const { data: nickname, isLoading } = useGetNickname(userId ?? '')
 
   const makeBgClass = pathname.endsWith('/preview')
     ? `bg-cover bg-center ${'bg-messageDetail'}`
     : 'bg-[#F7F7FC]'
 
+  // 닉네임을 불러오는 중이거나 없는 경우 처리
+  if (isLoading) {
+    return null // 로딩 중에는 아무것도 렌더링하지 않음 (로딩 스피너를 추가할 수도 있음)
+  }
+
+  //todo AuthProvider 감싸기
   return (
     <AuthProvider>
       <div
