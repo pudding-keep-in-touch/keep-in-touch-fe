@@ -6,11 +6,13 @@ import { MessageFormValues } from '@/features/message/_send/model/formSchema'
 import { Button } from '@/shared/components/Button'
 import { usePostMessage } from '@/features/questions/hooks/query/useQuestionQuery'
 import { useQueryClient } from '@tanstack/react-query'
+import { useFormStatus } from 'react-dom'
 
 export default function SendButton() {
   const router = useRouter()
   const { formState, handleSubmit } = useFormContext<MessageFormValues>()
   const { isValid } = formState
+  const { pending } = useFormStatus()
   const queryClient = useQueryClient()
 
   const selectedQuestion = queryClient.getQueryData<{
@@ -22,9 +24,7 @@ export default function SendButton() {
   console.log('selectedQuestion', selectedQuestion)
 
   // `usePostMessage` 훅 호출
-  const { mutateAsync, status } = usePostMessage()
-
-  const isLoading = status === 'pending'
+  const { mutateAsync } = usePostMessage()
 
   const onSubmit = handleSubmit(async (formValues) => {
     console.log('click')
@@ -35,7 +35,6 @@ export default function SendButton() {
         receiverId: selectedQuestion?.userId || '', // receiverId를 실제 데이터로 교체
         content: formValues.message,
         questionId: selectedQuestion?.questionId, // questionId를 실제 데이터로 교체
-        // emotionId: '', // emotionId를 실제 데이터로 교체
       })
 
       if (response?.messageId) {
@@ -53,10 +52,11 @@ export default function SendButton() {
   return (
     <Button
       type='submit'
+      disabled={!isValid || pending}
       className='h-fit p-4 bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
       onClick={onSubmit}
     >
-      {isLoading ? '보내는 중...' : '전송하기'}
+      {pending ? '보내는 중...' : '전송하기'}
     </Button>
   )
 }
