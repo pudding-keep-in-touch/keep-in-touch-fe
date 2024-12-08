@@ -6,7 +6,7 @@ import React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import Image from 'next/image'
 interface ScrollLayoutProps {
-  userId: number
+  userId: string
   isHome: boolean
   isVisible: boolean
   header: React.ReactNode

@@ -10,7 +10,7 @@ export default function LinkShareButton({
   disabled,
 }: {
   questionId: string
-  userId: number
+  userId: string
   disabled: boolean
 }) {
   const router = useRouter()

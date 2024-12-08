@@ -13,7 +13,7 @@ interface MessagePreviewProps {
   dmList?: DirectMessage
   title: string
   type: MessageType
-  userId: number
+  userId: string
 }
 
 export default function MessagePreview({

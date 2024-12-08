@@ -11,7 +11,7 @@ import { useGetQuestionList, usePostQuestionHidden } from './api/api'
 import { QuestionData } from '@/features/home/model/home.types'
 interface QuestionDetailProps {
   questionId: string
-  userId: number
+  userId: string
 }
 
 export default function QuestionDetail({

@@ -10,7 +10,7 @@ import { ScrollLayout } from '@/shared/ui/layouts/ScrollLayout'
 import { useGetQuestionList } from './api/api'
 
 interface HomeProps {
-  userId: number
+  userId: string
 }
 
 export default function Home({ userId }: HomeProps) {

@@ -6,7 +6,7 @@ import React from 'react'
 
 interface QuestionsCardProps {
   questionId: string
-  userId: number
+  userId: string
   createdAt: string
   description: React.ReactElement | string
   isHidden: boolean
