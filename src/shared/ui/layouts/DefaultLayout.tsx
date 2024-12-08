@@ -2,14 +2,16 @@
 
 import QueryProvider from '@/shared/provider/QueryProvider'
 import React from 'react'
-import { Toaster, ToasterProps } from 'react-hot-toast'
+import toast, { Toaster, useToasterStore } from 'react-hot-toast'
 
 export const DefaultLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) => {
-  //
+  const { toasts } = useToasterStore()
+  const [toastLimit] = React.useState<number>(3) // 3개의 토스트만 허용
+
   React.useEffect(() => {
     let vh = 0
     const setVh = () => {
@@ -27,6 +29,18 @@ export const DefaultLayout = ({
       window.removeEventListener('resize', setVh)
     }
   }, [])
+
+  React.useEffect(() => {
+    // 보이는 토스트 필터링
+    const visibleToasts = toasts.filter((t) => t.visible)
+
+    // 초과된 토스트 제거
+    if (visibleToasts.length > toastLimit) {
+      visibleToasts
+        .slice(toastLimit) // 초과된 부분만 선택
+        .forEach((t) => toast.dismiss(t.id)) // 초과된 토스트 제거
+    }
+  }, [toasts, toastLimit])
 
   return (
     <div

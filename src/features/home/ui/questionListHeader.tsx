@@ -1,7 +1,6 @@
 import { FRONT_API_BASE_URL } from '@/shared/config/env'
 import clsx from 'clsx'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
 import React from 'react'
 import toast from 'react-hot-toast'
 
@@ -14,28 +13,35 @@ export const QuestionListHeader = React.forwardRef<
   HTMLDivElement,
   QuestionListHeaderProps
 >(({ className, userId }, ref) => {
+  const [clickCount, setClickCount] = React.useState(0) // 클릭 횟수 추적
+
   function shareOnUrl() {
-    const contentToCopy = `${FRONT_API_BASE_URL}questions?userId=${userId}`
+    if (clickCount >= 3) {
+      toast.error('너무 자주 하면 안 돼요! 😅')
+    } else {
+      setClickCount((prev) => prev + 1)
+      const contentToCopy = `${FRONT_API_BASE_URL}questions?userId=${userId}`
 
-    const urlArea = document.createElement('textarea')
-    document.body.appendChild(urlArea)
-    urlArea.value = contentToCopy
-    urlArea.select()
-    document.execCommand('copy')
-    document.body.removeChild(urlArea)
+      const urlArea = document.createElement('textarea')
+      document.body.appendChild(urlArea)
+      urlArea.value = contentToCopy
+      urlArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(urlArea)
 
-    toast(
-      <div className='w-full flex items-center space-x-3 relative justify-center'>
-        <Image
-          src='/icon-check-fill.svg'
-          alt='check icon fill'
-          className='w-5 h-5'
-          width={20}
-          height={20}
-        />
-        <p>링크가 복사되었습니다.</p>
-      </div>
-    )
+      toast(
+        <div className='w-full flex items-center space-x-3 relative justify-center'>
+          <Image
+            src='/icon-check-fill.svg'
+            alt='check icon fill'
+            className='w-5 h-5'
+            width={20}
+            height={20}
+          />
+          <p>링크가 복사되었습니다.</p>
+        </div>
+      )
+    }
   }
 
   return (
