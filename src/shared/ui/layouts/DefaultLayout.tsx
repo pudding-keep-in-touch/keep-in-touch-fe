@@ -30,7 +30,7 @@ export const DefaultLayout = ({
 
   return (
     <div
-      className='max-w-[390px] w-full mr-auto ml-auto bg-white scrollbar-hide'
+      className='max-w-[390px] w-420:max-w-full w-full mr-auto ml-auto bg-white scrollbar-hide border-l border-r border-[#D0E4FF] box-border w-420:border-none'
       style={{
         height: 'calc(var(--vh, 1vh) * 100)', // Safari에서 안전한 높이 사용
         overflow: 'hidden', // 레이아웃 확장 방지
