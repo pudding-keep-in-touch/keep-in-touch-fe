@@ -11,7 +11,7 @@ import { useGetQuestionList, usePostQuestionHidden } from './api/api'
 import { QuestionData } from '@/features/home/model/home.types'
 interface QuestionDetailProps {
   questionId: string
-  userId: number
+  userId: string
 }
 
 export default function QuestionDetail({
@@ -26,7 +26,7 @@ export default function QuestionDetail({
   const [isHidden, setIsHidden] = React.useState(false)
 
   const { data } = useGetQuestionList({ userId })
-  const { mutateAsync } = usePostQuestionHidden()
+  const { mutateAsync, isPending, isError } = usePostQuestionHidden()
 
   const handleToggle = async (isToggle: boolean) => {
     try {
@@ -120,7 +120,11 @@ export default function QuestionDetail({
 
       <div className='sticky flex justify-center items-start bottom-[100px] left-0 w-full p-[16px] pt-0'>
         <Tooltip>
-          <LinkShareButton userId={userId} />
+          <LinkShareButton
+            userId={userId}
+            questionId={questionId}
+            disabled={isPending || isError}
+          />
         </Tooltip>
       </div>
     </QuestionLayout>

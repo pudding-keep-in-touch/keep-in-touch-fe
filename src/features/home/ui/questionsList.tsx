@@ -7,7 +7,7 @@ import { QuestionData } from '../model/home.types'
 interface QuestionsListProps {
   questionData: QuestionData[]
   isHome: boolean
-  userId: number
+  userId: string
 }
 
 export const QuestionsList = React.forwardRef<

@@ -37,7 +37,7 @@ const randomMockData = [
 ]
 
 interface ScrollHomeProps {
-  userId: number
+  userId: string
   visibleRef: LegacyRef<HTMLDivElement> | undefined
   scrollElement: HTMLElement | null
   setScrollElementState: React.Dispatch<
