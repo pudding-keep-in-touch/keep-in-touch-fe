@@ -4,20 +4,16 @@ import { useFormContext } from 'react-hook-form'
 import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 import { MessageFormValues } from '@/features/message/_send/model/formSchema'
+import MessageSendSubmitButton from '@/features/message/_send/_completion/ui/submitButton'
 
 export default function Page({
-  params: { userId },
+  params: { userId, variety },
 }: {
-  params: { userId: string }
+  params: { userId: string; variety: string }
 }) {
   const { getValues } = useFormContext<MessageFormValues>()
-  const router = useRouter()
 
   const { message } = getValues()
-
-  const clickHandler = () => {
-    router.back()
-  }
 
   return (
     <>
@@ -27,13 +23,8 @@ export default function Page({
           {message}
         </p>
       </div>
-      <Button
-        type='button'
-        className='h-fit p-[18px] bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
-        onClick={clickHandler}
-      >
-        완료
-      </Button>
+
+      <MessageSendSubmitButton userId={userId} variety={variety} />
     </>
   )
 }
