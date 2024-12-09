@@ -47,7 +47,7 @@ export default function MessageList({
         const isMessageNormal = !message.status || message.status === 'normal'
         const isReceived = messageType === 'received'
         const isUnread = !message.readAt || !message.reactionInfo
-        const isLastItem = index === (messages?.messageList.length || 0) - 1
+        const isLastItem = index === messages?.messageList.length - 1
         const messageContent = isReceived
           ? message.readAt === null
             ? '소중한 진심을 확인해보세요'

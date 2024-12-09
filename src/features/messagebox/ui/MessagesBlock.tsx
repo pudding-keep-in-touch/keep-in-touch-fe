@@ -27,27 +27,38 @@ export default function MessagesBlock({
     order: 'desc',
   })
 
+  // 여기서 filter랑 some을 사용해서 배열 연산을 수행하게 했는데 prev.messageList가 많아지면 느려질 수 있음
+  // 이후 퍼포먼스 개선 필요
   useEffect(() => {
     if (data?.messageList) {
       const newMessageList = data.messageList
       setMessages((prev) => {
-        const newResponse: MessageResponse = {
+        const updatedMessageList = cursor
+          ? [
+              ...(prev?.messageList || []),
+              ...newMessageList.filter(
+                (newMsg) =>
+                  !(prev?.messageList || []).some(
+                    (prevMsg) => prevMsg.messageId === newMsg.messageId
+                  )
+              ),
+            ]
+          : newMessageList
+
+        return {
           receivedMessageCount:
             data.receivedMessageCount || prev?.receivedMessageCount,
           sentMessageCount: data.sentMessageCount || prev?.sentMessageCount,
           unreadMessageCount:
             data.unreadMessageCount || prev?.unreadMessageCount,
           nextCursor: data.nextCursor ?? prev?.nextCursor ?? null,
-          messageList: cursor
-            ? [...(prev?.messageList || []), ...newMessageList]
-            : newMessageList,
+          messageList: updatedMessageList,
         }
-        return newResponse
       })
+
       setHasMore(!!data.nextCursor)
     }
   }, [data, cursor])
-
   useEffect(() => {
     if (isError) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

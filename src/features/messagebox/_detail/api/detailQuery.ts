@@ -194,10 +194,7 @@ export const useGetMessageList = ({
       const baseUrl = `/v2/users/${userId}/messages?type=${type}`
       const params = new URLSearchParams()
       if (cursor) {
-        params.append(
-          'cursor',
-          typeof cursor === 'string' ? cursor : cursor.toISOString()
-        )
+        params.append('cursor', cursor)
       }
       if (limit) {
         params.append('limit', limit.toString())
@@ -225,6 +222,8 @@ export const useGetMessageList = ({
         throw Error
       }
     },
+    placeholderData: (previousData) => previousData,
+    staleTime: 1000,
   })
 }
 
