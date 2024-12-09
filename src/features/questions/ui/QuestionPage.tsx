@@ -3,36 +3,75 @@
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/shared/components/Button'
-// import { question, questions } from '@/entities/questions/questionData'
 import QuestionBox from '@/shared/components/QuestionBox'
-import { useQueryClient } from '@tanstack/react-query'
 import { useGetQuestion } from '@/features/questions/hooks/query/useQuestionQuery'
+import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 
 export default function QuestionPage() {
   const router = useRouter()
-  const queryClient = useQueryClient()
 
   // URL에서 questionId를 가져옵니다.
   const { questionId } = useParams<{ questionId: string }>()
 
-  const { data: question } = useGetQuestion(questionId)
+  const {
+    data: question,
+    isError,
+    isLoading,
+    error,
+  } = useGetQuestion(questionId)
 
   console.log(question)
+
+  const redirectToLoginIfNeeded = (callback: () => void) => {
+    if (!isUserLoggedIn()) {
+      // /questions/messages로 리다이렉트하도록 설정
+      const redirectUrl = '/questions/messages'
+      localStorage.setItem('redirect_before_login', redirectUrl) // 이전 경로 저장
+      router.push(`/login?redirectUrl=${encodeURIComponent(redirectUrl)}`)
+    } else {
+      callback() // 로그인 상태라면 콜백 실행
+    }
+  }
 
   const handleQuestionClick = (
     questionId: string,
     content: string,
     userId: string
   ) => {
-    console.log('click')
-    // 선택된 질문 데이터를 캐싱
-    queryClient.setQueryData(['selectedQuestion'], {
+    const selectedQuestion = {
       questionId,
       content,
       userId,
+    }
+
+    // 데이터를 즉시 localStorage에 저장
+    localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
+
+    // 로그인 상태에 따라 리다이렉트
+    redirectToLoginIfNeeded(() => {
+      router.push('/questions/messages')
     })
-    // ReplyPage로 이동
-    router.push('/questions/messages')
+  }
+
+  // 에러 상태 처리
+  // todo 디자인 페이지로 변경 예정
+  if (isError) {
+    return (
+      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <h1 className='text-xl font-semibold text-red-600'>
+          {error?.message || 'page not found'}
+        </h1>
+      </div>
+    )
+  }
+
+  // 로딩 상태 처리
+  if (isLoading) {
+    return (
+      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <h1 className='text-xl font-semibold text-gray-600'>로딩 중...</h1>
+      </div>
+    )
   }
 
   return (

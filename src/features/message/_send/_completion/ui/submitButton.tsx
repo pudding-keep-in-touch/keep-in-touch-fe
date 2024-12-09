@@ -5,16 +5,14 @@ import { Button } from '@/shared/components/Button'
 import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { MessageFormValues } from '@/features/message/_send/model/formSchema'
-import { usePostSendMessage } from '@/features/message/_send/api/sendMutation'
+import { usePostMessage } from '@/features/questions/hooks/query/useQuestionQuery'
 
 interface MessageSendSubmitButtonProps {
-  emotionId: number
-  userId: number
+  userId: string
   variety: string
 }
 
 export default function MessageSendSubmitButton({
-  emotionId,
   userId,
   variety,
 }: MessageSendSubmitButtonProps) {
@@ -23,25 +21,30 @@ export default function MessageSendSubmitButton({
   const { pending } = useFormStatus()
   const { isValid } = formState
 
-  const { mutateAsync, isPending } = usePostSendMessage()
+  const { mutateAsync } = usePostMessage()
+
+  const emotionId = variety === 'thanks' ? '1' : '2'
 
   const onSubmit = handleSubmit(async (formValues) => {
+    console.log('click')
+    console.log('formValues', formValues)
     try {
+      // `usePostMessage`를 사용해 메시지 전송
       const response = await mutateAsync({
-        receiverId: userId,
-        emotionId: emotionId || 1,
+        receiverId: userId || '', // receiverId를 실제 데이터로 교체
         content: formValues.message,
+        emotionId: emotionId, // emotionId를 실제 데이터로 교체
       })
 
-      if (response && response.dmId) {
-        router.push(
-          `/message/send/${userId}/${variety}/complete/${response.dmId}`
-        )
+      if (response?.messageId) {
+        console.log('response', response)
+        // 성공적으로 전송 후 라우팅
+        router.push(`/questions/messages/complete`)
       } else {
-        console.error('dmId가 응답에 없습니다:', response)
+        console.error('응답에 messageId가 없습니다:', response)
       }
     } catch (error) {
-      console.log('쪽지 보내기에 실패했습니다.')
+      console.error('쪽지 보내기에 실패했습니다:', error)
     }
   })
 
@@ -52,7 +55,7 @@ export default function MessageSendSubmitButton({
       className='h-fit p-4 bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
       onClick={onSubmit}
     >
-      {pending ? '보내는 중...' : '쪽지 보내기'}
+      {pending ? '보내는 중...' : '전송하기'}
     </Button>
   )
 }

@@ -16,8 +16,12 @@ export default function QuestionListPage() {
 
   const userId = searchParams.get('userId') || ''
 
-  const { data: questions, isLoading } = useGetQuestionList(userId)
-
+  const {
+    data: questions,
+    isLoading,
+    isError,
+    error,
+  } = useGetQuestionList(userId)
   //todo 데이터가 없을 떄
 
   //todo 로그인 state추가F=${
@@ -63,22 +67,6 @@ export default function QuestionListPage() {
     })
   }
 
-  // const handleQuestionClick = (
-  //   questionId: string,
-  //   content: string,
-  //   userId: string
-  // ) => {
-  //   redirectToLoginIfNeeded(() => {
-  //     // 로그인 상태라면, 클릭한 질문 데이터를 캐시하고 /questions/messages로 이동
-  //     queryClient.setQueryData(['selectedQuestion'], {
-  //       questionId,
-  //       content,
-  //       userId,
-  //     })
-  //     router.push('/questions/messages')
-  //   })
-  // }
-
   console.log(
     'Selected Question:',
     queryClient.getQueryData(['selectedQuestion'])
@@ -86,6 +74,27 @@ export default function QuestionListPage() {
 
   const handleTypeMessageClick = () => {
     router.push(`/message/send/${userId}/select`)
+  }
+
+  // 에러 상태 처리
+  // todo 디자인 페이지로 변경 예정
+  if (isError || !userId) {
+    return (
+      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <h1 className='text-xl font-semibold text-red-600'>
+          {error?.message || 'page not found'}
+        </h1>
+      </div>
+    )
+  }
+
+  // 로딩 상태 처리
+  if (isLoading) {
+    return (
+      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <h1 className='text-xl font-semibold text-gray-600'>로딩 중...</h1>
+      </div>
+    )
   }
 
   return (
@@ -109,9 +118,10 @@ export default function QuestionListPage() {
             {/* 자유질문 */}
             <QuestionBox
               key={99}
-              questionId={'99'}
+              // questionId={'99'}
               variant='custom'
               onTypeClick={handleTypeMessageClick}
+              userId={userId}
             />
 
             {questions?.map((question) => (

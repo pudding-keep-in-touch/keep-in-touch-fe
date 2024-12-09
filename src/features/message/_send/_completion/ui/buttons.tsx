@@ -3,10 +3,7 @@
 import { Button } from '@/shared/components/Button'
 import { useParams, useRouter } from 'next/navigation'
 import MessageSendSubmitButton from './submitButton'
-import {
-  getVarietyNumber,
-  MessageVariety,
-} from '@/entities/message/utils/messageVarieties'
+import { MessageVariety } from '@/entities/message/utils/messageVarieties'
 
 interface MessageSendButtonsProps {
   variety: string
@@ -19,7 +16,6 @@ export default function MessageSendButtons({
 }: MessageSendButtonsProps) {
   const router = useRouter()
   const params = useParams<{ variety: MessageVariety }>()
-  const emotionId = getVarietyNumber(variety as MessageVariety | undefined)
 
   const clickHandler = () => {
     router.push(`/message/send/${userId}/${params.variety}/preview`)
@@ -35,11 +31,7 @@ export default function MessageSendButtons({
         미리보기
       </Button>
 
-      <MessageSendSubmitButton
-        userId={Number(userId)}
-        emotionId={Number(emotionId)}
-        variety={variety}
-      />
+      <MessageSendSubmitButton userId={userId} variety={variety} />
     </div>
   )
 }
