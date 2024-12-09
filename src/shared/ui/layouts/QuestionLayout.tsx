@@ -5,7 +5,7 @@ import React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
 interface QuestionLayoutProps {
-  userId: number
+  userId: string
   isHome: boolean
   isVisible: boolean
   children: React.ReactNode

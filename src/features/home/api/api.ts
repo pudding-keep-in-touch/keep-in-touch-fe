@@ -3,7 +3,7 @@ import { QuestionData } from '../model/home.types'
 import { baseQuery } from '@/shared/api/baseQuery'
 
 interface useGetQuestionListProps {
-  userId: number
+  userId: string
 }
 
 export const useGetQuestionList = ({ userId }: useGetQuestionListProps) => {

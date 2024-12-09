@@ -6,7 +6,7 @@ import React from 'react'
 import toast from 'react-hot-toast'
 
 interface CompleteButtonProps {
-  userId: number
+  userId: string
   isDisabled: boolean
   keyboardHeight: number
   onSubmit: () => unknown

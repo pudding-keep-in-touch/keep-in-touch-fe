@@ -11,7 +11,7 @@ import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { QuestionFormValues } from './model/formSchema'
 interface WriteQuestionProps {
-  userId: number
+  userId: string
 }
 
 export const WriteQuestion = ({ userId }: WriteQuestionProps) => {

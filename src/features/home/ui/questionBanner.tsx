@@ -19,7 +19,7 @@ type QuestionBannerType = {
 
 interface QuestionBannerProps {
   randomMockData: QuestionBannerType[]
-  userId: number
+  userId: string
 }
 
 export const QuestionBanner = ({
