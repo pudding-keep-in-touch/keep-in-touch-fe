@@ -31,7 +31,7 @@ vi.mock('')
 describe('SellForm', () => {
   render(
     <MessageFormProvider>
-      {/* <MessageInput /> */}
+      <MessageInput />
       <MessageWriteNextButton userId={'0'} />
     </MessageFormProvider>
   )

@@ -3,16 +3,21 @@
 import { Textarea } from '@/shared/components/textarea'
 import { useFormContext } from 'react-hook-form'
 import { MessageFormValues } from '../../model/formSchema'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { cn } from '@/shared/utils/emotionVariety'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
 
 export default function MessageInput() {
   const { watch, register } = useFormContext<MessageFormValues>()
   const { message } = watch()
 
-  const pathname = usePathname()
+  const [pathname, setPathname] = useState<string>('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPathname(window.location.pathname)
+    }
+  }, [])
 
   const textareaHeightClass = pathname.includes('write')
     ? 'resize-none h-[390px]'
