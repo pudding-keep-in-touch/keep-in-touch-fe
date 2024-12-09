@@ -16,8 +16,12 @@ export default function QuestionListPage() {
 
   const userId = searchParams.get('userId') || ''
 
-  const { data: questions, isLoading } = useGetQuestionList(userId)
-
+  const {
+    data: questions,
+    isLoading,
+    isError,
+    error,
+  } = useGetQuestionList(userId)
   //todo 데이터가 없을 떄
 
   //todo 로그인 state추가F=${
@@ -70,6 +74,26 @@ export default function QuestionListPage() {
 
   const handleTypeMessageClick = () => {
     router.push(`/message/send/${userId}/select`)
+  }
+
+  // 에러 상태 처리
+  if (isError || !userId) {
+    return (
+      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <h1 className='text-xl font-semibold text-red-600'>
+          {error?.message || 'page not found'}
+        </h1>
+      </div>
+    )
+  }
+
+  // 로딩 상태 처리
+  if (isLoading) {
+    return (
+      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <h1 className='text-xl font-semibold text-gray-600'>로딩 중...</h1>
+      </div>
+    )
   }
 
   return (
