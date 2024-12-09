@@ -16,7 +16,7 @@ type MessageDetailLayout = MainLayoutProps & {
   children: React.ReactNode
   messageType: MessageType
   variety: VarietyType
-  messageId: number
+  messageId: string
 }
 
 export default function MessageDetailLayout({

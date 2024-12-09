@@ -8,9 +8,9 @@ export default function Page({
   params: { userId, type, messageId, variety },
 }: {
   params: {
-    userId: number
+    userId: string
     type: MessageType
-    messageId: number
+    messageId: string
     variety: VarietyType
   }
 }) {

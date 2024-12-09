@@ -5,7 +5,7 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 export default function Page({
   params: { type, userId },
 }: {
-  params: { type: MessageType; userId: number }
+  params: { type: MessageType; userId: string }
 }) {
   return (
     <InboxLayout title='My 퐁' userId={userId}>

@@ -11,7 +11,7 @@ export default function InboxLayout({
 }: {
   children: React.ReactNode
   title: string
-  userId: number
+  userId: string
 }) {
   const router = useRouter()
   const pathname = usePathname()

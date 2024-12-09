@@ -10,7 +10,7 @@ import unWatchedJson from '@/features/messagebox/ui/lottie/activated.json'
 import Lottie from 'lottie-react'
 
 interface MessageListProps {
-  userId: number
+  userId: string
   messageType: MessageType
   messages?: MessageResponse
   observe?: (node: HTMLElement | null) => void

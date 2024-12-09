@@ -6,7 +6,7 @@ import React from 'react'
 
 interface NavProps {
   type: string
-  userId: number
+  userId: string
   isNew: boolean
 }
 

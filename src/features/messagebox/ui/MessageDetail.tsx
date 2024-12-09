@@ -12,11 +12,13 @@ export default function MessageDetail({
   messageId,
   messageType,
 }: {
-  userId: number
-  messageId: number
+  userId: string
+  messageId: string
   messageType: MessageType
 }) {
-  const { data, isLoading, error } = useGetMessageDetail({ messageId })
+  const { data, isLoading, error } = useGetMessageDetail({
+    messageId: parseInt(messageId, 10),
+  })
 
   if (isLoading) return <div>임시 로딩중.</div>
   if (error) return <div>Error fetching message details.</div>

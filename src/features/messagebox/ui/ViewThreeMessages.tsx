@@ -12,7 +12,7 @@ export default function MessagesBlock({
   userId,
 }: {
   messageType: MessageType
-  userId: number
+  userId: string
 }) {
   const { data, isLoading, isError, error } = useGetMessageList({
     userId,

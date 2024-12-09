@@ -5,7 +5,7 @@ export default function ViewAllMessage({
   userId,
 }: {
   messageType: MessageType
-  userId: number
+  userId: string
 }) {
   return (
     <div className='max-w-[390px] w-full'>

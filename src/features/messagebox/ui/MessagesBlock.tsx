@@ -13,7 +13,7 @@ export default function MessagesBlock({
   userId,
 }: {
   messageType: MessageType
-  userId: number
+  userId: string
 }) {
   const [cursor, setCursor] = useState<string | null>(null)
   const [messages, setMessages] = useState<MessageResponse>()
