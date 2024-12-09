@@ -54,7 +54,7 @@ export default function MessageList({
             : message.content
           : message.content
 
-        const messageClassName = `relative ${isUnread && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
+        const messageClassName = `relative ${isReceived && isUnread && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
         return (
           <div key={message.messageId} ref={isLastItem ? observe : null}>
             <Link
@@ -64,7 +64,7 @@ export default function MessageList({
                 <div className={messageClassName}>
                   <div className='relative w-[49px] h-[49px] rounded-lg bg-gradient-to-br from-[#BEAFFB] to-[#F975F0]'>
                     <Lottie animationData={unWatchedJson} loop={0} />
-                    {isUnread && (
+                    {isReceived && isUnread && (
                       <div className='absolute leading-[27.2%] border border-white px-[6px] py-[5px] -tracking-widest bottom-[1.1rem] right-[0.3rem] bg-white opacity-[80%] rounded-2xl text-[8px] text-gray-4 font-semibold flex justify-center'>
                         읽지 않음
                       </div>
