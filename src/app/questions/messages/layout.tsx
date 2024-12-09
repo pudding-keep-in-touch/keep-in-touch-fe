@@ -51,15 +51,18 @@ export default function Layout({ children }: Props) {
     return null // 로딩 중에는 아무것도 렌더링하지 않음 (로딩 스피너를 추가할 수도 있음)
   }
 
+  const isCompletePage = pathname.includes('/complete')
+
   //todo AuthProvider 감싸기
   return (
-    <AuthProvider>
-      <div
-        className={cn(
-          'w-full min-h-screen flex flex-col items-center pb-16 px-6',
-          makeBgClass
-        )}
-      >
+    // <AuthProvider>
+    <div
+      className={cn(
+        'w-full min-h-screen flex flex-col items-center pb-16 px-6',
+        !isCompletePage && makeBgClass // `/complete`가 아닌 경우에만 배경 클래스 적용
+      )}
+    >
+      {!isCompletePage && (
         <header className='w-full h-[50px] grid grid-cols-3 items-center z-50'>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
@@ -72,8 +75,9 @@ export default function Layout({ children }: Props) {
             </h1>
           )}
         </header>
-        <MessageFormProvider>{children}</MessageFormProvider>
-      </div>
-    </AuthProvider>
+      )}
+      <MessageFormProvider>{children}</MessageFormProvider>
+    </div>
+    // {/* </AuthProvider> */}
   )
 }

@@ -54,6 +54,7 @@ export default function QuestionPage() {
   }
 
   // 에러 상태 처리
+  // todo 디자인 페이지로 변경 예정
   if (isError) {
     return (
       <div className='flex items-center justify-center min-h-screen bg-gray-100'>

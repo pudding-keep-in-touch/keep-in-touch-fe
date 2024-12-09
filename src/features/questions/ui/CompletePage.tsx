@@ -8,8 +8,7 @@ export default function CompletePage() {
         <div className='mt-[250px] flex flex-col w-[100%] items-center text-center'>
           <Image src='/send.svg' alt='send' width={80} height={80} />
           <h2 className='text-[#333D4B] text-l font-bold leading-[150%] mt-6 mb-60'>
-            친구에게 쪽지 보내기를 <br />
-            완료하였습니다!
+            친구에게 퐁 보내기 완료!
           </h2>
 
           <div className='mb-4 text-[#6B6B6B]'>

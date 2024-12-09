@@ -62,9 +62,9 @@ export default function QuestionListPage() {
     localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
 
     // 로그인 상태에 따라 리다이렉트
-    redirectToLoginIfNeeded(() => {
-      router.push('/questions/messages')
-    })
+    // redirectToLoginIfNeeded(() => {
+    router.push('/questions/messages')
+    // })
   }
 
   console.log(
@@ -77,6 +77,7 @@ export default function QuestionListPage() {
   }
 
   // 에러 상태 처리
+  // todo 디자인 페이지로 변경 예정
   if (isError || !userId) {
     return (
       <div className='flex items-center justify-center min-h-screen bg-gray-100'>
