@@ -6,10 +6,17 @@ import { MessageFormValues } from '../../model/formSchema'
 import React from 'react'
 import { cn } from '@/shared/utils/emotionVariety'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 export default function MessageInput() {
   const { watch, register } = useFormContext<MessageFormValues>()
   const { message } = watch()
+
+  const pathname = usePathname()
+
+  const textareaHeightClass = pathname.includes('write')
+    ? 'resize-none h-[390px]'
+    : 'resize-none h-[300px]'
 
   const errorFocuseStyle =
     message?.length >= 200
@@ -27,7 +34,9 @@ export default function MessageInput() {
       <Textarea
         {...register('message')}
         className={cn(
-          'resize-none h-[390px] rounded-2xl border-2 p-[30px] border-white focus-visible:ring-offset-0 focus-visible:ring-0',
+          // 'resize-none h-[390px] rounded-2xl border-2 p-[30px] border-white focus-visible:ring-offset-0 focus-visible:ring-0',
+          'rounded-2xl border-2 p-[30px] border-white focus-visible:ring-offset-0 focus-visible:ring-0',
+          textareaHeightClass,
           errorFocuseStyle
         )}
         placeholder='글을 입력해 주세요'
