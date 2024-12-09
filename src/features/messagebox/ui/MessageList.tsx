@@ -9,15 +9,18 @@ import {
 import unWatchedJson from '@/features/messagebox/ui/lottie/activated.json'
 import Lottie from 'lottie-react'
 
+interface MessageListProps {
+  userId: string
+  messageType: MessageType
+  messages?: MessageResponse
+  observe?: (node: HTMLElement | null) => void
+}
 export default function MessageList({
-  data,
   userId,
   messageType,
-}: {
-  data: MessageResponse
-  userId: number
-  messageType: MessageType
-}) {
+  messages,
+  observe,
+}: MessageListProps) {
   const dateFormat = (e: Date) => {
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
@@ -40,20 +43,20 @@ export default function MessageList({
   }
   return (
     <>
-      {data.messageList.map((message: Message) => {
+      {messages?.messageList.map((message: Message, index: number) => {
         const isMessageNormal = !message.status || message.status === 'normal'
         const isReceived = messageType === 'received'
         const isUnread = !message.readAt
+        const isLastItem = index === messages?.messageList.length - 1
         const messageContent = isReceived
           ? message.readAt === null
             ? '소중한 진심을 확인해보세요'
             : message.content
           : message.content
-        console.log(message.createdAt)
-        const messageClassName = `relative ${!isReceived || !isUnread ? '' : 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
 
+        const messageClassName = `relative ${isReceived && isUnread && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
         return (
-          <div key={message.messageId}>
+          <div key={message.messageId} ref={isLastItem ? observe : null}>
             <Link
               href={`/messagebox/${userId}/${messageType}/${message.messageId}`}
             >
@@ -61,7 +64,7 @@ export default function MessageList({
                 <div className={messageClassName}>
                   <div className='relative w-[49px] h-[49px] rounded-lg bg-gradient-to-br from-[#BEAFFB] to-[#F975F0]'>
                     <Lottie animationData={unWatchedJson} loop={0} />
-                    {isUnread && (
+                    {isReceived && isUnread && (
                       <div className='absolute leading-[27.2%] border border-white px-[6px] py-[5px] -tracking-widest bottom-[1.1rem] right-[0.3rem] bg-white opacity-[80%] rounded-2xl text-[8px] text-gray-4 font-semibold flex justify-center'>
                         읽지 않음
                       </div>

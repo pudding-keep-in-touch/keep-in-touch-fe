@@ -5,13 +5,13 @@ import MessagesBlock from '@/features/messagebox/ui/MessagesBlock'
 export default function Page({
   params: { type, userId },
 }: {
-  params: { type: MessageType; userId: number }
+  params: { type: MessageType; userId: string }
 }) {
   // messageType이 아닌 url 접근 처리 필요
 
   return (
-    <InboxLayout title={'My 퐁'}>
-      <MessagesBlock messageType={type} userId={userId} limit={10} />
+    <InboxLayout title={'My 퐁'} userId={userId}>
+      <MessagesBlock messageType={type} userId={userId} />
     </InboxLayout>
   )
 }

@@ -3,21 +3,16 @@ import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/shared/utils/emotionVariety'
-import { NavigationBar } from '@/shared/ui/layouts/NavigationBar'
-
+import { Nav } from '@/shared/components/nav'
 export default function InboxLayout({
   children,
   title,
+  userId,
 }: {
   children: React.ReactNode
   title: string
+  userId: string
 }) {
-  // const userId = mockData.userId
-  // const userId =
-  //   typeof window !== 'undefined'
-  //     ? localStorage.getItem('keep_in_touch_user_id')
-  //     : null
-
   const router = useRouter()
   const pathname = usePathname()
 
@@ -47,7 +42,7 @@ export default function InboxLayout({
       <div className='relative w-full h-full overflow-y-scroll scrollbar-hide'>
         {children}
       </div>
-      <NavigationBar />
+      <Nav type='messagebox' userId={userId} isNew={false} />
     </div>
   )
 }

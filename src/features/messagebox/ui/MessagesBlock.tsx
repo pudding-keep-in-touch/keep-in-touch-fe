@@ -1,81 +1,86 @@
 'use client'
+import { useEffect, useState } from 'react'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
-import { useEffect, useRef, useState } from 'react'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 import MessageList from '@/features/messagebox/ui/MessageList'
-import Link from 'next/link'
 import Image from 'next/image'
-import { Message } from '@/features/messagebox/model/messagebox.types'
+import { MessageResponse } from '@/features/messagebox/model/messagebox.types'
+import { useInView } from 'react-cool-inview'
+import { Spinner } from '@/shared/components/Sppiner'
+
 export default function MessagesBlock({
   messageType,
   userId,
-  limit,
 }: {
   messageType: MessageType
-  userId: number
-  limit?: number
+  userId: string
 }) {
-  const [messages, setMessages] = useState<Message[]>([])
-  const [cursor, setCursor] = useState<Date | null>(null)
+  const [cursor, setCursor] = useState<string | null>(null)
+  const [messages, setMessages] = useState<MessageResponse>()
   const [hasMore, setHasMore] = useState(true)
-  const containerRef = useRef<HTMLDivElement>(null)
 
-  const { data, error, isLoading } = useGetMessageList({
+  const { data, isLoading, isError, error } = useGetMessageList({
     userId,
     type: messageType,
     cursor,
-    limit,
+    limit: 10,
+    order: 'desc',
   })
-  useEffect(() => {
-    if (data) {
-      setMessages((prev) => [...prev, ...data.messageList]) // 쪽지 데이터 추가
-      setHasMore(!!data.nextCursor) // 다음 커서가 있으면 더보기 가능
-      setCursor(data.nextCursor) // 다음 요청을 위한 nextCursor 설정
-    }
-  }, [data])
 
-  const handleScroll = () => {
-    if (!hasMore || isLoading) return
-    const container = containerRef.current
-    if (container) {
-      if (
-        container.scrollTop + container.clientHeight >=
-        container.scrollHeight - 10
-      ) {
-        setCursor((prev) => prev)
-      }
-    }
-  }
+  // 여기서 filter랑 some을 사용해서 배열 연산을 수행하게 했는데 prev.messageList가 많아지면 느려질 수 있음
+  // 이후 퍼포먼스 개선 필요
   useEffect(() => {
-    const container = containerRef.current
-    if (container) {
-      container.addEventListener('scroll', handleScroll)
-    }
-    return () => {
-      if (container) {
-        container.removeEventListener('scroll', handleScroll)
-      }
-    }
-  }, [hasMore, isLoading])
+    if (data?.messageList) {
+      const newMessageList = data.messageList
+      setMessages((prev) => {
+        const updatedMessageList = cursor
+          ? [
+              ...(prev?.messageList || []),
+              ...newMessageList.filter(
+                (newMsg) =>
+                  !(prev?.messageList || []).some(
+                    (prevMsg) => prevMsg.messageId === newMsg.messageId
+                  )
+              ),
+            ]
+          : newMessageList
 
-  if (isLoading) return <div>loading..</div>
-  if (error) return <div>Error fetching message details.</div>
-  if (!data) return null
+        return {
+          receivedMessageCount:
+            data.receivedMessageCount || prev?.receivedMessageCount,
+          sentMessageCount: data.sentMessageCount || prev?.sentMessageCount,
+          unreadMessageCount:
+            data.unreadMessageCount || prev?.unreadMessageCount,
+          nextCursor: data.nextCursor ?? prev?.nextCursor ?? null,
+          messageList: updatedMessageList,
+        }
+      })
+
+      setHasMore(!!data.nextCursor)
+    }
+  }, [data, cursor])
+  useEffect(() => {
+    if (isError) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const errorStatus = (error as any)?.response?.status
+      console.error(`Error fetching messages. Status: ${errorStatus}`)
+    }
+  }, [isError, error])
+
+  // useInView로 마지막 아이템 감지하고, 더 데이터가 있을 때 & 로딩중이 아닐 때 & data의 nextCursor 값이 있을 때 setCursor에 nextCursor 부여
+  const { observe } = useInView({
+    onEnter: () => {
+      if (hasMore && !isLoading && data?.nextCursor) {
+        setCursor(data?.nextCursor)
+      }
+    },
+  })
 
   const messageCount =
     messageType === 'sent'
-      ? data.sentMessageCount
-      : data.receivedMessageCount || 0
+      ? data?.sentMessageCount || 0
+      : data?.receivedMessageCount || 0
 
-  const moreLink = messageCount! > 3 && (
-    <Link
-      href={`/messagebox/${userId}/${messageType}`}
-      className='flex items-center gap-[9px]'
-    >
-      <p className=' text-[#6B7684]'>더보기</p>
-      <Image src='/nav_icon.svg' alt='watch more' width={18} height={18} />
-    </Link>
-  )
   const description =
     messageType === 'sent' ? '아직 보낸 퐁이 없어요!' : '아직 받은 퐁이 없어요!'
 
@@ -86,16 +91,24 @@ export default function MessagesBlock({
           <div>{messageType === 'sent' ? '보낸 퐁' : '받은 퐁'}</div>
           <div>({messageCount})</div>
         </h2>
-        {moreLink}
       </div>
-      {messageCount! > 0 ? (
-        <MessageList data={data} userId={userId} messageType={messageType} />
-      ) : (
-        <div className='flex flex-col items-center text-[#333D4B] pb-[162px] pt-[110px]'>
-          <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
-          <p className='leading-none pt-[11px] text-[17px]'>{description}</p>
-        </div>
-      )}
+      <div>
+        {/* 이후 스피너 대신 로딩 페이지 추가 */}
+        {isLoading && <Spinner />}
+        {messageCount > 0 ? (
+          <MessageList
+            messages={messages}
+            userId={userId}
+            messageType={messageType}
+            observe={observe}
+          />
+        ) : (
+          <div className='flex flex-col items-center text-[#333D4B] pb-[162px] pt-[110px]'>
+            <Image src='/no_msg.svg' alt='home_icon' width={65} height={57} />
+            <p className='leading-none pt-[11px] text-[17px]'>{description}</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
