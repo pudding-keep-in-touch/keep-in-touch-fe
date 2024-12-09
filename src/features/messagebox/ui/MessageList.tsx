@@ -46,7 +46,7 @@ export default function MessageList({
       {messages?.messageList.map((message: Message, index: number) => {
         const isMessageNormal = !message.status || message.status === 'normal'
         const isReceived = messageType === 'received'
-        const isUnread = !message.readAt || !message.reactionInfo
+        const isUnread = !message.readAt
         const isLastItem = index === messages?.messageList.length - 1
         const messageContent = isReceived
           ? message.readAt === null
@@ -54,7 +54,7 @@ export default function MessageList({
             : message.content
           : message.content
 
-        const messageClassName = `relative ${!isReceived || !isUnread ? '' : 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
+        const messageClassName = `relative ${isUnread && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
         return (
           <div key={message.messageId} ref={isLastItem ? observe : null}>
             <Link
