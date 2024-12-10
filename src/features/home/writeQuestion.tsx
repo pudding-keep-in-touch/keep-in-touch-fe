@@ -135,6 +135,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
               isColor
               type='question'
               maxLength={140}
+              minLength={2}
               setIsError={setIsError}
               desc={currentDescription}
               onFocus={() => setIsFocus(true)} // 포커스 시 상태 업데이트
@@ -198,7 +199,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
         >
           <CompleteButton
             userId={userId}
-            isDisabled={isError && isValid}
+            isDisabled={isError || !isValid}
             keyboardHeight={keyboardHeight}
             onSubmit={onSubmit}
           />
