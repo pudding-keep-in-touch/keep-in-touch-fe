@@ -1,7 +1,7 @@
 import { MessageType } from '../_detail/model/messagebox.types'
 
 export type MessageBoxType = {
-  messageId: number
+  messageId: string
 }
 export type Reactions = {
   reactionId: string
@@ -57,7 +57,7 @@ export interface MessageResponse {
   messageList: Message[]
 }
 export interface useGetMessageListProps {
-  userId: number
+  userId: string
   type: MessageType
   cursor?: Date | null
   limit?: number

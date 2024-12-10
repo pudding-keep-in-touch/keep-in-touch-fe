@@ -12,8 +12,8 @@ import EmojiSection from '@/features/messagebox/ui/EmojiSection'
 
 interface ReactionPageProps {
   messageType: MessageType
-  userId: number
-  messageId: number
+  userId: string
+  messageId: string
 }
 
 const ReactionPage = React.memo(

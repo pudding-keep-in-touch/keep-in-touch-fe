@@ -194,7 +194,7 @@ export const useGetMessageList = ({
       const baseUrl = `/v2/users/${userId}/messages?type=${type}`
       const params = new URLSearchParams()
       if (cursor) {
-        params.append('cursor', cursor)
+        params.append('cursor', cursor.toString())
       }
       if (limit) {
         params.append('limit', limit.toString())
@@ -228,7 +228,7 @@ export const useGetMessageList = ({
 }
 
 // 쪽지 상세 api
-export const useGetMessageDetail = ({ messageId }: { messageId: number }) => {
+export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
   return useQuery({
     queryKey: ['getDetailMessage', messageId],
     queryFn: async () => {

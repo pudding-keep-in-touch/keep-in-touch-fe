@@ -4,8 +4,8 @@ export type ListItem = {
   nextCursor: Date
   messageList: [
     {
-      messageId: number
-      receiverId: number
+      messageId: string
+      receiverId: string
       receiverNickname: string
       content: string
       status: string

@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast'
 export default function Page({
   params: { userId, type, messageId },
 }: {
-  params: { userId: number; type: MessageType; messageId: number }
+  params: { userId: string; type: MessageType; messageId: string }
 }) {
   const router = useRouter()
   // /reaction, /report, /hide 제외 나머지 페이지 예외 처리 필요
