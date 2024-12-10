@@ -6,10 +6,12 @@ import React from 'react'
 import CompleteButton from './ui/completeButton'
 import Image from 'next/image'
 import { debounce } from 'lodash'
-import { usePostQuestionList } from './api/api'
+import { usePostQuestionList, usePostQuestionListProps } from './api/api'
 import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { QuestionFormValues } from './model/formSchema'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 interface WriteQuestionProps {
   userId: string
 }
@@ -95,7 +97,11 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
         console.error('response가 응답에 없습니다:', response)
       }
     } catch (error) {
-      console.log('질문 작성에 실패했습니다.')
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          toast.error(error.response?.data.message)
+        }
+      }
     }
   })
 
