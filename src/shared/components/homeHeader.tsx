@@ -35,13 +35,14 @@ export const HomeHeader = ({ isVisible, isHome }: HomeHeaderProps) => {
           />
         )}
         {/* <button className='w-6'> */}
-        <Image
+        {/* <Image
           className='max-w-[6px] w-full h-[22px]'
           src='/header_more.svg'
           width={0}
           height={0}
           alt='more icon'
-        />
+        /> */}
+        <div />
         {/* </button> */}
       </header>
     </div>
