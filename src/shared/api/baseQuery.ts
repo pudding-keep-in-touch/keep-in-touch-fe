@@ -34,9 +34,20 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     // Handle global errors (e.g., unauthorized, server errors)
-    if (error.response.status === 401) {
-      redirect('/login')
+
+    if (axios.isAxiosError(error)) {
+      if (error.response && error.response.status >= 500) {
+        // TODO : 에러 페이지로 이동하도록 처리
+        alert('알 수 없는 오류가 발생했어요. 잠시 후 다시 시도해주세요.')
+      }
+
+      if (error.response && error.response.status === 401) {
+        redirect('/login')
+      }
+
+      throw error
     }
+
     throw new Error('API 요청 실패')
   }
 )

@@ -51,8 +51,8 @@ export const usePostQuestionList = () => {
       queryClient.invalidateQueries({ queryKey: ['questionList'] })
     },
 
-    onError: () => {
-      //
+    onError: (error) => {
+      console.log('usePostQuestionList API 호출 에러', error)
     },
   })
 }

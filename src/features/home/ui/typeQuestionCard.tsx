@@ -10,7 +10,7 @@ export const TypeQuestionCard = ({ isHome }: QuestionsCardProps) => {
     <div
       className={`flex-col justify-start w-full bg-opacity-30 border border-[#D0E4FF] rounded-2xl overflow-hidden mt-[10px] relative  ${isHome ? 'h-[186px] cursor-pointer' : 'h-fit'}`}
     >
-      <div className='flex justify-center items-center w-full h-[44px] bg-gray-1'>
+      <div className='flex justify-center items-center w-full h-[44px] bg-white'>
         <h3 className='text-gray-4 text-[14px] font-semibold'>
           질문 없이도 퐁을 받을 수 있어요
         </h3>

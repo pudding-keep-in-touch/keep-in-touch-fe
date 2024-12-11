@@ -12,6 +12,7 @@ interface WriteInputProps {
   isColor?: boolean
   type: string
   maxLength: number
+  minLength: number
   setIsError: React.Dispatch<React.SetStateAction<boolean>>
   desc?: string
   onFocus?: () => unknown
@@ -22,6 +23,7 @@ export default function WriteInput({
   isColor,
   type,
   maxLength,
+  minLength,
   setIsError,
   desc,
   onFocus,
@@ -29,17 +31,16 @@ export default function WriteInput({
 }: WriteInputProps) {
   const { watch, register } = useFormContext<QuestionFormValues>()
   const { question } = watch()
-  const minLength = 2
 
-  const error = question?.length >= maxLength || question?.length < minLength
+  const error = question?.length > maxLength || question?.length < minLength
 
   const errorFocusStyle = error
     ? 'focus-within:border-[#F42762]'
     : 'focus-within:border-[#35B6FF]'
   const errorFontColor =
-    question?.length >= maxLength ? 'text-[#F42762]' : 'text-gray-400'
+    question?.length > maxLength ? 'text-[#F42762]' : 'text-gray-400'
   const errorFlexStyle =
-    question?.length >= maxLength ? 'justify-between' : 'justify-end'
+    question?.length > maxLength ? 'justify-between' : 'justify-end'
 
   const backgroundColorStyle = isColor && 'bg-gray-1'
 
@@ -72,7 +73,7 @@ export default function WriteInput({
       />
 
       <div className={cn('flex mt-2 mb-2', errorFlexStyle)}>
-        {question?.length >= maxLength && (
+        {question?.length > maxLength && (
           <div className='flex justify-start items-center gap-1'>
             <p className='text-xs text-[#F42762]'>최대글자수 제한</p>
             <Image

@@ -38,11 +38,11 @@ export default function Layout({ children }: Props) {
   }
 
   React.useEffect(() => {
-    // if (step === 1) {
-    //   const timer = setTimeout(() => setStep(2), 2000)
-    //   // 클린업 함수
-    //   return () => clearTimeout(timer)
-    // }
+    if (step === 1) {
+      const timer = setTimeout(() => setStep(2), 2000)
+      // 클린업 함수
+      return () => clearTimeout(timer)
+    }
   }, [step])
 
   return <>{renderStep(step)}</>
