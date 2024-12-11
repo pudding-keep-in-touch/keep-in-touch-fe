@@ -33,6 +33,7 @@ const config = {
         'w-380': { raw: '(max-width: 380px)' },
         'w-420': { raw: '(max-width: 420px)' },
         'w-320': { raw: '(max-width: 320px)' },
+        'custom-md': { raw: '(min-height: 900px)' }, // 높이 900px 이상일 때
       },
 
       backgroundImage: {

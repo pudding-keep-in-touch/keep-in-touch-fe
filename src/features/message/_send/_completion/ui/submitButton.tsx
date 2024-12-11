@@ -26,14 +26,11 @@ export default function MessageSendSubmitButton({
   const emotionId = variety === 'thanks' ? '1' : '2'
 
   const onSubmit = handleSubmit(async (formValues) => {
-    console.log('click')
-    console.log('formValues', formValues)
     try {
-      // `usePostMessage`를 사용해 메시지 전송
       const response = await mutateAsync({
-        receiverId: userId || '', // receiverId를 실제 데이터로 교체
+        receiverId: userId || '',
         content: formValues.message,
-        emotionId: emotionId, // emotionId를 실제 데이터로 교체
+        emotionId: emotionId,
       })
 
       if (response?.messageId) {
