@@ -18,7 +18,7 @@ export default function Main() {
           ? localStorage.getItem('keep_in_touch_user_id')
           : null
 
-      if (!token) {
+      if (!token || !userId) {
         setTimeout(() => {
           router.push('/login')
         }, 2000)

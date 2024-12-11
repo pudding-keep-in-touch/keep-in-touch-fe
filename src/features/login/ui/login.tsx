@@ -11,6 +11,8 @@ import 'swiper/css/autoplay'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import { OnBoardingStep } from './onBoardingStep'
+import React from 'react'
+import { useRouter } from 'next/navigation'
 
 const onBoardingMockData = [
   {
@@ -28,12 +30,33 @@ const onBoardingMockData = [
 ]
 
 export const Login = () => {
+  const router = useRouter()
   const coverflowEffectConfig = {
     slideShadows: false,
     rotate: 0,
     stretch: 0,
     depth: 0,
   }
+
+  React.useEffect(() => {
+    const checkToken = async () => {
+      const token =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_token')
+          : null
+      const userId =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_user_id')
+          : null
+
+      if (!token || !userId) {
+        return
+      }
+
+      router.push(`/home/${userId}`)
+    }
+    checkToken()
+  }, [router])
 
   return (
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>

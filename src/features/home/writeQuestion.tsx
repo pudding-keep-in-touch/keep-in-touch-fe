@@ -10,6 +10,8 @@ import { usePostQuestionList } from './api/api'
 import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { QuestionFormValues } from './model/formSchema'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 interface WriteQuestionProps {
   userId: string
 }
@@ -95,7 +97,11 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
         console.error('response가 응답에 없습니다:', response)
       }
     } catch (error) {
-      console.log('질문 작성에 실패했습니다.')
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          toast.error(error.response?.data.message)
+        }
+      }
     }
   })
 
@@ -135,6 +141,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
               isColor
               type='question'
               maxLength={140}
+              minLength={2}
               setIsError={setIsError}
               desc={currentDescription}
               onFocus={() => setIsFocus(true)} // 포커스 시 상태 업데이트
@@ -198,7 +205,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
         >
           <CompleteButton
             userId={userId}
-            isDisabled={isError && isValid}
+            isDisabled={isError || !isValid}
             keyboardHeight={keyboardHeight}
             onSubmit={onSubmit}
           />

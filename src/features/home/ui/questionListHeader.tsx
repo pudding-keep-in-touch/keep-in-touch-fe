@@ -48,7 +48,7 @@ export const QuestionListHeader = React.forwardRef<
     <div
       ref={ref}
       className={clsx(
-        'w-full h-[50px] flex justify-between items-center px-[24px] bg-[#F6F7FC]',
+        'w-full h-[60px] flex justify-between items-center px-[24px] bg-[#ffff]',
         className
       )}
     >
@@ -57,13 +57,12 @@ export const QuestionListHeader = React.forwardRef<
       </h3>
       <button
         onClick={shareOnUrl}
-        className='flex justify-center items-center flex-shrink-0  py-[3px] px-[9px] w-[110px] bg-[#35B6FF] bg-opacity-30 rounded-3xl gap-[9px]'
+        className='flex justify-center items-center flex-shrink-0 border border-[#3490E6] py-[8px] px-[15px] w-[126px] bg-[#35B6FF] bg-opacity-30 rounded-3xl gap-[9px]'
       >
-        <div>
-          <span className='text-[#0788D1] font-bold text-[12.98px] tracking-[-0.045rem] leading-[140%]'>
-            전체 공유하기
-          </span>
-        </div>
+        <span className='text-[#0788D1] font-bold text-[12.98px] tracking-[-0.045rem] leading-[140%]'>
+          전체 공유하기
+        </span>
+
         <Image src='/icon_send.svg' alt='send icon' width={17} height={17} />
       </button>
     </div>
