@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
-// import { questions } from '@/entities/questions/questionData'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
 
@@ -72,8 +71,11 @@ export default function QuestionListPage() {
     queryClient.getQueryData(['selectedQuestion'])
   )
 
+  //todo 리다이렉션 테스트 필요
   const handleTypeMessageClick = () => {
-    router.push(`/message/send/${userId}/select`)
+    redirectToLoginIfNeeded(() => {
+      router.push(`/message/send/${userId}/select`)
+    })
   }
 
   // 에러 상태 처리
