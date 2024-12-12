@@ -3,11 +3,12 @@
 import AuthProvider from '@/features/auth/context/AuthProvider'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
+import { Spinner } from '@/shared/components/Sppiner'
 import { cn } from '@/shared/utils/emotionVariety'
 import { useQueryClient } from '@tanstack/react-query'
 import { ChevronLeftIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   children: React.ReactNode
@@ -18,6 +19,8 @@ export default function Layout({ children }: Props) {
   const router = useRouter()
   const pathname = usePathname()
 
+  const [userId, setUserId] = useState<string | ''>()
+
   // `localStorage`와 `QueryClient` 동기화
   useEffect(() => {
     const storedSelectedQuestion = localStorage.getItem('selectedQuestion')
@@ -26,34 +29,34 @@ export default function Layout({ children }: Props) {
       if (Object.keys(parsedData).length > 0) {
         queryClient.setQueryData(['selectedQuestion'], parsedData)
         localStorage.removeItem('selectedQuestion') // 복원 후 삭제
+        setUserId(parsedData.userId) // localStorage에서 가져온 userId를 state로 설정
       }
+    } else {
+      const selectedQuestionFromQuery = queryClient.getQueryData<{
+        questionId: string
+        content: string
+        userId: string
+      }>(['selectedQuestion'])
+      setUserId(selectedQuestionFromQuery?.userId) // queryClient에서 가져온 userId를 state로 설정
     }
   }, [queryClient])
 
-  // `selectedQuestion` 데이터 가져오기
-  const selectedQuestion = queryClient.getQueryData<{
-    questionId: string
-    content: string
-    userId: string
-  }>(['selectedQuestion'])
-
-  const userId = selectedQuestion?.userId
-
   // 닉네임 가져오기
-  const { data: nickname, isLoading } = useGetNickname(userId ?? '')
+  const { data: nickname, isLoading } = useGetNickname(userId)
 
   const makeBgClass = pathname.endsWith('/preview')
     ? `bg-cover bg-center ${'bg-messageDetail'}`
     : 'bg-[#F7F7FC]'
 
   // 닉네임을 불러오는 중이거나 없는 경우 처리
-  if (isLoading) {
-    return null // 로딩 중에는 아무것도 렌더링하지 않음 (로딩 스피너를 추가할 수도 있음)
+  if (isLoading || nickname === null) {
+    return (
+      <Spinner /> //todo 로딩 이미지 변경필요
+    )
   }
 
   const isCompletePage = pathname.includes('/complete')
 
-  //todo AuthProvider 감싸기
   return (
     <AuthProvider>
       <div
@@ -69,9 +72,9 @@ export default function Layout({ children }: Props) {
               onClick={() => router.back()}
             />
 
-            {!pathname.endsWith('/preview') && (
+            {!isLoading && !pathname.endsWith('/preview') && (
               <h1 className='text-lg font-semibold text-center text-[#333D4B] whitespace-nowrap w-full'>
-                {`To. ${nickname ?? '받는 사람'}에게`}
+                {`To. ${nickname}에게`}
               </h1>
             )}
           </header>
