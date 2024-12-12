@@ -63,33 +63,35 @@ export default function MessageDetailLayout({
             className='w-6 h-6 cursor-pointer'
             onClick={backHandler}
           />
-          <div className='flex flex-col items-end'>
-            <button type='button' onClick={openModal}>
-              <Image
-                src='/header_more.svg'
-                alt='header modal button'
-                width={5}
-                height={5}
-              />
-            </button>
-            {isOpen && (
-              <div
-                onClick={openModal}
-                className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
-              >
-                <Link
-                  href={`/messagebox/${userId}/${messageType}/${messageId}/report`}
+          {messageType === 'received' && (
+            <div className='flex flex-col items-end'>
+              <button type='button' onClick={openModal}>
+                <Image
+                  src='/header_more.svg'
+                  alt='header modal button'
+                  width={5}
+                  height={5}
+                />
+              </button>
+              {isOpen && (
+                <div
+                  onClick={openModal}
+                  className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
                 >
-                  신고하기
-                </Link>
-                <Link
-                  href={`/messagebox/${userId}/${messageType}/${messageId}/hide`}
-                >
-                  숨기기
-                </Link>
-              </div>
-            )}
-          </div>
+                  <Link
+                    href={`/messagebox/${userId}/${messageType}/${messageId}/report`}
+                  >
+                    신고하기
+                  </Link>
+                  <Link
+                    href={`/messagebox/${userId}/${messageType}/${messageId}/hide`}
+                  >
+                    숨기기
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
         </header>
       </div>
       {children}
