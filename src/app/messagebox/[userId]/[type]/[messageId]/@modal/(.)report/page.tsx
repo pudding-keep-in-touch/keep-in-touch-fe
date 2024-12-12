@@ -1,13 +1,39 @@
 'use client'
+import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQuery'
 import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 
-export default function Page() {
+export default function Page({
+  params: { userId, messageId },
+}: {
+  params: { userId: string; messageId: string }
+}) {
   const router = useRouter()
   const onDismiss = useCallback(() => {
     router.back()
   }, [])
+
+  const { mutateAsync, isPending, isError } = usePatchMessageStatus()
+  const changeStatus = async () => {
+    const redirectURL = `/messagebox/${userId}/received`
+    try {
+      console.log('Reported mutation payload: ', { messageId })
+      const response = await mutateAsync({
+        messageId,
+        status: 'reported',
+      })
+      router.push(redirectURL)
+      console.log(response)
+      if (!response) {
+        console.error('Reported response is empty: ', response)
+        router.back()
+      }
+    } catch (error) {
+      console.error('Failed to change status from normal to reported: ', error)
+      router.back()
+    }
+  }
   return (
     <div
       onClick={() => {
@@ -34,7 +60,7 @@ export default function Page() {
               취소
             </Button>
             <Button
-              onClick={() => router.back()}
+              onClick={changeStatus}
               className='rounded-2xl w-full h-full p-4 text-[17px] bg-[#35B6FF] text-white font-bold'
             >
               신고하기
