@@ -17,7 +17,7 @@ export default function MessageDetail({
   messageType: MessageType
 }) {
   const { data, isLoading, error } = useGetMessageDetail({
-    messageId: parseInt(messageId, 10),
+    messageId,
   })
 
   if (isLoading) return <div>임시 로딩중.</div>
