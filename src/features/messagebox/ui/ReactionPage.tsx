@@ -12,8 +12,8 @@ import EmojiSection from '@/features/messagebox/ui/EmojiSection'
 
 interface ReactionPageProps {
   messageType: MessageType
-  userId: number
-  messageId: number
+  userId: string
+  messageId: string
 }
 
 const ReactionPage = React.memo(
@@ -80,20 +80,24 @@ const ReactionPage = React.memo(
     if (isLoading) return <div>임시 로딩중..</div>
     if (error) return <div>Error fetching emojis.</div>
     return (
-      <div className='absolute top-0 left-0 w-full h-full pb-20 '>
-        {lists.map((type) => (
-          <EmojiSection
-            key={type}
-            messageType={messageType}
-            grouped={grouped}
-            selected={Array.from(selectedSet)}
-            onItemClick={storedData}
-            type={type}
-          />
-        ))}
-        <div className='fixed flex w-full max-w-[390px] justify-center items-center bottom-0 pb-[10px] z-10 px-6'>
+      <div className='w-full h-full h-815:pb-[100px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+        <div className='h-815:mb-[30px]'>
+          <div className='overflow-y-scroll scrollbar-hide max-w-[390px] min-h-[368px] flex flex-col justify-center w-full'>
+            {lists.map((type) => (
+              <EmojiSection
+                key={type}
+                messageType={messageType}
+                grouped={grouped}
+                selected={Array.from(selectedSet)}
+                onItemClick={storedData}
+                type={type}
+              />
+            ))}
+          </div>
+        </div>
+        <div className='fixed flex justify-center items-start bottom-0 max-w-[390px] w-full px-[24px] pb-[30px] pt-0  z-10'>
           <Toaster position='bottom-center' reverseOrder={false} />
-          <div className='relative flex items-center justify-center mt-[46px] w-full h-fit '>
+          <div className='relative flex items-center justify-center w-full h-fit '>
             <Button
               type='button'
               onClick={onSubmit}

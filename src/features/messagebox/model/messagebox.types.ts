@@ -1,7 +1,7 @@
 import { MessageType } from '../_detail/model/messagebox.types'
 
 export type MessageBoxType = {
-  messageId: number
+  messageId: string
 }
 export type Reactions = {
   reactionId: string
@@ -11,28 +11,30 @@ export type Reactions = {
 }
 // 쪽지 상세 조회
 export interface MessageDetail {
-  status: number
-  message: string
-  data: {
-    messageId: string
-    type: string
-    receiverId: string
-    receiverNickname: string
+  messageId: string
+  type: string
+  receiverId: string
+  receiverNickname: string
+  content: string
+  question?: {
+    questionId: string
     content: string
-    question: {
-      questionId: string
-      content: string
-    }
-    reactions?: {
-      reactionId: string
-      content: string
-      type: string
-      emoji: string
-    }[]
-    status?: string
-    createdAt: Date | null
   }
+  emotion?: {
+    emotionId: string
+    name: string
+    emoji: string
+  }
+  reactions?: {
+    reactionId: string
+    content: string
+    type: string
+    emoji: string
+  }[]
+  status?: string
+  createdAt: Date | null
 }
+
 type reaction = {
   readAt: Date | null
   createdAt: Date | null
@@ -57,7 +59,7 @@ export interface MessageResponse {
   messageList: Message[]
 }
 export interface useGetMessageListProps {
-  userId: number
+  userId: string
   type: MessageType
   cursor?: Date | null
   limit?: number

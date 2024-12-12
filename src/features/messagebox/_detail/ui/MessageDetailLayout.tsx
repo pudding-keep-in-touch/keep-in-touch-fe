@@ -1,11 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import {
-  MainLayoutProps,
-  MessageType,
-  VarietyType,
-} from '@/shared/types/common.types'
+import { MainLayoutProps, MessageType } from '@/shared/types/common.types'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
@@ -15,7 +11,7 @@ import Link from 'next/link'
 type MessageDetailLayout = MainLayoutProps & {
   children: React.ReactNode
   messageType: MessageType
-  variety: VarietyType
+  variety: string
   messageId: string
 }
 
@@ -42,14 +38,7 @@ export default function MessageDetailLayout({
       console.log('go to error page !! no userId')
     }
   }
-  const makeBgClass = pathname.endsWith('/reaction')
-    ? 'bg-[#FFFFFF]'
-    : variety
-      ? variety === 'thanks'
-        ? `bg-thanksPreview`
-        : `bg-honestTalkPreview`
-      : 'bg-thanksPreview'
-
+  const makeBgClass = pathname.endsWith('/reaction') ? 'bg-[#FFFFFF]' : variety
   return (
     <div
       className={cn(
@@ -57,39 +46,41 @@ export default function MessageDetailLayout({
         makeBgClass
       )}
     >
-      <div className='max-w-[390px] pb-32  w-full z-0 overflow-y-scroll scrollbar-hide mb-5'>
+      <div className='max-w-[390px] w-full z-0 overflow-y-scroll scrollbar-hide mb-5'>
         <header className='w-full h-[50px] flex justify-between items-center z-50 px-6'>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
             onClick={backHandler}
           />
-          <div className='flex flex-col items-end'>
-            <button type='button' onClick={openModal}>
-              <Image
-                src='/header_more.svg'
-                alt='header modal button'
-                width={5}
-                height={5}
-              />
-            </button>
-            {isOpen && (
-              <div
-                onClick={openModal}
-                className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
-              >
-                <Link
-                  href={`/messagebox/${userId}/${messageType}/${messageId}/report`}
+          {messageType === 'received' && (
+            <div className='flex flex-col items-end'>
+              <button type='button' onClick={openModal}>
+                <Image
+                  src='/header_more.svg'
+                  alt='header modal button'
+                  width={5}
+                  height={5}
+                />
+              </button>
+              {isOpen && (
+                <div
+                  onClick={openModal}
+                  className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
                 >
-                  신고하기
-                </Link>
-                <Link
-                  href={`/messagebox/${userId}/${messageType}/${messageId}/hide`}
-                >
-                  숨기기
-                </Link>
-              </div>
-            )}
-          </div>
+                  <Link
+                    href={`/messagebox/${userId}/${messageType}/${messageId}/report`}
+                  >
+                    신고하기
+                  </Link>
+                  <Link
+                    href={`/messagebox/${userId}/${messageType}/${messageId}/hide`}
+                  >
+                    숨기기
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
         </header>
       </div>
       {children}
