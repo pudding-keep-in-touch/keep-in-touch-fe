@@ -6,6 +6,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
+import { Spinner } from '@/shared/components/Sppiner'
 
 export default function QuestionListPage() {
   const router = useRouter()
@@ -92,11 +93,7 @@ export default function QuestionListPage() {
 
   // 로딩 상태 처리
   if (isLoading) {
-    return (
-      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
-        <h1 className='text-xl font-semibold text-gray-600'>로딩 중...</h1>
-      </div>
-    )
+    return <Spinner />
   }
 
   return (
