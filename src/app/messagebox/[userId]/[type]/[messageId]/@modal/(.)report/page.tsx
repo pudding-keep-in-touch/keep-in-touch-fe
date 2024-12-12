@@ -16,15 +16,15 @@ export default function Page({
 
   const { mutateAsync, isPending, isError } = usePatchMessageStatus()
   const changeStatus = async () => {
-    const redirectURL = `/messagebox/${userId}/received`
+    const redirectURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
     try {
       console.log('Reported mutation payload: ', { messageId })
       const response = await mutateAsync({
         messageId,
         status: 'reported',
       })
-      router.push(redirectURL)
-      console.log(response)
+      window.open(redirectURL) // 새로운 창으로 신고 폼 열기
+      router.push(`/messagebox/${userId}/received`) // 기존 화면은 받은 쪽지함 리스트로
       if (!response) {
         console.error('Reported response is empty: ', response)
         router.back()
@@ -65,7 +65,6 @@ export default function Page({
             >
               신고하기
             </Button>
-            {/* 신고하기 링크 추가 */}
           </div>
         </div>
       </div>
