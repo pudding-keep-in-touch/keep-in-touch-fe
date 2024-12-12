@@ -11,28 +11,30 @@ export type Reactions = {
 }
 // 쪽지 상세 조회
 export interface MessageDetail {
-  status: number
-  message: string
-  data: {
-    messageId: string
-    type: string
-    receiverId: string
-    receiverNickname: string
+  messageId: string
+  type: string
+  receiverId: string
+  receiverNickname: string
+  content: string
+  question?: {
+    questionId: string
     content: string
-    question: {
-      questionId: string
-      content: string
-    }
-    reactions?: {
-      reactionId: string
-      content: string
-      type: string
-      emoji: string
-    }[]
-    status?: string
-    createdAt: Date | null
   }
+  emotion?: {
+    emotionId: string
+    name: string
+    emoji: string
+  }
+  reactions?: {
+    reactionId: string
+    content: string
+    type: string
+    emoji: string
+  }[]
+  status?: string
+  createdAt: Date | null
 }
+
 type reaction = {
   readAt: Date | null
   createdAt: Date | null
