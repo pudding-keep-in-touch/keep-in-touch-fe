@@ -13,6 +13,7 @@ type MessageDetailLayout = MainLayoutProps & {
   messageType: MessageType
   variety: string
   messageId: string
+  isNormal: boolean
 }
 
 export default function MessageDetailLayout({
@@ -20,6 +21,7 @@ export default function MessageDetailLayout({
   messageType,
   messageId,
   variety,
+  isNormal,
 }: MessageDetailLayout) {
   const userId =
     typeof window !== 'undefined'
@@ -62,23 +64,35 @@ export default function MessageDetailLayout({
                   height={5}
                 />
               </button>
-              {isOpen && (
-                <div
-                  onClick={openModal}
-                  className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
-                >
-                  <Link
-                    href={`/messagebox/${userId}/${messageType}/${messageId}/report`}
+              {isOpen &&
+                (isNormal ? (
+                  <div
+                    onClick={openModal}
+                    className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
                   >
-                    신고하기
-                  </Link>
-                  <Link
-                    href={`/messagebox/${userId}/${messageType}/${messageId}/hide`}
+                    <Link
+                      href={`/messagebox/${userId}/${messageType}/${messageId}/report`}
+                    >
+                      신고하기
+                    </Link>
+                    <Link
+                      href={`/messagebox/${userId}/${messageType}/${messageId}/hide`}
+                    >
+                      숨기기
+                    </Link>
+                  </div>
+                ) : (
+                  <div
+                    onClick={openModal}
+                    className='fixed mt-[22px] flex flex-col justify-center items-center bg-black w-[100px] h-[30px] rounded-xl text-white'
                   >
-                    숨기기
-                  </Link>
-                </div>
-              )}
+                    <Link
+                      href={`/messagebox/${userId}/${messageType}/${messageId}/show`}
+                    >
+                      숨김 해제
+                    </Link>
+                  </div>
+                ))}
             </div>
           )}
         </header>
