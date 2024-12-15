@@ -21,12 +21,6 @@ export default function MessagePage() {
     userId: string
   }>(['selectedQuestion'])
 
-  console.log('localStorage.getItem', localStorage.getItem('selectedQuestion'))
-
-  console.log('selectedQuestion', selectedQuestion)
-
-  console.log('캐시 데이터 확인:', queryClient.getQueryCache())
-
   useEffect(() => {
     if (isMobile) return
 
@@ -91,7 +85,7 @@ export default function MessagePage() {
         ref={divRef}
         className='fixed w-full max-w-[24rem] px-4 transition-all duration-300'
         style={{
-          bottom: isMobile ? keyboardHeight + 60 : 12,
+          bottom: isMobile ? keyboardHeight + 60 : 60,
         }}
       >
         <ReplyNextButton />
