@@ -1,17 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false)
+export const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
     const checkIsMobile = () => {
+      const userAgent =
+        typeof window.navigator === 'undefined' ? '' : navigator.userAgent
+      const mobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          userAgent
+        )
       setIsMobile(
-        window.matchMedia('(max-width: 768px)').matches ||
-          /iPad|iPhone|iPod/.test(navigator.userAgent) // iOS 기기 추가
+        mobile || ('ontouchstart' in window && window.innerWidth <= 1024)
       )
     }
 
-    checkIsMobile() // 초기 실행
+    checkIsMobile()
     window.addEventListener('resize', checkIsMobile)
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [])
