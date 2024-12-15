@@ -5,7 +5,7 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 import MessageList from '@/features/messagebox/ui/MessageList'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Spinner } from '@/shared/components/Sppiner'
+import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessagesBlock({
   messageType,

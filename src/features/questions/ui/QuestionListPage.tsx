@@ -2,15 +2,13 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
-import { useQueryClient } from '@tanstack/react-query'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
-import { Spinner } from '@/shared/components/Sppiner'
+import { Spinner } from '@/shared/components/Spinner'
 
 export default function QuestionListPage() {
   const router = useRouter()
-  const queryClient = useQueryClient()
 
   const searchParams = useSearchParams()
 
@@ -22,19 +20,6 @@ export default function QuestionListPage() {
     isError,
     error,
   } = useGetQuestionList(userId)
-  //todo 데이터가 없을 떄
-
-  //todo 로그인 state추가F=${
-  // const redirectToLoginIfNeeded = (callback: () => void) => {
-  //   if (!isUserLoggedIn()) {
-  //     // 로그인 페이지로 이동, 원래 페이지인 /questions/messages 경로를 redirectUrl로 전달
-  //     const redirectUrl = encodeURIComponent('/questions/messages')
-  //     router.push(`/login?redirectUrl=${redirectUrl}`)
-  //   } else {
-  //     // 로그인 상태라면 콜백 실행
-  //     callback()
-  //   }
-  // }
 
   const redirectToLoginIfNeeded = (callback: () => void) => {
     if (!isUserLoggedIn()) {
@@ -67,12 +52,6 @@ export default function QuestionListPage() {
     })
   }
 
-  console.log(
-    'Selected Question:',
-    queryClient.getQueryData(['selectedQuestion'])
-  )
-
-  //todo 리다이렉션 테스트 필요
   const handleTypeMessageClick = () => {
     redirectToLoginIfNeeded(() => {
       router.push(`/message/send/${userId}/select`)
@@ -113,11 +92,8 @@ export default function QuestionListPage() {
 
         <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
           <div className='w-full px-[24px] grid grid-cols-1 gap-6'>
-            {/* <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'> */}
-            {/* 자유질문 */}
             <QuestionBox
               key={99}
-              // questionId={'99'}
               variant='custom'
               onTypeClick={handleTypeMessageClick}
               userId={userId}
@@ -132,7 +108,6 @@ export default function QuestionListPage() {
                 onQuestionClick={handleQuestionClick}
               />
             ))}
-            {/* </div> */}
           </div>
         </div>
       </div>

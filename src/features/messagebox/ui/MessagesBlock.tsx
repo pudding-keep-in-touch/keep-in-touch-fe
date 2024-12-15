@@ -6,7 +6,7 @@ import MessageList from '@/features/messagebox/ui/MessageList'
 import Image from 'next/image'
 import { MessageResponse } from '@/features/messagebox/model/messagebox.types'
 import { useInView } from 'react-cool-inview'
-import { Spinner } from '@/shared/components/Sppiner'
+import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessagesBlock({
   messageType,

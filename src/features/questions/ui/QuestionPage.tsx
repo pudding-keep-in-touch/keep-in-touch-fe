@@ -6,11 +6,11 @@ import { Button } from '@/shared/components/Button'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { useGetQuestion } from '@/features/questions/hooks/query/useQuestionQuery'
 import { isUserLoggedIn } from '@/shared/hooks/useAuth'
+import { Spinner } from '@/shared/components/Spinner'
 
 export default function QuestionPage() {
   const router = useRouter()
 
-  // URL에서 questionId를 가져옵니다.
   const { questionId } = useParams<{ questionId: string }>()
 
   const {
@@ -55,7 +55,7 @@ export default function QuestionPage() {
 
   // 에러 상태 처리
   // todo 디자인 페이지로 변경 예정
-  if (isError) {
+  if (isError || !questionId) {
     return (
       <div className='flex items-center justify-center min-h-screen bg-gray-100'>
         <h1 className='text-xl font-semibold text-red-600'>
@@ -67,11 +67,7 @@ export default function QuestionPage() {
 
   // 로딩 상태 처리
   if (isLoading) {
-    return (
-      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
-        <h1 className='text-xl font-semibold text-gray-600'>로딩 중...</h1>
-      </div>
-    )
+    return <Spinner />
   }
 
   return (

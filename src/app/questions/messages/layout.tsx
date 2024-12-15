@@ -3,7 +3,7 @@
 import AuthProvider from '@/features/auth/context/AuthProvider'
 import MessageFormProvider from '@/features/message/_send/context/FormProvider'
 import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
-import { Spinner } from '@/shared/components/Sppiner'
+import { Spinner } from '@/shared/components/Spinner'
 import { cn } from '@/shared/utils/emotionVariety'
 import { useQueryClient } from '@tanstack/react-query'
 import { ChevronLeftIcon } from 'lucide-react'
