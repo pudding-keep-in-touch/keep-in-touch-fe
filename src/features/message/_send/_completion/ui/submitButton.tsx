@@ -33,6 +33,8 @@ export default function MessageSendSubmitButton({
         emotionId: emotionId,
       })
 
+      console.log('response', response)
+
       if (response?.messageId) {
         console.log('response', response)
         // 성공적으로 전송 후 라우팅

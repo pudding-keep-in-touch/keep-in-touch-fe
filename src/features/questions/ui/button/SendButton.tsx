@@ -27,8 +27,6 @@ export default function SendButton() {
   const { mutateAsync } = usePostMessage()
 
   const onSubmit = handleSubmit(async (formValues) => {
-    console.log('click')
-    console.log('formValues', formValues)
     try {
       // `usePostMessage`를 사용해 메시지 전송
       const response = await mutateAsync({

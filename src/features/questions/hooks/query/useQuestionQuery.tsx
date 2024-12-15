@@ -48,7 +48,12 @@ export const usePostMessage = () => {
 
   return useMutation({
     mutationKey: ['postMessage'],
-    mutationFn: async (post: QuestionPostType) => {
+    mutationFn: async ({
+      receiverId,
+      content,
+      questionId,
+      emotionId,
+    }: QuestionPostType) => {
       const token = localStorage.getItem('keep_in_touch_token')
 
       if (!token) {
@@ -58,7 +63,10 @@ export const usePostMessage = () => {
       const { data } = await baseQuery.post(
         '/v2/messages',
         {
-          post,
+          receiverId,
+          content,
+          questionId,
+          emotionId,
         },
         {
           headers: {
