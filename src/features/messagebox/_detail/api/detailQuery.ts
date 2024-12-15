@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   MessageDetail,
   MessageResponse,
@@ -194,7 +194,7 @@ export const useGetMessageList = ({
       const baseUrl = `/v2/users/${userId}/messages?type=${type}`
       const params = new URLSearchParams()
       if (cursor) {
-        params.append('cursor', cursor)
+        params.append('cursor', cursor.toString())
       }
       if (limit) {
         params.append('limit', limit.toString())
@@ -228,7 +228,7 @@ export const useGetMessageList = ({
 }
 
 // 쪽지 상세 api
-export const useGetMessageDetail = ({ messageId }: { messageId: number }) => {
+export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
   return useQuery({
     queryKey: ['getDetailMessage', messageId],
     queryFn: async () => {
@@ -388,3 +388,33 @@ export const useGetEmoji = () => {
 //     },
 //   })
 // }
+
+interface usePatchMessageStatusProps {
+  messageId: string
+  status: string
+}
+export const usePatchMessageStatus = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationKey: ['patchMessageStatus'],
+    mutationFn: async ({ messageId, status }: usePatchMessageStatusProps) => {
+      const { data } = await baseQuery.patch(
+        `/v2/messages/${messageId}`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+          },
+        }
+      )
+      return data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getDetailMessage'] })
+      console.log('상태 변경 성공')
+    },
+    onError: (error) => {
+      console.error('상태 변경 실패: ', error)
+    },
+  })
+}

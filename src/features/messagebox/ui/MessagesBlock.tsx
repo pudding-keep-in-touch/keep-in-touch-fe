@@ -15,7 +15,7 @@ export default function MessagesBlock({
   messageType: MessageType
   userId: string
 }) {
-  const [cursor, setCursor] = useState<string | null>(null)
+  const [cursor, setCursor] = useState<Date | null>(null)
   const [messages, setMessages] = useState<MessageResponse>()
   const [hasMore, setHasMore] = useState(true)
 
@@ -71,7 +71,7 @@ export default function MessagesBlock({
   const { observe } = useInView({
     onEnter: () => {
       if (hasMore && !isLoading && data?.nextCursor) {
-        setCursor(data?.nextCursor)
+        setCursor(data.nextCursor)
       }
     },
   })

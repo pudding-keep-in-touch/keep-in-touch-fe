@@ -1,13 +1,39 @@
 'use client'
+import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQuery'
 import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 
-export default function Page() {
+export default function Page({
+  params: { userId, messageId },
+}: {
+  params: { userId: string; messageId: string }
+}) {
   const router = useRouter()
   const onDismiss = useCallback(() => {
     router.back()
   }, [])
+
+  const { mutateAsync, isPending, isError } = usePatchMessageStatus()
+  const changeStatus = async () => {
+    const redirectURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
+    try {
+      console.log('Reported mutation payload: ', { messageId })
+      const response = await mutateAsync({
+        messageId,
+        status: 'reported',
+      })
+      window.open(redirectURL) // 새로운 창으로 신고 폼 열기
+      router.push(`/messagebox/${userId}/received`) // 기존 화면은 받은 쪽지함 리스트로
+      if (!response) {
+        console.error('Reported response is empty: ', response)
+        router.back()
+      }
+    } catch (error) {
+      console.error('Failed to change status from normal to reported: ', error)
+      router.back()
+    }
+  }
   return (
     <div
       onClick={() => {
@@ -34,12 +60,11 @@ export default function Page() {
               취소
             </Button>
             <Button
-              onClick={() => router.back()}
+              onClick={changeStatus}
               className='rounded-2xl w-full h-full p-4 text-[17px] bg-[#35B6FF] text-white font-bold'
             >
               신고하기
             </Button>
-            {/* 신고하기 링크 추가 */}
           </div>
         </div>
       </div>
