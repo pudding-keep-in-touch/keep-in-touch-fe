@@ -1,8 +1,16 @@
-import { QuestionsType, QuestionType } from '@/entities/questions/questionType'
+import {
+  QuestionPostType,
+  QuestionsType,
+  QuestionType,
+} from '@/entities/questions/questionType'
 import { baseQuery, publicQuery } from '@/shared/api/baseQuery'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-// 질문 목록 가져오기
+/**
+ * 질문 목록 가져오기
+ * @param {string} userId - 질문자의 userId
+ * @returns {object}
+ */
 export const useGetQuestionList = (userId: string) => {
   return useQuery<QuestionsType, Error>({
     queryKey: ['questionList', userId],
@@ -10,12 +18,15 @@ export const useGetQuestionList = (userId: string) => {
       const { data } = await publicQuery.get(`/v2/questions?userId=${userId}`)
       return data
     },
-
     enabled: !!userId,
   })
 }
 
-// 질문 가져오기
+/**
+ * 특정 질문 가져오기
+ * @param {string} questionId - 질문의 questionId
+ * @returns {object}
+ */
 export const useGetQuestion = (questionId: string) => {
   return useQuery<QuestionType, Error>({
     queryKey: ['question', questionId],
@@ -24,26 +35,20 @@ export const useGetQuestion = (questionId: string) => {
 
       return data
     },
+    enabled: !!questionId,
   })
 }
 
-// 메시지 전송
+/**
+ * 메시지 전송
+ * @returns {object}
+ */
 export const usePostMessage = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
     mutationKey: ['postMessage'],
-    mutationFn: async ({
-      receiverId,
-      content,
-      questionId,
-      emotionId,
-    }: {
-      receiverId: string
-      content: string
-      questionId?: string
-      emotionId?: string
-    }) => {
+    mutationFn: async (post: QuestionPostType) => {
       const token = localStorage.getItem('keep_in_touch_token')
 
       if (!token) {
@@ -53,10 +58,7 @@ export const usePostMessage = () => {
       const { data } = await baseQuery.post(
         '/v2/messages',
         {
-          receiverId,
-          content,
-          questionId,
-          emotionId,
+          post,
         },
         {
           headers: {
