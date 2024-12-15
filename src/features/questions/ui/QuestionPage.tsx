@@ -20,8 +20,6 @@ export default function QuestionPage() {
     error,
   } = useGetQuestion(questionId)
 
-  console.log(question)
-
   const redirectToLoginIfNeeded = (callback: () => void) => {
     if (!isUserLoggedIn()) {
       // /questions/messages로 리다이렉트하도록 설정
@@ -103,7 +101,7 @@ export default function QuestionPage() {
                 question?.userId || ''
               )
             } // 함수 호출
-            className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-60 w-full'
+            className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-[380px] w-full'
           >
             {' '}
             마음 전하러 가기
