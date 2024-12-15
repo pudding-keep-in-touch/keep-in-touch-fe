@@ -50,7 +50,7 @@ export default function Page({
         <div className='bg-white w-full h-[193px] rounded-2xl py-[22px] px-[17px] flex flex-col justify-between items-center'>
           <h1 className='text-[#191F28] text-[22px] font-bold'>신고하기</h1>
           <p className='font-semibold text-[15px] text-[#6B7684]'>
-            해당 답변에 대한 신고하기 요청으로 넘어갑니다.
+            해당 내용에 대한 신고하기 요청으로 넘어갑니다.
           </p>
           <div className='flex justify-center items-center w-full h-[55px] gap-[9px]'>
             <Button
