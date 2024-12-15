@@ -34,9 +34,7 @@ export default function SendButton() {
         content: formValues.message,
         questionId: selectedQuestion?.questionId, // questionId를 실제 데이터로 교체
       })
-
       if (response?.messageId) {
-        console.log('response', response)
         // 성공적으로 전송 후 라우팅
         router.push(`/questions/messages/complete`)
       } else {
