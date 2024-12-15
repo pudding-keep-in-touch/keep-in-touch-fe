@@ -4,6 +4,7 @@ import MessageInput from '@/features/message/_send/_write/ui/messageInput'
 import { useIsMobile } from '@/features/questions/hooks/useIsMobile'
 import ReplyNextButton from '@/features/questions/ui/button/ReplyNextButton'
 import QuestionBox from '@/shared/components/QuestionBox'
+import { Spinner } from '@/shared/components/Sppiner'
 import Step from '@/shared/ui/Step'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
@@ -13,19 +14,6 @@ export default function MessagePage() {
   const divRef = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile() // 모바일 여부를 확인하는 훅 사용
   const [keyboardHeight, setKeyboardHeight] = useState(0) // 키보드 높이 상태 추가
-
-  useEffect(() => {
-    const storedQuestion = localStorage.getItem('selectedQuestion')
-    if (storedQuestion) {
-      const parsedData = JSON.parse(storedQuestion)
-      queryClient.setQueryData(['selectedQuestion'], parsedData)
-      localStorage.removeItem('selectedQuestion') // 복원 후 삭제
-    }
-  }, [queryClient])
-
-  console.log('localStorage.getItem', localStorage.getItem('selectedQuestion'))
-
-  console.log('캐시 데이터 확인:', queryClient.getQueryCache())
 
   const selectedQuestion = queryClient.getQueryData<{
     questionId: string
@@ -110,6 +98,6 @@ export default function MessagePage() {
       </div>
     </>
   ) : (
-    <p>데이터를 불러오는 중입니다...</p>
+    <Spinner />
   )
 }
