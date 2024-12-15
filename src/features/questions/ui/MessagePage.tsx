@@ -85,7 +85,7 @@ export default function MessagePage() {
         ref={divRef}
         className='fixed w-full max-w-[24rem] px-4 transition-all duration-300'
         style={{
-          bottom: isMobile ? keyboardHeight + 60 : 60,
+          bottom: isMobile ? keyboardHeight + 60 : 50,
         }}
       >
         <ReplyNextButton />
