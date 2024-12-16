@@ -14,30 +14,23 @@ export default function Page({
     router.back()
   }, [])
 
-  const openInNewTab = (url: string) => {
-    const newWindow = window.open(url, '_blank', 'noopener, popup')
-    if (newWindow) newWindow.opener = null
-  }
-
   const { mutateAsync, isPending, isError } = usePatchMessageStatus()
   const changeStatus = async () => {
-    const redirectURL = `/messagebox/${userId}/received`
+    const redirectURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
     try {
-      console.log('For Hide Mutation payload:', { messageId })
+      console.log('Reported mutation payload: ', { messageId })
       const response = await mutateAsync({
         messageId,
         status: 'reported',
       })
-      router.push(redirectURL)
-      openInNewTab(
-        `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
-      )
+      window.open(redirectURL) // 새로운 창으로 신고 폼 열기
+      router.push(`/messagebox/${userId}/received`) // 기존 화면은 받은 쪽지함 리스트로
       if (!response) {
-        console.error('Change to Normal Response is empty:', response)
+        console.error('Reported response is empty: ', response)
         router.back()
       }
     } catch (error) {
-      console.error('Failed to change Status from hidden to normal: ', error)
+      console.error('Failed to change status from normal to reported: ', error)
       router.back()
     }
   }

@@ -4,17 +4,26 @@ import { MessageType } from '@/features/messagebox/_detail/model/messagebox.type
 import ReactionPage from '@/features/messagebox/ui/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Toaster } from 'react-hot-toast'
+import { useEffect } from 'react'
+import toast, { Toaster, useToasterStore } from 'react-hot-toast'
 export default function Page({
   params: { userId, type, messageId },
 }: {
   params: { userId: string; type: MessageType; messageId: string }
 }) {
   const router = useRouter()
-  // /reaction, /report, /hide 제외 나머지 페이지 예외 처리 필요
+  const { toasts } = useToasterStore()
+  const toastLimit = 1
+
+  useEffect(() => {
+    const visibleToasts = toasts.filter((t) => t.visible)
+    if (visibleToasts.length > toastLimit) {
+      visibleToasts.slice(toastLimit).forEach((t) => toast.dismiss(t.id))
+    }
+  }, [toasts])
+
   return (
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
-      <Toaster position='bottom-center' reverseOrder={false} />
       <div className='max-w-[390px] w-full px-6'>
         <header className='w-full h-[50px] grid grid-cols-3 items-center z-50'>
           <ChevronLeftIcon
@@ -27,6 +36,12 @@ export default function Page({
         </header>
       </div>
       <ReactionPage messageType={type} userId={userId} messageId={messageId} />
+      <Toaster
+        position='bottom-center'
+        containerStyle={{
+          bottom: '100px',
+        }}
+      />
     </div>
   )
 }

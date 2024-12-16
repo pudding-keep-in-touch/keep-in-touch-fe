@@ -8,10 +8,12 @@ export default function InboxLayout({
   children,
   title,
   userId,
+  messageType,
 }: {
   children: React.ReactNode
   title: string
   userId: string
+  messageType: string
 }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -42,7 +44,12 @@ export default function InboxLayout({
       <div className='relative w-full h-full overflow-y-scroll scrollbar-hide'>
         {children}
       </div>
-      <Nav type='messagebox' userId={userId} isNew={false} />
+      <Nav
+        type='messagebox'
+        userId={userId}
+        isNew={false}
+        messageType={messageType}
+      />
     </div>
   )
 }

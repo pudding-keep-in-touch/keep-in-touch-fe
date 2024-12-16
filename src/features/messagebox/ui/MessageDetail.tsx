@@ -32,11 +32,13 @@ export default function MessageDetail({
         ? 'bg-thanksPreview'
         : 'bg-honestTalkPreview'
   const makePaddingTop = variety === 'bg-messageDetail' ? '' : 'pt-32'
+  const isNormal = data.status === 'normal'
   return (
     <MessageDetailLayout
       messageType={messageType}
       variety={variety}
       messageId={messageId}
+      isNormal={isNormal}
     >
       <div
         className={cn(
