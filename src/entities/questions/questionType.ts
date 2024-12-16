@@ -12,3 +12,10 @@ export type QuestionType = {
   isHidden: boolean
   createdAt: string
 }
+
+export type QuestionPostType = {
+  receiverId: string
+  content: string
+  questionId?: string
+  emotionId?: string
+}

@@ -6,24 +6,11 @@ type getNicknameType = {
   nickname: string
 }
 
-// export const useGetNickname = (userId: string) => {
-//   const token = localStorage.getItem('keep_in_touch_token')
-
-//   return useQuery<getNicknameType | null>({
-//     queryKey: ['nickname', userId],
-//     queryFn: async () => {
-//       const { data } = await baseQuery.get(`/v2/users/${userId}/nickname`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       })
-
-//       // 응답에서 nickname만 추출하여 반환
-//       return data?.nickname || null // nickname 값만 반환
-//     },
-//     enabled: !!userId && !!token,
-//   })
-// }
+/**
+ * 특정 사용자의 닉네임 가져오기
+ * @param {string | undefined} userId - 닉네임을 가져올 사용자의 userId
+ * @returns {object}
+ */
 
 export const useGetNickname = (userId: string | undefined) => {
   const token = localStorage.getItem('keep_in_touch_token')
@@ -40,6 +27,6 @@ export const useGetNickname = (userId: string | undefined) => {
       return data?.nickname || null
     },
     enabled: !!userId && !!token,
-    initialData: null, // 초기 데이터를 명시적으로 설정
+    initialData: null,
   })
 }

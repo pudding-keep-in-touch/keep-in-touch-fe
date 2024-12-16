@@ -32,11 +32,9 @@ export default function MessageSendSubmitButton({
         content: formValues.message,
         emotionId: emotionId,
       })
-
       if (response?.messageId) {
-        console.log('response', response)
         // 성공적으로 전송 후 라우팅
-        router.push(`/questions/messages/complete`)
+        router.push(`/questions/complete`)
       } else {
         console.error('응답에 messageId가 없습니다:', response)
       }

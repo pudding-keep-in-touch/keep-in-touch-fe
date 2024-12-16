@@ -4,6 +4,7 @@ import MessageInput from '@/features/message/_send/_write/ui/messageInput'
 import { useIsMobile } from '@/features/questions/hooks/useIsMobile'
 import ReplyNextButton from '@/features/questions/ui/button/ReplyNextButton'
 import QuestionBox from '@/shared/components/QuestionBox'
+import { Spinner } from '@/shared/components/Spinner'
 import Step from '@/shared/ui/Step'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
@@ -14,30 +15,11 @@ export default function MessagePage() {
   const isMobile = useIsMobile() // 모바일 여부를 확인하는 훅 사용
   const [keyboardHeight, setKeyboardHeight] = useState(0) // 키보드 높이 상태 추가
 
-  useEffect(() => {
-    const storedQuestion = localStorage.getItem('selectedQuestion')
-    if (storedQuestion) {
-      const parsedData = JSON.parse(storedQuestion)
-      queryClient.setQueryData(['selectedQuestion'], parsedData)
-      localStorage.removeItem('selectedQuestion') // 복원 후 삭제
-    }
-  }, [queryClient])
-
-  console.log('localStorage.getItem', localStorage.getItem('selectedQuestion'))
-
-  console.log('캐시 데이터 확인:', queryClient.getQueryCache())
-
   const selectedQuestion = queryClient.getQueryData<{
     questionId: string
     content: string
     userId: string
   }>(['selectedQuestion'])
-
-  console.log('localStorage.getItem', localStorage.getItem('selectedQuestion'))
-
-  console.log('selectedQuestion', selectedQuestion)
-
-  console.log('캐시 데이터 확인:', queryClient.getQueryCache())
 
   useEffect(() => {
     if (isMobile) return
@@ -103,13 +85,13 @@ export default function MessagePage() {
         ref={divRef}
         className='fixed w-full max-w-[24rem] px-4 transition-all duration-300'
         style={{
-          bottom: isMobile ? keyboardHeight + 60 : 12,
+          bottom: isMobile ? keyboardHeight + 60 : 50,
         }}
       >
         <ReplyNextButton />
       </div>
     </>
   ) : (
-    <p>데이터를 불러오는 중입니다...</p>
+    <Spinner />
   )
 }

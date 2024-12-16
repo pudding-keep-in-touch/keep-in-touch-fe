@@ -27,8 +27,6 @@ export default function SendButton() {
   const { mutateAsync } = usePostMessage()
 
   const onSubmit = handleSubmit(async (formValues) => {
-    console.log('click')
-    console.log('formValues', formValues)
     try {
       // `usePostMessage`를 사용해 메시지 전송
       const response = await mutateAsync({
@@ -36,11 +34,9 @@ export default function SendButton() {
         content: formValues.message,
         questionId: selectedQuestion?.questionId, // questionId를 실제 데이터로 교체
       })
-
       if (response?.messageId) {
-        console.log('response', response)
         // 성공적으로 전송 후 라우팅
-        router.push(`/questions/messages/complete`)
+        router.push(`/questions/complete`)
       } else {
         console.error('응답에 messageId가 없습니다:', response)
       }
