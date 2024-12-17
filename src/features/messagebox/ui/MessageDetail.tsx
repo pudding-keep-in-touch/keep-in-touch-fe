@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { cn } from '@/shared/utils/emotionVariety'
 import Tooltip from '@/features/messagebox/ui/Tooltip'
 import { Reactions } from '@/features/messagebox/model/messagebox.types'
-import MessageItem from './MessageItem'
-import MessageDetailLayout from '../_detail/ui/MessageDetailLayout'
+import MessageItem from '@/features/messagebox/ui/MessageItem'
+import MessageDetailLayout from '@/features/messagebox/_detail/ui/MessageDetailLayout'
 
 export default function MessageDetail({
   userId,
@@ -31,10 +31,12 @@ export default function MessageDetail({
       : data.emotion.emotionId === '1'
         ? 'bg-thanksPreview'
         : 'bg-honestTalkPreview'
-  const makePaddingTop = variety === 'bg-messageDetail' ? '' : 'pt-32'
+
+  const makePaddingTop = variety === 'bg-messageDetail' ? '' : 'my-auto'
   const isNormal = data.status === 'normal'
   return (
     <MessageDetailLayout
+      userId={userId}
       messageType={messageType}
       variety={variety}
       messageId={messageId}
@@ -42,7 +44,7 @@ export default function MessageDetail({
     >
       <div
         className={cn(
-          'w-full flex flex-col justify-center items-center text-black gap-4 px-6',
+          'w-full flex flex-col justify-center items-center bg-center bg-cover text-black gap-4 px-6 pb-[4.5rem]',
           makePaddingTop
         )}
       >
