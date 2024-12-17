@@ -32,8 +32,10 @@ export default function MessageDetail({
         ? 'bg-thanksPreview'
         : 'bg-honestTalkPreview'
 
-  const makePaddingTop = variety !== 'bg-messageDetail' && 'my-auto'
+  const makePaddingTop =
+    variety === 'bg-messageDetail' ? '' : 'justify-between my-auto'
   const isNormal = data.status === 'normal'
+
   return (
     <MessageDetailLayout
       userId={userId}
@@ -44,7 +46,7 @@ export default function MessageDetail({
     >
       <div
         className={cn(
-          'w-full flex flex-col items-center bg-center bg-cover text-black px-6 h-full',
+          'w-full flex flex-col justify-between h-full items-center bg-center bg-cover text-black px-6',
           makePaddingTop
         )}
       >
@@ -54,40 +56,44 @@ export default function MessageDetail({
           </div>
         ) : (
           <>
-            <div className='h-full flex flex-col w-full gap-4'>
+            <div
+              className={
+                variety === 'bg-messageDetail'
+                  ? 'h-full flex flex-col w-full'
+                  : 'my-auto w-full'
+              }
+            >
               <MessageItem
                 data={data}
                 variety={variety}
                 messageId={messageId}
               />
             </div>
-            <div className='w-full'>
-              {messageType === 'received' && data.reactions?.length === 0 ? (
-                <div className='sticky flex justify-center items-start bottom-0 left-0 w-full pb-[16px]'>
-                  <Tooltip>
-                    <Link
-                      href={`/messagebox/${userId}/${messageType}/${messageId}/reaction`}
-                      className='h-fit p-4 bg-black text-white rounded-2xl font-bold w-full flex justify-center items-center'
-                    >
-                      반응 보내기
-                    </Link>
-                  </Tooltip>
-                </div>
-              ) : (
-                <div className='w-full flex flex-wrap gap-[8px]'>
-                  {data.reactions?.map((reaction: Reactions) => (
-                    <div key={reaction.reactionId} className='flex-none'>
-                      <div className='w-full p-[12px] h-[35px] bg-white bg-opacity-90 rounded-2xl flex items-center border-[0.5px] border-gray-2 gap-[4px]'>
-                        <div>{reaction.emoji}</div>
-                        <div className='w-full flex text-[15px] font-semibold leading-[68.1%] tracking-[-2%]'>
-                          {reaction.content}
-                        </div>
+            {messageType === 'received' && data.reactions?.length === 0 ? (
+              <div className='sticky flex justify-center items-start bottom-0 left-0 w-full pb-[16px]'>
+                <Tooltip>
+                  <Link
+                    href={`/messagebox/${userId}/${messageType}/${messageId}/reaction`}
+                    className='h-fit p-4 bg-black text-white rounded-2xl font-bold w-full flex justify-center items-center'
+                  >
+                    반응 보내기
+                  </Link>
+                </Tooltip>
+              </div>
+            ) : (
+              <div className='w-full flex flex-wrap gap-[8px]'>
+                {data.reactions?.map((reaction: Reactions) => (
+                  <div key={reaction.reactionId} className='flex-none'>
+                    <div className='w-full p-[12px] h-[35px] bg-white bg-opacity-90 rounded-2xl flex items-center border-[0.5px] border-gray-2 gap-[4px]'>
+                      <div>{reaction.emoji}</div>
+                      <div className='w-full flex text-[15px] font-semibold leading-[68.1%] tracking-[-2%]'>
+                        {reaction.content}
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </>
         )}
       </div>
