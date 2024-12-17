@@ -32,7 +32,7 @@ export default function MessageDetail({
         ? 'bg-thanksPreview'
         : 'bg-honestTalkPreview'
 
-  const makePaddingTop = variety === 'bg-messageDetail' ? '' : 'my-auto'
+  const makePaddingTop = variety !== 'bg-messageDetail' && 'my-auto'
   const isNormal = data.status === 'normal'
   return (
     <MessageDetailLayout
