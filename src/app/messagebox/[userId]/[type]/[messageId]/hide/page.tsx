@@ -39,7 +39,7 @@ export default function Page({
       onClick={() => {
         onDismiss()
       }}
-      className='absolute inset-0 h-full w-full flex items-center justify-center bg-black bg-opacity-50'
+      className='absolute z-10 inset-0 h-full w-full flex items-center justify-center bg-black bg-opacity-50'
     >
       <div
         onClick={(e) => {
