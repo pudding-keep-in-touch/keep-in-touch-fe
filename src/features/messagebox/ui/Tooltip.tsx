@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react'
 
 interface TooltipProps {
@@ -8,7 +7,7 @@ interface TooltipProps {
 
 export default function Tooltip({ children }: TooltipProps) {
   return (
-    <div className='group relative flex items-center justify-center mt-[46px] px-6 w-full h-fit flex-col gap-2'>
+    <div className='group relative flex items-center justify-center mt-[46px] w-full h-fit flex-col gap-2'>
       <div className='absolute top-[-60px] hidden group-hover:flex flex-col items-center gap-4  max-w-[300px] '>
         <div className='bg-black rounded-full py-3 px-[20px] h-[46px] relative flex items-center '>
           <p className='line-height: 1.5rem text-[12px] text-white leading-none'>
