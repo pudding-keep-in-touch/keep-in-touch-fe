@@ -68,8 +68,11 @@ export default function Layout({ children }: Props) {
           />
 
           {!isLoading && !pathname.endsWith('/preview') && (
-            <h1 className='text-lg font-semibold text-center text-[#333D4B] whitespace-nowrap w-full'>
-              {`To. ${nickname}에게`}
+            <h1 className='text-lg font-semibold text-[#333D4B] flex justify-center items-center w-full'>
+              <span className='whitespace-nowrap'>To.</span>
+              <span className='whitespace-nowrap ml-1'>
+                {`${nickname}에게`}
+              </span>
             </h1>
           )}
         </header>
