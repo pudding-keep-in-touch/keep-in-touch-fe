@@ -1,0 +1,20 @@
+name: Lighthouse
+on: [push, pull_request]
+  
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+    - name: Lighthouse
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        outputDirectory: ${{ github.workspace }}/tmp/artifacts
+        urls: 'https://dev-fe.keep-in-touch.me'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: Lighthouse reports
+        path: ${{ github.workspace }}/tmp/artifacts

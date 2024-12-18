@@ -1,2 +1,2 @@
-import './src/app/globals.css'
+import '@/shared/styles/globals.css'
 import '@testing-library/jest-dom/vitest'
