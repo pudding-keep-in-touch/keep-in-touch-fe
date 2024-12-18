@@ -8,7 +8,7 @@ interface NavProps {
   type: string
   userId: string
   isNew: boolean
-  messageType: string
+  messageType?: string
 }
 
 export const Nav = ({ type, userId, isNew, messageType }: NavProps) => {

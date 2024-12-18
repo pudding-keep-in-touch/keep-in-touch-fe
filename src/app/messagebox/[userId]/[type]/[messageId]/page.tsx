@@ -1,4 +1,3 @@
-'use client'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 import MessageDetail from '@/features/messagebox/ui/MessageDetail'
 
