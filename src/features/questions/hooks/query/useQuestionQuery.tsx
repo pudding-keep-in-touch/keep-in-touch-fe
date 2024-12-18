@@ -54,27 +54,12 @@ export const usePostMessage = () => {
       questionId,
       emotionId,
     }: QuestionPostType) => {
-      const token = localStorage.getItem('keep_in_touch_token')
-
-      if (!token) {
-        throw new Error('Authorization token is missing')
-      }
-
-      const { data } = await baseQuery.post(
-        '/v2/messages',
-        {
-          receiverId,
-          content,
-          questionId,
-          emotionId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-
+      const { data } = await baseQuery.post('/v2/messages', {
+        receiverId,
+        content,
+        questionId,
+        emotionId,
+      }) // 헤더는 인터셉터에서 처리
       return data
     },
     onSuccess: () => {
