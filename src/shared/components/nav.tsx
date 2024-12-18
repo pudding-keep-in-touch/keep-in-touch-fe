@@ -8,9 +8,10 @@ interface NavProps {
   type: string
   userId: string
   isNew: boolean
+  messageType: string
 }
 
-export const Nav = ({ type, userId, isNew }: NavProps) => {
+export const Nav = ({ type, userId, isNew, messageType }: NavProps) => {
   const router = useRouter()
   const pathname = usePathname()
   // 활성 탭 상태 관리
@@ -45,8 +46,13 @@ export const Nav = ({ type, userId, isNew }: NavProps) => {
       className={`sticky w-full h-[84px] shadow-custom-top bottom-0 flex justify-center items-start px-[10px] pt-3 z-10 gap-[97px] rounded-tl-[16px] rounded-tr-[16px] ${type === 'home' ? 'bg-white' : 'bg-gray-1'}`}
     >
       {tabs.map((tab) => {
-        const isActive = activeTab === tab.link
-
+        const isActive =
+          activeTab ===
+          (tab.id === 0
+            ? tab.link
+            : messageType
+              ? `/messagebox/${userId}/${messageType}`
+              : tab.link)
         return (
           <>
             <button
