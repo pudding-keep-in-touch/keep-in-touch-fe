@@ -42,7 +42,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const handleLogout = () => {
-    console.log('Logging out and navigating to /login')
     removeCookie('keep_in_touch_token', { path: '/' })
     removeCookie('keep_in_touch_user_id', { path: '/' })
     setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
@@ -50,26 +49,25 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const checkAuth = async () => {
-    const accessToken = cookies.keep_in_touch_token
-    const userId = cookies.keep_in_touch_user_id
+    try {
+      const accessToken = cookies.keep_in_touch_token
+      const userId = cookies.keep_in_touch_user_id
+      const redirectUrl = localStorage.getItem('redirect_before_login') || null
 
-    const redirectUrl =
-      typeof window !== 'undefined'
-        ? localStorage.getItem('redirect_before_login')
-        : null
+      if (!accessToken || !isTokenValid(accessToken)) {
+        throw new Error('Invalid or expired token')
+      }
 
-    if (!accessToken || !isTokenValid(accessToken)) {
+      setAuthState({ isLoggedIn: true, isLoading: false, userId })
+
+      if (redirectUrl) {
+        localStorage.removeItem('redirect_before_login')
+        router.replace(redirectUrl)
+      }
+    } catch (error) {
+      console.error(error)
       toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
       handleLogout()
-      return
-    }
-
-    setAuthState({ isLoggedIn: true, isLoading: false, userId })
-
-    if (redirectUrl) {
-      localStorage.removeItem('redirect_before_login') // 이전 경로 초기화
-      console.log(`Redirecting to saved URL: ${redirectUrl}`)
-      router.replace(redirectUrl)
     }
   }
 
@@ -77,22 +75,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     if (authState.isLoading) {
       checkAuth()
     }
-  }, [
-    authState.isLoading,
-    cookies.keep_in_touch_token,
-    cookies.keep_in_touch_user_id,
-  ])
-
-  React.useEffect(() => {
-    if (
-      !authState.isLoggedIn &&
-      !authState.isLoading &&
-      pathname !== '/login'
-    ) {
-      localStorage.setItem('redirect_before_login', pathname)
-      router.replace('/login')
-    }
-  }, [authState.isLoggedIn, authState.isLoading, pathname, router])
+  }, [authState.isLoading])
 
   const value = React.useMemo(
     () => ({
@@ -104,11 +87,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   )
 
   if (authState.isLoading) {
-    return (
-      <div className='flex items-center justify-center min-h-screen'>
-        <p>AuthContext Loading...</p>
-      </div>
-    )
+    return <div>Loading...</div>
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

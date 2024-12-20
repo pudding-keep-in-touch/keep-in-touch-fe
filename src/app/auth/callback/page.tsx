@@ -31,11 +31,17 @@ export default function Callback() {
 
     const token = searchParams.get('accessToken')
     const userId = searchParams.get('userId')
+
     const selectedQuestion = localStorage.getItem('selectedQuestion')
 
-    if (redirectUrl === '/questions/messages' && !selectedQuestion) {
-      console.error('selectedQuestion 데이터가 없습니다.')
-      return
+    // redirectUrl이 /questions/messages인 경우 selectedQuestion 확인
+    if (redirectUrl === '/questions/messages') {
+      if (!selectedQuestion) {
+        console.error('selectedQuestion 데이터가 없습니다.')
+        // 필요 시 추가 조치 (예: 에러 페이지로 리다이렉트)
+        return
+      }
+      localStorage.setItem('selectedQuestion', selectedQuestion)
     }
 
     if (token && userId) {
@@ -47,7 +53,7 @@ export default function Callback() {
     } else {
       router.push('/login')
     }
-  }, [redirectUrl, searchParams, router, setCookie])
+  }, [redirectUrl, searchParams, setCookie, router])
 
   return (
     <MainLayout>
