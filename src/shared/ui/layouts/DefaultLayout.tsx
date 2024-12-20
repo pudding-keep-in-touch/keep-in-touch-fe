@@ -71,7 +71,7 @@ export const DefaultLayout = ({
         />
       </div>
 
-      <div
+      {/* <div
         style={{
           position: 'fixed', // 화면에 고정
           top: 0,
@@ -81,9 +81,9 @@ export const DefaultLayout = ({
           zIndex: -1, // 배경으로 이동
           pointerEvents: 'none', // Snowfall과의 상호작용 방지
         }}
-      >
-        <Snowfall color='#dee4fd' snowflakeCount={100} />
-      </div>
+      > */}
+      <Snowfall color='#dee4fd' snowflakeCount={100} />
+      {/* </div> */}
     </>
   )
 }
