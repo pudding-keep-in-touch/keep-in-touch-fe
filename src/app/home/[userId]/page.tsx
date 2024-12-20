@@ -12,19 +12,25 @@ export default function HomePage({
 }) {
   const router = useRouter()
   const [cookies] = useCookies(['keep_in_touch_token', 'keep_in_touch_user_id'])
+  const [isChecked, setIsChecked] = React.useState(false)
 
   React.useEffect(() => {
+    if (isChecked) return
+
     const cookiesToken = cookies.keep_in_touch_token
     const cookiesUserId = cookies.keep_in_touch_user_id
 
     if (!cookiesToken || cookiesUserId !== userId) {
-      router.replace('/') // 인증 실패 시 Unauthorized로 리다이렉트
+      router.replace('/')
+    } else {
+      setIsChecked(true)
     }
   }, [
     cookies.keep_in_touch_token,
     cookies.keep_in_touch_user_id,
     userId,
     router,
+    isChecked,
   ])
 
   return <Home userId={userId} />
