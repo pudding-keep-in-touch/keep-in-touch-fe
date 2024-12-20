@@ -20,16 +20,21 @@ export default function Main() {
       const userId = cookies.keep_in_touch_user_id
 
       if (!token || !userId) {
+        console.warn('Main > No token or userId, redirecting to login.')
         redirectToLogin()
         return
       }
 
       try {
         const decoded = decodeJwt(token)
+        console.log('Main > Decoded token:', decoded)
         const currentTime = Math.floor(Date.now() / 1000)
 
+        console.log('Main > Current time:', currentTime)
+        console.log('Main > Token expiration:', decoded.exp)
+
         if (decoded.exp && decoded.exp < currentTime) {
-          console.warn('Token has expired.')
+          console.warn('Main > Token has expired.')
           redirectToLogin()
           return
         }
@@ -46,10 +51,12 @@ export default function Main() {
     }
 
     const redirectToLogin = () => {
-      setTimeout(() => {
-        router.replace('/login') // `push` 대신 `replace`로 중복 방지
-      }, 2000)
-      setLoading(false)
+      if (!isChecked) {
+        setLoading(false)
+        setTimeout(() => {
+          router.replace('/login')
+        }, 1000)
+      }
     }
 
     checkToken()
@@ -59,6 +66,12 @@ export default function Main() {
     isChecked,
     router,
   ])
+
+  React.useEffect(() => {
+    // TODO : 디버깅 삭제 예정
+    console.log('Main > Token from cookies:', cookies.keep_in_touch_token)
+    console.log('Main > UserId from cookies:', cookies.keep_in_touch_user_id)
+  }, [cookies])
 
   if (loading) {
     return (
