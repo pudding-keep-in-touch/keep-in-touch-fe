@@ -43,10 +43,12 @@ export const Login = () => {
   const [cookies] = useCookies(['keep_in_touch_token', 'keep_in_touch_user_id'])
   const pathname = usePathname()
   const [loading, setLoading] = React.useState(true) // 로딩 상태 관리
-  const [isChecked, setIsChecked] = React.useState(false)
+  const isTokenChecked = React.useRef(false) // Token 체크 상태를 추적
 
   React.useEffect(() => {
     const checkToken = async () => {
+      if (isTokenChecked.current) return // 이미 실행된 경우 중단
+      isTokenChecked.current = true
       const token = cookies.keep_in_touch_token
       const userId = cookies.keep_in_touch_user_id
 
@@ -78,23 +80,16 @@ export const Login = () => {
     }
 
     const redirectToLogin = () => {
-      if (pathname === '/login') {
-        setLoading(false)
-        return
-      }
       setTimeout(() => {
-        router.replace('/login')
-      }, 2000)
+        if (pathname !== '/login') {
+          router.replace('/login')
+        }
+      }, 1000) // 딜레이를 짧게 설정
       setLoading(false)
     }
 
     checkToken()
-  }, [
-    cookies.keep_in_touch_token,
-    cookies.keep_in_touch_user_id,
-    pathname,
-    router,
-  ])
+  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id, router])
 
   if (loading) {
     return (
