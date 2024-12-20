@@ -1,18 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { QuestionData } from '../model/home.types'
 import { baseQuery } from '@/shared/api/baseQuery'
+import { useCookies } from 'react-cookie'
 
 interface useGetQuestionListProps {
   userId: string
 }
 
 export const useGetQuestionList = ({ userId }: useGetQuestionListProps) => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
+
   return useQuery<QuestionData[], Error>({
     queryKey: ['questionList', userId],
     queryFn: async () => {
       const { data } = await baseQuery.get(`/v2/users/${userId}/questions`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+          Authorization: `Bearer ${cookies.keep_in_touch_token}`,
         },
       })
 
@@ -27,7 +30,9 @@ interface usePostQuestionListProps {
 }
 
 export const usePostQuestionList = () => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
   const queryClient = useQueryClient()
+
   return useMutation({
     mutationKey: ['postQuestion'],
     mutationFn: async ({ content, isHidden }: usePostQuestionListProps) => {
@@ -39,7 +44,7 @@ export const usePostQuestionList = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
           },
         }
       )
@@ -63,7 +68,9 @@ interface usePostQuestionHiddenProps {
 }
 
 export const usePostQuestionHidden = () => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
   const queryClient = useQueryClient()
+
   return useMutation({
     mutationKey: ['postQuestionHidden'],
     mutationFn: async ({
@@ -71,11 +78,11 @@ export const usePostQuestionHidden = () => {
       isHidden,
     }: usePostQuestionHiddenProps) => {
       const { data } = await baseQuery.patch(
-        `/v2/questions/${questionId}`, // 백틱 사용
-        { isHidden }, // 요청 바디
+        `/v2/questions/${questionId}`,
+        { isHidden },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
           },
         }
       )

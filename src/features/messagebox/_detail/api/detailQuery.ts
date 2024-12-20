@@ -4,6 +4,7 @@ import {
   useGetMessageListProps,
 } from '@/features/messagebox/model/messagebox.types'
 import { baseQuery } from '@/shared/api/baseQuery'
+import { useCookies } from 'react-cookie'
 
 // 받은 쪽지 리스트
 const receivedMockData = {
@@ -187,6 +188,8 @@ export const useGetMessageList = ({
   limit,
   order,
 }: useGetMessageListProps) => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
+
   return useQuery<MessageResponse, Error>({
     queryKey: ['getMessageList', userId, type, cursor, limit, order],
     queryFn: async () => {
@@ -209,7 +212,7 @@ export const useGetMessageList = ({
       try {
         const { data } = await baseQuery.get(url, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
           },
         })
         if (!data) {
@@ -228,12 +231,14 @@ export const useGetMessageList = ({
 
 // 쪽지 상세 api
 export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
+
   return useQuery({
     queryKey: ['getDetailMessage', messageId],
     queryFn: async () => {
       const { data } = await baseQuery.get(`/v2/messages/${messageId}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+          Authorization: `Bearer ${cookies.keep_in_touch_token}`,
         },
       })
       return data
@@ -393,6 +398,7 @@ interface usePatchMessageStatusProps {
   status: string
 }
 export const usePatchMessageStatus = () => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: ['patchMessageStatus'],
@@ -402,7 +408,7 @@ export const usePatchMessageStatus = () => {
         { status },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
           },
         }
       )
