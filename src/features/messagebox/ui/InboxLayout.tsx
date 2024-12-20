@@ -2,9 +2,8 @@
 import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { cn } from '@/shared/utils/emotionVariety'
 import { Nav } from '@/shared/components/nav'
-import { DefaultLayout } from '@/shared/ui/layouts/DefaultLayout'
+
 export default function InboxLayout({
   children,
   title,
@@ -17,7 +16,6 @@ export default function InboxLayout({
   messageType: string
 }) {
   const router = useRouter()
-  const pathname = usePathname()
 
   return (
     <div className='w-full h-full flex flex-col overflow-auto'>
