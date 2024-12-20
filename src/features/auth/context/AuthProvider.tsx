@@ -50,26 +50,40 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const checkAuth = async () => {
-    const accessToken = cookies.keep_in_touch_token
-    const userId = cookies.keep_in_touch_user_id
+    try {
+      const accessToken = cookies.keep_in_touch_token
+      const userId = cookies.keep_in_touch_user_id
 
-    const redirectUrl =
-      typeof window !== 'undefined'
-        ? localStorage.getItem('redirect_before_login')
-        : null
+      const redirectUrl =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('redirect_before_login')
+          : null
 
-    if (!accessToken || !isTokenValid(accessToken)) {
-      toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
+      if (!accessToken) {
+        toast.error('인증 정보가 없습니다.')
+        console.error('No access token available.')
+        throw new Error('No access token available.')
+      }
+
+      if (!isTokenValid(accessToken)) {
+        toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
+        throw new Error('Access token is invalid or expired.')
+      }
+
+      // 인증 성공: 상태 업데이트
+      setAuthState({ isLoggedIn: true, isLoading: false, userId })
+
+      // 리다이렉트 URL이 있는 경우 이동
+      if (redirectUrl) {
+        localStorage.removeItem('redirect_before_login') // 이전 경로 초기화
+        console.log(`Redirecting to saved URL: ${redirectUrl}`)
+        router.replace(redirectUrl)
+      }
+    } catch (error) {
+      console.error(error)
+
+      // 에러 발생 시 로그아웃 및 로그인 페이지로 리다이렉트
       handleLogout()
-      return
-    }
-
-    setAuthState({ isLoggedIn: true, isLoading: false, userId })
-
-    if (redirectUrl) {
-      localStorage.removeItem('redirect_before_login') // 이전 경로 초기화
-      console.log(`Redirecting to saved URL: ${redirectUrl}`)
-      router.replace(redirectUrl)
     }
   }
 
