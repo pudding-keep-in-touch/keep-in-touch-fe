@@ -11,7 +11,7 @@ export default function KakaoButton() {
   const handleLogin = () => {
     setIsLoading(true)
     try {
-      window.location.href = `${API_BASE_URL}v1/auth/google/login`
+      window.location.href = `${API_BASE_URL}v2/auth/kakao/login`
     } catch (error) {
       console.error(error)
       setIsLoading(false)

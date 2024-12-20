@@ -3,15 +3,14 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import QuestionBox from '@/shared/components/QuestionBox'
-import { isUserLoggedIn } from '@/shared/hooks/useAuth'
+import { useRedirectToLoginIfNeeded } from '@/shared/hooks/useAuth'
 import { useGetQuestionList } from '@/features/questions/hooks/query/useQuestionQuery'
 import { Spinner } from '@/shared/components/Spinner'
+import React from 'react'
 
 export default function QuestionListPage() {
   const router = useRouter()
-
   const searchParams = useSearchParams()
-
   const userId = searchParams.get('userId') || ''
 
   const {
@@ -21,16 +20,10 @@ export default function QuestionListPage() {
     error,
   } = useGetQuestionList(userId)
 
-  const redirectToLoginIfNeeded = (callback: () => void) => {
-    if (!isUserLoggedIn()) {
-      // /questions/messages로 리다이렉트하도록 설정
-      const redirectUrl = '/questions/messages'
-      localStorage.setItem('redirect_before_login', redirectUrl) // 이전 경로 저장
-      router.push(`/login?redirectUrl=${encodeURIComponent(redirectUrl)}`)
-    } else {
-      callback() // 로그인 상태라면 콜백 실행
-    }
-  }
+  // 로그인 리다이렉트 상태를 관리
+  useRedirectToLoginIfNeeded(isLoading, () => {
+    console.log('User is logged in!')
+  })
 
   const handleQuestionClick = (
     questionId: string,
@@ -43,19 +36,12 @@ export default function QuestionListPage() {
       userId,
     }
 
-    // 데이터를 즉시 localStorage에 저장
     localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
-
-    // 로그인 상태에 따라 리다이렉트
-    redirectToLoginIfNeeded(() => {
-      router.push('/questions/messages')
-    })
+    router.push('/questions/messages')
   }
 
   const handleTypeMessageClick = () => {
-    redirectToLoginIfNeeded(() => {
-      router.push(`/message/send/${userId}/select`)
-    })
+    router.push(`/message/send/${userId}/select`)
   }
 
   // 에러 상태 처리
