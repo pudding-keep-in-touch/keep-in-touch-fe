@@ -49,10 +49,12 @@ export const Login = () => {
     const checkToken = async () => {
       if (isTokenChecked.current) return // 이미 실행된 경우 중단
       isTokenChecked.current = true
+
       const token = cookies.keep_in_touch_token
       const userId = cookies.keep_in_touch_user_id
 
       if (!token || !userId) {
+        console.log('No valid token or userId, redirecting to /login')
         redirectToLogin()
         return
       }
@@ -64,19 +66,20 @@ export const Login = () => {
 
         // 만료 시간 확인
         if (exp && exp < currentTime) {
-          console.warn('Token has expired.')
+          console.warn('Token has expired, redirecting to /login')
           redirectToLogin()
           return
         }
+
+        // 유효한 토큰과 유저 ID가 있는 경우
+        console.log('Valid token found, redirecting to home')
+        router.push(`/home/${userId}`)
       } catch (error) {
         console.error('Invalid token:', error)
         redirectToLogin()
-        return
+      } finally {
+        setLoading(false)
       }
-
-      // 유효한 토큰과 유저 ID가 있는 경우
-      setLoading(false)
-      router.push(`/home/${userId}`)
     }
 
     const redirectToLogin = () => {
