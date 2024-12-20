@@ -33,6 +33,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     userId: null as string | null,
   })
 
+  const [isChecked, setIsChecked] = React.useState(false) // 인증 체크 완료 플래그
+
   // JWT 만료 여부 확인
   const isTokenValid = (token: string): boolean => {
     try {
@@ -59,39 +61,34 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         ? localStorage.getItem('redirect_before_login')
         : null
 
-    try {
-      setAuthState((prev) => ({ ...prev, isLoading: true }))
-
-      if (!accessToken) {
-        toast.error('인증 정보가 없습니다.')
-        console.error('No access token available.')
-        throw new Error('No access token available.')
-      }
-
-      // 토큰 유부와 만료 여부 확인
-      if (!isTokenValid(accessToken)) {
-        toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
-        handleLogout()
-        throw new Error('Access token invalid or expired.')
-      }
-
-      setAuthState({ isLoggedIn: true, isLoading: false, userId: userId })
-
-      // 로그인 성공 시 redirect 처리
-      if (redirectUrl) {
-        localStorage.removeItem('redirect_before_login')
-        router.replace(redirectUrl) // 이전 경로로 이동
-      }
-    } catch (error) {
-      console.error('Authentication error:', error)
+    if (!accessToken) {
+      toast.error('인증 정보가 없습니다.')
+      handleLogout()
+      return
     }
+
+    if (!isTokenValid(accessToken)) {
+      toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
+      handleLogout()
+      return
+    }
+
+    setAuthState({ isLoggedIn: true, isLoading: false, userId })
+
+    if (redirectUrl) {
+      localStorage.removeItem('redirect_before_login')
+      router.replace(redirectUrl)
+    }
+    setIsChecked(true) // 인증 체크 완료
   }
 
   console.log('authState', authState)
 
   React.useEffect(() => {
-    checkAuth()
-  }, [cookies])
+    if (!isChecked) {
+      checkAuth()
+    }
+  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id, isChecked])
 
   React.useEffect(() => {
     if (
@@ -114,7 +111,11 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   )
 
   if (authState.isLoading) {
-    return <div>Loading...</div>
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <p>Loading...</p>
+      </div>
+    )
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
