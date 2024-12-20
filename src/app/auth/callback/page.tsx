@@ -39,14 +39,13 @@ export default function Callback() {
     }
 
     if (token && userId) {
-      // 쿠키 설정 (React Cookie 사용)
-      setCookie('keep_in_touch_token', token)
-      setCookie('keep_in_touch_user_id', userId)
+      setCookie('keep_in_touch_token', token, { path: '/' })
+      setCookie('keep_in_touch_user_id', userId, { path: '/' })
 
       localStorage.removeItem('redirect_before_login')
       router.push(decodeURIComponent(redirectUrl))
     } else {
-      router.push('/login') // 토큰 또는 userId가 없으면 /login으로 이동
+      router.push('/login')
     }
   }, [redirectUrl, searchParams, router, setCookie])
 

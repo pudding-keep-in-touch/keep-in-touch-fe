@@ -55,7 +55,7 @@ export default function Main() {
     return (
       <div className='w-full min-h-screen flex flex-col items-center bg-white box-border'>
         {/* 로딩 스피너 또는 메시지 */}
-        <p>Loading...</p>
+        <p>Main Loading...</p>
       </div>
     )
   }

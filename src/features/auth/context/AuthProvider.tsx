@@ -33,6 +33,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     userId: null as string | null,
   })
 
+  const [isChecked, setIsChecked] = React.useState(false)
+
   // JWT 만료 여부 확인
   const isTokenValid = (token: string): boolean => {
     try {
@@ -59,29 +61,29 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         ? localStorage.getItem('redirect_before_login')
         : null
 
-    try {
-      if (!accessToken || !isTokenValid(accessToken)) {
-        throw new Error('Invalid or expired token')
-      }
-
-      setAuthState({ isLoggedIn: true, isLoading: false, userId })
-
-      if (redirectUrl) {
-        localStorage.removeItem('redirect_before_login')
-        router.replace(redirectUrl)
-      }
-    } catch (error) {
-      console.error(error)
+    if (!accessToken || !isTokenValid(accessToken)) {
       toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
       handleLogout()
+      return
     }
+
+    setAuthState({ isLoggedIn: true, isLoading: false, userId })
+
+    if (redirectUrl) {
+      localStorage.removeItem('redirect_before_login')
+      router.replace(redirectUrl)
+    }
+
+    setIsChecked(true)
   }
 
   console.log('authState', authState)
 
   React.useEffect(() => {
-    checkAuth()
-  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id])
+    if (!isChecked) {
+      checkAuth()
+    }
+  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id, isChecked])
 
   React.useEffect(() => {
     if (
@@ -89,9 +91,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       !authState.isLoading &&
       pathname !== '/login'
     ) {
-      // 현재 경로 저장
       localStorage.setItem('redirect_before_login', pathname)
-      // 로그인 페이지로 리다이렉트
       router.replace('/login')
     }
   }, [authState.isLoggedIn, authState.isLoading, pathname, router])
@@ -108,7 +108,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   if (authState.isLoading) {
     return (
       <div className='flex items-center justify-center min-h-screen'>
-        <p>Loading...</p>
+        <p>AuthContext Loading...</p>
       </div>
     )
   }
