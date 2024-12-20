@@ -3,7 +3,7 @@ import { QuestionListHeader } from '@/features/home/ui/questionListHeader'
 import { ScrollToTopButton } from '@/features/home/ui/scrollToTopButton'
 import { Nav } from '@/shared/components/nav'
 import React from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import Image from 'next/image'
 interface ScrollLayoutProps {
   userId: string

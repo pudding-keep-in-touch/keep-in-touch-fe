@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import '@/shared/styles/globals.css'
-import QueryProvider from '@/shared/provider/QueryProvider'
 import { DefaultLayout } from '@/shared/ui/layouts/DefaultLayout'
 
-const GA_ID =
-  process.env.NODE_ENV === 'production' ? 'G-6ZWWSPLVD7' : 'G-49Q9HYM5E0'
+// const GA_ID =
+//   process.env.NODE_ENV === 'production' ? 'G-6ZWWSPLVD7' : 'G-49Q9HYM5E0'
 
 export const metadata: Metadata = {
   title: 'Keep In Touch',

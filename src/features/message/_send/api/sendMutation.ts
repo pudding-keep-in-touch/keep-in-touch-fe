@@ -1,5 +1,5 @@
 import { baseQuery } from '@/shared/api/baseQuery'
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 interface usePostSendMessageProps {
   receiverId: string

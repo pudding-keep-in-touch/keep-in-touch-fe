@@ -17,7 +17,6 @@ interface QuestionsCardProps {
 export const QuestionsCard = ({
   questionId,
   userId,
-  createdAt,
   description,
   isHidden,
   isHome,

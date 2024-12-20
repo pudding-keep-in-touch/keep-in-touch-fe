@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
-  MessageDetail,
   MessageResponse,
   useGetMessageListProps,
 } from '@/features/messagebox/model/messagebox.types'

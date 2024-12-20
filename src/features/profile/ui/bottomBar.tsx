@@ -1,8 +1,6 @@
 'use client'
 
 import { Button } from '@/shared/components/Button'
-import Image from 'next/image'
-import Link from 'next/link'
 
 export default function BottomBar() {
   return (

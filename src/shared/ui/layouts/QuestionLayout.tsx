@@ -2,7 +2,7 @@ import { HomeHeader } from '@/shared/components/homeHeader'
 import { Nav } from '@/shared/components/nav'
 import Image from 'next/image'
 import React from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 
 interface QuestionLayoutProps {
   userId: string
