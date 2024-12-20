@@ -115,6 +115,7 @@ export const usePatchMessageStatus = () => {
   })
 }
 
+// 반응 보내기
 export const usePostEmoji = () => {
   const queryClient = useQueryClient()
   return useMutation({
@@ -137,6 +138,21 @@ export const usePostEmoji = () => {
     },
     onError: (error) => {
       console.error('이모지 등록 실패: ', error)
+    },
+  })
+}
+
+// 안읽은 반응, 메세지 여부
+export const useGetUnreadCount = () => {
+  return useQuery({
+    queryKey: ['getUnreadCount'],
+    queryFn: async () => {
+      const data = await baseQuery.get(`/v2/messages/unread`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+        },
+      })
+      return data
     },
   })
 }
