@@ -70,7 +70,6 @@ export const DefaultLayout = ({
           }}
         />
       </div>
-      {/* <Snowfall color='#dee4fd' snowflakeCount={200} /> */}
 
       <div
         style={{
@@ -83,7 +82,7 @@ export const DefaultLayout = ({
           pointerEvents: 'none', // Snowfall과의 상호작용 방지
         }}
       >
-        <Snowfall color='#dee4fd' snowflakeCount={200} />
+        <Snowfall color='#dee4fd' snowflakeCount={100} />
       </div>
     </>
   )
