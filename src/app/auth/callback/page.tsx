@@ -1,15 +1,20 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
+import { useCookies } from 'react-cookie'
 
 export default function Callback() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [redirectUrl, setRedirectUrl] = useState<string | null>(null)
+  const [redirectUrl, setRedirectUrl] = React.useState<string | null>(null)
+  const [, setCookie] = useCookies([
+    'keep_in_touch_token',
+    'keep_in_touch_user_id',
+  ]) // 쿠키 관리
 
-  useEffect(() => {
+  React.useEffect(() => {
     const userId = searchParams.get('userId')
     const storedRedirectUrl = localStorage.getItem('redirect_before_login') // 로컬스토리지 값
 
@@ -23,22 +28,22 @@ export default function Callback() {
 
     // 디버깅 코드 : 삭제 예정
     console.log('searchParams redirectUrl:', searchParams.get('redirectUrl'))
-    console.log(
-      'localStorage redirect_before_login:',
-      localStorage.getItem('redirect_before_login')
-    )
+    console.log('localStorage redirect_before_login:', storedRedirectUrl)
     console.log('redirectUrl 결정:', calculatedRedirectUrl)
   }, [searchParams])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (redirectUrl) {
       const token = searchParams.get('accessToken')
       const userId = searchParams.get('userId')
       const selectedQuestion = localStorage.getItem('selectedQuestion')
 
       if (token && userId) {
-        localStorage.setItem('keep_in_touch_token', token)
-        localStorage.setItem('keep_in_touch_user_id', userId)
+        // 쿠키 설정 (React Cookie 사용)
+
+        setCookie('keep_in_touch_token', token)
+        setCookie('keep_in_touch_user_id', userId)
+
         // redirectUrl이 /questions/messages인 경우 selectedQuestion 확인
         if (redirectUrl === '/questions/messages') {
           if (!selectedQuestion) {
@@ -54,7 +59,7 @@ export default function Callback() {
         router.push('/login') // 토큰 또는 userId가 없으면 /login으로 이동
       }
     }
-  }, [redirectUrl, searchParams, router])
+  }, [redirectUrl, searchParams, router, setCookie])
 
   return (
     <MainLayout>
