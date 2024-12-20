@@ -54,7 +54,7 @@ export default function ScrollHome({
   scrollElement,
   setScrollElementState,
   questionData,
-  currentStep,
+
   questionListRef,
 }: ScrollHomeProps) {
   const [popupCookies, setPopupCookies] = useCookies()

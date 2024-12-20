@@ -3,7 +3,6 @@
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import BottomBar from './bottomBar'
-import Image from 'next/image'
 
 export default function Profile({ userId }: { userId: string }) {
   const router = useRouter()
