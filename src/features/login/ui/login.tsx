@@ -13,6 +13,8 @@ import 'swiper/css/pagination'
 import { OnBoardingStep } from './onBoardingStep'
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { useCookies } from 'react-cookie'
+import { decodeJwt } from 'jose'
 
 const onBoardingMockData = [
   {
@@ -38,25 +40,49 @@ export const Login = () => {
     depth: 0,
   }
 
+  const [cookies] = useCookies(['keep_in_touch_token', 'keep_in_touch_user_id'])
+  const [loading, setLoading] = React.useState(true) // 로딩 상태 관리
+
   React.useEffect(() => {
     const checkToken = async () => {
-      const token =
-        typeof window !== 'undefined'
-          ? localStorage.getItem('keep_in_touch_token')
-          : null
-      const userId =
-        typeof window !== 'undefined'
-          ? localStorage.getItem('keep_in_touch_user_id')
-          : null
+      const token = cookies.keep_in_touch_token
+      const userId = cookies.keep_in_touch_user_id
 
       if (!token || !userId) {
+        redirectToLogin()
         return
       }
 
+      try {
+        // JWT 디코딩
+        const { exp } = decodeJwt(token)
+        const currentTime = Math.floor(Date.now() / 1000) // 현재 시간 (초 단위)
+
+        // 만료 시간 확인
+        if (exp && exp < currentTime) {
+          console.warn('Token has expired.')
+          redirectToLogin()
+          return
+        }
+      } catch (error) {
+        console.error('Invalid token:', error)
+        redirectToLogin()
+        return
+      }
+
+      // 유효한 토큰과 유저 ID가 있는 경우
       router.push(`/home/${userId}`)
     }
+
+    const redirectToLogin = () => {
+      setTimeout(() => {
+        router.push('/login')
+      }, 2000)
+      setLoading(false) // 로딩 상태 종료
+    }
+
     checkToken()
-  }, [router])
+  }, [cookies, router])
 
   return (
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
