@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   EmojiProps,
-  MessageDetail,
   MessageResponse,
   useGetMessageListProps,
+  usePatchMessageStatusProps,
 } from '@/features/messagebox/model/messagebox.types'
 import { baseQuery } from '@/shared/api/baseQuery'
 
-// 쪽지 리스트 api
+// 쪽지 리스트
 export const useGetMessageList = ({
   userId,
   type,
@@ -54,7 +54,7 @@ export const useGetMessageList = ({
   })
 }
 
-// 쪽지 상세 api
+// 쪽지 상세
 export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
   return useQuery({
     queryKey: ['getDetailMessage', messageId],
@@ -69,139 +69,7 @@ export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
   })
 }
 
-const emojis = [
-  {
-    reactionTemplateId: '1',
-    emoji: '😊',
-    content: '고마워',
-    type: '감사',
-  },
-  {
-    reactionTemplateId: '2',
-    emoji: '🥰',
-    content: '덕분이야',
-    type: '감사',
-  },
-  {
-    reactionTemplateId: '3',
-    emoji: '😘',
-    content: '최고야',
-    type: '감사',
-  },
-  {
-    reactionTemplateId: '4',
-    emoji: '🥹',
-    content: '감동이야',
-    type: '감사',
-  },
-  {
-    reactionTemplateId: '5',
-    emoji: '🤭',
-    content: '너밖에 없어',
-    type: '감사',
-  },
-  {
-    reactionTemplateId: '6',
-    emoji: '🥲',
-    content: '내가 더 잘할게',
-    type: '사과',
-  },
-  {
-    reactionTemplateId: '7',
-    emoji: '😔',
-    content: '잘못했어',
-    type: '사과',
-  },
-  {
-    reactionTemplateId: '8',
-    emoji: '🥹',
-    content: '죄인이오',
-    type: '사과',
-  },
-  {
-    reactionTemplateId: '9',
-    emoji: '😭',
-    content: '반성하는 중',
-    type: '사과',
-  },
-  {
-    reactionTemplateId: '10',
-    emoji: '🥺',
-    content: '미안해',
-    type: '사과',
-  },
-  {
-    reactionTemplateId: '11',
-    emoji: '😎',
-    content: '화이팅',
-    type: '응원',
-  },
-  {
-    reactionTemplateId: '12',
-    emoji: '🤩',
-    content: '멋있어',
-    type: '응원',
-  },
-  {
-    reactionTemplateId: '13',
-    emoji: '👏',
-    content: '고생 많았어',
-    type: '응원',
-  },
-  {
-    reactionTemplateId: '14',
-    emoji: '💪',
-    content: '응원할게',
-    type: '응원',
-  },
-  {
-    reactionTemplateId: '15',
-    emoji: '🍀',
-    content: '행운을 빌어요',
-    type: '응원',
-  },
-  {
-    reactionTemplateId: '16',
-    emoji: '☺️',
-    content: '그럴 수 있지',
-    type: '화해',
-  },
-  {
-    reactionTemplateId: '17',
-    emoji: '🤗',
-    content: '괜찮아',
-    type: '화해',
-  },
-  {
-    reactionTemplateId: '18',
-    emoji: '😁',
-    content: '잘 부탁해',
-    type: '화해',
-  },
-  {
-    reactionTemplateId: '19',
-    emoji: '😤',
-    content: '나한테 잘해',
-    type: '화해',
-  },
-  {
-    reactionTemplateId: '20',
-    emoji: '😉',
-    content: '한 번만 봐줄게',
-    type: '화해',
-  },
-]
-
-// export const useGetEmoji = () => {
-//   return useQuery({
-//     queryKey: ['getEmoji'],
-//     queryFn: async () => {
-//       return emojis
-//     },
-//   })
-// }
-
-// 본 테스트
+// 반응 템플릿
 export const useGetEmoji = () => {
   return useQuery({
     queryKey: ['getEmoji'],
@@ -219,10 +87,7 @@ export const useGetEmoji = () => {
   })
 }
 
-interface usePatchMessageStatusProps {
-  messageId: string
-  status: string
-}
+// 쪽지 상태 변경
 export const usePatchMessageStatus = () => {
   const queryClient = useQueryClient()
   return useMutation({

@@ -83,3 +83,8 @@ export type EmojiResponse = {
     emoji: string
   }
 }
+
+export interface usePatchMessageStatusProps {
+  messageId: string
+  status: string
+}
