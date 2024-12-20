@@ -92,8 +92,7 @@ export const ScrollLayout = ({
         />
       )}
 
-      {/* TODO : isNew API 맹그러지면 추가해야함 */}
-      <Nav type='home' userId={userId} isNew={false} />
+      <Nav type='home' userId={userId} />
     </div>
   )
 }
