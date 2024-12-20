@@ -58,7 +58,12 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       const userId = cookies.keep_in_touch_user_id
       const redirectUrl = localStorage.getItem('redirect_before_login') || null
 
+      console.log('AuthProvider > accessToken', accessToken)
+      console.log('AuthProvider > userId', userId)
+
       if (!accessToken || !isTokenValid(accessToken)) {
+        console.log('AuthProvider > !accessToken || !isTokenValid(accessToken')
+        handleLogout()
         throw new Error('Invalid or expired token')
       }
 
@@ -70,6 +75,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       }
     } catch (error) {
       console.error(error)
+      console.log('AuthProvider > error', error)
       toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
       handleLogout()
     }
