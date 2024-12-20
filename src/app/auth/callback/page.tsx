@@ -45,6 +45,10 @@ export default function Callback() {
     }
 
     if (token && userId) {
+      // TODO : 디버깅 삭제 예정
+      console.log('Callback > Token received:', token)
+      console.log('Callback > UserId received:', userId)
+
       setCookie('keep_in_touch_token', token, { path: '/' })
       setCookie('keep_in_touch_user_id', userId, { path: '/' })
 
