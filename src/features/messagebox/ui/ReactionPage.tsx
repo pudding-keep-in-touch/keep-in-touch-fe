@@ -16,14 +16,16 @@ interface ReactionPageProps {
   userId: string
   messageId: string
 }
-
 const ReactionPage = React.memo(
   ({ messageType, userId, messageId }: ReactionPageProps) => {
     const lists = ['감사', '사과', '응원', '화해']
     const router = useRouter()
     const [selectedSet, setSelectedSet] = useState<Set<string>>(new Set())
-    const { data, error, isLoading } = useGetEmoji() // 반응 템플릿 api
-
+    const { data, error, isLoading } = useGetEmoji() as {
+      data: EmojiProps[] | undefined
+      error: Error | null
+      isLoading: boolean
+    }
     const onSubmit = () => {
       // 반응 보내기 api
       router.push(`/messagebox/${userId}/${messageType}/${messageId}`)
@@ -71,28 +73,21 @@ const ReactionPage = React.memo(
       }
     }, [selectedSet, toastVisible])
 
-    // 임시 반응 이모지
-    const grouped = useMemo(() => {
-      const groupedData: Record<EmojiProps['type'], EmojiProps[]> =
-        lists.reduce(
-          (acc, type) => {
-            acc[type] = []
-            return acc
-          },
-          {} as Record<EmojiProps['type'], EmojiProps[]>
-        )
+    const groupedEmoji: Record<EmojiProps['type'], EmojiProps[]> = lists.reduce(
+      (acc, type) => {
+        acc[type] = []
+        return acc
+      },
+      {} as Record<EmojiProps['type'], EmojiProps[]> // Initialize groupedData
+    )
 
-      if (data) {
-        data.forEach((item) => {
-          if (groupedData[item.type]) {
-            groupedData[item.type].push(item)
-          }
-        })
-      }
-      return groupedData
-    }, [data])
+    if (data) {
+      data.forEach((item) => {
+        groupedEmoji[item.type].push(item)
+      })
+    }
 
-    if (error) return <div>Error fetching emojis.</div>
+    if (error) return <div>Error fetching emojis. : Error: {error.message}</div>
 
     return (
       <>
@@ -106,7 +101,7 @@ const ReactionPage = React.memo(
                   <EmojiSection
                     key={type}
                     messageType={messageType}
-                    grouped={grouped}
+                    grouped={groupedEmoji}
                     selected={Array.from(selectedSet)}
                     onItemClick={storedData}
                     type={type}

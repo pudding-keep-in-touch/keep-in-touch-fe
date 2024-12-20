@@ -67,7 +67,7 @@ export interface useGetMessageListProps {
 }
 
 export type EmojiProps = {
-  templateId: string
+  reactionTemplateId: string
   type: string
   content: string
   emoji: string
