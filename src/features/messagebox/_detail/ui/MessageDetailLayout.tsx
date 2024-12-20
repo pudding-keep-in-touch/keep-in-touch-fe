@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState } from 'react'
 import { MainLayoutProps, MessageType } from '@/shared/types/common.types'
 import { usePathname } from 'next/navigation'
@@ -8,38 +7,31 @@ import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+
 type MessageDetailLayout = MainLayoutProps & {
   children: React.ReactNode
   messageType: MessageType
   variety: string
   messageId: string
   isNormal: boolean
+  userId: string
 }
 
 export default function MessageDetailLayout({
   children,
   messageType,
   messageId,
+  userId,
   variety,
   isNormal,
 }: MessageDetailLayout) {
-  const userId =
-    typeof window !== 'undefined'
-      ? localStorage.getItem('keep_in_touch_user_id')
-      : null
   const router = useRouter()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
     setIsOpen((e) => !e)
   }
-  const backHandler = () => {
-    if (userId) {
-      router.back()
-    } else {
-      console.log('go to error page !! no userId')
-    }
-  }
+
   const makeBgClass = pathname.endsWith('/reaction') ? 'bg-[#FFFFFF]' : variety
   return (
     <div
@@ -52,7 +44,7 @@ export default function MessageDetailLayout({
         <header className='w-full h-[50px] flex justify-between items-center z-50 px-6'>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
-            onClick={backHandler}
+            onClick={() => router.back()}
           />
           {messageType === 'received' && (
             <div className='flex flex-col items-end'>

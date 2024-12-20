@@ -13,20 +13,17 @@ type getNicknameType = {
  */
 
 export const useGetNickname = (userId: string | undefined) => {
-  const token = localStorage.getItem('keep_in_touch_token')
-
   return useQuery<getNicknameType | null>({
     queryKey: ['nickname', userId],
     queryFn: async () => {
       if (!userId) return null
-      const { data } = await baseQuery.get(`/v2/users/${userId}/nickname`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+
+      // 인터셉터에 의해 Authorization 헤더가 추가됨
+      const { data } = await baseQuery.get(`/v2/users/${userId}/nickname`)
       return data?.nickname || null
     },
-    enabled: !!userId && !!token,
+
+    enabled: !!userId,
     initialData: null,
   })
 }

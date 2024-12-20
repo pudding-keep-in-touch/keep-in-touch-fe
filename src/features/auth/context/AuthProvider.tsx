@@ -60,7 +60,12 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         typeof exp !== 'number' ||
         exp < Math.floor(Date.now() / 1000)
       ) {
-        throw new Error('Invalid or expired token')
+        // 세션 만료 시 사용자에게 알림 및 로그인 페이지로 리다이렉트
+        alert('세션이 만료되었습니다. 다시 로그인해주세요.')
+        localStorage.removeItem('keep_in_touch_token')
+        localStorage.removeItem('keep_in_touch_user_id')
+        router.push('/login')
+        throw new Error('Session expired')
       }
 
       console.log('3')
@@ -88,16 +93,27 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   console.log('authState', authState)
 
+  // const logout = async () => {
+  //   try {
+  //     console.log('No logout API call is needed in this application.')
+  //   } catch (error) {
+  //     console.error('Logout error:', error)
+  //   } finally {
+  //     setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
+  //     localStorage.removeItem('keep_in_touch_token')
+  //     localStorage.removeItem('keep_in_touch_user_id')
+  //     router.push('/login')
+  //   }
+  // }
+
   const logout = async () => {
     try {
-      console.log('No logout API call is needed in this application.')
-    } catch (error) {
-      console.error('Logout error:', error)
-    } finally {
       setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
       localStorage.removeItem('keep_in_touch_token')
       localStorage.removeItem('keep_in_touch_user_id')
       router.push('/login')
+    } catch (error) {
+      console.error('Logout error:', error)
     }
   }
 
