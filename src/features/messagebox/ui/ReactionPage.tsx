@@ -3,8 +3,11 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
 import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import { useGetEmoji } from '@/features/messagebox/_detail/api/detailQuery'
-import { useEffect, useMemo, useState } from 'react'
+import {
+  useGetEmoji,
+  usePostEmoji,
+} from '@/features/messagebox/_detail/api/detailQuery'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import React from 'react'
@@ -26,16 +29,12 @@ const ReactionPage = React.memo(
       error: Error | null
       isLoading: boolean
     }
-    const onSubmit = () => {
-      // 반응 보내기 api
-      router.push(`/messagebox/${userId}/${messageType}/${messageId}`)
-    }
+    const { mutateAsync } = usePostEmoji()
 
-    const [toastVisible, setToastVisible] = useState(false)
-    const storedData = (templateId: string) => {
+    const storedData = (templateId: string): Set<string> => {
       setSelectedSet((prevSet) => {
         const newSet = new Set(prevSet)
-        console.log(newSet.size)
+
         if (newSet.has(templateId)) {
           newSet.delete(templateId)
         } else if (newSet.size < 5) {
@@ -43,9 +42,32 @@ const ReactionPage = React.memo(
         } else {
           setToastVisible(true)
         }
+
         return newSet
       })
+
+      return selectedSet
     }
+
+    const onSubmit = async () => {
+      try {
+        const templateIdsArray = Array.from(selectedSet)
+        const response = await mutateAsync({
+          messageId: messageId,
+          templateIds: templateIdsArray,
+        })
+
+        if (response.messageId) {
+          router.back()
+        } else {
+          console.error('Post Emoji Error, messageId가 없습니다 : ', response)
+        }
+      } catch (error) {
+        console.error('쪽지 보내기에 실패했습니다. : ', error)
+      }
+    }
+
+    const [toastVisible, setToastVisible] = useState(false)
 
     useEffect(() => {
       if (toastVisible) {
@@ -78,7 +100,7 @@ const ReactionPage = React.memo(
         acc[type] = []
         return acc
       },
-      {} as Record<EmojiProps['type'], EmojiProps[]> // Initialize groupedData
+      {} as Record<EmojiProps['type'], EmojiProps[]>
     )
 
     if (data) {

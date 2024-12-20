@@ -4,6 +4,7 @@ import {
   MessageResponse,
   useGetMessageListProps,
   usePatchMessageStatusProps,
+  usePostEmojiProps,
 } from '@/features/messagebox/model/messagebox.types'
 import { baseQuery } from '@/shared/api/baseQuery'
 
@@ -110,6 +111,32 @@ export const usePatchMessageStatus = () => {
     },
     onError: (error) => {
       console.error('상태 변경 실패: ', error)
+    },
+  })
+}
+
+export const usePostEmoji = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationKey: ['postEmoji'],
+    mutationFn: async ({ messageId, templateIds }: usePostEmojiProps) => {
+      const { data } = await baseQuery.post(
+        `/v2/messages/${messageId}/reactions`,
+        { templateIds },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+          },
+        }
+      )
+      return data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getDetailMessage'] })
+      console.log('이모지 등록 성공')
+    },
+    onError: (error) => {
+      console.error('이모지 등록 실패: ', error)
     },
   })
 }

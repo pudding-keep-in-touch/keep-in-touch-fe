@@ -88,3 +88,8 @@ export interface usePatchMessageStatusProps {
   messageId: string
   status: string
 }
+
+export interface usePostEmojiProps {
+  messageId: string
+  templateIds: string[]
+}
