@@ -55,20 +55,20 @@ export const Login = () => {
 
       try {
         if (!token || !userId) {
-          throw new Error('Token or userId is missing')
+          throw new Error('Login > Token or userId is missing')
         }
 
         const { exp } = decodeJwt(token)
         const currentTime = Math.floor(Date.now() / 1000)
 
         if (exp && exp < currentTime) {
-          throw new Error('Token has expired')
+          throw new Error('Login > Token has expired')
         }
 
         // 유효한 토큰과 userId가 있는 경우
         router.push(`/home/${userId}`)
       } catch (error) {
-        console.error(error)
+        console.error('Login error', error)
         router.replace('/login')
       } finally {
         setLoading(false) // 모든 경우에 로딩 상태를 해제

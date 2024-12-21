@@ -1,13 +1,13 @@
 'use client'
 
+import { getCookie } from '@/shared/utils/cookieUtils'
 import { decodeJwt } from 'jose'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { useCookies } from 'react-cookie'
 
 export default function Main() {
   const router = useRouter()
-  const [cookies] = useCookies(['keep_in_touch_token', 'keep_in_touch_user_id']) // 쿠키 가져오기
+
   const [loading, setLoading] = React.useState(true) // 로딩 상태 관리
   const [isChecked, setIsChecked] = React.useState(false) // 체크 완료 플래그
 
@@ -16,8 +16,8 @@ export default function Main() {
     if (isChecked) return // 이미 체크한 경우 중복 실행 방지
 
     const checkToken = async () => {
-      const token = cookies.keep_in_touch_token
-      const userId = cookies.keep_in_touch_user_id
+      const token = getCookie('keep_in_touch_token')
+      const userId = getCookie('keep_in_touch_user_id')
 
       if (!token || !userId) {
         console.warn('Main > No token or userId, redirecting to login.')
@@ -33,7 +33,11 @@ export default function Main() {
         console.log('Main > Current time:', currentTime)
         console.log('Main > Token expiration:', decoded.exp)
 
-        if (decoded.exp && decoded.exp < currentTime) {
+        if (
+          decoded &&
+          typeof decoded.exp === 'number' &&
+          decoded.exp < currentTime
+        ) {
           console.warn('Main > Token has expired.')
           redirectToLogin()
           return
@@ -60,18 +64,17 @@ export default function Main() {
     }
 
     checkToken()
-  }, [
-    cookies.keep_in_touch_token,
-    cookies.keep_in_touch_user_id,
-    isChecked,
-    router,
-  ])
+  }, [isChecked, router])
 
   React.useEffect(() => {
+    const token = getCookie('keep_in_touch_token')
+    const userId = getCookie('keep_in_touch_user_id')
     // TODO : 디버깅 삭제 예정
-    console.log('Main > Token from cookies:', cookies.keep_in_touch_token)
-    console.log('Main > UserId from cookies:', cookies.keep_in_touch_user_id)
-  }, [cookies])
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Main > Token from cookies:', token)
+      console.log('Main > UserId from cookies:', userId)
+    }
+  }, [])
 
   if (loading) {
     return (
