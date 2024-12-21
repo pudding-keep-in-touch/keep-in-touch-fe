@@ -1,90 +1,36 @@
 'use client'
 
-import { getCookie } from '@/shared/utils/cookieUtils'
-import { decodeJwt } from 'jose'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
 export default function Main() {
   const router = useRouter()
 
-  const [loading, setLoading] = React.useState(true) // 로딩 상태 관리
-  const [isChecked, setIsChecked] = React.useState(false) // 체크 완료 플래그
-
   // TODO : 로그인 붙이고 처리 예정
   React.useEffect(() => {
-    if (isChecked) return // 이미 체크한 경우 중복 실행 방지
-
     const checkToken = async () => {
-      const token = getCookie('keep_in_touch_token')
-      const userId = getCookie('keep_in_touch_user_id')
+      const token =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_token')
+          : null
+      const userId =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('keep_in_touch_user_id')
+          : null
 
       if (!token || !userId) {
-        console.warn('Main > No token or userId, redirecting to login.')
-        redirectToLogin()
+        setTimeout(() => {
+          router.push('/login')
+        }, 2000)
         return
       }
-
-      try {
-        const decoded = decodeJwt(token)
-        console.log('Main > Decoded token:', decoded)
-        const currentTime = Math.floor(Date.now() / 1000)
-
-        console.log('Main > Current time:', currentTime)
-        console.log('Main > Token expiration:', decoded.exp)
-
-        if (
-          decoded &&
-          typeof decoded.exp === 'number' &&
-          decoded.exp < currentTime
-        ) {
-          console.warn('Main > Token has expired.')
-          redirectToLogin()
-          return
-        }
-      } catch (error) {
-        console.error('Invalid token:', error)
-        redirectToLogin()
-        return
-      }
-
-      // 유효한 토큰과 유저 ID가 있는 경우
-      setLoading(false)
-      setIsChecked(true) // 체크 완료 플래그 설정
       router.push(`/home/${userId}`)
     }
-
-    const redirectToLogin = () => {
-      if (!isChecked) {
-        setLoading(false)
-        setTimeout(() => {
-          router.replace('/login')
-        }, 1000)
-      }
-    }
-
     checkToken()
-  }, [isChecked, router])
+  }, [router])
 
-  React.useEffect(() => {
-    const token = getCookie('keep_in_touch_token')
-    const userId = getCookie('keep_in_touch_user_id')
-    // TODO : 디버깅 삭제 예정
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Main > Token from cookies:', token)
-      console.log('Main > UserId from cookies:', userId)
-    }
-  }, [])
-
-  if (loading) {
-    return (
-      <div className='w-full min-h-screen flex flex-col items-center bg-white box-border'>
-        {/* 로딩 스피너 또는 메시지 */}
-        <p>Main Loading...</p>
-      </div>
-    )
-  }
-
-  // 안전한 로딩 종료를 위해 빈 화면을 반환 (필요 시 추가 렌더링 가능)
-  return null
+  // TODO : 로딩 스피너 추가 예정
+  return (
+    <div className='w-full min-h-screen flex flex-col items-center bg-white box-border'></div>
+  )
 }

@@ -9,7 +9,6 @@ import {
 import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { getCookie } from '@/shared/utils/cookieUtils'
 
 type MessageDetailLayout = MainLayoutProps & {
   messageType: MessageType
@@ -21,8 +20,10 @@ export default function MessageDetailLayout({
   messageType,
   variety,
 }: MessageDetailLayout) {
-  const userId = getCookie('keep_in_touch_user_id')?.toString()
-
+  const userId =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('keep_in_touch_user_id')
+      : null
   const router = useRouter()
   const param = useSearchParams()
   const baseUrl = param.get('base')
