@@ -35,18 +35,18 @@ export default function MessageDetailLayout({
   return (
     <div
       className={cn(
-        'relative w-full pb-safe-bottom z-0 h-screen-safe flex flex-col bg-cover bg-center items-center',
+        'relative w-full pb-safe-bottom z-0 h-screen-safe overflow-y-scroll scrollbar-hide flex flex-col bg-cover bg-center items-center',
         variety
       )}
     >
-      <div className='max-w-[390px] w-full z-0 overflow-y-scroll scrollbar-hide mb-5'>
-        <header className='w-full h-[50px] flex justify-between items-center z-50 px-6'>
+      <div className='max-w-[390px] w-full z-0 mb-5'>
+        <header className='w-full h-[50px] flex justify-between items-center z-90 px-6'>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
             onClick={() => router.back()}
           />
           {messageType === 'received' && (
-            <div className='flex flex-col items-end'>
+            <div className='flex flex-col items-end z-100'>
               <button type='button' onClick={openModal}>
                 <Image
                   src='/header_more.svg'
