@@ -33,6 +33,9 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     userId: null as string | null,
   })
 
+  const [isChecked, setIsChecked] = React.useState(false)
+
+  // JWT 만료 여부 확인
   const isTokenValid = (token: string): boolean => {
     try {
       const { exp } = decodeJwt(token)
@@ -70,17 +73,17 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       localStorage.removeItem('redirect_before_login')
       router.replace(redirectUrl)
     }
+
+    setIsChecked(true)
   }
 
+  console.log('authState', authState)
+
   React.useEffect(() => {
-    if (authState.isLoading) {
+    if (!isChecked) {
       checkAuth()
     }
-  }, [
-    authState.isLoading,
-    cookies.keep_in_touch_token,
-    cookies.keep_in_touch_user_id,
-  ])
+  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id, isChecked])
 
   React.useEffect(() => {
     if (
