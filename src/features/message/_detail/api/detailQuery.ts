@@ -1,6 +1,7 @@
 import { baseQuery } from '@/shared/api/baseQuery'
+import { getCookie } from '@/shared/utils/cookieUtils'
+import { isTokenExpired } from '@/shared/utils/tokenUtils'
 import { useQuery } from '@tanstack/react-query'
-import { useCookies } from 'react-cookie'
 
 interface useGetDetailMessageProps {
   directMessageId: number
@@ -9,7 +10,11 @@ interface useGetDetailMessageProps {
 export const useGetDetailMessage = ({
   directMessageId,
 }: useGetDetailMessageProps) => {
-  const [cookies] = useCookies(['keep_in_touch_token']) // 쿠키에서 토큰 읽기
+  const accessToken = getCookie('keep_in_touch_token')
+
+  if (!accessToken || isTokenExpired(accessToken)) {
+    throw new Error('questionList No access token available')
+  }
 
   return useQuery({
     queryKey: ['getDetailMessage', directMessageId],
@@ -18,7 +23,7 @@ export const useGetDetailMessage = ({
         `/v1/direct-messages/${directMessageId}`,
         {
           headers: {
-            Authorization: `Bearer ${cookies.keep_in_touch_token}`, // 쿠키에서 토큰 읽어오기
+            Authorization: `Bearer ${accessToken}`, // 쿠키에서 토큰 읽어오기
           },
         }
       )

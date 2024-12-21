@@ -1,10 +1,10 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { decodeJwt } from 'jose'
 import React from 'react'
-import { useCookies } from 'react-cookie'
 import toast from 'react-hot-toast'
+import { getCookie, removeCookie } from '@/shared/utils/cookieUtils'
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -19,12 +19,7 @@ type AuthProviderProps = {
 }
 
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const pathname = usePathname()
   const router = useRouter()
-  const [cookies, , removeCookie] = useCookies([
-    'keep_in_touch_token',
-    'keep_in_touch_user_id',
-  ])
   const [authState, setAuthState] = React.useState({
     isLoggedIn: false,
     isLoading: true,
@@ -50,22 +45,31 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const handleLogout = () => {
     console.log('AuthProvider > Logging out and navigating to /login')
 
-    removeCookie('keep_in_touch_token', { path: '/' })
-    removeCookie('keep_in_touch_user_id', { path: '/' })
+    removeCookie('keep_in_touch_token')
+    removeCookie('keep_in_touch_user_id')
     setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
     router.replace('/login')
   }
 
   const checkAuth = async () => {
-    const accessToken = cookies.keep_in_touch_token
-    const userId = cookies.keep_in_touch_user_id
+    const accessToken = getCookie('keep_in_touch_token')
+    const userId = getCookie('keep_in_touch_user_id')
     const redirectUrl = localStorage.getItem('redirect_before_login') || null
 
     console.log('AuthProvider > accessToken:', accessToken)
     console.log('AuthProvider > userId:', userId)
 
-    if (!accessToken || !isTokenValid(accessToken)) {
-      console.warn('AuthProvider > Invalid or expired token')
+    // 토큰이 없는 경우
+    if (!accessToken) {
+      console.warn('AuthProvider > No access token available.')
+      toast.error('로그인이 필요합니다.')
+      handleLogout()
+      return
+    }
+
+    // 토큰이 있지만 유효하지 않은 경우
+    if (!isTokenValid(accessToken)) {
+      console.warn('AuthProvider > Invalid or expired token.')
       toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
       handleLogout()
       return
@@ -86,11 +90,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     if (authState.isLoading) {
       checkAuth()
     }
-  }, [
-    authState.isLoading,
-    cookies.keep_in_touch_token,
-    cookies.keep_in_touch_user_id,
-  ])
+  }, [authState.isLoading])
 
   const value = React.useMemo(
     () => ({

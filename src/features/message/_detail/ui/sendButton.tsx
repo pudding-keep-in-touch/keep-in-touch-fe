@@ -3,15 +3,14 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { MessageType } from '@/shared/types/common.types'
 import { Button } from '@/shared/components/Button'
-import { useCookies } from 'react-cookie'
+import { getCookie } from '@/shared/utils/cookieUtils'
 
 export default function MessageSendButton({
   messageType,
 }: {
   messageType: MessageType
 }) {
-  const [cookies] = useCookies(['keep_in_touch_user_id'])
-  const userId = cookies.keep_in_touch_user_id
+  const userId = getCookie('keep_in_touch_user_id')?.toString()
 
   const router = useRouter()
   const param = useSearchParams()
