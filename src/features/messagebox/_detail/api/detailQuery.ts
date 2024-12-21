@@ -4,8 +4,7 @@ import {
   useGetMessageListProps,
 } from '@/features/messagebox/model/messagebox.types'
 import { baseQuery } from '@/shared/api/baseQuery'
-import { getCookie } from '@/shared/utils/cookieUtils'
-import { isTokenExpired } from '@/shared/utils/tokenUtils'
+import { useCookies } from 'react-cookie'
 
 // 받은 쪽지 리스트
 const receivedMockData = {
@@ -189,15 +188,11 @@ export const useGetMessageList = ({
   limit,
   order,
 }: useGetMessageListProps) => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
+
   return useQuery<MessageResponse, Error>({
     queryKey: ['getMessageList', userId, type, cursor, limit, order],
     queryFn: async () => {
-      const accessToken = getCookie('keep_in_touch_token')
-
-      if (!accessToken || isTokenExpired(accessToken)) {
-        throw new Error('Invalid or expired token. Please log in again.')
-      }
-
       const baseUrl = `/v2/users/${userId}/messages?type=${type}`
       const params = new URLSearchParams()
       if (cursor) {
@@ -217,7 +212,7 @@ export const useGetMessageList = ({
       try {
         const { data } = await baseQuery.get(url, {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
           },
         })
         if (!data) {
@@ -236,18 +231,14 @@ export const useGetMessageList = ({
 
 // 쪽지 상세 api
 export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
-  const accessToken = getCookie('keep_in_touch_token')
-
-  if (!accessToken || isTokenExpired(accessToken)) {
-    throw new Error('questionList No access token available')
-  }
+  const [cookies] = useCookies(['keep_in_touch_token'])
 
   return useQuery({
     queryKey: ['getDetailMessage', messageId],
     queryFn: async () => {
       const { data } = await baseQuery.get(`/v2/messages/${messageId}`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${cookies.keep_in_touch_token}`,
         },
       })
       return data
@@ -407,22 +398,17 @@ interface usePatchMessageStatusProps {
   status: string
 }
 export const usePatchMessageStatus = () => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
   const queryClient = useQueryClient()
   return useMutation({
     mutationKey: ['patchMessageStatus'],
     mutationFn: async ({ messageId, status }: usePatchMessageStatusProps) => {
-      const accessToken = getCookie('keep_in_touch_token')
-
-      if (!accessToken || isTokenExpired(accessToken)) {
-        throw new Error('Invalid or expired token. Please log in again.')
-      }
-
       const { data } = await baseQuery.patch(
         `/v2/messages/${messageId}`,
         { status },
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
           },
         }
       )

@@ -3,9 +3,11 @@
 import { decodeJwt } from 'jose'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { getCookie } from '@/shared/utils/cookieUtils'
+import { useCookies } from 'react-cookie'
 
-function isTokenValid(token: string | null): boolean {
+// isUserLoggedIn을 일반 함수로 수정
+function isUserLoggedIn(cookies: Record<string, string>): boolean {
+  const token = cookies.keep_in_touch_token
   if (!token) return false
 
   try {
@@ -13,24 +15,19 @@ function isTokenValid(token: string | null): boolean {
     if (!exp) return false
 
     const currentTime = Math.floor(Date.now() / 1000) // 현재 시간 (초 단위)
-    return exp > currentTime // 토큰이 만료되지 않았으면 true
+    return exp > currentTime // 만료되지 않았으면 true
   } catch (error) {
     console.error('Invalid token:', error)
     return false
   }
 }
 
-// isUserLoggedIn을 일반 함수로 수정
-function isUserLoggedIn(): boolean {
-  const token = getCookie('keep_in_touch_token')
-  return isTokenValid(token)
-}
-
 export function useRedirectToLoginIfNeeded(
   isLoading: boolean,
   callback: () => void
 ) {
-  const isLoggedIn = isUserLoggedIn()
+  const [cookies] = useCookies(['keep_in_touch_token'])
+  const isLoggedIn = isUserLoggedIn(cookies)
   const router = useRouter()
 
   const stableCallback = React.useCallback(callback, [callback]) // callback을 안정적으로 유지

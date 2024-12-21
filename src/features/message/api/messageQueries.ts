@@ -1,8 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { baseQuery } from '@/shared/api/baseQuery'
 import { MessageType } from '@/shared/types/common.types'
-import { getCookie } from '@/shared/utils/cookieUtils'
-import { isTokenExpired } from '@/shared/utils/tokenUtils'
+import { useCookies } from 'react-cookie'
 
 interface GetMessageQueryProps {
   userId: string
@@ -15,15 +14,11 @@ export const useGetInfiniteMessages = ({
   limit,
   type,
 }: GetMessageQueryProps) => {
+  const [cookies] = useCookies(['keep_in_touch_token'])
+
   return useInfiniteQuery({
     queryKey: ['getMessages', userId],
     queryFn: async ({ pageParam }) => {
-      const accessToken = getCookie('keep_in_touch_token')
-
-      if (!accessToken || isTokenExpired(accessToken)) {
-        throw new Error('Invalid or expired token. Please log in again.')
-      }
-
       const { data } = await baseQuery.get(
         `/v1/users/${userId}/direct-messages`,
         {
@@ -35,7 +30,7 @@ export const useGetInfiniteMessages = ({
           },
 
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
           },
         }
       )

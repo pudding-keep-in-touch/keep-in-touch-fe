@@ -12,9 +12,9 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import { OnBoardingStep } from './onBoardingStep'
 import React from 'react'
-import { useRouter } from 'next/navigation'
-import { getCookie } from '@/shared/utils/cookieUtils'
-import { isTokenExpired } from '@/shared/utils/tokenUtils'
+import { usePathname, useRouter } from 'next/navigation'
+import { useCookies } from 'react-cookie'
+import { decodeJwt } from 'jose'
 
 const onBoardingMockData = [
   {
@@ -40,6 +40,8 @@ export const Login = () => {
     depth: 0,
   }
 
+  const [cookies] = useCookies(['keep_in_touch_token', 'keep_in_touch_user_id'])
+
   const [loading, setLoading] = React.useState(true) // 로딩 상태 관리
   const isTokenChecked = React.useRef(false) // Token 체크 상태를 추적
 
@@ -48,22 +50,25 @@ export const Login = () => {
       if (isTokenChecked.current) return
       isTokenChecked.current = true
 
-      const token = getCookie('keep_in_touch_token')
-      const userId = getCookie('keep_in_touch_user_id')
+      const token = cookies.keep_in_touch_token
+      const userId = cookies.keep_in_touch_user_id
 
       try {
         if (!token || !userId) {
-          throw new Error('Login > Token or userId is missing')
+          throw new Error('Token or userId is missing')
         }
 
-        if (isTokenExpired(token)) {
-          throw new Error('Login > Token has expired')
+        const { exp } = decodeJwt(token)
+        const currentTime = Math.floor(Date.now() / 1000)
+
+        if (exp && exp < currentTime) {
+          throw new Error('Token has expired')
         }
 
         // 유효한 토큰과 userId가 있는 경우
         router.push(`/home/${userId}`)
       } catch (error) {
-        console.error('Login error', error)
+        console.error(error)
         router.replace('/login')
       } finally {
         setLoading(false) // 모든 경우에 로딩 상태를 해제
@@ -71,7 +76,7 @@ export const Login = () => {
     }
 
     checkToken()
-  }, [router])
+  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id, router])
 
   if (loading) {
     return (
