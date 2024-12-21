@@ -32,17 +32,19 @@ const ReactionPage = React.memo(
     const { mutateAsync } = usePostEmoji()
 
     const storedData = (templateId: string): Set<string> => {
+      setToastVisible(false)
       setSelectedSet((prevSet) => {
         const newSet = new Set(prevSet)
 
         if (newSet.has(templateId)) {
           newSet.delete(templateId)
-        } else if (newSet.size < 5) {
-          newSet.add(templateId)
         } else {
-          setToastVisible(true)
+          if (newSet.size < 5) {
+            newSet.add(templateId)
+          } else {
+            setToastVisible(true)
+          }
         }
-
         return newSet
       })
 
