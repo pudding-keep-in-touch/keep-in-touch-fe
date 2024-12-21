@@ -46,7 +46,7 @@ export default function MessageList({
       {messages?.messageList.map((message: Message, index: number) => {
         const isMessageNormal = !message.status || message.status === 'normal'
         const isReceived = messageType === 'received'
-        const isUnread = !message.readAt || !message.reactionInfo?.readAt
+        const isUnread = !message.readAt
         const isLastItem = index === messages?.messageList.length - 1
         const messageContent = isReceived
           ? message.readAt === null
@@ -70,11 +70,11 @@ export default function MessageList({
                       </div>
                     )}
                   </div>
-                  <div className='flex flex-col w-[230px] pl-4'>
+                  <div className='flex flex-col max-w-[230px] pl-4'>
                     <div className='text-[#333D4B] font-semibold text-[17px] mb-[4px] leading-none'>
                       {isReceived ? '퐁이 도착했어요!' : '퐁을 보냈어요!'}
                     </div>
-                    <div className='text-gray-3 text-ellipsis whitespace-nowrap break-all overflow-hidden text-[14px] h-[20px] leading-[130%] tracking-[-0.75px]'>
+                    <div className=' text-gray-3 text-ellipsis whitespace-nowrap break-all overflow-hidden text-[14px] h-[20px] leading-[130%] tracking-[-0.75px]'>
                       {messageContent}
                     </div>
                     <div className='text-[#C5C5C5] font-medium h-[14px] text-[12px] mt-[14px]'>
