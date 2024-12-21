@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { baseQuery } from '@/shared/api/baseQuery'
 import { MessageType } from '@/shared/types/common.types'
-import { useCookies } from 'react-cookie'
 
 interface GetMessageQueryProps {
   userId: string
@@ -14,8 +13,6 @@ export const useGetInfiniteMessages = ({
   limit,
   type,
 }: GetMessageQueryProps) => {
-  const [cookies] = useCookies(['keep_in_touch_token'])
-
   return useInfiniteQuery({
     queryKey: ['getMessages', userId],
     queryFn: async ({ pageParam }) => {
@@ -30,7 +27,7 @@ export const useGetInfiniteMessages = ({
           },
 
           headers: {
-            Authorization: `Bearer ${cookies.keep_in_touch_token}`,
+            Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
           },
         }
       )

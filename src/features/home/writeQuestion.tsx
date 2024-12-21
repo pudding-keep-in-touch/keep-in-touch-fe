@@ -128,12 +128,9 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
   }, [])
 
   return (
-    <div className='w-full h-screen-safe z-0 relative pb-safe-bottom'>
+    <div id='wrapper' className='w-full h-screen flex flex-col relative'>
       <BackHeader title='질문 만들기' />
-      <div
-        id='content'
-        className='relative w-full h-full overflow-y-scroll scrollbar-hide'
-      >
+      <div id='content' className='w-full h-screen flex flex-col relative'>
         <div className='flex-grow w-full h-screen pt-[82px] h-815:pb-[200px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
           <div className='w-full px-[24px]'>
             <p className='font-semibold text-base mb-4 text-gray-4'>
@@ -166,7 +163,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
             {!toggle ? (
               <button
                 onClick={onClickToggle}
-                className='flex w-[159px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-gray-1 rounded-2xl'
+                className='flex w-[159px] py-2 w-380:w-full h-[47px] justify-between items-center px-4 bg-gray-1 rounded-2xl'
               >
                 <Image
                   src='/icon_show.svg'
@@ -181,7 +178,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
             ) : (
               <button
                 onClick={onClickToggle}
-                className='flex w-[198px] py-2 w-320:w-full h-[47px] justify-between items-center px-4 bg-[#C5C5C5] rounded-2xl'
+                className='flex w-[198px] py-2 w-380:w-full h-[47px] justify-between items-center px-4 bg-[#C5C5C5] rounded-2xl'
               >
                 <Image
                   src='/icon_hide.svg'
@@ -197,7 +194,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
           </div>
         </div>
 
-        {/* <div
+        <div
           className={`sticky w-full flex justify-between items-center px-[24px] z-10`}
           style={{
             bottom: keyboardHeight > 0 ? `${keyboardHeight + 60}px` : '100px',
@@ -205,16 +202,16 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
             position: 'absolute',
             width: '100%',
           }}
-        > */}
+        >
+          <CompleteButton
+            userId={userId}
+            isDisabled={isError || !isValid}
+            keyboardHeight={keyboardHeight}
+            onSubmit={onSubmit}
+          />
+        </div>
       </div>
-      <div className='sticky w-full bottom-0 flex flex-col justify-center items-start px-[10px] py-[20px] pt-3 rounded-tl-[16px] rounded-tr-[16px] z-20'>
-        <CompleteButton
-          userId={userId}
-          isDisabled={isError || !isValid}
-          keyboardHeight={keyboardHeight}
-          onSubmit={onSubmit}
-        />
-      </div>
+
       {/* <div id='make-scrollable' /> */}
     </div>
   )

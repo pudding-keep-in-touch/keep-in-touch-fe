@@ -70,20 +70,6 @@ export const DefaultLayout = ({
           }}
         />
       </div>
-
-      {/* <div
-        style={{
-          position: 'fixed', // 화면에 고정
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1, // 배경으로 이동
-          pointerEvents: 'none', // Snowfall과의 상호작용 방지
-        }}
-      > */}
-      <Snowfall color='#dee4fd' snowflakeCount={100} />
-      {/* </div> */}
     </>
   )
 }

@@ -1,83 +1,84 @@
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { API_BASE_URL } from '../config/env'
+import { useAuthContext } from '@/features/auth/context/AuthProvider'
+import router from 'next/router'
 
-import { decodeJwt } from 'jose'
-import { useCookies } from 'react-cookie'
-
-// 기본 Axios 인스턴스
 export const axiosInstance = axios.create({
   baseURL: `${API_BASE_URL}`,
 })
 
-// JWT 만료 여부 확인
-const isTokenExpired = (token: string): boolean => {
-  try {
-    const { exp } = decodeJwt(token)
-    const currentTime = Math.floor(Date.now() / 1000) // 현재 시간 (초 단위)
-    return exp ? exp < currentTime : true
-  } catch (error) {
-    console.error('Invalid token:', error)
-    return true
-  }
-}
+// 인증이 불필요할 때
+export const publicQuery = axios.create({
+  baseURL: `${API_BASE_URL}`,
+})
 
-// 요청 인터셉터 설정
 axiosInstance.interceptors.request.use(async (config) => {
   if (!config.headers) return config
 
-  const [cookies, , removeCookie] = useCookies([
-    'keep_in_touch_token',
-    'keep_in_touch_user_id',
-  ])
+  const accessToken =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('keep_in_touch_token')
+      : null
+  if (!accessToken) throw new Error('No accessToken')
 
-  const accessToken = cookies.keep_in_touch_token
-
-  if (!accessToken) {
-    console.error('No access token available.')
-    throw new Error('No access token available.')
+  if (accessToken) {
+    config.headers['Authorization'] = `Bearer ${accessToken}`
   }
 
-  // 토큰 만료 여부 확인
-  if (isTokenExpired(accessToken)) {
-    console.warn('Access token has expired. Logging out...')
-    removeCookie('keep_in_touch_token')
-    removeCookie('keep_in_touch_user_id')
-    throw new Error('Access token expired.')
-  }
-
-  // Authorization 헤더에 토큰 추가
-  config.headers['Authorization'] = `Bearer ${accessToken}`
   return config
 })
 
-// 응답 인터셉터 설정
+// Response interceptor
+// axiosInstance.interceptors.response.use(
+//   (response) => {
+//     return response.data
+//   },
+
+//   (error) => {
+//     // Handle global errors (e.g., unauthorized, server errors)
+//     if (axios.isAxiosError(error)) {
+//       if (error.response && error.response.status >= 500) {
+//         // TODO : 에러 페이지로 이동하도록 처리
+//         alert('알 수 없는 오류가 발생했어요. 잠시 후 다시 시도해주세요.')
+//       }
+
+//       if (error.response && error.response.status === 401) {
+//         alert('세션이 만료되었습니다. 다시 로그인해주세요.')
+
+//         const router = useRouter()
+//         router.push('/login')
+//       }
+
+//       throw error
+//     }
+
+//     throw new Error('API 요청 실패')
+//   }
+// )
+
 axiosInstance.interceptors.response.use(
-  (response) => response.data,
+  (response) => {
+    return response.data
+  },
   (error) => {
-    console.error('API 요청 실패:', error)
+    console.log(error)
 
     if (axios.isAxiosError(error)) {
       if (error.response) {
-        const router = useRouter()
-
-        // 서버 오류 처리
         if (error.response.status >= 500) {
           alert('알 수 없는 오류가 발생했어요. 잠시 후 다시 시도해주세요.')
         }
 
-        // 인증 오류 처리
         if (error.response.status === 401) {
           alert('세션이 만료되었습니다. 다시 로그인해주세요.')
 
-          // 로그아웃 처리
-          const [, , removeCookie] = useCookies([
-            'keep_in_touch_token',
-            'keep_in_touch_user_id',
-          ])
-          removeCookie('keep_in_touch_token')
-          removeCookie('keep_in_touch_user_id')
-          router.push('/login')
+          // 로그아웃 및 재로그인
+          const { logout } = useAuthContext()
+          logout().then(() => {
+            const router = useRouter()
+            router.push('/login')
+          })
         }
       }
     }
@@ -85,11 +86,6 @@ axiosInstance.interceptors.response.use(
     throw new Error('API 요청 실패')
   }
 )
-
-// 인증이 불필요할 때
-export const publicQuery = axios.create({
-  baseURL: `${API_BASE_URL}`,
-})
 
 publicQuery.interceptors.response.use(
   (response) => {

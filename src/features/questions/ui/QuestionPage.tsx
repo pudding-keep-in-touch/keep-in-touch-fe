@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Button } from '@/shared/components/Button'
 import QuestionBox from '@/shared/components/QuestionBox'
 import { useGetQuestion } from '@/features/questions/hooks/query/useQuestionQuery'
-import { useRedirectToLoginIfNeeded } from '@/shared/hooks/useAuth'
+import { isUserLoggedIn } from '@/shared/hooks/useAuth'
 import { Spinner } from '@/shared/components/Spinner'
 
 export default function QuestionPage() {
@@ -20,10 +20,16 @@ export default function QuestionPage() {
     error,
   } = useGetQuestion(questionId)
 
-  // 로그인 리다이렉트 상태를 관리
-  useRedirectToLoginIfNeeded(isLoading, () => {
-    console.log('User is logged in!')
-  })
+  const redirectToLoginIfNeeded = (callback: () => void) => {
+    if (!isUserLoggedIn()) {
+      // /questions/messages로 리다이렉트하도록 설정
+      const redirectUrl = '/questions/messages'
+      localStorage.setItem('redirect_before_login', redirectUrl) // 이전 경로 저장
+      router.push(`/login?redirectUrl=${encodeURIComponent(redirectUrl)}`)
+    } else {
+      callback() // 로그인 상태라면 콜백 실행
+    }
+  }
 
   const handleQuestionClick = (
     questionId: string,
@@ -36,8 +42,13 @@ export default function QuestionPage() {
       userId,
     }
 
+    // 데이터를 즉시 localStorage에 저장
     localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
-    router.push('/questions/messages')
+
+    // 로그인 상태에 따라 리다이렉트
+    redirectToLoginIfNeeded(() => {
+      router.push('/questions/messages')
+    })
   }
 
   // 에러 상태 처리
