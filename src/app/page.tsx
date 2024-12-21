@@ -9,15 +9,11 @@ export default function Main() {
   const router = useRouter()
   const [cookies] = useCookies(['keep_in_touch_token', 'keep_in_touch_user_id']) // 쿠키 가져오기
   const [loading, setLoading] = React.useState(true) // 로딩 상태 관리
-  const [isChecked, setIsChecked] = React.useState(false) // 체크 완료 플래그
-
   // TODO : 로그인 붙이고 처리 예정
   React.useEffect(() => {
-    if (isChecked) return // 이미 체크한 경우 중복 실행 방지
-
     const checkToken = async () => {
-      const token = cookies.keep_in_touch_token
-      const userId = cookies.keep_in_touch_user_id
+      const token = cookies.keep_in_touch_token // 쿠키에서 토큰 가져오기
+      const userId = cookies.keep_in_touch_user_id // 쿠키에서 유저 아이디 가져오기
 
       if (!token || !userId) {
         redirectToLogin()
@@ -25,9 +21,11 @@ export default function Main() {
       }
 
       try {
+        // JWT 디코딩
         const decoded = decodeJwt(token)
-        const currentTime = Math.floor(Date.now() / 1000)
+        const currentTime = Math.floor(Date.now() / 1000) // 현재 시간 (초 단위)
 
+        // 만료 시간 확인
         if (decoded.exp && decoded.exp < currentTime) {
           console.warn('Token has expired.')
           redirectToLogin()
@@ -40,25 +38,18 @@ export default function Main() {
       }
 
       // 유효한 토큰과 유저 ID가 있는 경우
-      setLoading(false)
-      setIsChecked(true) // 체크 완료 플래그 설정
       router.push(`/home/${userId}`)
     }
 
     const redirectToLogin = () => {
       setTimeout(() => {
-        router.replace('/login') // `push` 대신 `replace`로 중복 방지
+        router.push('/login')
       }, 2000)
-      setLoading(false)
+      setLoading(false) // 로딩 상태 종료
     }
 
     checkToken()
-  }, [
-    cookies.keep_in_touch_token,
-    cookies.keep_in_touch_user_id,
-    isChecked,
-    router,
-  ])
+  }, [cookies, router])
 
   if (loading) {
     return (
