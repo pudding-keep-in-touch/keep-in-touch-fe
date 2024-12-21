@@ -53,25 +53,24 @@ export const Login = () => {
       const token = cookies.keep_in_touch_token
       const userId = cookies.keep_in_touch_user_id
 
-      try {
-        if (!token || !userId) {
-          throw new Error('Token or userId is missing')
-        }
+      if (!token || !userId) {
+        router.replace('/login')
+        return
+      }
 
+      try {
         const { exp } = decodeJwt(token)
         const currentTime = Math.floor(Date.now() / 1000)
 
         if (exp && exp < currentTime) {
-          throw new Error('Token has expired')
+          router.replace('/login')
+          return
         }
 
-        // 유효한 토큰과 userId가 있는 경우
         router.push(`/home/${userId}`)
-      } catch (error) {
-        console.error(error)
+      } catch {
+        setLoading(false)
         router.replace('/login')
-      } finally {
-        setLoading(false) // 모든 경우에 로딩 상태를 해제
       }
     }
 
