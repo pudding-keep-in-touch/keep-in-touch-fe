@@ -21,10 +21,12 @@ type AuthProviderProps = {
 export default function AuthProvider({ children }: AuthProviderProps) {
   const pathname = usePathname()
   const router = useRouter()
+
   const [cookies, , removeCookie] = useCookies([
     'keep_in_touch_token',
     'keep_in_touch_user_id',
   ])
+
   const [authState, setAuthState] = React.useState({
     isLoggedIn: false,
     isLoading: true,
@@ -42,7 +44,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const handleLogout = () => {
-    console.log('Logging out and navigating to /login')
     removeCookie('keep_in_touch_token', { path: '/' })
     removeCookie('keep_in_touch_user_id', { path: '/' })
     setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
@@ -52,7 +53,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const checkAuth = async () => {
     const accessToken = cookies.keep_in_touch_token
     const userId = cookies.keep_in_touch_user_id
-
     const redirectUrl =
       typeof window !== 'undefined'
         ? localStorage.getItem('redirect_before_login')
@@ -67,8 +67,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     setAuthState({ isLoggedIn: true, isLoading: false, userId })
 
     if (redirectUrl) {
-      localStorage.removeItem('redirect_before_login') // 이전 경로 초기화
-      console.log(`Redirecting to saved URL: ${redirectUrl}`)
+      localStorage.removeItem('redirect_before_login')
       router.replace(redirectUrl)
     }
   }
