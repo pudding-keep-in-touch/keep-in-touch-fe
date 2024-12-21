@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Nav } from '@/shared/components/nav'
 
 export default function InboxLayout({
@@ -32,7 +32,7 @@ export default function InboxLayout({
               </h1>
             </header>
           </div>
-          <div className='relative w-full h-full overflow-y-scroll scrollbar-hide '>
+          <div className='relative w-full h-full overflow-y-scroll scrollbar-hide bg-[#F7F7FC]'>
             {children}
           </div>
           <Nav type='messagebox' userId={userId} messageType={messageType} />

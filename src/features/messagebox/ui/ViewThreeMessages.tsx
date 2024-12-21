@@ -57,13 +57,13 @@ export default function MessagesBlock({
         </h2>
         {moreLink}
       </div>
-      <div className='h-[382px]'>
+      <div className='max-h-[382px]'>
         {isLoading ? (
           <div className='w-full h-full relative top-0 left-0 right-0 bottom-0'>
             <Spinner />
           </div>
         ) : (
-          <div className='h-full'>
+          <div className='h-full mb-5'>
             {messageCount > 0 ? (
               <MessageList
                 messages={data}

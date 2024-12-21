@@ -7,11 +7,11 @@ export default function ViewAllMessage({
   userId: string
 }) {
   return (
-    <div className='max-w-[390px] w-full bg-[#F7F7FC]'>
+    <div className='max-w-[390px] w-full'>
       <div className='w-full border-b-[6px] border-b-white mb-2'>
         <ViewThreeMessages messageType='received' userId={userId} />
       </div>
-      <div className='w-full pb-6'>
+      <div className='w-full mb-2'>
         <ViewThreeMessages messageType='sent' userId={userId} />
       </div>
     </div>
