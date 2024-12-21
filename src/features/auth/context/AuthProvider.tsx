@@ -34,13 +34,9 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const isTokenValid = (token: string): boolean => {
     try {
       const { exp } = decodeJwt(token)
-      console.log('AuthContext > Decoded exp:', exp)
       const currentTime = Math.floor(Date.now() / 1000)
-      console.log('AuthContext > Current time:', currentTime)
-
       return !(exp && exp < currentTime)
-    } catch (error) {
-      console.error('AuthProvider > Error decoding JWT:', error)
+    } catch {
       return false
     }
   }
