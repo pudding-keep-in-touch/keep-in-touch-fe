@@ -46,6 +46,8 @@ export const Login = () => {
   const [isChecked, setIsChecked] = React.useState(false)
 
   React.useEffect(() => {
+    if (isChecked) return // 이미 체크한 경우 중단
+
     const checkToken = async () => {
       const token = cookies.keep_in_touch_token
       const userId = cookies.keep_in_touch_user_id
@@ -74,16 +76,14 @@ export const Login = () => {
 
       // 유효한 토큰과 유저 ID가 있는 경우
       setLoading(false)
+      setIsChecked(true) // 플래그 설정
       router.push(`/home/${userId}`)
     }
 
     const redirectToLogin = () => {
-      if (pathname === '/login') {
-        setLoading(false)
-        return
-      }
+      if (pathname === '/login') return // 현재 경로가 /login이면 중단
       setTimeout(() => {
-        router.replace('/login')
+        router.replace('/login') // replace로 브라우저 히스토리 중복 방지
       }, 2000)
       setLoading(false)
     }
@@ -92,7 +92,7 @@ export const Login = () => {
   }, [
     cookies.keep_in_touch_token,
     cookies.keep_in_touch_user_id,
-    pathname,
+    isChecked,
     router,
   ])
 
