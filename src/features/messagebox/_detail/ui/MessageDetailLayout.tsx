@@ -32,12 +32,11 @@ export default function MessageDetailLayout({
     setIsOpen((e) => !e)
   }
 
-  const makeBgClass = pathname.endsWith('/reaction') ? 'bg-[#FFFFFF]' : variety
   return (
     <div
       className={cn(
         'relative w-full pb-safe-bottom z-0 h-screen-safe flex flex-col bg-cover bg-center items-center',
-        makeBgClass
+        variety
       )}
     >
       <div className='max-w-[390px] w-full z-0 overflow-y-scroll scrollbar-hide mb-5'>

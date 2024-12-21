@@ -1,5 +1,6 @@
 import HomeIcon from '@/features/home/icons/homeIcon'
 import MessageIcon from '@/features/home/icons/messageIcon'
+import { useGetUnreadCount } from '@/features/messagebox/_detail/api/detailQuery'
 import { usePathname, useRouter } from 'next/navigation'
 
 import React from 'react'
@@ -7,15 +8,15 @@ import React from 'react'
 interface NavProps {
   type: string
   userId: string
-  isNew: boolean
   messageType?: string
 }
 
-export const Nav = ({ type, userId, isNew, messageType }: NavProps) => {
+export const Nav = ({ type, userId, messageType }: NavProps) => {
   const router = useRouter()
   const pathname = usePathname()
   // 활성 탭 상태 관리
   const [activeTab, setActiveTab] = React.useState<string>('')
+  const { data } = useGetUnreadCount() // 안읽은 반응, 메세지 확인
 
   const tabs = [
     {
@@ -63,28 +64,30 @@ export const Nav = ({ type, userId, isNew, messageType }: NavProps) => {
                 setActiveTab(tab.link) // 버튼 클릭 시 활성 탭 업데이트
               }}
             >
-              {isNew && tab.label === 'My 퐁' && (
-                <div className='absolute bottom-[55px] max-w-[56px] w-full h-[50px] z-[16]'>
-                  <div className='relative flex justify-center items-center w-[56px] h-[24px] bg-[#35B6FF] rounded-[4px]'>
-                    <p className='text-[#F3F3F9] text-[10px] font-normal leading-[20px] tracking-[-0.1px] text-left'>
-                      퐁 도착!
-                    </p>
+              {tab.label === 'My 퐁' &&
+                (data?.data.unreadMessageCount > 0 ||
+                  data?.data.unreadReactionCount > 0) && (
+                  <div className='absolute bottom-[55px] max-w-[56px] w-full h-[50px] z-[16]'>
+                    <div className='relative flex justify-center items-center w-[56px] h-[24px] bg-[#35B6FF] rounded-[4px]'>
+                      <p className='text-[#F3F3F9] text-[10px] font-normal leading-[20px] tracking-[-0.1px] text-left'>
+                        퐁 도착!
+                      </p>
 
-                    <div className='absolute right-[65%] bottom-[3px]'>
-                      <svg
-                        className='absolute'
-                        width='16'
-                        height='8'
-                        viewBox='0 0 16 8'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'
-                      >
-                        <path d='M8 8L0 0H16L8 8Z' fill='#35B6FF' />
-                      </svg>
+                      <div className='absolute right-[65%] bottom-[3px]'>
+                        <svg
+                          className='absolute'
+                          width='16'
+                          height='8'
+                          viewBox='0 0 16 8'
+                          fill='none'
+                          xmlns='http://www.w3.org/2000/svg'
+                        >
+                          <path d='M8 8L0 0H16L8 8Z' fill='#35B6FF' />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
               {/* 아이콘 색상 적용 */}
               <tab.Icon changeColor={isActive ? '#35B6FF' : '#BDBDBD'} />
               <span

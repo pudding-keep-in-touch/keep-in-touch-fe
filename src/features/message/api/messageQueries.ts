@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { baseQuery } from '@/shared/api/baseQuery'
 import { MessageType } from '@/shared/types/common.types'
 

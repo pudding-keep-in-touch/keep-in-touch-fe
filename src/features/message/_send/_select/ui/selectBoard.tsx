@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 // import { getLoginUrl } from '@/shared/config/env'
 import MessageSendStep from '@/features/message/_send/ui/step'

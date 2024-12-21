@@ -19,7 +19,7 @@ export default function QuestionDetail({
   userId,
 }: QuestionDetailProps) {
   const [detailQuestion, setDetailQuestion] = React.useState<QuestionData[]>()
-  const [visibleRef, isVisible] = useIsVisible({
+  const [, isVisible] = useIsVisible({
     options: { threshold: 0, rootMargin: '0px' },
     initialState: false,
   })

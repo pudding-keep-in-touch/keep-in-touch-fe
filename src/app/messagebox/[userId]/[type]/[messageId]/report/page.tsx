@@ -14,7 +14,7 @@ export default function Page({
     router.back()
   }, [])
 
-  const { mutateAsync, isPending, isError } = usePatchMessageStatus()
+  const { mutateAsync } = usePatchMessageStatus()
   const changeStatus = async () => {
     const redirectURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
     try {

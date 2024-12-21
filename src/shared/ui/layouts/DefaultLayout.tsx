@@ -70,7 +70,6 @@ export const DefaultLayout = ({
           }}
         />
       </div>
-      <Snowfall color='#dee4fd' snowflakeCount={200} />
     </>
   )
 }

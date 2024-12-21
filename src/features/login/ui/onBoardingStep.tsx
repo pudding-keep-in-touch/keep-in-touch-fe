@@ -30,10 +30,10 @@ export const OnBoardingStep = ({
       <p className='text-gray-4 font-normal text-[15px] tracking-[-0.75px] text-center'>
         {description}
       </p>
-      <Image
+      <object
         className='mt-[35px] mb-7 min-w-[390px] min-h-[274px] w-full'
-        src={imageUrl}
-        alt='onboarding step image'
+        data={imageUrl}
+        type='image/svg+xml'
         width={390}
         height={274}
       />

@@ -14,9 +14,9 @@ const EmojiList: React.FC<EmojiListProps> = React.memo(
       <div className='flex w-full flex-wrap gap-2 pt-[20px]'>
         {items.map((item) => (
           <EmojiItem
-            key={item.templateId}
+            key={item.reactionTemplateId}
             item={item}
-            isSelected={selected.includes(item.templateId)}
+            isSelected={selected.includes(item.reactionTemplateId)}
             onItemClick={onItemClick}
           />
         ))}

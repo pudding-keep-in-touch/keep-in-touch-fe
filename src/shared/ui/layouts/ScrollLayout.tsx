@@ -3,7 +3,7 @@ import { QuestionListHeader } from '@/features/home/ui/questionListHeader'
 import { ScrollToTopButton } from '@/features/home/ui/scrollToTopButton'
 import { Nav } from '@/shared/components/nav'
 import React from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import Image from 'next/image'
 interface ScrollLayoutProps {
   userId: string
@@ -92,8 +92,7 @@ export const ScrollLayout = ({
         />
       )}
 
-      {/* TODO : isNew API 맹그러지면 추가해야함 */}
-      <Nav type='home' userId={userId} isNew={false} />
+      <Nav type='home' userId={userId} />
     </div>
   )
 }

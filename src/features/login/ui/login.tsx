@@ -95,9 +95,9 @@ export const Login = () => {
           </Swiper>
         </div>
       </div>
-      <div className='sticky w-full h-[84px] bottom-0 flex flex-col justify-center items-start px-[10px] py-[20px] pt-3 gap-[97px] rounded-tl-[16px] rounded-tr-[16px] z-20'>
+      <div className='sticky w-full bottom-0 flex flex-col justify-center items-start px-[10px] py-[20px] pt-3 gap-[14px] rounded-tl-[16px] rounded-tr-[16px] z-20'>
         {/* TODO : 카카오 로그인 API 완성되면 추가해야함 */}
-        {/* <KakaoButton /> */}
+        <KakaoButton />
         <GoogleButton />
       </div>
     </div>

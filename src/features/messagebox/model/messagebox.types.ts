@@ -67,7 +67,7 @@ export interface useGetMessageListProps {
 }
 
 export type EmojiProps = {
-  templateId: string
+  reactionTemplateId: string
   type: string
   content: string
   emoji: string
@@ -82,4 +82,14 @@ export type EmojiResponse = {
     content: string
     emoji: string
   }
+}
+
+export interface usePatchMessageStatusProps {
+  messageId: string
+  status: string
+}
+
+export interface usePostEmojiProps {
+  messageId: string
+  templateIds: string[]
 }

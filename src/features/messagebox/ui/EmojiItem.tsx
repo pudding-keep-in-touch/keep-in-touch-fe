@@ -10,7 +10,7 @@ interface EmojiItemProps {
 const EmojiItem: React.FC<EmojiItemProps> = React.memo(
   ({ item, isSelected, onItemClick }) => {
     return (
-      <div onClick={() => onItemClick(item.templateId)}>
+      <div onClick={() => onItemClick(item.reactionTemplateId)}>
         <div className='w-full flex h-full'>
           <div className='flex-none'>
             <div

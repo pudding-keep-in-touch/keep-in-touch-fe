@@ -2,7 +2,7 @@ import { HomeHeader } from '@/shared/components/homeHeader'
 import { Nav } from '@/shared/components/nav'
 import Image from 'next/image'
 import React from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 
 interface QuestionLayoutProps {
   userId: string
@@ -44,7 +44,7 @@ export const QuestionLayout = ({
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
       <HomeHeader isVisible={isVisible} isHome={isHome} /> {/* 네비게이션 바 */}
       {children}
-      <Nav type='home' userId={userId} isNew={false} />
+      <Nav type='home' userId={userId} />
     </div>
   )
 }

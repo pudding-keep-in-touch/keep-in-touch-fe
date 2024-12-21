@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { decodeJwt } from 'jose'
 import React from 'react'
-import { API_BASE_URL, getLoginUrl } from '@/shared/config/env'
 
 const AuthContext = React.createContext<{
   isLoggedIn: boolean

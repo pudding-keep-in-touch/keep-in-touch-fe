@@ -10,7 +10,6 @@ export default function Callback() {
   const [redirectUrl, setRedirectUrl] = useState<string | null>(null)
 
   useEffect(() => {
-    const token = searchParams.get('accessToken')
     const userId = searchParams.get('userId')
     const storedRedirectUrl = localStorage.getItem('redirect_before_login') // 로컬스토리지 값
 
