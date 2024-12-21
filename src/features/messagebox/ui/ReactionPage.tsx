@@ -3,8 +3,11 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
 import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
 import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import { useGetEmoji } from '@/features/messagebox/_detail/api/detailQuery'
-import { useEffect, useMemo, useState } from 'react'
+import {
+  useGetEmoji,
+  usePostEmoji,
+} from '@/features/messagebox/_detail/api/detailQuery'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import React from 'react'
@@ -16,24 +19,22 @@ interface ReactionPageProps {
   userId: string
   messageId: string
 }
-
 const ReactionPage = React.memo(
   ({ messageType, userId, messageId }: ReactionPageProps) => {
     const lists = ['감사', '사과', '응원', '화해']
     const router = useRouter()
     const [selectedSet, setSelectedSet] = useState<Set<string>>(new Set())
-    const { data, error, isLoading } = useGetEmoji() // 반응 템플릿 api
-
-    const onSubmit = () => {
-      // 반응 보내기 api
-      router.push(`/messagebox/${userId}/${messageType}/${messageId}`)
+    const { data, error, isLoading } = useGetEmoji() as {
+      data: EmojiProps[] | undefined
+      error: Error | null
+      isLoading: boolean
     }
+    const { mutateAsync } = usePostEmoji()
 
-    const [toastVisible, setToastVisible] = useState(false)
-    const storedData = (templateId: string) => {
+    const storedData = (templateId: string): Set<string> => {
       setSelectedSet((prevSet) => {
         const newSet = new Set(prevSet)
-        console.log(newSet.size)
+
         if (newSet.has(templateId)) {
           newSet.delete(templateId)
         } else if (newSet.size < 5) {
@@ -41,9 +42,32 @@ const ReactionPage = React.memo(
         } else {
           setToastVisible(true)
         }
+
         return newSet
       })
+
+      return selectedSet
     }
+
+    const onSubmit = async () => {
+      try {
+        const templateIdsArray = Array.from(selectedSet)
+        const response = await mutateAsync({
+          messageId: messageId,
+          templateIds: templateIdsArray,
+        })
+
+        if (response.messageId) {
+          router.back()
+        } else {
+          console.error('Post Emoji Error, messageId가 없습니다 : ', response)
+        }
+      } catch (error) {
+        console.error('쪽지 보내기에 실패했습니다. : ', error)
+      }
+    }
+
+    const [toastVisible, setToastVisible] = useState(false)
 
     useEffect(() => {
       if (toastVisible) {
@@ -71,28 +95,21 @@ const ReactionPage = React.memo(
       }
     }, [selectedSet, toastVisible])
 
-    // 임시 반응 이모지
-    const grouped = useMemo(() => {
-      const groupedData: Record<EmojiProps['type'], EmojiProps[]> =
-        lists.reduce(
-          (acc, type) => {
-            acc[type] = []
-            return acc
-          },
-          {} as Record<EmojiProps['type'], EmojiProps[]>
-        )
+    const groupedEmoji: Record<EmojiProps['type'], EmojiProps[]> = lists.reduce(
+      (acc, type) => {
+        acc[type] = []
+        return acc
+      },
+      {} as Record<EmojiProps['type'], EmojiProps[]>
+    )
 
-      if (data) {
-        data.forEach((item) => {
-          if (groupedData[item.type]) {
-            groupedData[item.type].push(item)
-          }
-        })
-      }
-      return groupedData
-    }, [data])
+    if (data) {
+      data.forEach((item) => {
+        groupedEmoji[item.type].push(item)
+      })
+    }
 
-    if (error) return <div>Error fetching emojis.</div>
+    if (error) return <div>Error fetching emojis. : Error: {error.message}</div>
 
     return (
       <>
@@ -106,7 +123,7 @@ const ReactionPage = React.memo(
                   <EmojiSection
                     key={type}
                     messageType={messageType}
-                    grouped={grouped}
+                    grouped={groupedEmoji}
                     selected={Array.from(selectedSet)}
                     onItemClick={storedData}
                     type={type}

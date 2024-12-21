@@ -85,15 +85,15 @@ export default function MessagesBlock({
     messageType === 'sent' ? '아직 보낸 퐁이 없어요!' : '아직 받은 퐁이 없어요!'
 
   return (
-    <div className='max-w-[390px] px-6 w-full min-h-[368px] h-full'>
-      <div className='w-full h-[67px] flex items-center justify-between gap-1'>
+    <div className='max-w-[390px] w-full bg-[#F7F7FC]'>
+      <div className='w-full h-[67px] flex items-center justify-between gap-1  px-6 '>
         <h2 className='font-semibold text-[18px] flex items-center gap-2'>
           <div>{messageType === 'sent' ? '보낸 퐁' : '받은 퐁'}</div>
           <div>({messageCount})</div>
         </h2>
       </div>
       {/* 이후 스피너 대신 로딩 페이지 추가 */}
-      <div className='h-full'>
+      <div className='max-w-[390px] px-6 w-full min-h-[368px] h-full'>
         {isLoading ? (
           <div className='w-full h-full relative top-0 left-0 right-0 bottom-0'>
             <Spinner />

@@ -44,7 +44,7 @@ export const QuestionLayout = ({
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom'>
       <HomeHeader isVisible={isVisible} isHome={isHome} /> {/* 네비게이션 바 */}
       {children}
-      <Nav type='home' userId={userId} isNew={false} />
+      <Nav type='home' userId={userId} />
     </div>
   )
 }
