@@ -33,26 +33,31 @@ export default function Callback() {
   }, [searchParams])
 
   React.useEffect(() => {
-    if (!redirectUrl) return
+    if (redirectUrl) {
+      const token = searchParams.get('accessToken')
+      const userId = searchParams.get('userId')
+      const selectedQuestion = localStorage.getItem('selectedQuestion')
 
-    const token = searchParams.get('accessToken')
-    const userId = searchParams.get('userId')
-    const selectedQuestion = localStorage.getItem('selectedQuestion')
+      if (token && userId) {
+        // 쿠키 설정 (React Cookie 사용)
 
-    if (token && userId) {
-      // 쿠키 설정 (React Cookie 사용)
-      setCookie('keep_in_touch_token', token)
-      setCookie('keep_in_touch_user_id', userId)
+        setCookie('keep_in_touch_token', token)
+        setCookie('keep_in_touch_user_id', userId)
 
-      if (redirectUrl === '/questions/messages' && !selectedQuestion) {
-        console.error('selectedQuestion 데이터가 없습니다.')
-        return
+        // redirectUrl이 /questions/messages인 경우 selectedQuestion 확인
+        if (redirectUrl === '/questions/messages') {
+          if (!selectedQuestion) {
+            console.error('selectedQuestion 데이터가 없습니다.')
+            // 필요 시 추가 조치 (예: 에러 페이지로 리다이렉트)
+            return
+          }
+          localStorage.setItem('selectedQuestion', selectedQuestion)
+        }
+        localStorage.removeItem('redirect_before_login') // 초기화
+        router.push(decodeURIComponent(redirectUrl)) // 최종 redirectUrl로 이동
+      } else {
+        router.push('/login') // 토큰 또는 userId가 없으면 /login으로 이동
       }
-
-      localStorage.removeItem('redirect_before_login')
-      router.push(decodeURIComponent(redirectUrl))
-    } else {
-      router.push('/login') // 토큰 또는 userId가 없으면 /login으로 이동
     }
   }, [redirectUrl, searchParams, router, setCookie])
 
