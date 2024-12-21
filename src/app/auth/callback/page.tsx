@@ -16,14 +16,20 @@ export default function Callback() {
 
   React.useEffect(() => {
     const userId = searchParams.get('userId')
-    const storedRedirectUrl = localStorage.getItem('redirect_before_login')
+    const storedRedirectUrl = localStorage.getItem('redirect_before_login') // 로컬스토리지 값
 
+    // redirectUrl 결정
     const calculatedRedirectUrl =
-      searchParams.get('redirectUrl') ||
-      storedRedirectUrl ||
-      (userId ? `/home/${userId}` : `/login`)
+      searchParams.get('redirectUrl') || // URL에 있는 경우
+      storedRedirectUrl || // 로컬스토리지 값
+      (userId ? `/home/${userId}` : `/login`) // 기본값
 
     setRedirectUrl(calculatedRedirectUrl)
+
+    // 디버깅 코드 : 삭제 예정
+    console.log('searchParams redirectUrl:', searchParams.get('redirectUrl'))
+    console.log('localStorage redirect_before_login:', storedRedirectUrl)
+    console.log('redirectUrl 결정:', calculatedRedirectUrl)
   }, [searchParams])
 
   React.useEffect(() => {
@@ -33,15 +39,15 @@ export default function Callback() {
     const userId = searchParams.get('userId')
     const selectedQuestion = localStorage.getItem('selectedQuestion')
 
-    if (redirectUrl === '/questions/messages' && !selectedQuestion) {
-      console.error('selectedQuestion 데이터가 없습니다.')
-      return
-    }
-
     if (token && userId) {
       // 쿠키 설정 (React Cookie 사용)
       setCookie('keep_in_touch_token', token)
       setCookie('keep_in_touch_user_id', userId)
+
+      if (redirectUrl === '/questions/messages' && !selectedQuestion) {
+        console.error('selectedQuestion 데이터가 없습니다.')
+        return
+      }
 
       localStorage.removeItem('redirect_before_login')
       router.push(decodeURIComponent(redirectUrl))

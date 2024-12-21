@@ -33,6 +33,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     userId: null as string | null,
   })
 
+  const [isChecked, setIsChecked] = React.useState(false) // 인증 체크 완료 플래그
+
   // JWT 만료 여부 확인
   const isTokenValid = (token: string): boolean => {
     try {
@@ -45,10 +47,10 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const handleLogout = () => {
-    removeCookie('keep_in_touch_token', { path: '/' })
-    removeCookie('keep_in_touch_user_id', { path: '/' })
-    setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
+    removeCookie('keep_in_touch_token')
+    removeCookie('keep_in_touch_user_id')
     router.replace('/login')
+    setAuthState({ isLoggedIn: false, isLoading: false, userId: null })
   }
 
   const checkAuth = async () => {
@@ -59,29 +61,34 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         ? localStorage.getItem('redirect_before_login')
         : null
 
-    try {
-      if (!accessToken || !isTokenValid(accessToken)) {
-        throw new Error('Invalid or expired token')
-      }
+    if (!accessToken) {
+      toast.error('인증 정보가 없습니다.')
+      handleLogout()
+      return
+    }
 
-      setAuthState({ isLoggedIn: true, isLoading: false, userId })
-
-      if (redirectUrl) {
-        localStorage.removeItem('redirect_before_login')
-        router.replace(redirectUrl)
-      }
-    } catch (error) {
-      console.error(error)
+    if (!isTokenValid(accessToken)) {
       toast.error('세션이 만료되었습니다. 다시 로그인해주세요.')
       handleLogout()
+      return
     }
+
+    setAuthState({ isLoggedIn: true, isLoading: false, userId })
+
+    if (redirectUrl) {
+      localStorage.removeItem('redirect_before_login')
+      router.replace(redirectUrl)
+    }
+    setIsChecked(true) // 인증 체크 완료
   }
 
   console.log('authState', authState)
 
   React.useEffect(() => {
-    checkAuth()
-  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id])
+    if (!isChecked) {
+      checkAuth()
+    }
+  }, [cookies.keep_in_touch_token, cookies.keep_in_touch_user_id, isChecked])
 
   React.useEffect(() => {
     if (
@@ -89,9 +96,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       !authState.isLoading &&
       pathname !== '/login'
     ) {
-      // 현재 경로 저장
-      localStorage.setItem('redirect_before_login', pathname)
-      // 로그인 페이지로 리다이렉트
+      localStorage.setItem('redirect_before_login', pathname) // 이전 경로 저장
       router.replace('/login')
     }
   }, [authState.isLoggedIn, authState.isLoading, pathname, router])
