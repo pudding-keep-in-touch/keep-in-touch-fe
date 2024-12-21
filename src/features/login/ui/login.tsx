@@ -41,37 +41,54 @@ export const Login = () => {
   }
 
   const [cookies] = useCookies(['keep_in_touch_token', 'keep_in_touch_user_id'])
-
+  const pathname = usePathname()
   const [loading, setLoading] = React.useState(true) // 로딩 상태 관리
   const isTokenChecked = React.useRef(false) // Token 체크 상태를 추적
 
   React.useEffect(() => {
     const checkToken = async () => {
-      if (isTokenChecked.current) return
+      if (isTokenChecked.current) return // 이미 실행된 경우 중단
       isTokenChecked.current = true
 
       const token = cookies.keep_in_touch_token
       const userId = cookies.keep_in_touch_user_id
 
       if (!token || !userId) {
-        router.replace('/login')
+        console.log('No valid token or userId, redirecting to /login')
+        redirectToLogin()
         return
       }
 
       try {
+        // JWT 디코딩
         const { exp } = decodeJwt(token)
-        const currentTime = Math.floor(Date.now() / 1000)
+        const currentTime = Math.floor(Date.now() / 1000) // 현재 시간 (초 단위)
 
+        // 만료 시간 확인
         if (exp && exp < currentTime) {
-          router.replace('/login')
+          console.warn('Token has expired, redirecting to /login')
+          redirectToLogin()
           return
         }
 
+        // 유효한 토큰과 유저 ID가 있는 경우
+        console.log('Valid token found, redirecting to home')
         router.push(`/home/${userId}`)
-      } catch {
+      } catch (error) {
+        console.error('Invalid token:', error)
+        redirectToLogin()
+      } finally {
         setLoading(false)
-        router.replace('/login')
       }
+    }
+
+    const redirectToLogin = () => {
+      setTimeout(() => {
+        if (pathname !== '/login') {
+          router.replace('/login')
+        }
+      }, 1000) // 딜레이를 짧게 설정
+      setLoading(false)
     }
 
     checkToken()
