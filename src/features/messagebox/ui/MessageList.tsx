@@ -54,7 +54,7 @@ export default function MessageList({
             : message.content
           : message.content
 
-        const messageClassName = `relative ${isReceived && isUnread && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] gap-4 mb-3`
+        const messageClassName = `relative ${isReceived && isUnread && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] mb-3`
         return (
           <div key={message.messageId} ref={isLastItem ? observe : null}>
             <Link
@@ -70,7 +70,7 @@ export default function MessageList({
                       </div>
                     )}
                   </div>
-                  <div className='flex flex-col w-[230px]'>
+                  <div className='flex flex-col w-[230px] pl-4'>
                     <div className='text-[#333D4B] font-semibold text-[17px] mb-[4px] leading-none'>
                       {isReceived ? '퐁이 도착했어요!' : '퐁을 보냈어요!'}
                     </div>
@@ -87,7 +87,7 @@ export default function MessageList({
                 </div>
               ) : (
                 <div className='w-full'>
-                  <div className='relative bg-white w-full rounded-2xl flex items-center h-[75px] gap-[16px] px-[20px] py-[13px] mb-[12px]'>
+                  <div className='relative bg-white w-full rounded-2xl flex items-center h-[75px] gap-4 px-[20px] py-[13px] mb-[12px]'>
                     <Image
                       src='/hidden.svg'
                       alt='hidden message'
