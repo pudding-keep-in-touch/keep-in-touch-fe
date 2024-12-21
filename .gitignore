@@ -40,3 +40,6 @@ next-env.d.ts
 # vitest
 __screenshots__
 *storybook.log
+
+# Sentry Config File
+.env.sentry-build-plugin
