@@ -62,15 +62,15 @@ export default function MessageList({
             >
               {isMessageNormal ? (
                 <div className={messageClassName}>
-                  <div className='relative w-[49px] h-[49px] rounded-lg bg-gradient-to-br from-[#BEAFFB] to-[#F975F0]'>
+                  <div className='absolute w-[49px] h-[49px] rounded-lg bg-gradient-to-br  from-[#BEAFFB] to-[#F975F0]'>
                     <Lottie animationData={unWatchedJson} loop={0} />
                     {isReceived && isUnread && (
-                      <div className='absolute leading-[27.2%] border border-white px-[6px] py-[5px] -tracking-widest bottom-[1.1rem] right-[0.3rem] bg-white opacity-[80%] rounded-2xl text-[8px] text-gray-4 font-semibold flex justify-center'>
+                      <div className='relative leading-[27.2%] border border-white h-3 items-center mx-1 -tracking-widest bottom-[30px]  bg-white opacity-[80%] rounded-2xl text-[8px] text-gray-4 font-semibold flex justify-center'>
                         읽지 않음
                       </div>
                     )}
                   </div>
-                  <div className='flex flex-col max-w-[230px] pl-4'>
+                  <div className='flex flex-col min-w-[200px] max-w-[230px] ml-16'>
                     <div className='text-[#333D4B] font-semibold text-[17px] mb-[4px] leading-none'>
                       {isReceived ? '퐁이 도착했어요!' : '퐁을 보냈어요!'}
                     </div>
@@ -82,7 +82,7 @@ export default function MessageList({
                     </div>
                   </div>
                   {isUnread && isReceived && (
-                    <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full'></div>
+                    <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full' />
                   )}
                 </div>
               ) : (

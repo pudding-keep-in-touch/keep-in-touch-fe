@@ -32,7 +32,7 @@ export default function InboxLayout({
               </h1>
             </header>
           </div>
-          <div className='relative w-full h-full overflow-y-scroll scrollbar-hide '>
+          <div className='relative w-full h-full overflow-y-scroll scrollbar-hide bg-[#F7F7FC]'>
             {children}
           </div>
           <Nav type='messagebox' userId={userId} messageType={messageType} />

@@ -63,7 +63,7 @@ export default function MessagesBlock({
             <Spinner />
           </div>
         ) : (
-          <div className='h-full'>
+          <div className='h-full mb-5'>
             {messageCount > 0 ? (
               <MessageList
                 messages={data}
