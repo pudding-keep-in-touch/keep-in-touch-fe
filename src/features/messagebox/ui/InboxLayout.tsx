@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Nav } from '@/shared/components/nav'
 
 export default function InboxLayout({
