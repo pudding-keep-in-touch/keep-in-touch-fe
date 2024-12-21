@@ -54,7 +54,13 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
       ) : (
         <p
           className='text-sm text-[#6B7684] text-center mt-3 mb-3'
-          style={{ whiteSpace: 'pre-line' }}
+          style={{
+            whiteSpace: 'normal', // 줄바꿈 허용
+            overflow: 'hidden', // 넘치는 텍스트 숨김
+            display: '-webkit-box', // 플렉스박스 설정
+            WebkitBoxOrient: 'vertical', // 방향 설정
+            WebkitLineClamp: 1, // 표시할 줄 수 설정
+          }}
         >
           {content}
         </p>
