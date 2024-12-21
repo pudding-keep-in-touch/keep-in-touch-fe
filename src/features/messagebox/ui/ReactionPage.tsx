@@ -32,19 +32,17 @@ const ReactionPage = React.memo(
     const { mutateAsync } = usePostEmoji()
 
     const storedData = (templateId: string): Set<string> => {
-      setToastVisible(false)
       setSelectedSet((prevSet) => {
         const newSet = new Set(prevSet)
 
         if (newSet.has(templateId)) {
           newSet.delete(templateId)
+        } else if (newSet.size < 5) {
+          newSet.add(templateId)
         } else {
-          if (newSet.size < 5) {
-            newSet.add(templateId)
-          } else {
-            setToastVisible(true)
-          }
+          setToastVisible(true)
         }
+
         return newSet
       })
 
@@ -114,12 +112,12 @@ const ReactionPage = React.memo(
     if (error) return <div>Error fetching emojis. : Error: {error.message}</div>
 
     return (
-      <div className='w-full h-full '>
+      <>
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className='w-full h-full h-815:pb-[100px] overflow-y-scroll h-815:scrollbar-hide'>
-            <div className='h-815:mb-[50px]'>
+          <div className='w-full h-full h-815:pb-[100px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+            <div className='h-815:mb-[30px]'>
               <div className='overflow-y-scroll scrollbar-hide max-w-[390px] min-h-[368px] flex flex-col justify-center w-full'>
                 {lists.map((type) => (
                   <EmojiSection
@@ -146,7 +144,7 @@ const ReactionPage = React.memo(
             </div>
           </div>
         )}
-      </div>
+      </>
     )
   }
 )
