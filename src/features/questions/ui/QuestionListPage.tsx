@@ -47,9 +47,9 @@ export default function QuestionListPage() {
     localStorage.setItem('selectedQuestion', JSON.stringify(selectedQuestion))
 
     // 로그인 상태에 따라 리다이렉트
-    redirectToLoginIfNeeded(() => {
-      router.push('/questions/messages')
-    })
+    // redirectToLoginIfNeeded(() => {
+    router.push('/questions/messages')
+    // })
   }
 
   const handleTypeMessageClick = () => {

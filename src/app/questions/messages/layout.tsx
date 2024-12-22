@@ -49,6 +49,7 @@ export default function Layout({ children }: Props) {
     : 'bg-[#F7F7FC]'
 
   // 닉네임을 불러오는 중이거나 없는 경우 처리
+  //todo 모바일 테스트용 삭제 필요
   if (isLoading || nickname === null) {
     return <Spinner /> //todo 로딩 이미지 변경필요
   }
@@ -68,11 +69,11 @@ export default function Layout({ children }: Props) {
           />
 
           {!isLoading && !pathname.endsWith('/preview') && (
+            // {!pathname.endsWith('/preview') && (
             <h1 className='text-lg font-semibold text-[#333D4B] flex justify-center items-center w-full'>
               <span className='whitespace-nowrap'>To.</span>
-              <span className='whitespace-nowrap ml-1'>
-                {`${nickname}에게`}
-              </span>
+              <span className='whitespace-nowrap ml-1'>{`${nickname}에게`}</span>
+              {/* <span className='whitespace-nowrap ml-1'>{`닉네임에게`}</span> */}
             </h1>
           )}
         </header>

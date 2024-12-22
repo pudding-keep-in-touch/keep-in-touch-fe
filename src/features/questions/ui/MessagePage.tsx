@@ -69,7 +69,7 @@ export default function MessagePage() {
 
   return selectedQuestion ? (
     <>
-      <div className='mt-[30px] mb-5'>
+      <div className='flex-grow w-full h-screen pt-[30px]'>
         <Step steps={steps} active={1} />
       </div>
       <p className='font-medium text-lg'>글을 입력해주세요!</p>
@@ -85,7 +85,7 @@ export default function MessagePage() {
         ref={divRef}
         className='fixed w-full max-w-[24rem] px-4 transition-all duration-300'
         style={{
-          bottom: isMobile ? keyboardHeight + 60 : 50,
+          bottom: isMobile ? keyboardHeight + 20 : 50,
         }}
       >
         <ReplyNextButton />
