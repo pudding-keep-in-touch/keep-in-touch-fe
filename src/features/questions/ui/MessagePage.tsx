@@ -68,11 +68,13 @@ export default function MessagePage() {
   const steps = [1, 2]
 
   return selectedQuestion ? (
+    // <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
     <>
-      <div className='flex-grow w-full h-screen pt-[30px]'>
+      <div className='mt-[30px] mb-5'>
         <Step steps={steps} active={1} />
       </div>
       <p className='font-medium text-lg'>글을 입력해주세요!</p>
+      {/* </div> */}
       <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'>
         <QuestionBox
           key={selectedQuestion.questionId}
