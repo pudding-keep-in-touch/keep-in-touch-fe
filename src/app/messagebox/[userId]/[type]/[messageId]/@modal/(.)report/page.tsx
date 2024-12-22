@@ -3,6 +3,7 @@ import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQ
 import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
+import toast from 'react-hot-toast'
 
 export default function Page({
   params: { userId, messageId },
@@ -27,6 +28,17 @@ export default function Page({
       const response = await mutateAsync({
         messageId,
         status: 'reported',
+      })
+      toast('신고하기 완료되었습니다', {
+        style: {
+          borderRadius: '16px',
+          background: '#474747',
+          color: '#fff',
+          width: '100%',
+          height: '56px',
+          paddingLeft: '1.5rem',
+          paddingRight: '1.5rem',
+        },
       })
       router.push(redirectURL)
       openInNewTab(

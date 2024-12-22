@@ -60,10 +60,19 @@ const ReactionPage = React.memo(
         })
 
         if (response.messageId) {
-          router.back()
-        } else {
-          console.error('Post Emoji Error, messageId가 없습니다 : ', response)
+          toast('반응보내기가 완료되었습니다', {
+            style: {
+              borderRadius: '16px',
+              background: '#474747',
+              color: '#fff',
+              width: '100%',
+              height: '56px',
+              paddingLeft: '1.5rem',
+              paddingRight: '1.5rem',
+            },
+          })
         }
+        router.back()
       } catch (error) {
         console.error('쪽지 보내기에 실패했습니다. : ', error)
       }
