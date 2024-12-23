@@ -1,4 +1,4 @@
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import MessageDetail from '@/features/messagebox/ui/MessageDetail'
 
 export default function Page({

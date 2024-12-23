@@ -1,11 +1,11 @@
 'use client'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
   Message,
   MessageResponse,
 } from '@/features/messagebox/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import unWatchedJson from '@/features/messagebox/ui/lottie/activated.json'
 import Lottie from 'lottie-react'
 

@@ -1,16 +1,15 @@
 'use client'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
 import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import {
   useGetEmoji,
   usePostEmoji,
 } from '@/features/messagebox/_detail/api/detailQuery'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import Image from 'next/image'
-import React from 'react'
 import EmojiSection from '@/features/messagebox/ui/EmojiSection'
 import { Spinner } from '@/shared/components/Spinner'
 
@@ -128,7 +127,7 @@ const ReactionPage = React.memo(
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className='w-full h-full min-h-700:pb-[85px] h-815:pb-[130px] overflow-y-scroll h-815:scrollbar-hide'>
+          <div className='w-full h-full h-815:pb-[8rem] overflow-y-scroll h-815:scrollbar-hide'>
             <div className='h-815:mb-[50px]'>
               <div className='overflow-y-scroll scrollbar-hide max-w-[390px] min-h-[368px] flex flex-col justify-center w-full'>
                 {lists.map((type) => (

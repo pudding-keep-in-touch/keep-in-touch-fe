@@ -1,4 +1,4 @@
-import { MessageType } from '../_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 
 export type MessageBoxType = {
   messageId: string
@@ -9,7 +9,6 @@ export type Reactions = {
   type: string
   emoji: string
 }
-// 쪽지 상세 조회
 export interface MessageDetail {
   messageId: string
   type: string
@@ -50,11 +49,10 @@ export type Message = {
   reactionInfo?: reaction | null
 }
 
-// 쪽지 리스트 조회
 export interface MessageResponse {
   receivedMessageCount?: number
   sentMessageCount?: number
-  unreadMessageCount?: number // 받은 쪽지만
+  unreadMessageCount?: number
   nextCursor: Date | null
   messageList: Message[]
 }

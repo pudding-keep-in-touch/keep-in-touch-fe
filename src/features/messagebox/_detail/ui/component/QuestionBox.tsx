@@ -2,7 +2,6 @@ interface QuestionBoxProps {
   content?: string
 }
 
-// 자유질문일 경우? ++
 const QuestionBox: React.FC<QuestionBoxProps> = ({ content }) => {
   return (
     <div className='bg-white border-[1px] rounded-2xl h-fit flex flex-col w-full items-center mb-5'>

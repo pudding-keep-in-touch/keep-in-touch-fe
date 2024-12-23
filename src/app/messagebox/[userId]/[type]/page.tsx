@@ -1,5 +1,5 @@
 import InboxLayout from '@/features/messagebox/ui/InboxLayout'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import MessagesBlock from '@/features/messagebox/ui/MessagesBlock'
 
 export default function Page({

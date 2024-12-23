@@ -1,11 +1,11 @@
 'use client'
-
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import ReactionPage from '@/features/messagebox/ui/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import toast, { Toaster, useToasterStore } from 'react-hot-toast'
+
 export default function Page({
   params: { userId, type, messageId },
 }: {

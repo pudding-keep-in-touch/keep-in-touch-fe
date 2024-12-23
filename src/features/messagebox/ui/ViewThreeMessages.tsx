@@ -1,10 +1,9 @@
 'use client'
-import { useEffect } from 'react'
-import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import MessageList from '@/features/messagebox/ui/MessageList'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
+import { MessageType } from '@/shared/types/common.types'
+import MessageList from '@/features/messagebox/ui/MessageList'
 import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessagesBlock({
@@ -14,21 +13,13 @@ export default function MessagesBlock({
   messageType: MessageType
   userId: string
 }) {
-  const { data, isLoading, isError, error } = useGetMessageList({
+  const { data, isLoading } = useGetMessageList({
     userId,
     type: messageType,
     cursor: null,
     limit: 3,
     order: 'desc',
   })
-
-  useEffect(() => {
-    if (isError) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const errorStatus = (error as any)?.response?.status
-      console.error(`Error fetching messages. Status: ${errorStatus}`)
-    }
-  }, [isError, error])
 
   const messageCount =
     messageType === 'sent'

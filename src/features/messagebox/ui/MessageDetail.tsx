@@ -1,6 +1,6 @@
 'use client'
 import { useGetMessageDetail } from '@/features/messagebox/_detail/api/detailQuery'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import Link from 'next/link'
 import { cn } from '@/shared/utils/emotionVariety'
 import Tooltip from '@/features/messagebox/ui/Tooltip'
@@ -43,7 +43,7 @@ export default function MessageDetail({
     >
       <div
         className={cn(
-          'w-full flex flex-col pb-10 h-full justify-between items-center bg-center bg-cover text-black',
+          'w-full flex flex-col pb-16 h-full justify-between items-center bg-center bg-cover text-black',
           makePaddingTop
         )}
       >
