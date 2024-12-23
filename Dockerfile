@@ -1,20 +1,26 @@
-FROM node:22-slim
-
+FROM node:22-slim AS base
 WORKDIR /app
 
-RUN npm install -g pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-RUN apt-get update && apt-get install -y \
-    git \
-    vim \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY package.json ./
-
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 COPY . .
+RUN pnpm run build
 
-EXPOSE 3000
+FROM node:22-slim AS release
+WORKDIR /app
 
-ENTRYPOINT ["npm", "run", "dev"]
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile --ignore-scripts
+
+COPY --from=base /app/.next ./.next
+
+ENTRYPOINT ["pnpm", "start"]
