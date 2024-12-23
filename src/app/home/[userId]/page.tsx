@@ -1,7 +1,10 @@
+'use client'
+
 import { useGetUserNickname } from '@/features/home/api/api'
 import Home from '@/features/home/home'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
+import React from 'react'
 
 type Props = {
   params: { userId: string }
@@ -43,5 +46,17 @@ export default function HomePage({
 }: {
   params: { userId: string }
 }) {
+  const router = useRouter()
+
+  React.useEffect(() => {
+    const userId = localStorage.getItem('userId')
+    const urlParts = window.location.pathname.split('/') // 브라우저의 URL 경로를 직접 사용
+    const urlId = urlParts[urlParts.length - 1] // URL에서 ID 추출
+
+    if (!userId || userId !== urlId) {
+      router.replace(`/`) // 메인 페이지로 리다이렉트
+    }
+  }, [router])
+
   return <Home userId={userId} />
 }
