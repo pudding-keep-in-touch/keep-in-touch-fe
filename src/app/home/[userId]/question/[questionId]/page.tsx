@@ -1,4 +1,3 @@
-import { useGetUserNickname } from '@/features/home/api/api'
 import QuestionDetail from '@/features/home/questionDetail'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -9,26 +8,13 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const id =
-      typeof window !== 'undefined'
-        ? localStorage.getItem('keep_in_touch_user_id')
-        : null
-
-    const isLogin = id !== null ? true : false
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { data } = useGetUserNickname({
-      userId: params.userId,
-      isLogin: isLogin,
-    })
-
     return {
-      title: `From. ${data?.nickname}, 너에게 닿기를`,
+      title: `너에게 닿기를`,
       description: '질문이 도착했어요! 퐁~ 마음을 전해보세요!',
       openGraph: {
-        title: `From. ${data?.nickname}, 너에게 닿기를`,
+        title: `너에게 닿기를`,
         description: '질문이 도착했어요! 퐁~ 마음을 전해보세요!',
-        url: `https://dev-fe-v2.keep-in-touch.me/home/${params.userId}`,
+        url: `https://dev-fe-v2.keep-in-touch.me/home/${params.userId}/question/${params.questionId}`,
       },
     }
   } catch (e) {
