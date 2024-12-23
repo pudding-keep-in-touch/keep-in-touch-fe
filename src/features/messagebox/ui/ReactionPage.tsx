@@ -58,21 +58,22 @@ const ReactionPage = React.memo(
           messageId: messageId,
           templateIds: templateIdsArray,
         })
-
-        if (response.messageId) {
-          toast('반응보내기가 완료되었습니다', {
-            style: {
-              borderRadius: '16px',
-              background: '#474747',
-              color: '#fff',
-              width: '100%',
-              height: '56px',
-              paddingLeft: '1.5rem',
-              paddingRight: '1.5rem',
-            },
-          })
-        }
+        toast('반응보내기가 완료되었습니다', {
+          style: {
+            borderRadius: '16px',
+            background: '#474747',
+            color: '#fff',
+            width: '100%',
+            height: '56px',
+            paddingLeft: '1.5rem',
+            paddingRight: '1.5rem',
+          },
+        })
         router.back()
+        if (!response) {
+          console.error('Post Emoji Response is empty: ', response)
+          router.back()
+        }
       } catch (error) {
         console.error('쪽지 보내기에 실패했습니다. : ', error)
       }
@@ -127,7 +128,7 @@ const ReactionPage = React.memo(
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className='w-full h-full h-815:pb-[100px] overflow-y-scroll h-815:scrollbar-hide'>
+          <div className='w-full h-full min-h-700:pb-[85px] h-815:pb-[130px] overflow-y-scroll h-815:scrollbar-hide'>
             <div className='h-815:mb-[50px]'>
               <div className='overflow-y-scroll scrollbar-hide max-w-[390px] min-h-[368px] flex flex-col justify-center w-full'>
                 {lists.map((type) => (
