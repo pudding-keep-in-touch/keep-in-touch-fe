@@ -29,17 +29,7 @@ export default function Page({
         messageId,
         status: 'reported',
       })
-      toast('신고하기 완료되었습니다', {
-        style: {
-          borderRadius: '16px',
-          background: '#474747',
-          color: '#fff',
-          width: '100%',
-          height: '56px',
-          paddingLeft: '1.5rem',
-          paddingRight: '1.5rem',
-        },
-      })
+      toast('신고하기 완료되었습니다.')
       router.push(redirectURL)
       openInNewTab(
         `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`

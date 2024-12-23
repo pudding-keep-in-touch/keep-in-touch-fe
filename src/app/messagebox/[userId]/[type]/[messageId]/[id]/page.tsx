@@ -41,6 +41,14 @@ export default function Page({
         containerStyle={{
           bottom: '100px',
         }}
+        toastOptions={{
+          style: {
+            borderRadius: '16px',
+            backgroundColor: '#474747',
+            width: '100%',
+            height: '56px',
+          },
+        }}
       />
     </div>
   )

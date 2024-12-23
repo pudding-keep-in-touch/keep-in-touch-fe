@@ -24,17 +24,7 @@ export default function Page({
         messageId,
         status: 'normal',
       })
-      toast('숨기기가 해제되었습니다', {
-        style: {
-          borderRadius: '16px',
-          background: '#474747',
-          color: '#fff',
-          width: '100%',
-          height: '56px',
-          paddingLeft: '1.5rem',
-          paddingRight: '1.5rem',
-        },
-      })
+      toast('숨기기가 해제되었습니다.')
       router.push(redirectURL)
       console.log(response)
       if (!response) {
