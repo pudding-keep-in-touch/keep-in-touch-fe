@@ -22,5 +22,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --prod --frozen-lockfile --ignore-scripts
 
 COPY --from=base /app/.next ./.next
+COPY --from=base /app/public ./public
+
 
 ENTRYPOINT ["pnpm", "start"]
