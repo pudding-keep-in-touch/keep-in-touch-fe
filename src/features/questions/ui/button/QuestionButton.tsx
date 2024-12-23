@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 export default function QuestionButton() {
   const router = useRouter()
   const onClick = () => {
-    //todo userId 변경 필요?
     router.push(`/`)
   }
 

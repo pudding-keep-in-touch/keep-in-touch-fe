@@ -27,10 +27,6 @@ export default function PreviewPage() {
 
   const { data: nickname } = useGetNickname(userId ?? '')
 
-  const onClickSendHandler = () => {
-    router.push(`/questions/messages/complete`)
-  }
-
   return (
     <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
       <div className='w-full max-w-[32rem] px-6 py-4'>
