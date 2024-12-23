@@ -63,7 +63,7 @@ export default function RootLayout({
         <meta property='og:url' content='https://dev-fe.keep-in-touch.me' />
         <meta
           property='og:image'
-          content='https://dev-fe.keep-in-touch.me/images/og-image.jpg'
+          content='https://dev-fe.keep-in-touch.me/meta_image.png'
         />
 
         <meta name='twitter:card' content='summary_large_image' />
@@ -77,10 +77,14 @@ export default function RootLayout({
         />
         <meta
           name='twitter:image'
-          content='https://dev-fe.keep-in-touch.me/images/og-image.jpg'
+          content='https://dev-fe.keep-in-touch.me/meta_image.png'
         />
 
-        <link rel='icon' href='/icon.ico' sizes='any' />
+        <link
+          rel='icon'
+          href='https://dev-fe.keep-in-touch.me/icon.ico'
+          sizes='any'
+        />
 
         <meta name='mobile-web-app-capable' content='yes' />
         <meta name='theme-color' content='#3b5998' />
