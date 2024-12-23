@@ -3,10 +3,10 @@ import { useGetMessageDetail } from '@/features/messagebox/_detail/api/detailQue
 import { MessageType } from '@/shared/types/common.types'
 import Link from 'next/link'
 import { cn } from '@/shared/utils/emotionVariety'
-import Tooltip from '@/features/messagebox/ui/Tooltip'
-import { Reactions } from '@/features/messagebox/model/messagebox.types'
-import MessageItem from '@/features/messagebox/ui/MessageItem'
-import MessageDetailLayout from '@/features/messagebox/_detail/ui/MessageDetailLayout'
+import Tooltip from '@/features/messagebox/ui/components/Tooltip'
+import { Reactions } from '@/features/messagebox/_detail/model/messagebox.types'
+import MessageItem from '@/features/messagebox/ui/components/MessageItem'
+import MessageDetailLayout from '@/features/messagebox/ui/layouts/MessageDetailLayout'
 import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessageDetail({

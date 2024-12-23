@@ -4,7 +4,7 @@ import Image from 'next/image'
 import {
   Message,
   MessageResponse,
-} from '@/features/messagebox/model/messagebox.types'
+} from '@/features/messagebox/_detail/model/messagebox.types'
 import { MessageType } from '@/shared/types/common.types'
 import unWatchedJson from '@/features/messagebox/ui/lottie/activated.json'
 import Lottie from 'lottie-react'

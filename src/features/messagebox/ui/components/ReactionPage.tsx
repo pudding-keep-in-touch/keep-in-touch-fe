@@ -4,13 +4,13 @@ import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
-import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
+import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
 import { MessageType } from '@/shared/types/common.types'
 import {
   useGetEmoji,
   usePostEmoji,
 } from '@/features/messagebox/_detail/api/detailQuery'
-import EmojiSection from '@/features/messagebox/ui/EmojiSection'
+import EmojiSection from '@/features/messagebox/ui/components/EmojiSection'
 import { Spinner } from '@/shared/components/Spinner'
 
 interface ReactionPageProps {
