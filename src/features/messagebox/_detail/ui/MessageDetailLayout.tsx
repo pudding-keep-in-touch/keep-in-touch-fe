@@ -26,7 +26,6 @@ export default function MessageDetailLayout({
   isNormal,
 }: MessageDetailLayout) {
   const router = useRouter()
-  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
     setIsOpen((e) => !e)

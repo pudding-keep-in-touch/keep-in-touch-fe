@@ -1,11 +1,11 @@
 'use client'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
   Message,
   MessageResponse,
 } from '@/features/messagebox/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import unWatchedJson from '@/features/messagebox/ui/lottie/activated.json'
 import Lottie from 'lottie-react'
 
@@ -37,24 +37,29 @@ export default function MessageList({
   const formattedDate = (createdAt: Date) => {
     const date = new Date(createdAt)
     if (isNaN(date.getTime())) {
-      return '유효하지 않은 날짜' // null일 경우 처리
+      return '유효하지 않은 날짜'
     }
     return dateFormat(date)
   }
   return (
     <>
       {messages?.messageList.map((message: Message, index: number) => {
-        const isMessageNormal = !message.status || message.status === 'normal'
         const isReceived = messageType === 'received'
-        const isUnread = !message.readAt
+        const isMessageNormal = !message.status || message.status === 'normal'
+        const isUnreadReaction =
+          !isReceived &&
+          message.reactionInfo &&
+          message.reactionInfo?.readAt === null
+        const isUnread = isReceived && !message.readAt
         const isLastItem = index === messages?.messageList.length - 1
-        const messageContent = isReceived
-          ? message.readAt === null
+        const messageContent =
+          isReceived && message.readAt === null
             ? '소중한 진심을 확인해보세요'
-            : message.content
-          : message.content
+            : isUnreadReaction
+              ? '친구의 감정 이모지를 확인해보세요'
+              : message.content
 
-        const messageClassName = `relative ${isReceived && isUnread && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] mb-3`
+        const messageClassName = `relative ${(isUnreadReaction || isUnread) && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] mb-3`
         return (
           <div key={message.messageId} ref={isLastItem ? observe : null}>
             <Link
@@ -64,7 +69,7 @@ export default function MessageList({
                 <div className={messageClassName}>
                   <div className='absolute w-[49px] h-[49px] rounded-lg bg-gradient-to-br  from-[#BEAFFB] to-[#F975F0]'>
                     <Lottie animationData={unWatchedJson} loop={0} />
-                    {isReceived && isUnread && (
+                    {(isUnreadReaction || isUnread) && (
                       <div className='relative leading-[27.2%] border border-white h-3 items-center mx-1 -tracking-widest bottom-[30px]  bg-white opacity-[80%] rounded-2xl text-[8px] text-gray-4 font-semibold flex justify-center'>
                         읽지 않음
                       </div>
@@ -72,7 +77,11 @@ export default function MessageList({
                   </div>
                   <div className='flex flex-col min-w-[200px] max-w-[230px] ml-16'>
                     <div className='text-[#333D4B] font-semibold text-[17px] mb-[4px] leading-none'>
-                      {isReceived ? '퐁이 도착했어요!' : '퐁을 보냈어요!'}
+                      {isReceived
+                        ? '퐁이 도착했어요!'
+                        : isUnreadReaction
+                          ? '친구가 내 퐁에 반응했어요!'
+                          : '퐁을 보냈어요!'}
                     </div>
                     <div className=' text-gray-3 text-ellipsis whitespace-nowrap break-all overflow-hidden text-[14px] h-[20px] leading-[130%] tracking-[-0.75px]'>
                       {messageContent}
@@ -81,7 +90,7 @@ export default function MessageList({
                       {message.createdAt && formattedDate(message.createdAt)}
                     </div>
                   </div>
-                  {isUnread && isReceived && (
+                  {(isUnreadReaction || isUnread) && (
                     <div className='absolute top-0 right-0 m-[14px] w-[8px] h-[8px] bg-[#FF5F5F] rounded-full' />
                   )}
                 </div>

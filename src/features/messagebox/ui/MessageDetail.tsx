@@ -1,6 +1,6 @@
 'use client'
 import { useGetMessageDetail } from '@/features/messagebox/_detail/api/detailQuery'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import Link from 'next/link'
 import { cn } from '@/shared/utils/emotionVariety'
 import Tooltip from '@/features/messagebox/ui/Tooltip'
@@ -18,11 +18,9 @@ export default function MessageDetail({
   messageId: string
   messageType: MessageType
 }) {
-  const { data, isLoading, error } = useGetMessageDetail({
+  const { data, isLoading } = useGetMessageDetail({
     messageId,
   })
-
-  if (error) return <div>Error fetching message details.</div>
   if (!data) return null
   const questionType = data.question ? 'question' : 'emotion'
   const variety =
@@ -32,7 +30,7 @@ export default function MessageDetail({
         ? 'bg-thanksPreview'
         : 'bg-honestTalkPreview'
 
-  const makePaddingTop = variety === 'bg-messageDetail' ? '' : 'mt-40'
+  const makePaddingTop = variety === 'bg-messageDetail' ? '' : 'my-auto'
   const isNormal = data.status === 'normal'
 
   return (
@@ -45,17 +43,20 @@ export default function MessageDetail({
     >
       <div
         className={cn(
-          'w-full flex flex-col justify-between h-screen-safe items-center bg-center bg-cover text-black',
+          'w-full flex flex-col pb-16 h-full justify-between items-center bg-center bg-cover text-black',
           makePaddingTop
         )}
       >
         <>
           {isLoading ? (
-            <div className='w-full h-full relative top-0 left-0 right-0 bottom-0'>
-              <Spinner />
-            </div>
+            <Spinner />
           ) : (
-            <div className='max-w-[390px] px-6 w-full h-fit flex flex-col '>
+            <div
+              className={cn(
+                'max-w-[390px] px-6 w-full h-fit flex flex-col',
+                makePaddingTop
+              )}
+            >
               <div
                 className={
                   variety === 'bg-messageDetail'
@@ -85,7 +86,7 @@ export default function MessageDetail({
               )}
               <div className='h-full w-full '>
                 {messageType === 'received' && data.reactions?.length === 0 && (
-                  <div className='absolute flex justify-center items-start bottom-0 left-0 w-full pb-[16px] px-6'>
+                  <div className='absolute flex justify-center items-start bottom-0 left-0 w-full pb-[30px] px-6'>
                     <Tooltip>
                       <Link
                         href={`/messagebox/${userId}/${messageType}/${messageId}/reaction`}

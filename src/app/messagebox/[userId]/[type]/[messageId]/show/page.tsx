@@ -3,6 +3,7 @@ import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQ
 import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
+import toast from 'react-hot-toast'
 
 export default function Page({
   params: { userId, messageId },
@@ -14,7 +15,7 @@ export default function Page({
     router.back()
   }, [])
 
-  const { mutateAsync, isPending, isError } = usePatchMessageStatus()
+  const { mutateAsync } = usePatchMessageStatus()
   const changeStatus = async () => {
     const redirectURL = `/messagebox/${userId}/received`
     try {
@@ -22,6 +23,17 @@ export default function Page({
       const response = await mutateAsync({
         messageId,
         status: 'normal',
+      })
+      toast('숨기기가 해제되었습니다', {
+        style: {
+          borderRadius: '16px',
+          background: '#474747',
+          color: '#fff',
+          width: '100%',
+          height: '56px',
+          paddingLeft: '1.5rem',
+          paddingRight: '1.5rem',
+        },
       })
       router.push(redirectURL)
       console.log(response)
