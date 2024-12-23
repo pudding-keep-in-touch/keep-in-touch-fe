@@ -80,12 +80,6 @@ export default function RootLayout({
         `}
         </Script>
 
-        {/* ChannelTalk Script */}
-        <Script
-          strategy='afterInteractive'
-          src='./channeltalk/channeltalk.js'
-        />
-
         {/* In-App Browser Script */}
         <Script
           type='text/javascript'
