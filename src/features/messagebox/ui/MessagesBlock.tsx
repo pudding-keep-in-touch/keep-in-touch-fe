@@ -86,9 +86,7 @@ export default function MessagesBlock({
       </div>
       <div className='max-w-[390px] px-6 w-full min-h-[368px] h-full'>
         {isLoading ? (
-          <div className='w-full h-full relative top-0 left-0 right-0 bottom-0'>
-            <Spinner />
-          </div>
+          <Spinner />
         ) : (
           <div className='h-full'>
             {messageCount > 0 ? (
