@@ -19,3 +19,8 @@ export interface QuestionData {
   isHidden: boolean
   createdAt: string
 }
+
+export interface UserNicknameData {
+  userId: string
+  nickname: string
+}
