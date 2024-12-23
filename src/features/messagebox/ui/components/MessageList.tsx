@@ -8,6 +8,7 @@ import {
 import { MessageType } from '@/shared/types/common.types'
 import unWatchedJson from '@/features/messagebox/ui/lottie/activated.json'
 import Lottie from 'lottie-react'
+import { formattedDate } from '@/shared/hooks/util/dateUtil'
 
 interface MessageListProps {
   userId: string
@@ -21,26 +22,6 @@ export default function MessageList({
   messages,
   observe,
 }: MessageListProps) {
-  const dateFormat = (e: Date) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    }
-
-    const formatter = new Intl.DateTimeFormat('ko-KR', options)
-    return formatter.format(e).replace(' ', '').replace(',', '')
-  }
-  const formattedDate = (createdAt: Date) => {
-    const date = new Date(createdAt)
-    if (isNaN(date.getTime())) {
-      return '유효하지 않은 날짜'
-    }
-    return dateFormat(date)
-  }
   return (
     <>
       {messages?.messageList.map((message: Message, index: number) => {
