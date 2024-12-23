@@ -1,5 +1,5 @@
 import { MessageType } from '@/shared/types/common.types'
-import MessageDetail from '@/features/messagebox/ui/MessageDetail'
+import MessageDetail from '@/features/messagebox/ui/components/MessageDetail'
 
 export default function Page({
   params: { userId, type, messageId },

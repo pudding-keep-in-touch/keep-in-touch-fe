@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { useInView } from 'react-cool-inview'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 
-import MessageList from '@/features/messagebox/ui/MessageList'
+import MessageList from '@/features/messagebox/ui/components/MessageList'
 import { MessageType } from '@/shared/types/common.types'
-import { MessageResponse } from '@/features/messagebox/model/messagebox.types'
+import { MessageResponse } from '@/features/messagebox/_detail/model/messagebox.types'
 import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessagesBlock({

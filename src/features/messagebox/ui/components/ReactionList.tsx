@@ -1,4 +1,4 @@
-import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
+import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
 
 const ReactionList = ({ data }: { data: EmojiProps }) => {
   return (

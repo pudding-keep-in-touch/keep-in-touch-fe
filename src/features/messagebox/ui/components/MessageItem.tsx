@@ -1,6 +1,6 @@
-import QuestionBox from '@/features/messagebox/_detail/ui/component/QuestionBox'
-import MessageBoard from '@/features/messagebox/_detail/ui/component/MessageBoard'
-import { MessageDetail } from '@/features/messagebox/model/messagebox.types'
+import QuestionBox from '@/features/messagebox/ui/components/QuestionBox'
+import MessageBoard from '@/features/messagebox/ui/components/MessageBoard'
+import { MessageDetail } from '@/features/messagebox/_detail/model/messagebox.types'
 
 export default function MessageItem({
   data,

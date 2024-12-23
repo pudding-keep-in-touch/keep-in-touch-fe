@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
 import { MessageType } from '@/shared/types/common.types'
-import MessageList from '@/features/messagebox/ui/MessageList'
+import MessageList from '@/features/messagebox/ui/components/MessageList'
 import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessagesBlock({

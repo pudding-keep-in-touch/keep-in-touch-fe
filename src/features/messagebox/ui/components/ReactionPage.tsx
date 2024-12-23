@@ -4,13 +4,13 @@ import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
-import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
+import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
 import { MessageType } from '@/shared/types/common.types'
 import {
   useGetEmoji,
   usePostEmoji,
 } from '@/features/messagebox/_detail/api/detailQuery'
-import EmojiSection from '@/features/messagebox/ui/EmojiSection'
+import EmojiSection from '@/features/messagebox/ui/components/EmojiSection'
 import { Spinner } from '@/shared/components/Spinner'
 
 interface ReactionPageProps {
@@ -23,9 +23,8 @@ const ReactionPage = React.memo(
     const lists = ['감사', '사과', '응원', '화해']
     const router = useRouter()
     const [selectedSet, setSelectedSet] = useState<Set<string>>(new Set())
-    const { data, error, isLoading } = useGetEmoji() as {
+    const { data, isLoading } = useGetEmoji() as {
       data: EmojiProps[] | undefined
-      error: Error | null
       isLoading: boolean
     }
     const { mutateAsync } = usePostEmoji()
@@ -57,13 +56,8 @@ const ReactionPage = React.memo(
           messageId: messageId,
           templateIds: templateIdsArray,
         })
-        toast('반응보내기가 완료되었습니다', {
+        toast('반응 보내기가 완료되었습니다.', {
           style: {
-            borderRadius: '16px',
-            background: '#474747',
-            color: '#fff',
-            width: '100%',
-            height: '56px',
             paddingLeft: '1.5rem',
             paddingRight: '1.5rem',
           },
@@ -92,13 +86,8 @@ const ReactionPage = React.memo(
             />
           ),
           style: {
-            borderRadius: '16px',
-            background: '#474747',
-            color: '#fff',
-            width: '100%',
-            height: '56px',
-            paddingLeft: '1.5rem',
-            paddingRight: '1.5rem',
+            paddingLeft: '3.8rem',
+            paddingRight: '3.2rem',
           },
         })
       } else {
@@ -119,9 +108,6 @@ const ReactionPage = React.memo(
         groupedEmoji[item.type].push(item)
       })
     }
-
-    if (error) return <div>Error fetching emojis. : Error: {error.message}</div>
-
     return (
       <div className='w-full h-full '>
         {isLoading ? (

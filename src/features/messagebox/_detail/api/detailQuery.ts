@@ -5,7 +5,7 @@ import {
   usePatchMessageStatusProps,
   usePostEmojiProps,
   EmojiProps,
-} from '@/features/messagebox/model/messagebox.types'
+} from '@/features/messagebox/_detail/model/messagebox.types'
 import { baseQuery } from '@/shared/api/baseQuery'
 
 // 쪽지 리스트

@@ -1,5 +1,5 @@
 import { MessageType } from '@/shared/types/common.types'
-import ViewThreeMessages from '@/features/messagebox/ui/ViewThreeMessages'
+import ViewThreeMessages from '@/features/messagebox/ui/components/ViewThreeMessages'
 
 export default function ViewAllMessage({
   userId,

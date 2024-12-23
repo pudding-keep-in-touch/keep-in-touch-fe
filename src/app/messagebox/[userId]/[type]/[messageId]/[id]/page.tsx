@@ -1,6 +1,6 @@
 'use client'
 import { MessageType } from '@/shared/types/common.types'
-import ReactionPage from '@/features/messagebox/ui/ReactionPage'
+import ReactionPage from '@/features/messagebox/ui/components/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -40,6 +40,14 @@ export default function Page({
         position='bottom-center'
         containerStyle={{
           bottom: '100px',
+        }}
+        toastOptions={{
+          style: {
+            borderRadius: '16px',
+            backgroundColor: '#474747',
+            width: '100%',
+            height: '56px',
+          },
         }}
       />
     </div>
