@@ -8,9 +8,11 @@ export default function CompletionPage() {
   const steps = [1, 2]
 
   return (
-    <>
-      <div className='mt-[30px] mb-5'>
-        <Step steps={steps} active={2} />
+    <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+      <div className='grid flex items-center justify-center'>
+        <div className='mb-5 '>
+          <Step steps={steps} active={2} />
+        </div>
       </div>
 
       <p className='font-medium text-lg mb-10 text-center'>
@@ -22,6 +24,6 @@ export default function CompletionPage() {
       <Preview />
 
       <ReplyButton />
-    </>
+    </div>
   )
 }
