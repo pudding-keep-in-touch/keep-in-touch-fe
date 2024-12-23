@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { QuestionData } from '../model/home.types'
+import { QuestionData, UserNicknameData } from '../model/home.types'
 import { baseQuery } from '@/shared/api/baseQuery'
 
 interface useGetQuestionListProps {
@@ -18,6 +18,30 @@ export const useGetQuestionList = ({ userId }: useGetQuestionListProps) => {
 
       return data
     },
+  })
+}
+
+interface useGetUserNicknameProps {
+  userId: string
+  isLogin: boolean
+}
+
+export const useGetUserNickname = ({
+  userId,
+  isLogin,
+}: useGetUserNicknameProps) => {
+  return useQuery<UserNicknameData, Error>({
+    queryKey: ['userNickname', userId],
+    queryFn: async () => {
+      const { data } = await baseQuery.get(`/v2/users/${userId}/nickname`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('keep_in_touch_token')}`,
+        },
+      })
+
+      return data
+    },
+    enabled: isLogin,
   })
 }
 

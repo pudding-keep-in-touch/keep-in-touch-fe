@@ -8,12 +8,15 @@ import { useHomeScrollToTopStep } from '@/shared/hooks/useScrollToTop'
 import ScrollHome from '@/features/home/ui/scrollHome'
 import { ScrollLayout } from '@/shared/ui/layouts/ScrollLayout'
 import { useGetQuestionList } from './api/api'
+import { useRouter } from 'next/navigation'
 
 interface HomeProps {
   userId: string
 }
 
 export default function Home({ userId }: HomeProps) {
+  const router = useRouter()
+  const hasAlerted = React.useRef(false)
   const [domLoaded, setDomLoaded] = React.useState(false)
 
   const { data } = useGetQuestionList({ userId })
@@ -35,6 +38,17 @@ export default function Home({ userId }: HomeProps) {
   React.useEffect(() => {
     setDomLoaded(true)
   }, [])
+
+  React.useEffect(() => {
+    const id = localStorage.getItem('keep_in_touch_user_id')
+    if (userId === id || hasAlerted.current === true) return
+
+    if (userId !== id) {
+      hasAlerted.current = true // 알림 표시 상태 설정
+      alert('타인의 home에는 접근 불가능합니다.')
+      router.replace(`/home/${id}`) // 메인 페이지로 리다이렉트
+    }
+  }, [userId, router])
 
   return (
     <>
