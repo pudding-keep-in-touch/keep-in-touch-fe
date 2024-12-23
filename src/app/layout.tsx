@@ -7,10 +7,16 @@ import { DefaultLayout } from '@/shared/ui/layouts/DefaultLayout'
 //   process.env.NODE_ENV === 'production' ? 'G-6ZWWSPLVD7' : 'G-49Q9HYM5E0'
 
 export const metadata: Metadata = {
-  title: 'Keep In Touch',
-  description: '너에게 닿기를, Keep In Touch',
+  title: '너에게 닿기를',
+  description:
+    '솔직한 마음을 주고 받는 익명 질문 답변 메신저 · 친구의 질문에 퐁~ 솔직한 마음을 전해보세요·나도 질문을 만들어 링크를 공유해봐요!',
 
   openGraph: {
+    title: '너에게 닿기를',
+    description:
+      '솔직한 마음을 주고 받는 익명 질문 답변 메신저 · 친구의 질문에 퐁~ 솔직한 마음을 전해보세요·나도 질문을 만들어 링크를 공유해봐요!',
+    // TODO : 운영 배포 url로 수정해야함
+    url: 'https://dev-fe.keep-in-touch.me/',
     images: ['https://dev-fe.keep-in-touch.me/meta_image.png'],
   },
 }
@@ -23,29 +29,61 @@ export default function RootLayout({
   return (
     <html lang='en' className='scrollbar-hide overflow-hidden'>
       <head>
+        <meta property='og:title' content='너에게 닿기를' />
+        <meta
+          name='description'
+          content='솔직한 마음을 주고 받는 익명 질문 답변 메신저 · 친구의 질문에 퐁~ 솔직한 마음을 전해보세요·나도 질문을 만들어 링크를 공유해봐요!'
+        />
+        <meta
+          name='keywords'
+          content='너에게 닿기를, 익명 메시지, 응원과 감사, 솔직한 대화, 롤링페이퍼, '
+        />
+
+        <meta name='author' content='Keep-in-Touch Team' />
+
         <meta
           name='viewport'
           content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
         />
 
-        <meta property='og:title' content='Keep In Touch' />
+        <meta
+          name='google-site-verification'
+          content='your-google-verification-code-here'
+        />
+
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:title'
+          content='너에게 닿기를, 익명으로 마음을 전해요'
+        />
         <meta
           property='og:description'
-          content='너에게 닿기를, Keep In Touch by puddingcamp'
+          content='친구가 보낸 질문을 확인하고 지금 바로 퐁!'
         />
+        <meta property='og:url' content='https://dev-fe.keep-in-touch.me' />
         <meta
           property='og:image'
-          content='https://dev-fe.keep-in-touch.me/meta_image.png'
+          content='https://dev-fe.keep-in-touch.me/images/og-image.jpg'
         />
-        <meta property='og:url' content='https://keep-in-touch.me/' />
-        <meta property='og:type' content='website' />
 
+        <meta name='twitter:card' content='summary_large_image' />
         <meta
-          name='naver-site-verification'
-          content='b672b0f18f18d6fe9a5f9913d06e6a548f17c901'
+          name='twitter:title'
+          content='너에게 닿기를, 익명으로 마음을 전해요'
+        />
+        <meta
+          name='twitter:description'
+          content='친구가 보낸 질문을 확인하고 지금 바로 퐁!'
+        />
+        <meta
+          name='twitter:image'
+          content='https://dev-fe.keep-in-touch.me/images/og-image.jpg'
         />
 
         <link rel='icon' href='/icon.ico' sizes='any' />
+
+        <meta name='mobile-web-app-capable' content='yes' />
+        <meta name='theme-color' content='#3b5998' />
 
         {/* Google Tag Manager Script */}
         <Script
