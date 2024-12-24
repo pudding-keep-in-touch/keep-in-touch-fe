@@ -1,0 +1,25 @@
+# Node.js 관련
+node_modules
+dist
+pnpm-debug.log
+
+# Docker 관련
+Dockerfile
+.dockerignore
+
+# 환경 파일
+.env
+.env.local
+.env.*.local
+
+# OS 또는 IDE 관련
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+*.swp
+
+# Git 관련
+*.log
+*.md
+.git

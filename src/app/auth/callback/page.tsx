@@ -1,10 +1,27 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
 
-export default function Callback() {
+export default function CallbackPage() {
+  return (
+    <MainLayout>
+      <Suspense
+        fallback={
+          <div className='flex items-center justify-center h-screen text-center text-[#333D4B] text-2xl font-bold'>
+            로딩중...
+          </div>
+        }
+      >
+        <CallbackContent />
+      </Suspense>
+    </MainLayout>
+  )
+}
+
+// 실제 콜백 로직을 처리하는 컴포넌트
+function CallbackContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [redirectUrl, setRedirectUrl] = useState<string | null>(null)
@@ -43,7 +60,6 @@ export default function Callback() {
         if (redirectUrl === '/questions/messages') {
           if (!selectedQuestion) {
             console.error('selectedQuestion 데이터가 없습니다.')
-            // 필요 시 추가 조치 (예: 에러 페이지로 리다이렉트)
             return
           }
           localStorage.setItem('selectedQuestion', selectedQuestion)
@@ -57,10 +73,8 @@ export default function Callback() {
   }, [redirectUrl, searchParams, router])
 
   return (
-    <MainLayout>
-      <div className='flex items-center justify-center h-screen text-center text-[#333D4B] text-2xl font-bold'>
-        로그인 중...
-      </div>
-    </MainLayout>
+    <div className='flex items-center justify-center h-screen text-center text-[#333D4B] text-2xl font-bold'>
+      로그인 중...
+    </div>
   )
 }
