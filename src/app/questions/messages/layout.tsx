@@ -50,7 +50,7 @@ export default function Layout({ children }: Props) {
 
   // 닉네임을 불러오는 중이거나 없는 경우 처리
   if (isLoading || nickname === null) {
-    return <Spinner /> //todo 로딩 이미지 변경필요
+    return <Spinner />
   }
 
   return (
@@ -66,13 +66,10 @@ export default function Layout({ children }: Props) {
             className='w-6 h-6 cursor-pointer'
             onClick={() => router.back()}
           />
-
           {!isLoading && !pathname.endsWith('/preview') && (
             <h1 className='text-lg font-semibold text-[#333D4B] flex justify-center items-center w-full'>
               <span className='whitespace-nowrap'>To.</span>
-              <span className='whitespace-nowrap ml-1'>
-                {`${nickname}에게`}
-              </span>
+              <span className='whitespace-nowrap ml-1'>{`${nickname}에게`}</span>
             </h1>
           )}
         </header>

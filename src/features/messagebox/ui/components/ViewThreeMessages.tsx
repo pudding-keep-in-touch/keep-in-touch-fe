@@ -1,10 +1,9 @@
 'use client'
-import { useEffect } from 'react'
-import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import MessageList from '@/features/messagebox/ui/MessageList'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useGetMessageList } from '@/features/messagebox/_detail/api/detailQuery'
+import { MessageType } from '@/shared/types/common.types'
+import MessageList from '@/features/messagebox/ui/components/MessageList'
 import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessagesBlock({
@@ -14,21 +13,13 @@ export default function MessagesBlock({
   messageType: MessageType
   userId: string
 }) {
-  const { data, isLoading, isError, error } = useGetMessageList({
+  const { data, isLoading } = useGetMessageList({
     userId,
     type: messageType,
     cursor: null,
     limit: 3,
     order: 'desc',
   })
-
-  useEffect(() => {
-    if (isError) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const errorStatus = (error as any)?.response?.status
-      console.error(`Error fetching messages. Status: ${errorStatus}`)
-    }
-  }, [isError, error])
 
   const messageCount =
     messageType === 'sent'
@@ -57,13 +48,11 @@ export default function MessagesBlock({
         </h2>
         {moreLink}
       </div>
-      <div className='h-[382px]'>
+      <div className='max-h-[382px] w-full'>
         {isLoading ? (
-          <div className='w-full h-full relative top-0 left-0 right-0 bottom-0'>
-            <Spinner />
-          </div>
+          <Spinner />
         ) : (
-          <div className='h-full'>
+          <div className='h-full mb-5'>
             {messageCount > 0 ? (
               <MessageList
                 messages={data}

@@ -27,12 +27,8 @@ export default function PreviewPage() {
 
   const { data: nickname } = useGetNickname(userId ?? '')
 
-  const onClickSendHandler = () => {
-    router.push(`/questions/messages/complete`)
-  }
-
   return (
-    <>
+    <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
       <div className='w-full max-w-[32rem] px-6 py-4'>
         <QuestionBox
           key={selectedQuestion?.questionId}
@@ -46,10 +42,10 @@ export default function PreviewPage() {
           {message}
         </p>
       </div>
-      <div className='text-white text-left w-full text-sm'>
+      <div className='text-white text-left w-full text-sm mb-1'>
         *쪽지는 모두 익명으로 전달됩니다
       </div>
       <SendButton />
-    </>
+    </div>
   )
 }

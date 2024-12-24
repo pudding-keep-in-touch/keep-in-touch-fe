@@ -3,6 +3,7 @@ import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQ
 import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
+import toast from 'react-hot-toast'
 
 export default function Page({
   params: { userId, messageId },
@@ -23,6 +24,7 @@ export default function Page({
         messageId,
         status: 'reported',
       })
+      toast('신고하기 완료되었습니다.')
       window.open(redirectURL) // 새로운 창으로 신고 폼 열기
       router.push(`/messagebox/${userId}/received`) // 기존 화면은 받은 쪽지함 리스트로
       if (!response) {

@@ -1,11 +1,11 @@
 'use client'
-
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import ReactionPage from '@/features/messagebox/ui/ReactionPage'
+import { MessageType } from '@/shared/types/common.types'
+import ReactionPage from '@/features/messagebox/ui/components/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import toast, { Toaster, useToasterStore } from 'react-hot-toast'
+
 export default function Page({
   params: { userId, type, messageId },
 }: {
@@ -40,6 +40,14 @@ export default function Page({
         position='bottom-center'
         containerStyle={{
           bottom: '100px',
+        }}
+        toastOptions={{
+          style: {
+            borderRadius: '16px',
+            backgroundColor: '#474747',
+            width: '100%',
+            height: '56px',
+          },
         }}
       />
     </div>

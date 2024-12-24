@@ -1,6 +1,6 @@
 import React from 'react'
-import EmojiItem from '@/features/messagebox/ui/EmojiItem'
-import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
+import EmojiItem from '@/features/messagebox/ui/components/EmojiItem'
+import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
 
 interface EmojiListProps {
   items: EmojiProps[]

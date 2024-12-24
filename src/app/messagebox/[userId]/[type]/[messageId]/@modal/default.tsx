@@ -1,5 +1,5 @@
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
-import MessageDetail from '@/features/messagebox/ui/MessageDetail'
+import { MessageType } from '@/shared/types/common.types'
+import MessageDetail from '@/features/messagebox/ui/components/MessageDetail'
 
 export default function ModalDefaultPage({
   params: { userId, type, messageId },

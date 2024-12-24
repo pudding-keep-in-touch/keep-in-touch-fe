@@ -1,17 +1,16 @@
 'use client'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
-import { EmojiProps } from '@/features/messagebox/model/messagebox.types'
-import { MessageType } from '@/features/messagebox/_detail/model/messagebox.types'
+import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
+import { MessageType } from '@/shared/types/common.types'
 import {
   useGetEmoji,
   usePostEmoji,
 } from '@/features/messagebox/_detail/api/detailQuery'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import Image from 'next/image'
-import React from 'react'
-import EmojiSection from '@/features/messagebox/ui/EmojiSection'
+import EmojiSection from '@/features/messagebox/ui/components/EmojiSection'
 import { Spinner } from '@/shared/components/Spinner'
 
 interface ReactionPageProps {
@@ -24,25 +23,26 @@ const ReactionPage = React.memo(
     const lists = ['감사', '사과', '응원', '화해']
     const router = useRouter()
     const [selectedSet, setSelectedSet] = useState<Set<string>>(new Set())
-    const { data, error, isLoading } = useGetEmoji() as {
+    const { data, isLoading } = useGetEmoji() as {
       data: EmojiProps[] | undefined
-      error: Error | null
       isLoading: boolean
     }
     const { mutateAsync } = usePostEmoji()
 
     const storedData = (templateId: string): Set<string> => {
+      setToastVisible(false)
       setSelectedSet((prevSet) => {
         const newSet = new Set(prevSet)
 
         if (newSet.has(templateId)) {
           newSet.delete(templateId)
-        } else if (newSet.size < 5) {
-          newSet.add(templateId)
         } else {
-          setToastVisible(true)
+          if (newSet.size < 5) {
+            newSet.add(templateId)
+          } else {
+            setToastVisible(true)
+          }
         }
-
         return newSet
       })
 
@@ -56,11 +56,16 @@ const ReactionPage = React.memo(
           messageId: messageId,
           templateIds: templateIdsArray,
         })
-
-        if (response.messageId) {
+        toast('반응 보내기가 완료되었습니다.', {
+          style: {
+            paddingLeft: '1.5rem',
+            paddingRight: '1.5rem',
+          },
+        })
+        router.back()
+        if (!response) {
+          console.error('Post Emoji Response is empty: ', response)
           router.back()
-        } else {
-          console.error('Post Emoji Error, messageId가 없습니다 : ', response)
         }
       } catch (error) {
         console.error('쪽지 보내기에 실패했습니다. : ', error)
@@ -81,13 +86,8 @@ const ReactionPage = React.memo(
             />
           ),
           style: {
-            borderRadius: '16px',
-            background: '#474747',
-            color: '#fff',
-            width: '100%',
-            height: '56px',
-            paddingLeft: '1.5rem',
-            paddingRight: '1.5rem',
+            paddingLeft: '3.8rem',
+            paddingRight: '3.2rem',
           },
         })
       } else {
@@ -108,16 +108,13 @@ const ReactionPage = React.memo(
         groupedEmoji[item.type].push(item)
       })
     }
-
-    if (error) return <div>Error fetching emojis. : Error: {error.message}</div>
-
     return (
-      <>
+      <div className='w-full h-full '>
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className='w-full h-full h-815:pb-[100px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
-            <div className='h-815:mb-[30px]'>
+          <div className='w-full h-full h-815:pb-[8rem] overflow-y-scroll h-815:scrollbar-hide'>
+            <div className='h-815:mb-[50px]'>
               <div className='overflow-y-scroll scrollbar-hide max-w-[390px] min-h-[368px] flex flex-col justify-center w-full'>
                 {lists.map((type) => (
                   <EmojiSection
@@ -144,7 +141,7 @@ const ReactionPage = React.memo(
             </div>
           </div>
         )}
-      </>
+      </div>
     )
   }
 )

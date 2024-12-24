@@ -32,16 +32,16 @@ export default function SelectBoard({ userId }: { userId: string }) {
   // }, [router])
 
   return (
-    <>
-      <div className='mt-[30px] mb-5'>
-        <MessageSendStep active={1} />
+    <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+      <div className='grid flex items-center justify-center'>
+        <div className='mb-5 ml-10'>
+          <MessageSendStep active={1} />
+        </div>
+        <p className='font-medium text-lg mb-10'>쪽지 타입을 선택해 주세요!</p>
       </div>
-
-      <p className='font-medium text-lg mb-10'>쪽지 타입을 선택해 주세요!</p>
-
       <MessageSendSelect />
 
       <MessageSendNextButton userId={userId} />
-    </>
+    </div>
   )
 }

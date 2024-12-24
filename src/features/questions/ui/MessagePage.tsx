@@ -68,11 +68,13 @@ export default function MessagePage() {
   const steps = [1, 2]
 
   return selectedQuestion ? (
-    <>
-      <div className='mt-[30px] mb-5'>
-        <Step steps={steps} active={1} />
+    <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+      <div className='grid flex items-center justify-center'>
+        <div className='mb-5 ml-7'>
+          <Step steps={steps} active={1} />
+        </div>
+        <p className='font-medium text-lg'>글을 입력해주세요!</p>
       </div>
-      <p className='font-medium text-lg'>글을 입력해주세요!</p>
       <div className='w-full max-w-[32rem] px-6 py-10 grid grid-cols-1 gap-6'>
         <QuestionBox
           key={selectedQuestion.questionId}
@@ -83,14 +85,17 @@ export default function MessagePage() {
       <MessageInput />
       <div
         ref={divRef}
-        className='fixed w-full max-w-[24rem] px-4 transition-all duration-300'
+        className='fixed w-full max-w-[24rem] h-815:max-w-[22rem] px-4 sm:px-2 transition-all duration-300 flex justify-center'
         style={{
-          bottom: isMobile ? keyboardHeight + 60 : 50,
+          bottom: isMobile ? keyboardHeight + 20 : 50,
+          margin: '0 auto',
+          left: 0,
+          right: 0,
         }}
       >
         <ReplyNextButton />
       </div>
-    </>
+    </div>
   ) : (
     <Spinner />
   )

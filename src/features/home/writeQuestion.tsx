@@ -128,9 +128,9 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
   }, [])
 
   return (
-    <div id='wrapper' className='w-full h-screen flex flex-col relative'>
+    <div className='relative w-full h-screen-safe z-0 pb-safe-bottom'>
       <BackHeader title='질문 만들기' />
-      <div id='content' className='w-full h-screen flex flex-col relative'>
+      <div className='relative w-full h-full overflow-y-scroll scrollbar-hide'>
         <div className='flex-grow w-full h-screen pt-[82px] h-815:pb-[200px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
           <div className='w-full px-[24px]'>
             <p className='font-semibold text-base mb-4 text-gray-4'>
@@ -195,13 +195,7 @@ export const WriteQuestion = ({ userId }: WriteQuestionProps) => {
         </div>
 
         <div
-          className={`sticky w-full flex justify-between items-center px-[24px] z-10`}
-          style={{
-            bottom: keyboardHeight > 0 ? `${keyboardHeight + 60}px` : '100px',
-            transition: 'bottom 0.2s ease-out',
-            position: 'absolute',
-            width: '100%',
-          }}
+          className={`sticky flex justify-center items-start bottom-[10px] left-0 w-full p-[16px] pt-0`}
         >
           <CompleteButton
             userId={userId}

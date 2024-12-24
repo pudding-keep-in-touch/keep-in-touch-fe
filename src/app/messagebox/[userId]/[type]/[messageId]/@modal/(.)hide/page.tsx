@@ -3,6 +3,7 @@ import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQ
 import { Button } from '@/shared/components/Button'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
+import { toast } from 'react-hot-toast'
 
 export default function Page({
   params: { userId, messageId },
@@ -14,7 +15,7 @@ export default function Page({
     router.back()
   }, [])
 
-  const { mutateAsync, isPending, isError } = usePatchMessageStatus()
+  const { mutateAsync } = usePatchMessageStatus()
   const changeStatus = async () => {
     const redirectURL = `/messagebox/${userId}/received`
     try {
@@ -23,6 +24,7 @@ export default function Page({
         messageId,
         status: 'hidden',
       })
+      toast('숨김 처리 완료되었습니다.')
       router.push(redirectURL)
       console.log(response)
       if (!response) {
