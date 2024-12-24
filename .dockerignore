@@ -1,0 +1,11 @@
+# Node.js 및 개발 환경 관련 파일/디렉토리 제외
+node_modules
+.pnpm*
+
+# 테스트 결과 및 커버리지 리포트 제외
+coverage
+test-results
+
+# IDE 설정 파일, 템플릿, 임시 파일 등 제외
+*.tmp
+*.swp
