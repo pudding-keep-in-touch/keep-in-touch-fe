@@ -14,15 +14,33 @@ const config = {
     container: {
       center: true,
       padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
     },
     extend: {
+      height: {
+        'screen-safe': 'var(--viewport-height)', // iOS 사파리 대응
+      },
+      spacing: {
+        'safe-bottom': 'env(safe-area-inset-bottom)', // 안전 영역을 위한 padding/margin
+        inherit: 'inherit', // `h-inherit`, `w-inherit` 등을 위한 설정
+      },
+      boxShadow: {
+        'custom-top': '0px -2px 6px rgba(0, 0, 0, 0.05)', // nav 상단 그림자
+        'custom-bottom': '0px 2px 6px rgba(0, 0, 0, 0.08)', // nav 하단 그림자
+      },
+      screens: {
+        '2xl': '1400px',
+        'h-815': { raw: '(max-height: 815px)' }, // 높이 기준 브레이크포인트 추가
+        'w-380': { raw: '(max-width: 380px)' },
+        'w-420': { raw: '(max-width: 420px)' },
+        'w-320': { raw: '(max-width: 320px)' },
+        'custom-md': { raw: '(min-height: 900px)' }, // 높이 900px 이상일 때
+      },
+
       backgroundImage: {
+        messageDetail: "url('/detailMessageBg.png')",
         honestTalkPreview: "url('/honestTalkPreviewBg.png')",
         thanksPreview: "url('/thanksPreviewBg.png')",
-        home: "url('/home.svg')",
+        home: "url('/home_banner_normal.svg')",
         main: "url('/bg_splash.svg')",
       },
       colors: {
@@ -59,7 +77,25 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+
+        // Main Colors
+        'system-green': '#4DDF22',
+        'system-blue': '#35B6FF',
+        'system-pink': '#FFD4FE',
+
+        // Grayscale
+        'gray-1': '#F6F7FC',
+        'gray-2': '#C5C5C5',
+        'gray-3': '#474747',
+        'gray-4': '#1F1F1F',
+        black: '#000000',
+        white: '#FFFFFF',
       },
+
+      letterSpacing: {
+        '-0.75': '-0.047rem', // -0.75px (16px 기준 rem 값)
+      },
+
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

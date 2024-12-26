@@ -1,9 +1,9 @@
-import Profile from './_components/profile'
+import Profile from '@/features/profile/ui/profile'
 
 export default function Page({
   params: { userId },
 }: {
-  params: { userId: number }
+  params: { userId: string }
 }) {
   return <Profile userId={userId} />
 }

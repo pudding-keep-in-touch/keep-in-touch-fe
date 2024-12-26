@@ -1,39 +1,33 @@
 'use client'
 
 import { useFormContext } from 'react-hook-form'
-import { MessageFormValues } from '../_components/formSchema'
-import { Button } from '@/shared/ui/components/Button'
-import { useRouter } from 'next/navigation'
+import { MessageFormValues } from '@/features/message/_send/model/formSchema'
+import MessageSendSubmitButton from '@/features/message/_send/_completion/ui/submitButton'
+import { useGetNickname } from '@/features/questions/hooks/query/useNicknameQuery'
 
 export default function Page({
-  params: { userId },
+  params: { userId, variety },
 }: {
-  params: { userId: number }
+  params: { userId: string; variety: string }
 }) {
   const { getValues } = useFormContext<MessageFormValues>()
-  const router = useRouter()
 
   const { message } = getValues()
 
-  const clickHandler = () => {
-    router.back()
-  }
+  const { data: nickname } = useGetNickname(userId ?? '')
 
   return (
-    <>
-      <div className='backdrop-blur-md bg-white/50 w-full h-full min-h-[380px] rounded-2xl mt-[160px] px-6 py-5'>
-        <p className='text-[#1F1F1F] font-bold text-lg mb-4'>{`To. ${userId}에게!`}</p>
+    <div className='flex-grow w-full h-screen pt-[30px] h-815:pb-[250px] overflow-y-auto h-815:overflow-y-scroll h-815:scrollbar-hide'>
+      <div className='backdrop-blur-md bg-white/50 w-full h-full min-h-[380px] rounded-2xl mt-[180px] custom-md:mt-[250px] lg:mt-[280px] px-6 py-5'>
+        <p className='text-[#1F1F1F] font-bold text-lg mb-4'>{`To. ${nickname}에게!`}</p>
         <p className='text-[#191F28] break-all whitespace-pre-wrap text-lg'>
           {message}
         </p>
       </div>
-      <Button
-        type='button'
-        className='h-fit p-[18px] bg-[#1F1F1F] text-white rounded-2xl font-bold w-full mt-auto'
-        onClick={clickHandler}
-      >
-        완료
-      </Button>
-    </>
+      <div className='text-white text-left w-full text-sm mb-1'>
+        *쪽지는 모두 익명으로 전달됩니다
+      </div>
+      <MessageSendSubmitButton userId={userId} variety={variety} />
+    </div>
   )
 }
