@@ -7,17 +7,17 @@ export const isProduction = APP_ENV === 'production'
 export const isDev = APP_ENV === 'development'
 
 export const API_BASE_URL = {
-  production: 'https://dev-be-v2.keep-in-touch.me/', // FIXME: production 백엔드 서버 배포한 걸로 추가해야함
+  production: process.env.PROD_WAS_ADDR,
   development: 'https://dev-be-v2.keep-in-touch.me/',
 }[APP_ENV]
 
 export const FRONT_API_BASE_URL = {
-  production: 'https://dev-fe-v2.keep-in-touch.me/',
+  production: 'https://www.keep-in-touch.me/',
   development: 'https://dev-fe-v2.keep-in-touch.me/',
 }[APP_ENV]
 
 export const LOCAL_URL = {
-  production: 'https://localhost:3000/', // FIXME: production 백엔드 서버 배포한 걸로 추가해야함
+  production: 'https://localhost:3000/',
   development: 'https://localhost:3000/',
 }[APP_ENV]
 
