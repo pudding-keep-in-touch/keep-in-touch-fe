@@ -1,11 +1,25 @@
-# Node.js 및 개발 환경 관련 파일/디렉토리 제외
+# Node.js 관련
 node_modules
-.pnpm*
+dist
+pnpm-debug.log
 
-# 테스트 결과 및 커버리지 리포트 제외
-coverage
-test-results
+# Docker 관련
+Dockerfile
+.dockerignore
 
-# IDE 설정 파일, 템플릿, 임시 파일 등 제외
-*.tmp
+# 환경 파일
+.env
+.env.local
+.env.*.local
+
+# OS 또는 IDE 관련
+.DS_Store
+Thumbs.db
+.idea
+.vscode
 *.swp
+
+# Git 관련
+*.log
+*.md
+.git
