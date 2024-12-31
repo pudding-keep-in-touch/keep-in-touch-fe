@@ -1,9 +1,9 @@
 'use client'
 import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQuery'
 import { Button } from '@/shared/components/Button'
+import { openInNewTab } from '@/shared/hooks/util/openTabUtil'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
-import toast from 'react-hot-toast'
 
 export default function Page({
   params: { userId, messageId },
@@ -14,11 +14,6 @@ export default function Page({
   const onDismiss = useCallback(() => {
     router.back()
   }, [])
-
-  const openInNewTab = (url: string) => {
-    const newWindow = window.open(url, '_blank', 'noopener, popup')
-    if (newWindow) newWindow.opener = null
-  }
 
   const { mutateAsync, isPending } = usePatchMessageStatus()
   const changeStatus = async () => {

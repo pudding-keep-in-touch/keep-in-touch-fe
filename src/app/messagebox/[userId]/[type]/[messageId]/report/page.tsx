@@ -1,9 +1,9 @@
 'use client'
 import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQuery'
 import { Button } from '@/shared/components/Button'
+import { openInNewTab } from '@/shared/hooks/util/openTabUtil'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
-import toast from 'react-hot-toast'
 
 export default function Page({
   params: { userId, messageId },
@@ -24,7 +24,7 @@ export default function Page({
         messageId,
         status: 'reported',
       })
-      window.open(redirectURL)
+      openInNewTab(redirectURL)
       router.push(`/messagebox/${userId}/received/${messageId}`)
       if (!response) {
         console.error('Reported response is empty: ', response)
