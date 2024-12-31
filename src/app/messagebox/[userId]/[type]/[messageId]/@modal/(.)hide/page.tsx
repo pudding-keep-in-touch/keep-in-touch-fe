@@ -15,7 +15,7 @@ export default function Page({
     router.back()
   }, [])
 
-  const { mutateAsync } = usePatchMessageStatus()
+  const { mutateAsync, isPending } = usePatchMessageStatus()
   const changeStatus = async () => {
     const redirectURL = `/messagebox/${userId}/received`
     try {
@@ -49,19 +49,24 @@ export default function Page({
         }}
         className='flex flex-col'
       >
-        <div className='bg-white w-full h-[193px] rounded-2xl py-[22px] px-[17px] flex flex-col justify-between items-center'>
+        <div className='bg-white w-[321px] h-[193px] rounded-2xl py-[22px] px-[17px] flex flex-col justify-between items-center'>
           <h1 className='text-[#191F28] text-[22px] font-bold'>숨기기</h1>
           <p className='font-semibold text-[15px] text-[#6B7684]'>
-            해당 내용을 숨김 처리하시겠습니까?
+            해당 내용을 숨김 처리 하시겠습니까?
           </p>
           <div className='flex justify-center items-center w-full h-[55px] gap-[9px]'>
             <Button
+              type='button'
+              variant='secondary'
               onClick={() => router.back()}
-              className='bg-gray-1 text-[#505967] text-[17px] rounded-2xl w-full h-full p-4 font-bold'
+              className=' bg-[#F2F2F2] text-[#505967] text-[17px] rounded-2xl w-full h-full p-4 font-bold'
             >
               취소
             </Button>
             <Button
+              type='button'
+              variant='ghost'
+              disabled={isPending}
               onClick={changeStatus}
               className='rounded-2xl w-full h-full p-4 text-[17px] bg-[#35B6FF] text-white font-bold'
             >

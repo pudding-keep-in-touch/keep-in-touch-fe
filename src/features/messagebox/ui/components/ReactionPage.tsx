@@ -132,6 +132,7 @@ const ReactionPage = React.memo(
               <div className='relative flex items-center justify-center w-full h-fit '>
                 <Button
                   type='button'
+                  disabled={isLoading}
                   onClick={onSubmit}
                   className='h-fit p-4 bg-[#35B6FF] rounded-2xl w-full'
                 >
