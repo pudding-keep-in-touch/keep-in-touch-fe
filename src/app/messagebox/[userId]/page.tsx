@@ -8,8 +8,8 @@ export default function Page({
   params: { type: MessageType; userId: string }
 }) {
   return (
-    <InboxLayout title='My 퐁' userId={userId} messageType={type}>
-      <ViewAllMessage messageType={type} userId={userId} />
+    <InboxLayout title='My 퐁' userId={userId} type={type}>
+      <ViewAllMessage type={type} userId={userId} />
     </InboxLayout>
   )
 }

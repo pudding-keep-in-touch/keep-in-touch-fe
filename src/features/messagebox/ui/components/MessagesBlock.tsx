@@ -10,10 +10,10 @@ import { MessageResponse } from '@/features/messagebox/_detail/model/messagebox.
 import { Spinner } from '@/shared/components/Spinner'
 
 export default function MessagesBlock({
-  messageType,
+  type,
   userId,
 }: {
-  messageType: MessageType
+  type: MessageType
   userId: string
 }) {
   const [cursor, setCursor] = useState<Date | null>(null)
@@ -22,13 +22,12 @@ export default function MessagesBlock({
 
   const { data, isLoading } = useGetMessageList({
     userId,
-    type: messageType,
+    type,
     cursor,
     limit: 10,
     order: 'desc',
   })
 
-  // 퍼포먼스 개선 필요
   useEffect(() => {
     if (data?.messageList) {
       const newMessageList = data.messageList
@@ -69,18 +68,18 @@ export default function MessagesBlock({
   })
 
   const messageCount =
-    messageType === 'sent'
+    type === 'sent'
       ? data?.sentMessageCount || 0
       : data?.receivedMessageCount || 0
 
   const description =
-    messageType === 'sent' ? '아직 보낸 퐁이 없어요!' : '아직 받은 퐁이 없어요!'
+    type === 'sent' ? '아직 보낸 퐁이 없어요!' : '아직 받은 퐁이 없어요!'
 
   return (
     <div className='max-w-[390px] w-full bg-[#F7F7FC]'>
       <div className='w-full h-[67px] flex items-center justify-between gap-1  px-6 '>
         <h2 className='font-semibold text-[18px] flex items-center gap-2'>
-          <div>{messageType === 'sent' ? '보낸 퐁' : '받은 퐁'}</div>
+          <div>{type === 'sent' ? '보낸 퐁' : '받은 퐁'}</div>
           <div>({messageCount})</div>
         </h2>
       </div>
@@ -93,7 +92,7 @@ export default function MessagesBlock({
               <MessageList
                 messages={messages}
                 userId={userId}
-                messageType={messageType}
+                type={type}
                 observe={observe}
               />
             ) : (

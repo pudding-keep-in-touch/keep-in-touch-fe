@@ -5,21 +5,20 @@ import { MessageType } from '@/shared/types/common.types'
 import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
 
 interface EmojiSectionProps {
-  messageType: MessageType
   grouped: Record<string, EmojiProps[]>
-  type: string
+  emojiType: string
   selected: string[]
   onItemClick: (templateId: string) => void
 }
 
 const EmojiSection: React.FC<EmojiSectionProps> = React.memo(
-  ({ messageType, grouped, type, selected, onItemClick }) => {
+  ({ grouped, emojiType, selected, onItemClick }) => {
     return (
       <div className='w-full flex flex-col py-[20px] border-b-[6px] border-b-gray-1'>
         <div className='px-6'>
-          <EmojiHeader type={type} />
+          <EmojiHeader emojiType={emojiType} />
           <EmojiList
-            items={grouped[type]}
+            items={grouped[emojiType]}
             selected={selected}
             onItemClick={onItemClick}
           />

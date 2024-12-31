@@ -2,7 +2,7 @@
 import { MessageType } from '@/shared/types/common.types'
 import ReactionPage from '@/features/messagebox/ui/components/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import toast, { Toaster, useToasterStore } from 'react-hot-toast'
 
@@ -21,21 +21,33 @@ export default function Page({
       visibleToasts.slice(toastLimit).forEach((t) => toast.dismiss(t.id))
     }
   }, [toasts])
-
+  const param = useParams()
+  console.log(param)
+  const backHandler = () => {
+    if (param.id) {
+      router.replace(`/messagebox/${userId}/${type}/${messageId}`)
+    } else if (messageId) {
+      router.replace(`/messagebox/${userId}/${type}`)
+    } else if (type) {
+      router.replace(`/messagebox/${userId}`)
+    } else {
+      router.back()
+    }
+  }
   return (
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom bg-[#FFFFFF]'>
       <div className='max-w-[390px] w-full px-6'>
         <header className='w-full h-[50px] grid grid-cols-3 items-center z-50'>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
-            onClick={() => router.back()}
+            onClick={backHandler}
           />
           <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
             반응 보내기
           </h1>
         </header>
       </div>
-      <ReactionPage messageType={type} userId={userId} messageId={messageId} />
+      <ReactionPage userId={userId} messageId={messageId} />
       <Toaster
         position='bottom-center'
         containerStyle={{
