@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
 import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
-import { MessageType } from '@/shared/types/common.types'
 import {
   useGetEmoji,
   usePostEmoji,

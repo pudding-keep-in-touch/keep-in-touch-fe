@@ -19,14 +19,12 @@ export default function Page({
   const changeStatus = async () => {
     const redirectURL = `/messagebox/${userId}/received`
     try {
-      console.log('For Hide Mutation payload:', { messageId })
       const response = await mutateAsync({
         messageId,
         status: 'hidden',
       })
       toast('숨김 처리 완료되었습니다.')
       router.push(redirectURL)
-      console.log(response)
       if (!response) {
         console.error('Hidden Response is empty:', response)
         router.back()

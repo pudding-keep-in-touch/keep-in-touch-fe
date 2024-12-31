@@ -22,7 +22,6 @@ export default function Page({
     }
   }, [toasts])
   const param = useParams()
-  console.log(param)
   const backHandler = () => {
     if (param.id) {
       router.replace(`/messagebox/${userId}/${type}/${messageId}`)

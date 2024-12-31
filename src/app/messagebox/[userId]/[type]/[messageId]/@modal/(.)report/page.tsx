@@ -17,17 +17,15 @@ export default function Page({
 
   const { mutateAsync, isPending } = usePatchMessageStatus()
   const changeStatus = async () => {
+    const openURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
     const redirectURL = `/messagebox/${userId}/received/${messageId}`
     try {
-      console.log('For Hide Mutation payload:', { messageId })
       const response = await mutateAsync({
         messageId,
         status: 'reported',
       })
       router.push(redirectURL)
-      openInNewTab(
-        `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
-      )
+      openInNewTab(openURL)
       if (!response) {
         console.error('Change to Normal Response is empty:', response)
         router.back()

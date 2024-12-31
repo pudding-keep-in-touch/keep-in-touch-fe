@@ -17,15 +17,15 @@ export default function Page({
 
   const { mutateAsync, isPending } = usePatchMessageStatus()
   const changeStatus = async () => {
-    const redirectURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
+    const redirectURL = `/messagebox/${userId}/received/${messageId}`
+    const openURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
     try {
-      console.log('Reported mutation payload: ', { messageId })
       const response = await mutateAsync({
         messageId,
         status: 'reported',
       })
-      openInNewTab(redirectURL)
-      router.push(`/messagebox/${userId}/received/${messageId}`)
+      openInNewTab(openURL)
+      router.push(redirectURL)
       if (!response) {
         console.error('Reported response is empty: ', response)
         router.back()

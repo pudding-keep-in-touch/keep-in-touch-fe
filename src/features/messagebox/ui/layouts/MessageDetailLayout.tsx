@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
 import { MainLayoutProps, MessageType } from '@/shared/types/common.types'
-import { useParams, usePathname } from 'next/navigation'
 import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -30,8 +29,6 @@ export default function MessageDetailLayout({
   const openModal = () => {
     setIsOpen((e) => !e)
   }
-  const param = useParams()
-  console.log(param)
   const backHandler = () => {
     if (messageId) {
       router.replace(`/messagebox/${userId}/${type}`)

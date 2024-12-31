@@ -1,7 +1,6 @@
 import React from 'react'
 import EmojiHeader from '@/features/messagebox/ui/components/EmojiHeader'
 import EmojiList from '@/features/messagebox/ui/components/EmojiList'
-import { MessageType } from '@/shared/types/common.types'
 import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
 
 interface EmojiSectionProps {

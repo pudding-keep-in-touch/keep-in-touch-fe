@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { Nav } from '@/shared/components/nav'
 
 export default function InboxLayout({
@@ -16,8 +16,6 @@ export default function InboxLayout({
   type: string
 }) {
   const router = useRouter()
-  const param = useParams()
-  console.log(param)
   const backHandler = () => {
     if (type) {
       router.replace(`/messagebox/${userId}`)
