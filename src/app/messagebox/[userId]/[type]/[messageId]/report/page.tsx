@@ -24,9 +24,8 @@ export default function Page({
         messageId,
         status: 'reported',
       })
-      toast('신고하기 완료되었습니다.')
-      window.open(redirectURL) // 새로운 창으로 신고 폼 열기
-      router.push(`/messagebox/${userId}/received`) // 기존 화면은 받은 쪽지함 리스트로
+      window.open(redirectURL)
+      router.push(`/messagebox/${userId}/received/${messageId}`)
       if (!response) {
         console.error('Reported response is empty: ', response)
         router.back()
