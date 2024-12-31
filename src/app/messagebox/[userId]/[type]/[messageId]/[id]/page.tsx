@@ -2,16 +2,16 @@
 import { MessageType } from '@/shared/types/common.types'
 import ReactionPage from '@/features/messagebox/ui/components/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import toast, { Toaster, useToasterStore } from 'react-hot-toast'
+import { useBackHandler } from '@/features/messagebox/hooks/useBackHandler'
 
 export default function Page({
   params: { userId, type, messageId },
 }: {
   params: { userId: string; type: MessageType; messageId: string }
 }) {
-  const router = useRouter()
+  const backHandler = useBackHandler({ userId, type: 'received', messageId })
   const { toasts } = useToasterStore()
   const toastLimit = 1
 
@@ -21,18 +21,7 @@ export default function Page({
       visibleToasts.slice(toastLimit).forEach((t) => toast.dismiss(t.id))
     }
   }, [toasts])
-  const param = useParams()
-  const backHandler = () => {
-    if (param.id) {
-      router.replace(`/messagebox/${userId}/${type}/${messageId}`)
-    } else if (messageId) {
-      router.replace(`/messagebox/${userId}/${type}`)
-    } else if (type) {
-      router.replace(`/messagebox/${userId}`)
-    } else {
-      router.back()
-    }
-  }
+
   return (
     <div className='relative w-full h-screen-safe z-0 bg-light-background pb-safe-bottom bg-[#FFFFFF]'>
       <div className='max-w-[390px] w-full px-6'>

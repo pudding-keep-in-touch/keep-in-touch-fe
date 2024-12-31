@@ -1,5 +1,6 @@
 'use client'
 import { usePatchMessageStatus } from '@/features/messagebox/_detail/api/detailQuery'
+import { useBackHandler } from '@/features/messagebox/hooks/useBackHandler'
 import { Button } from '@/shared/components/Button'
 import { openInNewTab } from '@/shared/hooks/util/openTabUtil'
 import { useRouter } from 'next/navigation'
@@ -11,28 +12,28 @@ export default function Page({
   params: { userId: string; messageId: string }
 }) {
   const router = useRouter()
+  const backHandler = useBackHandler({ userId, type: 'received', messageId })
   const onDismiss = useCallback(() => {
     router.back()
   }, [])
 
   const { mutateAsync, isPending } = usePatchMessageStatus()
   const changeStatus = async () => {
-    const redirectURL = `/messagebox/${userId}/received/${messageId}`
     const openURL = `https://docs.google.com/forms/d/e/1FAIpQLSeZPcMHDIXxFnzu5KPc8Iz3f7kivNexgR0kDTghnWIPJuuRZQ/viewform`
     try {
       const response = await mutateAsync({
         messageId,
         status: 'reported',
       })
+      router.back()
       openInNewTab(openURL)
-      router.push(redirectURL)
       if (!response) {
         console.error('Reported response is empty: ', response)
-        router.back()
+        backHandler()
       }
     } catch (error) {
       console.error('Failed to change status from normal to reported: ', error)
-      router.back()
+      backHandler()
     }
   }
   return (

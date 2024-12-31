@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { MainLayoutProps, MessageType } from '@/shared/types/common.types'
 import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useBackHandler } from '@/features/messagebox/hooks/useBackHandler'
 
 type MessageDetailLayout = MainLayoutProps & {
   children: React.ReactNode
@@ -24,20 +24,12 @@ export default function MessageDetailLayout({
   variety,
   isNormal,
 }: MessageDetailLayout) {
-  const router = useRouter()
+  const backHandler = useBackHandler({ userId, type })
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
     setIsOpen((e) => !e)
   }
-  const backHandler = () => {
-    if (messageId) {
-      router.replace(`/messagebox/${userId}/${type}`)
-    } else if (type) {
-      router.replace(`/messagebox/${userId}`)
-    } else {
-      router.back()
-    }
-  }
+
   return (
     <div
       className={cn(

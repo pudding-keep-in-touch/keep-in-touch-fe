@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
 import { Nav } from '@/shared/components/nav'
+import { MessageType } from '@/shared/types/common.types'
+import { useBackHandler } from '@/features/messagebox/hooks/useBackHandler'
 
 export default function InboxLayout({
   children,
@@ -13,16 +14,9 @@ export default function InboxLayout({
   children: React.ReactNode
   title: string
   userId: string
-  type: string
+  type: MessageType
 }) {
-  const router = useRouter()
-  const backHandler = () => {
-    if (type) {
-      router.replace(`/messagebox/${userId}`)
-    } else {
-      router.back()
-    }
-  }
+  const backHandler = useBackHandler({ userId, type })
   return (
     <div className='w-full h-full flex flex-col overflow-auto'>
       <div className='flex-grow w-full overflow-y-auto scrollbar-hide'>

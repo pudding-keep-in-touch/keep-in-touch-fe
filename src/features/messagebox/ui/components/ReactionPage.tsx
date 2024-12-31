@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/components/Button'
 import { EmojiProps } from '@/features/messagebox/_detail/model/messagebox.types'
 import {
@@ -11,6 +10,7 @@ import {
 } from '@/features/messagebox/_detail/api/detailQuery'
 import EmojiSection from '@/features/messagebox/ui/components/EmojiSection'
 import { Spinner } from '@/shared/components/Spinner'
+import { useBackHandler } from '@/features/messagebox/hooks/useBackHandler'
 
 interface ReactionPageProps {
   userId: string
@@ -18,7 +18,7 @@ interface ReactionPageProps {
 }
 const ReactionPage = React.memo(({ userId, messageId }: ReactionPageProps) => {
   const lists = ['감사', '사과', '응원', '화해']
-  const router = useRouter()
+  const backHandler = useBackHandler({ userId, type: 'received', messageId })
   const [selectedSet, setSelectedSet] = useState<Set<string>>(new Set())
   const { data, isLoading } = useGetEmoji() as {
     data: EmojiProps[] | undefined
@@ -59,13 +59,14 @@ const ReactionPage = React.memo(({ userId, messageId }: ReactionPageProps) => {
           paddingRight: '1.5rem',
         },
       })
-      router.back()
+      backHandler()
       if (!response) {
         console.error('Post Emoji Response is empty: ', response)
-        router.back()
+        backHandler()
       }
     } catch (error) {
       console.error('쪽지 보내기에 실패했습니다. : ', error)
+      backHandler()
     }
   }
 
