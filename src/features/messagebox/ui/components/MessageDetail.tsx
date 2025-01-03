@@ -12,11 +12,11 @@ import { Spinner } from '@/shared/components/Spinner'
 export default function MessageDetail({
   userId,
   messageId,
-  messageType,
+  type,
 }: {
   userId: string
   messageId: string
-  messageType: MessageType
+  type: MessageType
 }) {
   const { data, isLoading } = useGetMessageDetail({
     messageId,
@@ -36,7 +36,7 @@ export default function MessageDetail({
   return (
     <MessageDetailLayout
       userId={userId}
-      messageType={messageType}
+      type={type}
       variety={variety}
       messageId={messageId}
       isNormal={isNormal}
@@ -85,11 +85,11 @@ export default function MessageDetail({
                 </div>
               )}
               <div className='h-full w-full '>
-                {messageType === 'received' && data.reactions?.length === 0 && (
+                {type === 'received' && data.reactions?.length === 0 && (
                   <div className='absolute flex justify-center items-start bottom-0 left-0 w-full pb-[30px] px-6'>
                     <Tooltip>
                       <Link
-                        href={`/messagebox/${userId}/${messageType}/${messageId}/reaction`}
+                        href={`/messagebox/${userId}/${type}/${messageId}/reaction`}
                         className='h-fit p-4 bg-black text-white rounded-2xl font-bold w-full flex justify-center items-center'
                       >
                         반응 보내기

@@ -8,7 +8,6 @@ import {
 } from '@/features/messagebox/_detail/model/messagebox.types'
 import { baseQuery } from '@/shared/api/baseQuery'
 
-// 쪽지 리스트
 export const useGetMessageList = ({
   userId,
   type,
@@ -55,7 +54,6 @@ export const useGetMessageList = ({
   })
 }
 
-// 쪽지 상세
 export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
   return useQuery({
     queryKey: ['getDetailMessage', messageId],
@@ -70,7 +68,6 @@ export const useGetMessageDetail = ({ messageId }: { messageId: string }) => {
   })
 }
 
-// 반응 템플릿
 export const useGetEmoji = () => {
   return useQuery({
     queryKey: ['getEmoji'],
@@ -88,7 +85,6 @@ export const useGetEmoji = () => {
   })
 }
 
-// 쪽지 상태 변경
 export const usePatchMessageStatus = () => {
   const queryClient = useQueryClient()
   return useMutation({
@@ -107,7 +103,6 @@ export const usePatchMessageStatus = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getDetailMessage'] })
-      console.log('상태 변경 성공')
     },
     onError: (error) => {
       console.error('상태 변경 실패: ', error)
@@ -115,7 +110,6 @@ export const usePatchMessageStatus = () => {
   })
 }
 
-// 반응 보내기
 export const usePostEmoji = () => {
   const queryClient = useQueryClient()
   return useMutation({
@@ -134,7 +128,6 @@ export const usePostEmoji = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getDetailMessage'] })
-      console.log('이모지 등록 성공')
     },
     onError: (error) => {
       console.error('이모지 등록 실패: ', error)
@@ -142,7 +135,6 @@ export const usePostEmoji = () => {
   })
 }
 
-// 안읽은 반응, 메세지 여부
 export const useGetUnreadCount = () => {
   return useQuery({
     queryKey: ['getUnreadCount'],
