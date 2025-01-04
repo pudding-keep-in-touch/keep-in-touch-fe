@@ -91,7 +91,6 @@ export default function QuestionPage() {
             userId={question?.userId}
             onQuestionClick={handleQuestionClick}
           />
-
           <Button
             type='button'
             onClick={() =>
@@ -100,10 +99,9 @@ export default function QuestionPage() {
                 question?.content || '',
                 question?.userId || ''
               )
-            } // 함수 호출
-            className='h-fit p-4 bg-[#35B6FF] text-white rounded-2xl font-bold mt-[380px] w-full'
+            }
+            className='fixed bottom-4 w-full max-w-[24rem] h-815:max-w-[22rem] px-4 sm:px-2 transition-all duration-300 flex justify-center bg-[#35B6FF] text-white rounded-2xl font-bold p-6'
           >
-            {' '}
             마음 전하러 가기
           </Button>
         </div>
