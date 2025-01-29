@@ -1,4 +1,5 @@
-<a id="readme-top"></a>
+
+![Group 8 (1)](https://github.com/user-attachments/assets/3569ccbc-6a5b-4538-8019-9f7fcf7e7e1b)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -36,9 +37,8 @@
 - 이해: 서로를 더 깊이 이해하려는 노력
 - 성장: 피드백을 통한 개인과 관계의 성장
 
-### 핵심 목표
 
-## 핵심 목표
+### 핵심 목표
 
 - **진정성 있는 소통을 유도하는 소통 플랫폼 완성**
   - 초기 기획의 목적을 반영하여, 친구들에게 진솔한 감정과 생각을 표현할 수 있도록 다양한 소통 방식을 지원.
@@ -55,39 +55,447 @@
 - **편리한 접근성과 사용자 경험 최적화**
   - 간결한 정보 구조와 화면 전환을 통해, 감정 표현과 피드백에 쉽게 접근할 수 있도록 함.
   - 각 기능과 기능의 이름이 명확한 가이드 역할을 하며 이를 통해 새로운 사용자가 기능을 쉽게 이해하고 사용할 수 있도록 UX와 워딩을 개선.
+ 
 
-## HOW TO
 
-### Built With
+<br><br> 
+## TEAM 손절보안관 - FE 챕터
 
+<!-- ### 팀원 소개 -->
+
+| [<img src="https://github.com/user-attachments/assets/939cddb1-a149-4c7d-8e56-9548809fb1e7" width="100">](https://github.com/ichbinmin2) | [<img src="https://github.com/user-attachments/assets/cf0498bd-da88-4783-a57d-7471bd86c25b" width="100">](https://github.com/lunashp) | [<img src="https://github.com/user-attachments/assets/31d91174-8444-4d0a-b162-912a1efca872" width="100">](https://github.com/Jieunwang0) | 
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                          민지연                                                                            |                                                                             양희진                                                                              |                                                                            지은                                                                             |                                                                              
+| 팀장 / 프론트엔드 | 프론트엔드 | 프론트엔드 |
+
+<br><br>
+## 개발 일정
+
+- 총 기간 : 24.11.08 ~ 25.01.18
+- 기획/디자인 설계 기간 : ~11월 8일
+- 개발 기간 : 11월 11일(월) - 12월 24일(화) (약 **6주**)
+- 개발 서버 배포일 : 12월 25일(수)
+- 내부 QA 기간 : 12월 25일 - 운영 서버 배포 전까지
+- 운영 서버 배포일 : 1월 2일(목)
+- 운영 기간 : 배포 이후 - 1월 17일(금) (약 **2주**)
+- 회고/발표 : 1월 18일(토)
+
+<br><br>
+
+## Tech Stack
+
+### 언어 & 라이브러리
+- ![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 - ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 - ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 - ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 - ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
-- ![Vitest](https://img.shields.io/badge/-Vitest-252529?style=for-the-badge&logo=vitest&logoColor=FCC72B)
-- ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+- ![React Query](https://img.shields.io/badge/-ReactQuery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+### 도구
 
-## Getting Started
+- ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?&style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white)
+- ![ESLint](https://img.shields.io/badge/ESLint-4B32C3.svg?&style=for-the-badge&logo=ESLint&logoColor=white)<br>
+- ![Git](https://img.shields.io/badge/Git-F05032.svg?&style=for-the-badge&logo=Git&logoColor=white)
+- ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+- ![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white)
+- ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+- ![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)
+- ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
+- ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=#000000)
 
-TBU
 
-<!-- USAGE EXAMPLES -->
+<br><br>
 
-## Usage
+## 핵심 기능 
+### 질문 게시판(공개/비공개 선택 가능)
+- 
 
-TBU
+### 답변함(1:1 메세지)
+- 
 
-<!-- CONTRIBUTING -->
+### 답변 쓰기 기능(메세지 보내기)
+▶ [YouTube 영상 보기](https://youtu.be/MoKbV4wVjfQ?si=_53QIUg36sMYCSSz) 
 
-## Contributing
+### 반응 보내기 
 
-TBU
+▶ [YouTube 영상 보기](https://youtube.com/shorts/IQvEo8MseBY?si=AW-iLmbHgI5HKu90) 
 
-<!-- LICENSE -->
+### 숨기기 기능
+- 
+
+### 질문 공유하기 기능
+▶ [YouTube 영상 보기](https://youtube.com/shorts/pb1mKBgXULM?si=k5ak_v9QQaXJso3_)
+
+<br><br>
+
+## 구현 영상
+
+
+![Group 8 (1)](https://github.com/user-attachments/assets/0b79a1af-1ed2-4126-9951-45b94f1f662a)
+
+## 폴더 구조 - 기능 분할 설계(Feature-Sliced Design, FSD) 디자인 패턴
+```
+📦toronto
+ ┣ 📦.devcontainer
+ ┗ 📜devcontainer.json
+ ┣ 📦.github
+ ┃ ┗ 📂workflows
+ ┃ ┃ ┣ 📜Lighthouse.yml
+ ┃ ┃ ┣ 📜build-and-push-image.yml
+ ┃ ┃ ┗ 📜run_test.yml
+ ┣ 📦.husky
+ ┃ ┣ 📜pre-commit
+ ┃ ┗ 📜pre-push
+ ┣ 📦public
+ ┃ ┣ 📜robots.txt
+ ┣ 📂src
+ ┃ ┣ 📂app
+ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┗ 📂sentry-example-api
+ ┃ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┗ 📂callback
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂home
+ ┃ ┃ ┃ ┗ 📂[userId]
+ ┃ ┃ ┃ ┃ ┣ 📂question
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂[questionId]
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂write
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂login
+ ┃ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂message
+ ┃ ┃ ┃ ┣ 📂[type]
+ ┃ ┃ ┃ ┃ ┗ 📂[userId]
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂[variety]
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂[detail]
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜layout.tsx
+ ┃ ┃ ┃ ┗ 📂send
+ ┃ ┃ ┃ ┃ ┗ 📂[userId]
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂[variety]
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂completion
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂preview
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂write
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜layout.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂select
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜layout.tsx
+ ┃ ┃ ┣ 📂messagebox
+ ┃ ┃ ┃ ┗ 📂[userId]
+ ┃ ┃ ┃ ┃ ┣ 📂[type]
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂[messageId]
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂@modal
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂(.)hide
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂(.)report
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂(.)show
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜default.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂[id]
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂hide
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂report
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂show
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂profile
+ ┃ ┃ ┃ ┗ 📂[userId]
+ ┃ ┃ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂questions
+ ┃ ┃ ┃ ┣ 📂[questionId]
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┣ 📂complete
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┣ 📂messages
+ ┃ ┃ ┃ ┃ ┣ 📂completion
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Preview.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂preview
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂sentry-example-page
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📜global-error.tsx
+ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂entities
+ ┃ ┃ ┣ 📂message
+ ┃ ┃ ┃ ┗ 📂utils
+ ┃ ┃ ┃ ┃ ┗ 📜messageVarieties.ts
+ ┃ ┃ ┗ 📂questions
+ ┃ ┃ ┃ ┣ 📂hooks
+ ┃ ┃ ┃ ┃ ┗ 📂query
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜useGetUserNicknameQuery.ts
+ ┃ ┃ ┃ ┗ 📜questionType.ts
+ ┃ ┣ 📂features
+ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┗ 📜apiClient.ts
+ ┃ ┃ ┃ ┣ 📂context
+ ┃ ┃ ┃ ┃ ┗ 📜AuthProvider.tsx
+ ┃ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┗ 📜LoginForm.tsx
+ ┃ ┃ ┣ 📂home
+ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┗ 📜api.ts
+ ┃ ┃ ┃ ┣ 📂context
+ ┃ ┃ ┃ ┃ ┗ 📜FormProvider.tsx
+ ┃ ┃ ┃ ┣ 📂icons
+ ┃ ┃ ┃ ┃ ┣ 📜homeIcon.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜messageIcon.tsx
+ ┃ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┃ ┣ 📜formSchema.ts
+ ┃ ┃ ┃ ┃ ┗ 📜home.types.ts
+ ┃ ┃ ┃ ┣ 📂ui
+ ┃ ┃ ┃ ┃ ┣ 📜completeButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜linkShareButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜messagePreview.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜questionBanner.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜questionListHeader.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜questionsCard.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜questionsList.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜scrollHome.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜scrollToTopButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜tooltip.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜typeQuestionCard.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜userInfo.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜writeInput.tsx
+ ┃ ┃ ┃ ┣ 📜home.tsx
+ ┃ ┃ ┃ ┣ 📜questionDetail.tsx
+ ┃ ┃ ┃ ┗ 📜writeQuestion.tsx
+ ┃ ┃ ┣ 📂login
+ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┣ 📜googleButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜kakaoButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜login.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜onBoardingStep.tsx
+ ┃ ┃ ┣ 📂main
+ ┃ ┃ ┃ ┗ 📂lottie
+ ┃ ┃ ┃ ┃ ┗ 📜splash.json
+ ┃ ┃ ┣ 📂message
+ ┃ ┃ ┃ ┣ 📂_detail
+ ┃ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜detailQuery.ts
+ ┃ ┃ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂layouts
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜MessageDetailLayout.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜board.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜sendButton.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜shareButton.tsx
+ ┃ ┃ ┃ ┣ 📂_send
+ ┃ ┃ ┃ ┃ ┣ 📂_complete
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜moveButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂_completion
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜buttons.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜preview.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜submitButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂_select
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜nextButton.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜select.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜selectBoard.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂_write
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜messageInput.tsx
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜nextButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜sendMutation.ts
+ ┃ ┃ ┃ ┃ ┣ 📂context
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜FormProvider.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜form.test.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜formSchema.ts
+ ┃ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜step.tsx
+ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┗ 📜messageQueries.ts
+ ┃ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┃ ┗ 📜message.types.ts
+ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┗ 📜message.tsx
+ ┃ ┃ ┣ 📂messagebox
+ ┃ ┃ ┃ ┣ 📂_detail
+ ┃ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜detailQuery.ts
+ ┃ ┃ ┃ ┃ ┗ 📂model
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜messagebox.types.ts
+ ┃ ┃ ┃ ┣ 📂hooks
+ ┃ ┃ ┃ ┃ ┗ 📜useBackHandler.tsx
+ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜EmojiHeader.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜EmojiItem.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜EmojiList.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜EmojiSection.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MessageBoard.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MessageDetail.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MessageItem.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MessageList.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MessagesBlock.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜QuestionBox.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReactionList.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReactionPage.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Tooltip.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ViewAllMessage.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜ViewThreeMessages.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂layouts
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜InboxLayout.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜MessageDetailLayout.tsx
+ ┃ ┃ ┃ ┃ ┗ 📂lottie
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜activated.json
+ ┃ ┃ ┣ 📂profile
+ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┣ 📜bottomBar.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜profile.tsx
+ ┃ ┃ ┗ 📂questions
+ ┃ ┃ ┃ ┣ 📂hooks
+ ┃ ┃ ┃ ┃ ┣ 📂query
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜useNicknameQuery.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜useQuestionQuery.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜useIsMobile.tsx
+ ┃ ┃ ┃ ┗ 📂ui
+ ┃ ┃ ┃ ┃ ┣ 📂button
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜PreviewButton.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜QuestionButton.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReplyButton.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReplyNextButton.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜SendButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜CompletePage.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜CompletionPage.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜MessagePage.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜PreviewPage.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜PreviewStepPage.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜QuestionListPage.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜QuestionPage.tsx
+ ┃ ┣ 📂shared
+ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┗ 📜baseQuery.ts
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┣ 📜Button.tsx
+ ┃ ┃ ┃ ┣ 📜Input.tsx
+ ┃ ┃ ┃ ┣ 📜QuestionBox.tsx
+ ┃ ┃ ┃ ┣ 📜Spinner.tsx
+ ┃ ┃ ┃ ┣ 📜homeHeader.tsx
+ ┃ ┃ ┃ ┣ 📜nav.tsx
+ ┃ ┃ ┃ ┗ 📜textarea.tsx
+ ┃ ┃ ┣ 📂config
+ ┃ ┃ ┃ ┗ 📜env.ts
+ ┃ ┃ ┣ 📂hooks
+ ┃ ┃ ┃ ┣ 📂util
+ ┃ ┃ ┃ ┃ ┣ 📜dateUtil.ts
+ ┃ ┃ ┃ ┃ ┗ 📜openTabUtil.ts
+ ┃ ┃ ┃ ┣ 📜useAuth.ts
+ ┃ ┃ ┃ ┣ 📜useIsVisible.tsx
+ ┃ ┃ ┃ ┗ 📜useScrollToTop.tsx
+ ┃ ┃ ┣ 📂provider
+ ┃ ┃ ┃ ┗ 📜QueryProvider.tsx
+ ┃ ┃ ┣ 📂styles
+ ┃ ┃ ┃ ┣ 📜globals.css
+ ┃ ┃ ┃ ┗ 📜icon.ico
+ ┃ ┃ ┣ 📂types
+ ┃ ┃ ┃ ┣ 📜backend.d.ts
+ ┃ ┃ ┃ ┣ 📜backend.json
+ ┃ ┃ ┃ ┗ 📜common.types.ts
+ ┃ ┃ ┣ 📂ui
+ ┃ ┃ ┃ ┣ 📂layouts
+ ┃ ┃ ┃ ┃ ┣ 📜DefaultLayout.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜MainLayout.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜QuestionLayout.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜ScrollLayout.tsx
+ ┃ ┃ ┃ ┣ 📂lottie
+ ┃ ┃ ┃ ┃ ┗ 📜loading.json
+ ┃ ┃ ┃ ┣ 📜BackHeader.tsx
+ ┃ ┃ ┃ ┗ 📜Step.tsx
+ ┃ ┃ ┗ 📂utils
+ ┃ ┃ ┃ ┗ 📜emotionVariety.ts
+ ┃ ┣ 📂stories
+ ┃ ┃ ┣ 📂assets
+ ┃ ┃ ┃ ┣ 📜accessibility.png
+ ┃ ┃ ┃ ┣ 📜accessibility.svg
+ ┃ ┃ ┃ ┣ 📜addon-library.png
+ ┃ ┃ ┃ ┣ 📜assets.png
+ ┃ ┃ ┃ ┣ 📜avif-test-image.avif
+ ┃ ┃ ┃ ┣ 📜context.png
+ ┃ ┃ ┃ ┣ 📜discord.svg
+ ┃ ┃ ┃ ┣ 📜docs.png
+ ┃ ┃ ┃ ┣ 📜figma-plugin.png
+ ┃ ┃ ┃ ┣ 📜github.svg
+ ┃ ┃ ┃ ┣ 📜share.png
+ ┃ ┃ ┃ ┣ 📜styling.png
+ ┃ ┃ ┃ ┣ 📜testing.png
+ ┃ ┃ ┃ ┣ 📜theming.png
+ ┃ ┃ ┃ ┣ 📜tutorials.svg
+ ┃ ┃ ┃ ┗ 📜youtube.svg
+ ┃ ┃ ┣ 📜Button.stories.ts
+ ┃ ┃ ┣ 📜Button.tsx
+ ┃ ┃ ┣ 📜Configure.mdx
+ ┃ ┃ ┣ 📜Header.stories.ts
+ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┣ 📜Page.stories.ts
+ ┃ ┃ ┣ 📜Page.tsx
+ ┃ ┃ ┣ 📜button.css
+ ┃ ┃ ┣ 📜header.css
+ ┃ ┃ ┗ 📜page.css
+ ┃ ┣ 📂widgets
+ ┃ ┃ ┗ 📂header
+ ┃ ┃ ┃ ┗ 📜index.ts
+ ┃ ┗ 📜instrumentation.ts
+ ┣ 📜.dockerignore
+ ┣ 📜.eslintrc.json
+ ┣ 📜.gitignore
+ ┣ 📜.lintstagedrc.js
+ ┣ 📜.prettierrc
+ ┣ 📜Dockerfile
+ ┣ 📜Dockerfile.v2
+ ┣ 📜README.md
+ ┣ 📜components.json
+ ┣ 📜next-env.d.ts
+ ┣ 📜next.config.mjs
+ ┣ 📜package.json
+ ┣ 📜pnpm-lock.yaml
+ ┣ 📜postcss.config.mjs
+ ┣ 📜pull_request_template.md
+ ┣ 📜sentry.client.config.ts
+ ┣ 📜sentry.edge.config.ts
+ ┣ 📜sentry.server.config.ts
+ ┣ 📜setup-tests.ts
+ ┣ 📜tailwind.config.ts
+ ┣ 📜tsconfig.json
+ ┣ 📜tsconfig.tsbuildinfo
+ ┗ 📜vitest.config.ts
+
+
+```
+
 
 ## License
 
