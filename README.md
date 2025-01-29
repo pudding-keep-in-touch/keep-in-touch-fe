@@ -55,7 +55,6 @@
 - **편리한 접근성과 사용자 경험 최적화**
   - 간결한 정보 구조와 화면 전환을 통해, 감정 표현과 피드백에 쉽게 접근할 수 있도록 함.
   - 각 기능과 기능의 이름이 명확한 가이드 역할을 하며 이를 통해 새로운 사용자가 기능을 쉽게 이해하고 사용할 수 있도록 UX와 워딩을 개선.
- 
 
 
 <br><br> 
@@ -63,7 +62,7 @@
 
 <!-- ### 팀원 소개 -->
 
-| [<img src="https://github.com/user-attachments/assets/939cddb1-a149-4c7d-8e56-9548809fb1e7" width="100">](https://github.com/ichbinmin2) | [<img src="https://github.com/user-attachments/assets/cf0498bd-da88-4783-a57d-7471bd86c25b" width="100">](https://github.com/lunashp) | [<img src="https://github.com/user-attachments/assets/31d91174-8444-4d0a-b162-912a1efca872" width="100">](https://github.com/Jieunwang0) | 
+| [<img src="https://github.com/user-attachments/assets/939cddb1-a149-4c7d-8e56-9548809fb1e7" width="100">](https://github.com/ichbinmin2) | [<img src="https://github.com/user-attachments/assets/cf0498bd-da88-4783-a57d-7471bd86c25b" width="100">](https://github.com/lunashp) | [<img src="https://github.com/user-attachments/assets/abd9e5b8-8406-4efc-9f74-80add98d3824" width="100">](https://github.com/Jieunwang0) | 
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                          민지연                                                                            |                                                                             양희진                                                                              |                                                                            지은                                                                             |                                                                              
 | 팀장 / 프론트엔드 | 프론트엔드 | 프론트엔드 |
