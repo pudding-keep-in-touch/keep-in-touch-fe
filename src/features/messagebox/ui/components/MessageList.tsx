@@ -12,20 +12,20 @@ import { formattedDate } from '@/shared/hooks/util/dateUtil'
 
 interface MessageListProps {
   userId: string
-  messageType: MessageType
+  type: MessageType
   messages?: MessageResponse
   observe?: (node: HTMLElement | null) => void
 }
 export default function MessageList({
   userId,
-  messageType,
+  type,
   messages,
   observe,
 }: MessageListProps) {
   return (
     <>
       {messages?.messageList.map((message: Message, index: number) => {
-        const isReceived = messageType === 'received'
+        const isReceived = type === 'received'
         const isMessageNormal = !message.status || message.status === 'normal'
         const isUnreadReaction =
           !isReceived &&
@@ -43,9 +43,7 @@ export default function MessageList({
         const messageClassName = `relative ${(isUnreadReaction || isUnread) && 'border border-[#35b6ff]'} bg-white w-full rounded-2xl h-[106px] items-start flex justify-start pl-[20px] pr-[27px] py-[18px] mb-3`
         return (
           <div key={message.messageId} ref={isLastItem ? observe : null}>
-            <Link
-              href={`/messagebox/${userId}/${messageType}/${message.messageId}`}
-            >
+            <Link href={`/messagebox/${userId}/${type}/${message.messageId}`}>
               {isMessageNormal ? (
                 <div className={messageClassName}>
                   <div className='absolute w-[49px] h-[49px] rounded-lg bg-gradient-to-br  from-[#BEAFFB] to-[#F975F0]'>

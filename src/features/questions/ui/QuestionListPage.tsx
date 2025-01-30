@@ -48,13 +48,23 @@ export default function QuestionListPage() {
 
     // 로그인 상태에 따라 리다이렉트
     redirectToLoginIfNeeded(() => {
-      router.push('/questions/messages')
+      if (userId === localStorage.getItem('keep_in_touch_user_id')) {
+        alert('잘못된 접근입니다')
+        router.push(`/home/${userId}`)
+      } else {
+        router.push('/questions/messages')
+      }
     })
   }
 
   const handleTypeMessageClick = () => {
     redirectToLoginIfNeeded(() => {
-      router.push(`/message/send/${userId}/select`)
+      if (userId === localStorage.getItem('keep_in_touch_user_id')) {
+        alert('잘못된 접근입니다')
+        router.push(`/home/${userId}`)
+      } else {
+        router.push(`/message/send/${userId}/select`)
+      }
     })
   }
 

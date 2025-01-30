@@ -22,7 +22,7 @@ export default function GoogleButton() {
     <Button
       type='button'
       className='h-fit p-[18px] text-[#1F1F1F] bg-[#F2F2F2] rounded-2xl font-bold w-full relative'
-      variant='secondary'
+      variant='link'
       onClick={handleLogin}
       disabled={isLoading}
     >

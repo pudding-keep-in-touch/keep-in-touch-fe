@@ -2,16 +2,16 @@
 import { MessageType } from '@/shared/types/common.types'
 import ReactionPage from '@/features/messagebox/ui/components/ReactionPage'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import toast, { Toaster, useToasterStore } from 'react-hot-toast'
+import { useBackHandler } from '@/features/messagebox/hooks/useBackHandler'
 
 export default function Page({
   params: { userId, type, messageId },
 }: {
   params: { userId: string; type: MessageType; messageId: string }
 }) {
-  const router = useRouter()
+  const backHandler = useBackHandler({ userId, type: 'received', messageId })
   const { toasts } = useToasterStore()
   const toastLimit = 1
 
@@ -28,14 +28,14 @@ export default function Page({
         <header className='w-full h-[50px] grid grid-cols-3 items-center z-50'>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
-            onClick={() => router.back()}
+            onClick={backHandler}
           />
           <h1 className='text-lg font-semibold text-center text-[#333D4B]'>
             반응 보내기
           </h1>
         </header>
       </div>
-      <ReactionPage messageType={type} userId={userId} messageId={messageId} />
+      <ReactionPage userId={userId} messageId={messageId} />
       <Toaster
         position='bottom-center'
         containerStyle={{
