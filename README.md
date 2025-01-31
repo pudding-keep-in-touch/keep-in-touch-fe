@@ -117,28 +117,35 @@
 - 
 
 ### 답변 쓰기 기능(메세지 보내기)
-▶ [YouTube 영상 보기](https://youtu.be/MoKbV4wVjfQ?si=_53QIUg36sMYCSSz) 
+- 
 
 ### 반응 보내기 
-
-▶ [YouTube 영상 보기](https://youtube.com/shorts/IQvEo8MseBY?si=AW-iLmbHgI5HKu90) 
+- 
 
 ### 숨기기 기능
 - 
 
 ### 질문 공유하기 기능
-▶ [YouTube 영상 보기](https://youtube.com/shorts/pb1mKBgXULM?si=k5ak_v9QQaXJso3_)
+- 
 
 <br><br>
 
 ## 구현 영상
 
+### 질문 공유 
+- ▶ [YouTube 영상 보기](https://youtube.com/shorts/IQvEo8MseBY?si=AW-iLmbHgI5HKu90)
+
+### 답장 보내기
+- ▶ [YouTube 영상 보기](https://youtu.be/MoKbV4wVjfQ?si=_53QIUg36sMYCSSz)
+
+### 반응 보내기
+- ▶ [YouTube 영상 보기](https://youtube.com/shorts/pb1mKBgXULM?si=k5ak_v9QQaXJso3_)
 
 ![Group 8 (1)](https://github.com/user-attachments/assets/0b79a1af-1ed2-4126-9951-45b94f1f662a)
 
 ## 폴더 구조 - 기능 분할 설계(Feature-Sliced Design, FSD) 디자인 패턴
 ```
-📦toronto
+📦 keep-in-touch-fe
  ┣ 📦.devcontainer
  ┗ 📜devcontainer.json
  ┣ 📦.github
@@ -436,37 +443,6 @@
  ┃ ┃ ┃ ┗ 📜Step.tsx
  ┃ ┃ ┗ 📂utils
  ┃ ┃ ┃ ┗ 📜emotionVariety.ts
- ┃ ┣ 📂stories
- ┃ ┃ ┣ 📂assets
- ┃ ┃ ┃ ┣ 📜accessibility.png
- ┃ ┃ ┃ ┣ 📜accessibility.svg
- ┃ ┃ ┃ ┣ 📜addon-library.png
- ┃ ┃ ┃ ┣ 📜assets.png
- ┃ ┃ ┃ ┣ 📜avif-test-image.avif
- ┃ ┃ ┃ ┣ 📜context.png
- ┃ ┃ ┃ ┣ 📜discord.svg
- ┃ ┃ ┃ ┣ 📜docs.png
- ┃ ┃ ┃ ┣ 📜figma-plugin.png
- ┃ ┃ ┃ ┣ 📜github.svg
- ┃ ┃ ┃ ┣ 📜share.png
- ┃ ┃ ┃ ┣ 📜styling.png
- ┃ ┃ ┃ ┣ 📜testing.png
- ┃ ┃ ┃ ┣ 📜theming.png
- ┃ ┃ ┃ ┣ 📜tutorials.svg
- ┃ ┃ ┃ ┗ 📜youtube.svg
- ┃ ┃ ┣ 📜Button.stories.ts
- ┃ ┃ ┣ 📜Button.tsx
- ┃ ┃ ┣ 📜Configure.mdx
- ┃ ┃ ┣ 📜Header.stories.ts
- ┃ ┃ ┣ 📜Header.tsx
- ┃ ┃ ┣ 📜Page.stories.ts
- ┃ ┃ ┣ 📜Page.tsx
- ┃ ┃ ┣ 📜button.css
- ┃ ┃ ┣ 📜header.css
- ┃ ┃ ┗ 📜page.css
- ┃ ┣ 📂widgets
- ┃ ┃ ┗ 📂header
- ┃ ┃ ┃ ┗ 📜index.ts
  ┃ ┗ 📜instrumentation.ts
  ┣ 📜.dockerignore
  ┣ 📜.eslintrc.json
@@ -491,8 +467,6 @@
  ┣ 📜tsconfig.json
  ┣ 📜tsconfig.tsbuildinfo
  ┗ 📜vitest.config.ts
-
-
 ```
 
 
