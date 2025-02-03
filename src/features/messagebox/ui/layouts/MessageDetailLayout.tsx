@@ -1,16 +1,15 @@
 'use client'
 import React, { useState } from 'react'
 import { MainLayoutProps, MessageType } from '@/shared/types/common.types'
-import { usePathname } from 'next/navigation'
 import { cn } from '@/shared/utils/emotionVariety'
 import { ChevronLeftIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useBackHandler } from '@/features/messagebox/hooks/useBackHandler'
 
 type MessageDetailLayout = MainLayoutProps & {
   children: React.ReactNode
-  messageType: MessageType
+  type: MessageType
   variety: string
   messageId: string
   isNormal: boolean
@@ -19,13 +18,13 @@ type MessageDetailLayout = MainLayoutProps & {
 
 export default function MessageDetailLayout({
   children,
-  messageType,
+  type,
   messageId,
   userId,
   variety,
   isNormal,
 }: MessageDetailLayout) {
-  const router = useRouter()
+  const backHandler = useBackHandler({ userId, type })
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
     setIsOpen((e) => !e)
@@ -42,9 +41,9 @@ export default function MessageDetailLayout({
         <header className='w-full h-[50px] flex justify-between items-center z-90 px-6'>
           <ChevronLeftIcon
             className='w-6 h-6 cursor-pointer'
-            onClick={() => router.back()}
+            onClick={backHandler}
           />
-          {messageType === 'received' && (
+          {type === 'received' && (
             <div className='flex flex-col items-end z-100'>
               <button type='button' onClick={openModal}>
                 <Image
@@ -61,12 +60,12 @@ export default function MessageDetailLayout({
                     className='fixed mt-[20px] flex flex-col justify-center items-center bg-black w-[100px] h-[56px] rounded-xl text-white'
                   >
                     <Link
-                      href={`/messagebox/${userId}/${messageType}/${messageId}/report`}
+                      href={`/messagebox/${userId}/${type}/${messageId}/report`}
                     >
                       신고하기
                     </Link>
                     <Link
-                      href={`/messagebox/${userId}/${messageType}/${messageId}/hide`}
+                      href={`/messagebox/${userId}/${type}/${messageId}/hide`}
                     >
                       숨기기
                     </Link>
@@ -77,7 +76,7 @@ export default function MessageDetailLayout({
                     className='fixed mt-[22px] flex flex-col justify-center items-center bg-black w-[100px] h-[30px] rounded-xl text-white'
                   >
                     <Link
-                      href={`/messagebox/${userId}/${messageType}/${messageId}/show`}
+                      href={`/messagebox/${userId}/${type}/${messageId}/show`}
                     >
                       숨김 해제
                     </Link>

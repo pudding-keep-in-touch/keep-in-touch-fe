@@ -4,16 +4,16 @@ import ViewThreeMessages from '@/features/messagebox/ui/components/ViewThreeMess
 export default function ViewAllMessage({
   userId,
 }: {
-  messageType: MessageType
+  type: MessageType
   userId: string
 }) {
   return (
     <div className='max-w-[390px] w-full'>
       <div className='w-full border-b-[6px] border-b-white mb-2'>
-        <ViewThreeMessages messageType='received' userId={userId} />
+        <ViewThreeMessages type='received' userId={userId} />
       </div>
       <div className='w-full mb-2'>
-        <ViewThreeMessages messageType='sent' userId={userId} />
+        <ViewThreeMessages type='sent' userId={userId} />
       </div>
     </div>
   )
