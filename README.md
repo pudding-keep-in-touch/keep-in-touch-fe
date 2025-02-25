@@ -110,23 +110,46 @@
 <br><br>
 
 ## 핵심 기능 
-### 질문 게시판(공개/비공개 선택 가능)
-- 
 
-### 답변함(1:1 메세지)
-- 
+### 스플래시 & 소셜 로그인 
+<img src="https://github.com/user-attachments/assets/17fe50f9-e340-4172-9149-2b53dda0c03e" width="300"/>
+<img src="https://github.com/user-attachments/assets/2ebba707-2b87-4d2b-be80-accf4d620816" width="300"/>
+
+### 질문 게시판(공개/비공개 선택 가능)
+<img src="https://github.com/user-attachments/assets/bea910c9-6cab-4eca-835b-2920383577bb" width="300"/>
+<img src="https://github.com/user-attachments/assets/9b498248-c881-47ea-8202-11ace339766a" width="300"/>
+
+### 상대의 질문함 
+<img src="https://github.com/user-attachments/assets/39916054-cba6-4c94-946c-eaf6fa68c75a" width="300"/>
+
+
+### 질문 쓰기 기능(질문 만들기)
+<img src="https://github.com/user-attachments/assets/7c9a3d5c-5536-4585-b814-9774ceca8c37" width="300"/>
+<img src="https://github.com/user-attachments/assets/4361546c-5218-4a99-a60f-ef626eeb01a7" width="300"/>
+
+
 
 ### 답변 쓰기 기능(메세지 보내기)
-- 
+<img src="https://github.com/user-attachments/assets/5cde6acb-13c2-4c34-9cae-d201834f9c44" width="300"/>
+<img src="https://github.com/user-attachments/assets/315d3b55-404c-483d-8ff0-8e261437313a" width="300"/>
+<img src="https://github.com/user-attachments/assets/26897c69-2dfd-4523-bec6-4e05dab3c596" width="300"/>
+<img src="https://github.com/user-attachments/assets/6bf35fb7-52a4-4c16-823a-e1487e9d8081" width="300"/>
+
+### 답변함(1:1 메세지)
+<img src="https://github.com/user-attachments/assets/8cd379b4-177a-43ee-bca0-4d6a68c1e9f5" width="300"/>
+<img src="https://github.com/user-attachments/assets/821348a1-ece6-4d88-ad70-b6667e635724" width="300"/>
+<img src="https://github.com/user-attachments/assets/cb2c19a1-5f66-40a5-b152-38c23043687c" width="300"/>
 
 ### 반응 보내기 
-- 
+<img src="https://github.com/user-attachments/assets/78b499a9-8fa2-4c25-84e9-aec9459485d9" width="300"/>
+<img src="https://github.com/user-attachments/assets/5b4deca6-06ff-4f11-93d2-ed5fed22b180" width="300"/>
 
-### 숨기기 기능
-- 
+### 답변 숨김 처리
+<img src="https://github.com/user-attachments/assets/dd909782-f543-4e27-85a2-b6d10bcbb2c3" width="300"/>
 
 ### 질문 공유하기 기능
-- 
+<img src="https://github.com/user-attachments/assets/d4738561-c228-43d8-aa5e-93d21717501f" width="300"/>
+
 
 <br><br>
 
