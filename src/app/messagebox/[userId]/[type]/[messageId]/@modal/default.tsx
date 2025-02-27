@@ -10,7 +10,5 @@ export default function ModalDefaultPage({
     messageId: string
   }
 }) {
-  return (
-    <MessageDetail userId={userId} messageId={messageId} messageType={type} />
-  )
+  return <MessageDetail userId={userId} messageId={messageId} type={type} />
 }
